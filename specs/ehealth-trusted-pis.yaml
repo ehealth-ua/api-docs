@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: eHealth Trusted PIS API — PROD
+  title: eHealth Trusted PIS API — STAGE
   version: "9.11.0 v.1"
   description: |-
     **Version: 9.11.0 v.1**
 
-    **Environment: PROD**
+    **Environment: STAGE**
 
     This is a **Trusted PIS-related sign-in and sign-up part** of API documentation for Ukrainian Health Services government institution back-end, that should provide:
 
@@ -21,22 +21,22 @@ info:
 
     > In order to get specification for PIS-related consumers part of API documentation please proceed [here](https://ehealthpisapi.docs.apiary.io/#)
 servers:
-  - url: https://api.ehealth.gov.ua
-    description: PROD — eHealth ehealth-trusted-pis API
+  - url: https://api-stage.ehealth.gov.ua
+    description: STAGE — eHealth ehealth-trusted-pis API
 tags:
   - name: Public. Patient Information System
     description: 'The table below reflects actual API endpoints for all the eHealth environments
 
 
-      Env      | Host
+      Env     | Host
 
-      ---------|-----
+      --------|-----
 
-      DEMO     | https://auth-demo.ehealth.gov.ua
+      DEMO    | https://api-demo.ehealth.gov.ua
 
-      PREPROD  | https://auth-preprod.ehealth.gov.ua
+      PREPROD | https://api-preprod.ehealth.gov.ua
 
-      PROD     | https://auth.ehealth.gov.ua
+      PROD    | https://api.ehealth.gov.ua
 
 
       **Notes:**

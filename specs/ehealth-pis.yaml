@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: eHealth PIS API — PROD
-  version: "9.11.0.3 v.2"
-  description: '**Version: 9.11.0.3 v.2**
+  title: eHealth PIS API — STAGE
+  version: "9.11.0 v.2"
+  description: '**Version: 9.11.0 v.2**
 
 
-    Environment: **PROD**
+    Environment: **STAGE**
 
 
     This is a **PIS-related consumers part** of API documentation for Ukrainian Health Services government institution back-end, that should provide:
@@ -45,8 +45,8 @@ info:
 
     PROD    | https://auth-preprod.ehealth.gov.ua'
 servers:
-  - url: https://api.ehealth.gov.ua
-    description: PROD — eHealth ehealth-pis API
+  - url: https://api-stage.ehealth.gov.ua
+    description: STAGE — eHealth ehealth-pis API
 tags:
   - name: Public. Patient Information System
     description: "**Attention!**\nUse following HOSTs for oAuth 2.0 Authentication\n\nEnv     | Host\n--------|-----\nDEMO    | http://my-demo.ehealth.gov.ua \nPREPROD | https://my-preprod.ehealth.gov.ua\nPROD    | https://my.ehealth.gov.ua"

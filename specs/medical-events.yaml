@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: MEDICAL EVENTS MIS API — PROD
+  title: MEDICAL EVENTS MIS API — STAGE
   version: "9.11.0 v.3"
   description: "**Version: 9.11.0 v.3**\n\n**Environment: PROD**\n\n> Read more about\
     \ eHealth API Manifest [here](https://ehealthapimanifest.docs.apiary.io/#introduction/interacting-with-api)\n\
@@ -30,8 +30,8 @@ info:
     \ successfull access with ABAC response will be filtered according to [Medical\
     \ Events filtration by Forbidden groups](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/5056954517/Medical+Events+filtration+by+Forbidden+groups+EN)"
 servers:
-- url: https://api.ehealth.gov.ua
-  description: PROD — eHealth medical-events API
+- url: https://api-stage.ehealth.gov.ua
+  description: STAGE — eHealth medical-events API
 tags:
 - name: Medical Events
   description: 'Medical events API is a set of web services designed to provide methods
