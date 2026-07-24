@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: eHealth Trusted PIS API — PROD
-  version: "9.11.0 v.1"
+  title: eHealth Trusted PIS API — PREPROD
+  version: "9.14.0 v.1"
   description: |-
-    **Version: 9.11.0 v.1**
+    **Version: 9.14.0 v.1**
 
-    **Environment: PROD**
+    Environment: **PREPROD**
 
     This is a **Trusted PIS-related sign-in and sign-up part** of API documentation for Ukrainian Health Services government institution back-end, that should provide:
 
@@ -21,22 +21,22 @@ info:
 
     > In order to get specification for PIS-related consumers part of API documentation please proceed [here](https://ehealthpisapi.docs.apiary.io/#)
 servers:
-  - url: https://api.ehealth.gov.ua
-    description: PROD — eHealth ehealth-trusted-pis API
+  - url: https://api-preprod.ehealth.gov.ua
+    description: PREPROD — eHealth ehealth-trusted-pis API
 tags:
   - name: Public. Patient Information System
     description: 'The table below reflects actual API endpoints for all the eHealth environments
 
 
-      Env      | Host
+      Env     | Host
 
-      ---------|-----
+      --------|-----
 
-      DEMO     | https://auth-demo.ehealth.gov.ua
+      DEMO    | https://api-demo.ehealth.gov.ua
 
-      PREPROD  | https://auth-preprod.ehealth.gov.ua
+      PREPROD | https://api-preprod.ehealth.gov.ua
 
-      PROD     | https://auth.ehealth.gov.ua
+      PROD    | https://api.ehealth.gov.ua
 
 
       **Notes:**
@@ -1324,7 +1324,6 @@ paths:
                         type: boolean
                       process_disclosure_data_consent:
                         type: boolean
-                        description: ознакf погодження на використання персональних даних
                       content:
                         type: string
                         description: HTML document
@@ -2475,7 +2474,6 @@ components:
           type: boolean
         process_disclosure_data_consent:
           type: boolean
-          description: ознакf погодження на використання персональних даних
         content:
           type: string
           description: HTML document
