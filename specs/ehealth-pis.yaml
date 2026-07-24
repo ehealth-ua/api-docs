@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: eHealth PIS API — PROD
-  version: "9.11.0.3 v.2"
-  description: '**Version: 9.11.0.3 v.2**
+  title: eHealth PIS API — DEMO
+  version: "9.15.0 v.1"
+  description: '**Version: 9.15.0 v.1**
 
 
-    Environment: **PROD**
+    Environment: **DEMO**
 
 
     This is a **PIS-related consumers part** of API documentation for Ukrainian Health Services government institution back-end, that should provide:
@@ -45,11 +45,24 @@ info:
 
     PROD    | https://auth-preprod.ehealth.gov.ua'
 servers:
-  - url: https://api.ehealth.gov.ua
-    description: PROD — eHealth ehealth-pis API
+  - url: https://api-demo.ehealth.gov.ua
+    description: DEMO — eHealth ehealth-pis API
 tags:
   - name: Public. Patient Information System
-    description: "**Attention!**\nUse following HOSTs for oAuth 2.0 Authentication\n\nEnv     | Host\n--------|-----\nDEMO    | http://my-demo.ehealth.gov.ua \nPREPROD | https://my-preprod.ehealth.gov.ua\nPROD    | https://my.ehealth.gov.ua"
+    description: '**Attention!**
+
+      Use following HOSTs for oAuth 2.0 Authentication
+
+
+      Env     | Host
+
+      --------|-----
+
+      DEMO    | https://auth-demo.ehealth.gov.ua
+
+      PREPROD | https://auth-preprod.ehealth.gov.ua
+
+      PROD    | https://auth-preprod.ehealth.gov.ua'
 paths:
   /oauth/nonce:
     post:
@@ -366,8 +379,8 @@ paths:
                     ending_before: 56c31536a60ad644060041aa
                   size: 1000
                   has_more: false
-      summary: Use Refresh Token for Access Token extension
-      operationId: Use Refresh Token for Access Token extension
+      summary: Renew access token using refresh token
+      operationId: Renew access token using refresh token
       description: 'This endpoint is used to renew access token using refresh token.
 
 
@@ -1633,6 +1646,145 @@ paths:
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
+  /api/pis/minfin_validations_details:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: recommendation internal identifier
+                        minfin_request_id:
+                          type: string
+                          description: minfin request identifier
+                        resource_id:
+                          type: string
+                          description: Person unique identifier
+                        resource:
+                          type: string
+                          enum:
+                            - PERSON
+                          description: Type of resource
+                        recommendation_id:
+                          type: string
+                          description: recommendation identifier
+                        recommendation_result:
+                          type: string
+                          enum:
+                            - '101'
+                          description: decision based on results of recommendation
+                        result_date:
+                          type: string
+                          description: decision result date
+                        non_compliance_info:
+                          type: array
+                          items: {}
+                      required:
+                        - id
+                        - minfin_request_id
+                        - resource_id
+                        - resource
+                        - recommendation_id
+                  paging:
+                    type: object
+                    properties:
+                      page_number:
+                        type: number
+                        description: Page number.
+                      page_size:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+                      total_entries:
+                        type: number
+                        description: Total number of objects in collection.
+                      total_pages:
+                        type: number
+                        description: Total number of pages.
+                    required:
+                      - page_number
+                      - page_size
+                      - total_entries
+                      - total_pages
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  - id: eeebb86d-5cba-43c9-885b-6482ecaf82
+                    minfin_request_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                    resource_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                    resource: PERSON
+                    recommendation_id: XXXXXXXXXXXXX02
+                    recommendation_result: '101'
+                    result_date: '2025-11-11T11:11:11Z'
+                    non_compliance_info:
+                      - code: '487'
+                        process_type: auto
+                        status: NEW
+                        data_sourse: D2
+                        updated_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
+                        inserted_at: '2025-11-11T11:11:11Z'
+                        discrepancy_result: '101'
+                paging:
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
+      summary: Get Minfin validation details
+      operationId: Get Minfin validation details
+      description: This method returns current person's Minfin validation details.
+      tags:
+        - Public. Patient Information System
+      parameters:
+        - name: page
+          in: query
+          description: Page number.
+          example: '2'
+          schema:
+            type: number
+        - name: page_size
+          in: query
+          description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+          example: '50'
+          schema:
+            type: number
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: false
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: api-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: false
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
   /api/pis/authentication_method_requests/{request_id}/actions/resend_otp:
     post:
       responses:
@@ -2198,8 +2350,10 @@ paths:
                         description: ISO Datetime
                       patient_signed:
                         type: boolean
+                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         type: boolean
+                        description: Person's evidence of information about consent to data disclosure
                       content:
                         type: string
                         description: HTML document
@@ -2514,8 +2668,10 @@ paths:
                     - emergency_contact
                 patient_signed:
                   type: boolean
+                  description: Person's evidence of sign the declaration request
                 process_disclosure_data_consent:
                   type: boolean
+                  description: Person's evidence of information about consent to data disclosure
               required:
                 - person
                 - patient_signed
@@ -2796,8 +2952,10 @@ paths:
                         description: ISO Datetime
                       patient_signed:
                         type: boolean
+                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         type: boolean
+                        description: Person's evidence of information about consent to data disclosure
                       content:
                         type: string
                         description: HTML document
@@ -3033,8 +3191,10 @@ paths:
                         description: ISO Datetime
                       patient_signed:
                         type: boolean
+                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         type: boolean
+                        description: Person's evidence of information about consent to data disclosure
                       content:
                         type: string
                         description: HTML document
@@ -3338,7 +3498,7 @@ paths:
                     id: ba3a41c7-ea43-4e95-952c-a46cd04cc8b7
                   status: terminated
                   scope: family_doctor
-                  declaration_request_id: '`74a6fae6-4207-4e03-a136-f2e70c6b0c02` c'
+                  declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
                   content: Declaration content
                   inserted_at: '2017-03-02T10:45:16.000Z'
                   updated_at: '2017-03-02T10:45:16.000Z'
@@ -3732,17 +3892,17 @@ paths:
                             properties:
                               educations:
                                 type: array
-                                description: освіта
+                                description: Information about the employee's education
                                 items:
                                   $ref: '#/components/schemas/Education'
                               qualifications:
                                 type: array
-                                description: підвищення кваліфікації
+                                description: Information about employee qualification improvement
                                 items:
                                   $ref: '#/components/schemas/Qualification'
                               specialities:
                                 type: array
-                                description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
+                                description: Block of information on obtaining a specialist certificate and passing attestations
                                 items:
                                   $ref: '#/components/schemas/Speciality'
                               science_degree:
@@ -3870,15 +4030,15 @@ paths:
                                 description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                               issued_date:
                                 type: string
-                                description: дата видачі
+                                description: The date when document was issued
                               expiry_date:
                                 type: string
                               order_no:
                                 type: string
-                                description: номер наказу МОЗ
+                                description: Ministry of Health order number
                               order_date:
                                 type: string
-                                description: дата наказу МОЗ
+                                description: Ministry of Health order date
                             required:
                               - category
                               - order_no
@@ -3923,7 +4083,7 @@ paths:
                                     type: string
                                   order_no:
                                     type: string
-                                    description: номер наказу
+                                    description: Order number
                                 required:
                                   - type
                                   - issued_by
@@ -4187,7 +4347,7 @@ paths:
                         zip: 2090
                   status: terminated
                   scope: family_doctor
-                  declaration_request_id: '`74a6fae6-4207-4e03-a136-f2e70c6b0c02` c'
+                  declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
                   content: Declaration content
                   inserted_at: '2017-03-02T10:45:16.000Z'
                   updated_at: '2017-03-02T10:45:16.000Z'
@@ -4468,15 +4628,15 @@ paths:
                                     description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                                   issued_date:
                                     type: string
-                                    description: дата видачі
+                                    description: The date when document was issued
                                   expiry_date:
                                     type: string
                                   order_no:
                                     type: string
-                                    description: номер наказу МОЗ
+                                    description: Ministry of Health order number
                                   order_date:
                                     type: string
-                                    description: дата наказу МОЗ
+                                    description: Ministry of Health order date
                                 required:
                                   - category
                                   - order_no
@@ -5256,7 +5416,7 @@ paths:
                               - last_name
                           speciality:
                             type: string
-                            description: інформація про спеціальність лікаря
+                            description: Information about the employee's specialty
                         required:
                           - id
                           - position
@@ -5287,15 +5447,15 @@ paths:
                                 description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                               issued_date:
                                 type: string
-                                description: дата видачі
+                                description: The date when document was issued
                               expiry_date:
                                 type: string
                               order_no:
                                 type: string
-                                description: номер наказу МОЗ
+                                description: Ministry of Health order number
                               order_date:
                                 type: string
-                                description: дата наказу МОЗ
+                                description: Ministry of Health order date
                             required:
                               - category
                               - order_no
@@ -5573,15 +5733,15 @@ paths:
                                     description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                                   issued_date:
                                     type: string
-                                    description: дата видачі
+                                    description: The date when document was issued
                                   expiry_date:
                                     type: string
                                   order_no:
                                     type: string
-                                    description: номер наказу МОЗ
+                                    description: Ministry of Health order number
                                   order_date:
                                     type: string
-                                    description: дата наказу МОЗ
+                                    description: Ministry of Health order date
                                 required:
                                   - category
                                   - order_no
@@ -6250,7 +6410,7 @@ paths:
                               - last_name
                           speciality:
                             type: string
-                            description: інформація про спеціальність лікаря
+                            description: Information about the employee's specialty
                         required:
                           - id
                           - position
@@ -6281,15 +6441,15 @@ paths:
                                 description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                               issued_date:
                                 type: string
-                                description: дата видачі
+                                description: The date when document was issued
                               expiry_date:
                                 type: string
                               order_no:
                                 type: string
-                                description: номер наказу МОЗ
+                                description: Ministry of Health order number
                               order_date:
                                 type: string
-                                description: дата наказу МОЗ
+                                description: Ministry of Health order date
                             required:
                               - category
                               - order_no
@@ -6567,15 +6727,15 @@ paths:
                                     description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                                   issued_date:
                                     type: string
-                                    description: дата видачі
+                                    description: The date when document was issued
                                   expiry_date:
                                     type: string
                                   order_no:
                                     type: string
-                                    description: номер наказу МОЗ
+                                    description: Ministry of Health order number
                                   order_date:
                                     type: string
-                                    description: дата наказу МОЗ
+                                    description: Ministry of Health order date
                                 required:
                                   - category
                                   - order_no
@@ -7326,15 +7486,15 @@ paths:
                                     description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                                   issued_date:
                                     type: string
-                                    description: дата видачі
+                                    description: The date when document was issued
                                   expiry_date:
                                     type: string
                                   order_no:
                                     type: string
-                                    description: номер наказу МОЗ
+                                    description: Ministry of Health order number
                                   order_date:
                                     type: string
-                                    description: дата наказу МОЗ
+                                    description: Ministry of Health order date
                                 required:
                                   - category
                                   - order_no
@@ -7736,8 +7896,6 @@ paths:
                         gender:
                           type: string
                           description: '`Dictionary: GENDER`'
-                        tax_id:
-                          type: string
                         inserted_at:
                           type: string
                           description: ISO Datetime
@@ -7786,7 +7944,7 @@ paths:
                           type: string
                         working_experience:
                           type: number
-                        'verification_status: `VERIFICATION_NEEDED`':
+                        verification_status:
                           type: string
                       required:
                         - id
@@ -7795,7 +7953,7 @@ paths:
                         - year_of_birth
                         - gender
                         - inserted_at
-                        - 'verification_status: `VERIFICATION_NEEDED`'
+                        - verification_status
               example:
                 meta:
                   code: 200
@@ -7810,7 +7968,6 @@ paths:
                     second_name: Миколайович
                     year_of_birth: '1975'
                     gender: MALE
-                    tax_id: '1234567890'
                     inserted_at: '2021-11-09T00:00:00.000Z'
                     updated_at: '2021-11-09T00:00:00.000Z'
                     educations:
@@ -7848,7 +8005,7 @@ paths:
                       issued_date: '2017-02-28'
                     about_myself: Закінчив всі можливі курси
                     working_experience: 10
-                    'verification_status: `VERIFICATION_NEEDED`': ''
+                    verification_status: VERIFICATION_NEEDED
       summary: Get parties
       operationId: Get parties
       description: Get parties
@@ -7999,7 +8156,7 @@ paths:
                               description: '`Dictionary SPECIALITY_TYPE`'
                             speciality_officio:
                               type: boolean
-                              description: основна спеціалазація, лише одна має бути true
+                              description: Main specialty, only one must be true
                             level:
                               type: string
                               description: '`Dictionary SPECIALITY_LEVEL`'
@@ -8008,13 +8165,13 @@ paths:
                               description: '`Dictionary SPEC_QUALIFICATION_TYPE`'
                             attestation_name:
                               type: string
-                              description: орган що видав
+                              description: Authority which issued the document
                             attestation_date:
                               type: string
-                              description: дата отримання
+                              description: The date when document was issued
                             valid_to_date:
                               type: string
-                              description: дата дії до
+                              description: Document expiration date
                             certificate_number:
                               type: string
                           required:
@@ -8416,7 +8573,7 @@ paths:
                           description: ISO Datetime
                         website:
                           type: string
-                        'status_reason: AUTO_SUSPEND':
+                        status_reason:
                           type: string
                           description: Division status
                         residence_address:
@@ -8475,15 +8632,15 @@ paths:
                               description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
                             issued_date:
                               type: string
-                              description: дата видачі
+                              description: The date when document was issued
                             expiry_date:
                               type: string
                             order_no:
                               type: string
-                              description: номер наказу МОЗ
+                              description: Ministry of Health order number
                             order_date:
                               type: string
-                              description: дата наказу МОЗ
+                              description: Ministry of Health order date
                           required:
                             - category
                             - order_no
@@ -8541,6 +8698,7 @@ paths:
                     inserted_at: '2021-11-09T00:00:00.000Z'
                     updated_at: '2021-11-09T00:00:00.000Z'
                     website: www.msp.com.ua
+                    status_reason: AUTO_SUSPEND
                     residence_address:
                       type: RESIDENCE
                       country: UA
@@ -10024,8 +10182,14 @@ paths:
                         child_values:
                           - is_active: true
                             child_values: []
+                            id: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                            inserted_at: '2021-11-09T00:00:00.000Z'
+                            updated_at: '2021-11-09T00:00:00.000Z'
                             code: b11429
                             description: Орієнтація в особі неуточнена
+                        id: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                        inserted_at: '2021-11-09T00:00:00.000Z'
+                        updated_at: '2021-11-09T00:00:00.000Z'
                     labels:
                       - SYSTEM
                       - EXTERNAL
@@ -10041,6 +10205,9 @@ paths:
                         description: Апендицит
                         is_active: true
                         child_values: []
+                        id: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                        inserted_at: '2021-11-09T00:00:00.000Z'
+                        updated_at: '2021-11-09T00:00:00.000Z'
       summary: Get dictionaries v2
       operationId: Get dictionaries v2
       description: Each dictionary is an object that contains not only a code and description of a value, but also a status of the value. In addition, it can represent hierarchical dictionaries with subordinate (child) values
@@ -11868,6 +12035,66 @@ components:
                 verification_reason:
                   type: string
                   description: Verification reason according to `PERSON_VERIFICATION_STATUS_REASONS` dictionary.
+    Minfin_Validation_Details:
+      type: object
+      required:
+        - id
+        - minfin_request_id
+        - resource_id
+        - resource
+        - recommendation_id
+      properties:
+        id:
+          type: string
+          description: recommendation internal identifier
+        minfin_request_id:
+          type: string
+          description: minfin request identifier
+        resource_id:
+          type: string
+          description: Person unique identifier
+        resource:
+          type: string
+          enum:
+            - PERSON
+          description: Type of resource
+        recommendation_id:
+          type: string
+          description: recommendation identifier
+        recommendation_result:
+          type: string
+          enum:
+            - '101'
+          description: decision based on results of recommendation
+        result_date:
+          type: string
+          description: decision result date
+        non_compliance_info:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: '487'
+              process_type:
+                type: string
+                example: auto
+              status:
+                type: string
+                example: NEW
+              data_sourse:
+                type: string
+                example: D2
+              updated_by:
+                type: string
+                example: eeebb86d-5cba-43c9-885b-6482ecaf826b
+              inserted_at:
+                type: string
+                example: '2025-11-11T11:11:11Z'
+              discrepancy_result:
+                type: string
+                example: '101'
     pis_person_response:
       type: object
       required:
@@ -12344,17 +12571,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Education'
-          description: освіта
+          description: Information about the employee's education
         qualifications:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
-          description: підвищення кваліфікації
+          description: Information about employee qualification improvement
         specialities:
           type: array
           items:
             $ref: '#/components/schemas/Speciality'
-          description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
+          description: Block of information on obtaining a specialist certificate and passing attestations
         science_degree:
           $ref: '#/components/schemas/ScienceDegree'
     ScienceDegree:
@@ -12399,7 +12626,7 @@ components:
           description: '`Dictionary SPECIALITY_TYPE`'
         speciality_officio:
           type: boolean
-          description: основна спеціалазація, лише одна має бути true
+          description: Main specialty, only one must be true
         level:
           type: string
           description: '`Dictionary SPECIALITY_LEVEL`'
@@ -12408,13 +12635,13 @@ components:
           description: '`Dictionary SPEC_QUALIFICATION_TYPE`'
         attestation_name:
           type: string
-          description: орган що видав
+          description: Authority which issued the document
         attestation_date:
           type: string
-          description: дата отримання
+          description: The date when document was issued
         valid_to_date:
           type: string
-          description: дата дії до
+          description: Document expiration date
         certificate_number:
           type: string
     Qualification:
@@ -12435,15 +12662,15 @@ components:
           type: string
         issued_date:
           type: string
-          description: дата отримання сертифікату
+          description: Document issue date
         certificate_number:
           type: string
         valid_to:
           type: string
-          description: дійсний до
+          description: Document expiration date
         additional_info:
           type: string
-          description: додаткова інформація
+          description: Additional information
     Education:
       type: object
       required:
@@ -12579,7 +12806,7 @@ components:
           type: string
         birth_country:
           type: string
-          description: країна народження
+          description: Country of birth
     Person_Short_person_request:
       type: object
       required:
@@ -12604,15 +12831,15 @@ components:
           description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
         issued_date:
           type: string
-          description: дата видачі
+          description: The date when document was issued
         expiry_date:
           type: string
         order_no:
           type: string
-          description: номер наказу МОЗ
+          description: Ministry of Health order number
         order_date:
           type: string
-          description: дата наказу МОЗ
+          description: Ministry of Health order date
     Division_Declaration:
       type: object
       required:
@@ -12726,7 +12953,7 @@ components:
           type: string
         order_no:
           type: string
-          description: номер наказу
+          description: Order number
     Employee_Minimal:
       type: object
       required:
@@ -12801,7 +13028,7 @@ components:
           $ref: '#/components/schemas/Division_Declaration'
         employee:
           $ref: '#/components/schemas/Employee_Minimal'
-          description: 'інформація про спеціальність лікаря'
+          description: 'Information about the employee''s specialty'
         legal_entity:
           $ref: '#/components/schemas/Medical_Service_Provider'
         seed:
@@ -13196,7 +13423,7 @@ components:
               properties:
                 speciality:
                   type: string
-                  description: інформація про спеціальність лікаря
+                  description: Information about the employee's specialty
         legal_entity:
           allOf:
             - $ref: '#/components/schemas/Medical_Service_Provider'
@@ -13246,7 +13473,7 @@ components:
               properties:
                 speciality:
                   type: string
-                  description: інформація про спеціальність лікаря
+                  description: Information about the employee's specialty
         legal_entity:
           allOf:
             - $ref: '#/components/schemas/Medical_Service_Provider'
@@ -13745,8 +13972,10 @@ components:
           description: ISO Datetime
         patient_signed:
           type: boolean
+          description: Person's evidence of sign the declaration request
         process_disclosure_data_consent:
           type: boolean
+          description: Person's evidence of information about consent to data disclosure
         content:
           type: string
           description: HTML document
@@ -13786,17 +14015,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Education'
-          description: освіта
+          description: Information about the employee's education
         qualifications:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
-          description: підвищення кваліфікації
+          description: Information about employee qualification improvement
         specialities:
           type: array
           items:
             $ref: '#/components/schemas/Speciality'
-          description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
+          description: Block of information on obtaining a specialist certificate and passing attestations
         science_degree:
           $ref: '#/components/schemas/ScienceDegree'
         employees:
@@ -14165,7 +14394,7 @@ components:
         - year_of_birth
         - gender
         - inserted_at
-        - 'verification_status: `VERIFICATION_NEEDED`'
+        - verification_status
       properties:
         id:
           type: string
@@ -14180,8 +14409,6 @@ components:
         gender:
           type: string
           description: '`Dictionary: GENDER`'
-        tax_id:
-          type: string
         inserted_at:
           type: string
           description: ISO Datetime
@@ -14206,7 +14433,7 @@ components:
           type: string
         working_experience:
           type: number
-        'verification_status: `VERIFICATION_NEEDED`':
+        verification_status:
           type: string
     Employee_bulk:
       type: object
@@ -14392,7 +14619,7 @@ components:
           description: ISO Datetime
         website:
           type: string
-        'status_reason: AUTO_SUSPEND':
+        status_reason:
           type: string
           description: Division status
         residence_address:
@@ -14802,6 +15029,8 @@ components:
         - code
         - description
         - is_active
+        - id
+        - inserted_at
       properties:
         code:
           type: string
@@ -14816,6 +15045,15 @@ components:
           type: array
           items: {}
           description: subordinate values of the dictionary
+        id:
+          type: string
+          description: id of the dictionary value
+        inserted_at:
+          type: string
+          description: ISO Datetime
+        updated_at:
+          type: string
+          description: 'ISO Datetime:'
     Dictionary_v2:
       type: object
       required:
