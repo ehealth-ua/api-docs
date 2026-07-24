@@ -1,0 +1,40 @@
+# Деплой середовища на merge (push) у гілку-середовище.
+# main=PROD, preprod, demo, stage. Крок деплою (TODO) наповнює DevOps.
+name: deploy
+
+on:
+  push:
+    branches: [main, preprod, demo, stage]
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-env:
+    runs-on: ubuntu-latest
+    # Динамічна назва від гілки-середовища.
+    name: Deploy (${{ github.ref_name }})
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve docs host
+        id: host
+        run: |
+          case "${{ github.ref_name }}" in
+            main)    echo "url=docs.ehealth.gov.ua"         >> "$GITHUB_OUTPUT" ;;
+            preprod) echo "url=docs-preprod.ehealth.gov.ua" >> "$GITHUB_OUTPUT" ;;
+            demo)    echo "url=docs-demo.ehealth.gov.ua"    >> "$GITHUB_OUTPUT" ;;
+            stage)   echo "url=docs-stage.ehealth.gov.ua"   >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Assemble static bundle
+        run: |
+          mkdir -p _site
+          cp -R index.html assets specs _site/
+          echo "bundle: $(du -sh _site | cut -f1)"
+
+      # TODO(DevOps): задеплоїти ./_site на ${{ steps.host.outputs.url }}
+      # (Cloudflare / S3 / nginx). Стиснена віддача (gzip/brotli) — див. nginx.conf.
+      - name: Deploy
+        run: echo "TODO(DevOps): deploy ./_site to ${{ steps.host.outputs.url }}"

@@ -1,0 +1,44 @@
+# Ефемерний прев'ю-хост на КОЖЕН коміт у PR; авто-видалення на merge/close.
+# Крок деплою/тіардауну (позначено TODO) наповнює DevOps під обраний хост
+# (Cloudflare Pages preview, S3 bucket, nginx vhost, ...).
+name: preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+# Один запуск на PR; новий коміт скасовує попередній прев'ю-білд.
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    # Динамічна назва: env (гілка-ціль PR) + номер PR.
+    name: Preview (${{ github.base_ref }} PR #${{ github.event.number }})
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble static bundle
+        # Сайт уже статичний — артефакт це сам чекаут (index.html + assets + specs).
+        run: |
+          mkdir -p _site
+          cp -R index.html assets specs _site/
+          echo "bundle: $(du -sh _site | cut -f1)"
+
+      # TODO(DevOps): задеплоїти ./_site на ефемерний хост
+      #   docs-${{ github.base_ref }}${{ github.event.number }}.ehealth.gov.ua
+      # (Cloudflare Pages / S3 / nginx vhost). Виставити URL у вивід кроку.
+      - name: Deploy preview
+        run: echo "TODO(DevOps): deploy ./_site to docs-${{ github.base_ref }}${{ github.event.number }}.ehealth.gov.ua"
+
+  teardown-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Teardown preview (PR #${{ github.event.number }})
+    steps:
+      # TODO(DevOps): знести прев'ю-хост цього PR.
+      - name: Teardown
+        run: echo "TODO(DevOps): teardown docs-${{ github.base_ref }}${{ github.event.number }}.ehealth.gov.ua"

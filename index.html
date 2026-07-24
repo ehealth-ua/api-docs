@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <title>eHealth API Reference</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <style>
+      body { margin: 0; padding: 0; }
+      /* Small fixed badge showing which ENVIRONMENT this deploy renders.
+         Derived from the hostname (docs. -> PROD, docs-demo. -> DEMO, ...) so
+         the same file serves every branch untouched. Purely cosmetic. */
+      #env-badge{position:fixed;bottom:12px;right:14px;z-index:9999;
+        font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+        font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+        color:#fff;background:#0076BD;padding:5px 11px;border-radius:6px;
+        box-shadow:0 1px 4px rgba(0,0,0,.25);opacity:.92;}
+    </style>
+  </head>
+  <body>
+    <!--
+      eHealth API Reference — ONE Scalar instance served at /.
+      No landing page, no environment switcher: in this repo a GIT BRANCH IS AN
+      ENVIRONMENT (main=prod, preprod, demo, stage), so each branch is deployed
+      to its own docs host and this page simply lists the SERVICES of that env.
+
+      The left-panel document switcher cycles through the services (Medical
+      Events, General MIS, eHealth PIS, eHealth Trusted PIS) plus the decoded
+      signed-content documents. Every spec URL is RELATIVE -> deployable at any
+      path on any static host (nginx, CDN, ...). The correct API `servers:` host
+      is already baked into each spec per environment.
+
+      To add/remove a service: edit SOURCES below and drop/remove the spec under
+      specs/<service>.yaml. Signed-content docs live under specs/signed-payloads/.
+    -->
+    <a id="env-badge"></a>
+    <div id="app"></div>
+
+    <script src="assets/scalar.standalone.js?v=1.62.9-ehealth-custom"></script>
+    <script>
+      // Document switcher entries, in display order. title -> left-panel label.
+      const SOURCES = [
+        { slug: 'medical-events',      title: 'Medical Events',                 url: 'specs/medical-events.yaml' },
+        { slug: 'general-mis',         title: 'General MIS',                    url: 'specs/general-mis.yaml' },
+        { slug: 'ehealth-pis',         title: 'eHealth PIS',                    url: 'specs/ehealth-pis.yaml' },
+        { slug: 'ehealth-trusted-pis', title: 'eHealth Trusted PIS',            url: 'specs/ehealth-trusted-pis.yaml' },
+        { slug: 'me-signed',           title: 'Medical Events — Signed Content',    url: 'specs/signed-payloads/medical-events.yaml' },
+        { slug: 'tpis-signed',         title: 'eHealth Trusted PIS — Signed Content', url: 'specs/signed-payloads/ehealth-trusted-pis.yaml' },
+      ];
+
+      // Cosmetic env label from hostname; falls back to hidden if unknown.
+      const host = location.hostname;
+      let env = '';
+      if (/^docs-demo/.test(host))         env = 'DEMO';
+      else if (/^docs-preprod/.test(host)) env = 'PREPROD';
+      else if (/^docs-(qa|stage)/.test(host)) env = 'STAGE';
+      else if (/^docs\./.test(host))       env = 'PROD';
+      const badge = document.getElementById('env-badge');
+      if (env) { badge.textContent = env; document.title = 'eHealth API Reference — ' + env; }
+      else { badge.style.display = 'none'; }
+
+      const sources = SOURCES.map((s, i) => ({ ...s, default: i === 0 }));
+
+      // Stock Scalar — no theme overrides. Keep schema fields in the spec's own
+      // (apiary) order rather than Scalar's alphabetical-with-required-first sort.
+      Scalar.createApiReference('#app', {
+        sources: sources,
+        orderSchemaPropertiesBy: 'preserve',
+        orderRequiredPropertiesFirst: false,
+      });
+    </script>
+  </body>
+</html>
