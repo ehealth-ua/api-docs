@@ -432,7 +432,7 @@ paths:
 
         Signed content must contain patient data to search and identify patient and validate relation
 
-        Look at [**Dummy Confidant patient sign-in**](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
+        Look at [**Dummy Confidant patient sign-in**](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
       tags:
         - Public. Patient Information System
       parameters:
@@ -493,7 +493,7 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-in](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-in](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
@@ -1146,7 +1146,7 @@ paths:
 
         Signed content must contain nonce that was generated for trusted PIS.
 
-        Look at [**Dummy Patient sign-up**](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
+        Look at [**Dummy Patient sign-up**](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1212,7 +1212,7 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Patient sign-up](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/sign-up)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Patient sign-up](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/sign-up)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
@@ -1558,7 +1558,7 @@ paths:
 
         Signed content must contain patient data needed to create new MPI record
 
-        Look at [**Dummy Confidant patient sign-up**](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
+        Look at [**Dummy Confidant patient sign-up**](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1619,7 +1619,7 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-up](/#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-up](/?s=tpis-signed#tpis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.

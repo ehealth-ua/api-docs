@@ -18,7 +18,7 @@ paths:
       summary: 'Payload: Submit Encounter Package'
       operationId: dummy-post-api-patients-id-encounter-package
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Encounter_Request`** into `signed_data`. → [Submit Encounter Package](/#medical-events/tag/medical-events/POST/api/patients/{id}/encounter_package)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Encounter_Request`** into `signed_data`. → [Submit Encounter Package](/?s=medical-events#medical-events/tag/medical-events/POST/api/patients/{id}/encounter_package)
 
         **Payload validation rules:**
 
@@ -49,7 +49,7 @@ paths:
       summary: 'Payload: Cancel Encounter Package'
       operationId: dummy-patch-api-patients-id-encounter-package
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Cancel_Encounter`** into `signed_data`. → [Cancel Encounter Package](/#medical-events/tag/medical-events/PATCH/api/patients/{id}/encounter_package)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Cancel_Encounter`** into `signed_data`. → [Cancel Encounter Package](/?s=medical-events#medical-events/tag/medical-events/PATCH/api/patients/{id}/encounter_package)
       requestBody:
         required: true
         content:
@@ -74,7 +74,7 @@ paths:
       summary: 'Payload: Submit Diagnostic Report  Package'
       operationId: dummy-post-api-patients-id-diagnostic-report-package
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Submit_DR_Package`** into `signed_data`. → [Submit Diagnostic Report  Package](/#medical-events/tag/medical-events/POST/api/patients/{id}/diagnostic_report_package)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Submit_DR_Package`** into `signed_data`. → [Submit Diagnostic Report  Package](/?s=medical-events#medical-events/tag/medical-events/POST/api/patients/{id}/diagnostic_report_package)
       requestBody:
         required: true
         content:
@@ -98,7 +98,7 @@ paths:
       summary: 'Payload: Cancel Diagnostic Report Package'
       operationId: dummy-patch-api-patients-id-diagnostic-report-package
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Submit_DR_Package_Cancel`** into `signed_data`. → [Cancel Diagnostic Report Package](/#medical-events/tag/medical-events/PATCH/api/patients/{id}/diagnostic_report_package)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Submit_DR_Package_Cancel`** into `signed_data`. → [Cancel Diagnostic Report Package](/?s=medical-events#medical-events/tag/medical-events/PATCH/api/patients/{id}/diagnostic_report_package)
       requestBody:
         required: true
         content:
@@ -123,7 +123,7 @@ paths:
       summary: 'Payload: Create procedure'
       operationId: dummy-post-api-patients-patient-id-procedures
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Procedure_Request`** into `signed_data`. → [Create procedure](/#medical-events/tag/medical-events/POST/api/patients/{patient_id}/procedures)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Procedure_Request`** into `signed_data`. → [Create procedure](/?s=medical-events#medical-events/tag/medical-events/POST/api/patients/{patient_id}/procedures)
       requestBody:
         required: true
         content:
@@ -148,7 +148,7 @@ paths:
       summary: 'Payload: Cancel Procedure'
       operationId: dummy-patch-api-patients-person-id-procedures-id-actions-cancel
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Procedure_Request`** into `signed_data`. → [Cancel Procedure](/#medical-events/tag/medical-events/PATCH/api/patients/{person_id}/procedures/{id}/actions/cancel)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Procedure_Request`** into `signed_data`. → [Cancel Procedure](/?s=medical-events#medical-events/tag/medical-events/PATCH/api/patients/{person_id}/procedures/{id}/actions/cancel)
       requestBody:
         required: true
         content:
@@ -261,7 +261,7 @@ paths:
       summary: 'Payload: Create Specimen'
       operationId: dummy-post-api-patients-patient-id-specimens
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Specimen_Request`** into `signed_data`. → [Create Specimen](/#medical-events/tag/medical-events/POST/api/patients/{patient_id}/specimens)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Specimen_Request`** into `signed_data`. → [Create Specimen](/?s=medical-events#medical-events/tag/medical-events/POST/api/patients/{patient_id}/specimens)
       requestBody:
         required: true
         content:
@@ -286,7 +286,7 @@ paths:
       summary: 'Payload: Cancel Specimen'
       operationId: dummy-patch-api-patients-patient-id-specimens-id-actions-cancel
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Specimen_Response`** into `signed_data`. → [Cancel Specimen](/#medical-events/tag/medical-events/PATCH/api/patients/{patient_id}/specimens/{id}/actions/cancel)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Specimen_Response`** into `signed_data`. → [Cancel Specimen](/?s=medical-events#medical-events/tag/medical-events/PATCH/api/patients/{patient_id}/specimens/{id}/actions/cancel)
       requestBody:
         required: true
         content:
@@ -346,7 +346,7 @@ paths:
       summary: 'Payload: Submit Composition'
       operationId: dummy-post-api-patients-patient-id-compositions
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Composition_Create`** into `signed_data`. → [Submit Composition](/#medical-events/tag/medical-events/POST/api/patients/{patient_id}/compositions)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Composition_Create`** into `signed_data`. → [Submit Composition](/?s=medical-events#medical-events/tag/medical-events/POST/api/patients/{patient_id}/compositions)
       requestBody:
         required: true
         content:
@@ -371,7 +371,7 @@ paths:
       summary: 'Payload: Mark in error Composition'
       operationId: dummy-patch-api-patients-patient-id-compositions-id-actions-mark-in-error
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Composition_Create`** into `signed_data`. → [Mark in error Composition](/#medical-events/tag/medical-events/PATCH/api/patients/{patient_id}/compositions/{id}/actions/mark_in_error)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Composition_Create`** into `signed_data`. → [Mark in error Composition](/?s=medical-events#medical-events/tag/medical-events/PATCH/api/patients/{patient_id}/compositions/{id}/actions/mark_in_error)
       requestBody:
         required: true
         content:
@@ -435,7 +435,7 @@ paths:
       summary: 'Payload: Create Service request'
       operationId: dummy-post-api-patients-patient-id-service-requests
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Create`** into `signed_data`. → [Create Service request](/#medical-events/tag/service-requests/POST/api/patients/{patient_id}/service_requests)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Create`** into `signed_data`. → [Create Service request](/?s=medical-events#medical-events/tag/service-requests/POST/api/patients/{patient_id}/service_requests)
       requestBody:
         required: true
         content:
@@ -460,7 +460,7 @@ paths:
       summary: 'Payload: Create Device request'
       operationId: dummy-post-api-patients-patient-id-device-requests
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Base`** into `signed_data`. → [Create Device request](/#medical-events/tag/device-requests/POST/api/patients/{patient_id}/device_requests)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Base`** into `signed_data`. → [Create Device request](/?s=medical-events#medical-events/tag/device-requests/POST/api/patients/{patient_id}/device_requests)
       requestBody:
         required: true
         content:
@@ -539,7 +539,7 @@ paths:
       summary: 'Payload: Revoke Device request'
       operationId: dummy-patch-api-patients-patient-id-device-requests-device-request-id-actions-revoke
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Response_Base`** into `signed_data`. → [Revoke Device request](/#medical-events/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/revoke)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Response_Base`** into `signed_data`. → [Revoke Device request](/?s=medical-events#medical-events/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/revoke)
       requestBody:
         required: true
         content:
@@ -599,7 +599,7 @@ paths:
       summary: 'Payload: Mark in error Device request'
       operationId: dummy-patch-api-patients-patient-id-device-requests-device-request-id-actions-mark-in-error
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Response_Base`** into `signed_data`. → [Mark in error Device request](/#medical-events/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/mark_in_error)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Request_Response_Base`** into `signed_data`. → [Mark in error Device request](/?s=medical-events#medical-events/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/mark_in_error)
       requestBody:
         required: true
         content:
@@ -659,7 +659,7 @@ paths:
       summary: 'Payload: Complete Device dispense'
       operationId: dummy-patch-api-patients-patient-id-device-dispenses-device-dispense-id-actions-complete
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Dispense_Complete_Request`** into `signed_data`. → [Complete Device dispense](/#medical-events/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/complete)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Dispense_Complete_Request`** into `signed_data`. → [Complete Device dispense](/?s=medical-events#medical-events/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/complete)
       requestBody:
         required: true
         content:
@@ -691,7 +691,7 @@ paths:
       summary: 'Payload: Mark in error Device dispense'
       operationId: dummy-patch-api-patients-patient-id-device-dispenses-device-dispense-id-actions-mark-in-error
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Dispense_Response`** into `signed_data`. → [Mark in error Device dispense](/#medical-events/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/mark_in_error)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Device_Dispense_Response`** into `signed_data`. → [Mark in error Device dispense](/?s=medical-events#medical-events/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/mark_in_error)
       requestBody:
         required: true
         content:
@@ -723,7 +723,7 @@ paths:
       summary: 'Payload: Create Care Plan'
       operationId: dummy-post-api-patients-patient-id-care-plans
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_Create`** into `signed_data`. → [Create Care Plan](/#medical-events/tag/care-plan/POST/api/patients/{patient_id}/care_plans)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_Create`** into `signed_data`. → [Create Care Plan](/?s=medical-events#medical-events/tag/care-plan/POST/api/patients/{patient_id}/care_plans)
       requestBody:
         required: true
         content:
@@ -823,7 +823,7 @@ paths:
       summary: 'Payload: Create Care Plan Activity'
       operationId: dummy-post-api-patients-patient-id-care-plans-care-plan-id-activities
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_activity_base`** into `signed_data`. → [Create Care Plan Activity](/#medical-events/tag/care-plan/POST/api/patients/{patient_id}/care_plans/{care_plan_id}/activities)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_activity_base`** into `signed_data`. → [Create Care Plan Activity](/?s=medical-events#medical-events/tag/care-plan/POST/api/patients/{patient_id}/care_plans/{care_plan_id}/activities)
       requestBody:
         required: true
         content:
@@ -855,7 +855,7 @@ paths:
       summary: 'Payload: Cancel Care Plan'
       operationId: dummy-patch-api-patients-patient-id-care-plans-id-actions-cancel
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_Show`** into `signed_data`. → [Cancel Care Plan](/#medical-events/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{id}/actions/cancel)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_Plan_Show`** into `signed_data`. → [Cancel Care Plan](/?s=medical-events#medical-events/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{id}/actions/cancel)
       requestBody:
         required: true
         content:
@@ -1018,7 +1018,7 @@ paths:
       summary: 'Payload: Cancel Care Plan Activity'
       operationId: dummy-patch-api-patients-patient-id-care-plans-care-plan-id-activities-id-actions-cancel
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_plan_activity_show`** into `signed_data`. → [Cancel Care Plan Activity](/#medical-events/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{care_plan_id}/activities/{id}/actions/cancel)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Care_plan_activity_show`** into `signed_data`. → [Cancel Care Plan Activity](/?s=medical-events#medical-events/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{care_plan_id}/activities/{id}/actions/cancel)
       requestBody:
         required: true
         content:
@@ -1057,7 +1057,7 @@ paths:
       summary: 'Payload: Cancel Service request'
       operationId: dummy-patch-api-patients-id-service-requests-id-2-actions-cancel
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Base`** into `signed_data`. → [Cancel Service request](/#medical-events/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/cancel)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Base`** into `signed_data`. → [Cancel Service request](/?s=medical-events#medical-events/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/cancel)
       requestBody:
         required: true
         content:
@@ -1115,7 +1115,7 @@ paths:
       summary: 'Payload: Recall Service request'
       operationId: dummy-patch-api-patients-id-service-requests-id-2-actions-recall
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Base`** into `signed_data`. → [Recall Service request](/#medical-events/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/recall)
+        Build, sign (КЕП / UA-EDS) and base64-encode **`Service_Request_Base`** into `signed_data`. → [Recall Service request](/?s=medical-events#medical-events/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/recall)
       requestBody:
         required: true
         content:
