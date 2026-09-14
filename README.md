@@ -34,8 +34,15 @@ specs/
   <service>.yaml         # OpenAPI 3.1 кожного сервісу цього середовища
   signed-payloads/       # декодовані підписані контенти (частина specs)
 nginx.conf               # референс віддачі: gzip / кеш / CORS
-.github/workflows/       # preview + env-deploy
+scripts/
+  stamp_deploy_badge.sh  # ставить "deployed <час>" у верхній правий кут при деплої
+.github/workflows/       # preview + env-deploy (обидва кличуть stamp_deploy_badge.sh)
 ```
+
+Верхній правий кут показує лише **час останнього деплою** (`deployed 14 Sep
+15:30`), проставлений `scripts/stamp_deploy_badge.sh` у момент реального
+деплою — не з git-історії. Позначки середовища (PROD/DEMO/…) немає: хостнейм
+сам про це каже (`docs.` / `docs-demo.` / `docs-preprod.` / `docs-stage.`).
 
 Усі шляхи в `index.html` відносні → сайт працює з будь‑якого шляху на будь‑якому
 статичному хості (nginx, CDN, S3, GitHub Pages).
