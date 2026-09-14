@@ -14,7 +14,7 @@ paths:
       summary: 'Payload: Confidant patient sign-in'
       operationId: dummy-post-api-pis-confidant-sign-in
       description: |-
-        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-in`) -- a plain (unsigned), much smaller reference payload Apiary provides for MIS integration testing, distinct from the real signed `Person_Request_PIS` content (verified separately). → [Confidant patient sign-in](/?r=0#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-in`) -- a plain (unsigned), much smaller reference payload Apiary provides for MIS integration testing, distinct from the real signed `Person_Request_PIS` content (verified separately). → [Confidant patient sign-in](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)
       requestBody:
         required: true
         content:
@@ -58,7 +58,7 @@ paths:
       summary: 'Payload: Patient sign-up'
       operationId: dummy-post-api-pis-sign-up
       description: |-
-        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/sign-up`) -- a plain (unsigned) `person` body plus a `jwt`, used for MIS integration testing instead of the real signed `Person_Request_PIS` content (verified separately). → [Patient sign-up](/?r=0#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/sign-up`) -- a plain (unsigned) `person` body plus a `jwt`, used for MIS integration testing instead of the real signed `Person_Request_PIS` content (verified separately). → [Patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up)
       requestBody:
         required: true
         content:
@@ -142,7 +142,7 @@ paths:
       summary: 'Payload: Confidant patient sign-up'
       operationId: dummy-post-api-pis-confidant-sign-up
       description: |-
-        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-up`) -- a plain (unsigned) `person` body, used for MIS integration testing instead of the real signed `Person_Request_PIS_With_Confidant` content (verified separately). → [Confidant patient sign-up](/?r=0#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-up`) -- a plain (unsigned) `person` body, used for MIS integration testing instead of the real signed `Person_Request_PIS_With_Confidant` content (verified separately). → [Confidant patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)
       requestBody:
         required: true
         content:
