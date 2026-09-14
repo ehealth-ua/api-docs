@@ -24,7 +24,11 @@
 ```
 index.html               # єдина Scalar-оболонка, віддається на /
 assets/
-  scalar.standalone.js   # pinned рендерер (?v=1.62.9-ehealth-custom)
+  scalar.standalone.js   # pinned рендерер (?v=<base>-ehealth-custom.<sha256:8>,
+                         #   base = версія апстріму, з якої форкнулись, статична;
+                         #   хеш — від вмісту файлу, міняється на кожен реальний
+                         #   білд і б'є кеш (assets/ кешується Cache-Control:
+                         #   immutable на рік у nginx.conf))
   fonts/                 # e-Ukraine
 specs/
   <service>.yaml         # OpenAPI 3.1 кожного сервісу цього середовища
