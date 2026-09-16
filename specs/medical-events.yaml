@@ -289,7 +289,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Encounter Package](/#me-signed/tag/medical-events/POST/api/patients/{id}/encounter_package)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Encounter Package](/?r=1#medical-events-signed/tag/medical-events/POST/api/patients/{id}/encounter_package)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -442,7 +442,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Encounter Package](/#me-signed/tag/medical-events/PATCH/api/patients/{id}/encounter_package)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Encounter Package](/?r=1#medical-events-signed/tag/medical-events/PATCH/api/patients/{id}/encounter_package)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -25340,7 +25340,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Diagnostic Report  Package](/#me-signed/tag/medical-events/POST/api/patients/{id}/diagnostic_report_package)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Diagnostic Report  Package](/?r=1#medical-events-signed/tag/medical-events/POST/api/patients/{id}/diagnostic_report_package)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -25493,7 +25493,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Diagnostic Report Package](/#me-signed/tag/medical-events/PATCH/api/patients/{id}/diagnostic_report_package)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Diagnostic Report Package](/?r=1#medical-events-signed/tag/medical-events/PATCH/api/patients/{id}/diagnostic_report_package)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -28400,7 +28400,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create procedure](/#me-signed/tag/medical-events/POST/api/patients/{patient_id}/procedures)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create procedure](/?r=1#medical-events-signed/tag/medical-events/POST/api/patients/{patient_id}/procedures)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -30702,7 +30702,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Procedure](/#me-signed/tag/medical-events/PATCH/api/patients/{person_id}/procedures/{id}/actions/cancel)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Procedure](/?r=1#medical-events-signed/tag/medical-events/PATCH/api/patients/{person_id}/procedures/{id}/actions/cancel)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -30818,7 +30818,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Specimen](/#me-signed/tag/medical-events/POST/api/patients/{patient_id}/specimens)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Specimen](/?r=1#medical-events-signed/tag/medical-events/POST/api/patients/{patient_id}/specimens)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -33575,7 +33575,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Specimen](/#me-signed/tag/medical-events/PATCH/api/patients/{patient_id}/specimens/{id}/actions/cancel)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Specimen](/?r=1#medical-events-signed/tag/medical-events/PATCH/api/patients/{patient_id}/specimens/{id}/actions/cancel)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -33781,7 +33781,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Composition](/#me-signed/tag/medical-events/POST/api/patients/{patient_id}/compositions)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Submit Composition](/?r=1#medical-events-signed/tag/medical-events/POST/api/patients/{patient_id}/compositions)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -44840,7 +44840,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Composition](/#me-signed/tag/medical-events/PATCH/api/patients/{patient_id}/compositions/{id}/actions/mark_in_error)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Composition](/?r=1#medical-events-signed/tag/medical-events/PATCH/api/patients/{patient_id}/compositions/{id}/actions/mark_in_error)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -57821,7 +57821,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Service request](/#me-signed/tag/service-requests/POST/api/patients/{patient_id}/service_requests)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Service request](/?r=1#medical-events-signed/tag/service-requests/POST/api/patients/{patient_id}/service_requests)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -68996,7 +68996,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Device request](/#me-signed/tag/device-requests/POST/api/patients/{patient_id}/device_requests)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Device request](/?r=1#medical-events-signed/tag/device-requests/POST/api/patients/{patient_id}/device_requests)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -72094,7 +72094,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Revoke Device request](/#me-signed/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/revoke)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Revoke Device request](/?r=1#medical-events-signed/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/revoke)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -72340,7 +72340,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Device request](/#me-signed/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/mark_in_error)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Device request](/?r=1#medical-events-signed/tag/device-requests/PATCH/api/patients/{patient_id}/device_requests/{device_request_id}/actions/mark_in_error)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -73794,7 +73794,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Complete Device dispense](/#me-signed/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/complete)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Complete Device dispense](/?r=1#medical-events-signed/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/complete)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -75869,7 +75869,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Device dispense](/#me-signed/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/mark_in_error)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Mark in error Device dispense](/?r=1#medical-events-signed/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/mark_in_error)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -79070,7 +79070,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Care Plan](/#me-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Care Plan](/?r=1#medical-events-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -81050,7 +81050,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Care Plan Activity](/#me-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans/{care_plan_id}/activities)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Create Care Plan Activity](/?r=1#medical-events-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans/{care_plan_id}/activities)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -85279,7 +85279,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Care Plan](/#me-signed/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{id}/actions/cancel)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Care Plan](/?r=1#medical-events-signed/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{id}/actions/cancel)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -86974,7 +86974,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Care Plan Activity](/#me-signed/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{care_plan_id}/activities/{id}/actions/cancel)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Care Plan Activity](/?r=1#medical-events-signed/tag/care-plan/PATCH/api/patients/{patient_id}/care_plans/{care_plan_id}/activities/{id}/actions/cancel)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -90010,7 +90010,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Service request](/#me-signed/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/cancel)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Cancel Service request](/?r=1#medical-events-signed/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/cancel)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
@@ -90138,7 +90138,7 @@ paths:
                 signed_data:
                   description: |-
                     <!-- signed-payload-xref -->
-                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Recall Service request](/#me-signed/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/recall)**.
+                    > 🔒 **Signed content** — Base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Recall Service request](/?r=1#medical-events-signed/tag/service-requests/PATCH/api/patients/{id}/service_requests/{id_2}/actions/recall)**.
                     <!-- /signed-payload-xref -->
                   example: "ew0KICAicGVyaW9kIjogew0KIC..."
                   type: string
