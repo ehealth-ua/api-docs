@@ -114289,8 +114289,6 @@ components:
         employee_type:
           type: string
           example: DOCTOR
-        'employee_type: `DOCTOR` (string, required) - `Dictionary: EMPLOYEE_TYPE`':
-          type: string
     ContactInfo:
       type: object
       properties:
