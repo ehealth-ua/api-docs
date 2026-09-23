@@ -24,14 +24,25 @@
 ```
 index.html               # єдина Scalar-оболонка, віддається на /
 assets/
-  scalar.standalone.js   # pinned рендерер (?v=1.62.9-ehealth-custom)
+  scalar.standalone.js   # pinned рендерер (?v=<base>-ehealth-custom.<sha256:8>,
+                         #   base = версія апстріму, з якої форкнулись, статична;
+                         #   хеш — від вмісту файлу, міняється на кожен реальний
+                         #   білд і б'є кеш (assets/ кешується Cache-Control:
+                         #   immutable на рік у nginx.conf))
   fonts/                 # e-Ukraine
 specs/
   <service>.yaml         # OpenAPI 3.1 кожного сервісу цього середовища
   signed-payloads/       # декодовані підписані контенти (частина specs)
 nginx.conf               # референс віддачі: gzip / кеш / CORS
-.github/workflows/       # preview + env-deploy
+scripts/
+  stamp_deploy_badge.sh  # ставить "deployed <час>" у верхній правий кут при деплої
+.github/workflows/       # preview + env-deploy (обидва кличуть stamp_deploy_badge.sh)
 ```
+
+Верхній правий кут показує лише **час останнього деплою** (`deployed 14 Sep
+15:30`), проставлений `scripts/stamp_deploy_badge.sh` у момент реального
+деплою — не з git-історії. Позначки середовища (PROD/DEMO/…) немає: хостнейм
+сам про це каже (`docs.` / `docs-demo.` / `docs-preprod.` / `docs-stage.`).
 
 Усі шляхи в `index.html` відносні → сайт працює з будь‑якого шляху на будь‑якому
 статичному хості (nginx, CDN, S3, GitHub Pages).
