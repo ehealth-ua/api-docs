@@ -62,14 +62,14 @@ tags:
       ### Sign-in
 
       Patient Sign-in process:
-      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
-      2. Client UI: redirects user to [Patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
+      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
+      2. Client UI: redirects user to [Patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -79,13 +79,13 @@ tags:
 
       Confidant Patient Sign-in process:
       1. Client BE: forms patient data, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
+      2. Client UI: redirects user to [Confidant patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -95,7 +95,7 @@ tags:
 
       **Notes:**
       - If User does not exist, but patient exists in `mpi`, User is created before scopes approval step.
-      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) method.
+      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) method.
 
       **API-key:**
       - For identifiers of PIS clients (as a broker) we use term api-key. PIS must **mandatory** send api-key when called any eHealth API.
@@ -106,14 +106,14 @@ tags:
       ### Sign-up
 
       PIS Sign-up process:
-      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
+      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
       2. User: fills in data to registration form, applies users digital signature;
-      3. Client UI: redirects user to [Patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      3. Client UI: redirects user to [Patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       4. Sign-up UI: shows patient registration form with patient data to confirm;
       5. Sign-up UI: completes patient registration with `app:authorize` scope;
       6. Login UI: renders page with Approval (that lists requested scopes);
       7. User: approves scopes;
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -123,12 +123,12 @@ tags:
 
       PIS Confidant Patient Sign-up process:
       1. User: fills in data to registration form, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      2. Client UI: redirects user to [Confidant patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       3. Sign-up UI: shows patient registration form with patient data to confirm;
       4. Sign-up UI: completes patient registration with `app:authorize` scope;
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
-      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       8. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       9. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -506,7 +506,7 @@ paths:
                   size: 1000
                   has_more: false
       summary: Exchange oAuth Code Grant or Refresh Token for Access Token
-      operationId: Exchange oAuth Code Grant or Refresh Token for Access Token
+      operationId: Renew access token using refresh token
       description: "This single endpoint handles two distinct oAuth flows, selected by `grant_type`:\n\n**`authorization_code`** -- after obtaining an oAuth Code Grant, exchange it for an `access_token` **on your back-end**.\n\nGeneral recommendations: never expose `client_secret` to your front-end, and avoid pushing it to the application source code, to limit the number of developers with access to it. Exposed client credentials may be blocked for security reasons; contact the administrator to receive new credentials.\n\n**`refresh_token`** -- renew an access token using a refresh token. Available as many times as needed during the lifetime of the refresh token."
       tags:
         - Public. Patient Information System
@@ -2931,11 +2931,9 @@ paths:
                       patient_signed:
                         example: true
                         type: boolean
-                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         example: true
                         type: boolean
-                        description: Person's evidence of information about consent to data disclosure
                       content:
                         example: "Person content"
                         type: string
@@ -3398,11 +3396,9 @@ paths:
                 patient_signed:
                   example: false
                   type: boolean
-                  description: Person's evidence of sign the declaration request
                 process_disclosure_data_consent:
                   example: true
                   type: boolean
-                  description: Person's evidence of information about consent to data disclosure
               required:
                 - person
                 - patient_signed
@@ -3677,8 +3673,7 @@ paths:
         content:
           application/json:
             example:
-              signed_content: 
-                ewogICJzdGF0dXMiOiAiQVBQUk9WRUQiLAogICJpZCI6ICJlZWViYjg2ZC01Y2JhLTQzYzktODg1Yi02NDgyZWNhZjgyNmIiLAogICJwZXJzb24iOiB7CiAgICAiaWQiOiAiMTMwMDFjNjAtNDVhMC00YjVhLWI0MjUtOTUwNWUxZGUxOGJkIiwKICAgICJmaXJzdF9uYW1lIjogItCf0LXRgtGA0L4iLAogICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgInNlY29uZF9uYW1lIjogItCc0LjQutC+0LvQsNC50L7QstC40YciLAogICAgImJpcnRoX2RhdGUiOiAiMjAwOS0wNy0wNSIsCiAgICAiYmlydGhfY291bnRyeSI6ICLQo9C60YDQsNGX0L3QsCIsCiAgICAiYmlydGhfc2V0dGxlbWVudCI6ICLQktGW0L3QvdC40YbRjyIsCiAgICAiZ2VuZGVyIjogIk1BTEUiLAogICAgImVtYWlsIjogImVtYWlsQGV4YW1wbGUuY29tIiwKICAgICJub190YXhfaWQiOiBmYWxzZSwKICAgICJ0YXhfaWQiOiAiMzk5OTg2OTM5NCIsCiAgICAic2VjcmV0IjogInNlY3JldCIsCiAgICAiZG9jdW1lbnRzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiQklSVEhfQ0VSVElGSUNBVEUiLAogICAgICAgICJudW1iZXIiOiAi0JDQkDEyMDUxOCIsCiAgICAgICAgImlzc3VlZF9ieSI6ICLQoNC+0LrQuNGC0L3Rj9C90YHRjNC60LjQvCDQoNCSINCT0KMg0JzQktChINCa0LjRl9Cy0YHRjNC60L7RlyDQvtCx0LvQsNGB0YLRliIsCiAgICAgICAgImlzc3VlZF9hdCI6ICIyMDE3LTAyLTI4IiwKICAgICAgICAiZXhwaXJhdGlvbl9kYXRlIjogIjIwMjctMDItMjgiCiAgICAgIH0KICAgIF0sCiAgICAiYWRkcmVzc2VzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiUkVTSURFTkNFIiwKICAgICAgICAiY291bnRyeSI6ICJVQSIsCiAgICAgICAgImFyZWEiOiAi0JbQuNGC0L7QvNC40YDRgdGM0LrQsCIsCiAgICAgICAgInJlZ2lvbiI6ICLQkdC10YDQtNC40YfRltCy0YHRjNC60LjQuSIsCiAgICAgICAgInNldHRsZW1lbnQiOiAi0JrQuNGX0LIiLAogICAgICAgICJzZXR0bGVtZW50X3R5cGUiOiAiQ0lUWSIsCiAgICAgICAgInNldHRsZW1lbnRfaWQiOiAiYjA3NWYxNDgiLAogICAgICAgICJzdHJlZXRfdHlwZSI6ICJTVFJFRVQiLAogICAgICAgICJzdHJlZXQiOiAi0LLRg9C7LiDQndGW0LbQuNC90YHRjNC60LAiLAogICAgICAgICJidWlsZGluZyI6ICIxNSIsCiAgICAgICAgImFwYXJ0bWVudCI6ICIyMyIsCiAgICAgICAgInppcCI6ICIwMjA5MCIKICAgICAgfQogICAgXSwKICAgICJwaG9uZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgfQogICAgXSwKICAgICJhdXRoZW50aWNhdGlvbl9tZXRob2RzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiVEhJUkRfUEVSU09OIiwKICAgICAgICAidmFsdWUiOiAiKzM4MDUwODg4NzcwMCIsCiAgICAgICAgImFsaWFzIjogImh1c2JhbmQiCiAgICAgIH0KICAgIF0sCiAgICAidW56ciI6ICIyMDA5MDcwNS0wMDAxMSIsCiAgICAiZW1lcmdlbmN5X2NvbnRhY3QiOiB7CiAgICAgICJmaXJzdF9uYW1lIjogItCf0LXRgtGA0L4iLAogICAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAgICJzZWNvbmRfbmFtZSI6ICLQnNC40LrQvtC70LDQudC+0LLQuNGHIiwKICAgICAgInBob25lcyI6IFsKICAgICAgICB7CiAgICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICAgIH0KICAgICAgXQogICAgfSwKICAgICJjb25maWRhbnRfcGVyc29uIjogWwogICAgICB7CiAgICAgICAgInJlbGF0aW9uX3R5cGUiOiAiUFJJTUFSWSIsCiAgICAgICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAgICJzZWNvbmRfbmFtZSI6ICLQnNC40LrQvtC70LDQudC+0LLQuNGHIiwKICAgICAgICAiYmlydGhfZGF0ZSI6ICIxOTcyLTEwLTI2IiwKICAgICAgICAiYmlydGhfY291bnRyeSI6ICLQo9C60YDQsNGX0L3QsCIsCiAgICAgICAgImJpcnRoX3NldHRsZW1lbnQiOiAi0JLRltC90L3QuNGG0Y8iLAogICAgICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAgICAgInRheF9pZCI6ICIyNjU5NzE5MzUwIiwKICAgICAgICAic2VjcmV0IjogInNlY3JldCIsCiAgICAgICAgImRvY3VtZW50c19wZXJzb24iOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJ0eXBlIjogIlBBU1NQT1JUIiwKICAgICAgICAgICAgIm51bWJlciI6ICLQkNCQMTIwNTE4IiwKICAgICAgICAgICAgImlzc3VlZF9ieSI6ICLQoNC+0LrQuNGC0L3Rj9C90YHRjNC60LjQvCDQoNCSINCT0KMg0JzQktChINCa0LjRl9Cy0YHRjNC60L7RlyDQvtCx0LvQsNGB0YLRliIsCiAgICAgICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJkb2N1bWVudHNfcmVsYXRpb25zaGlwIjogWwogICAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgICAgICJudW1iZXIiOiAi0JDQkDEyMDUxOCIsCiAgICAgICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICAgICAiaXNzdWVkX2F0IjogIjIwMTctMDItMjgiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicGhvbmVzIjogWwogICAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICAgICAibnVtYmVyIjogIiszODA1MDM0MTA4NzAiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAiZW1haWwiOiAiZW1haWxsQGV4YW1wbGUuY29tIgogICAgICB9CiAgICBdLAogICAgInByZWZlcnJlZF93YXlfY29tbXVuaWNhdGlvbiI6ICJlbWFpbCIKICB9LAogICJwYXRpZW50X3NpZ25lZCI6IHRydWUsCiAgInByb2Nlc3NfZGlzY2xvc3VyZV9kYXRhX2NvbnNlbnQiOiB0cnVlLAogICJjb250ZW50IjogIjxodG1sPjxib2R5PjxwPnNpZ25lZCBwZXJzb24gZGF0YTwvcD48L2JvZHk+PC9odG1sPiIsCiAgImNoYW5uZWwiOiAiTUlTIgp9
+              signed_content: ewogICJzdGF0dXMiOiAiQVBQUk9WRUQiLAogICJpZCI6ICJlZWViYjg2ZC01Y2JhLTQzYzktODg1Yi02NDgyZWNhZjgyNmIiLAogICJwZXJzb24iOiB7CiAgICAiaWQiOiAiMTMwMDFjNjAtNDVhMC00YjVhLWI0MjUtOTUwNWUxZGUxOGJkIiwKICAgICJmaXJzdF9uYW1lIjogItCf0LXRgtGA0L4iLAogICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgInNlY29uZF9uYW1lIjogItCc0LjQutC+0LvQsNC50L7QstC40YciLAogICAgImJpcnRoX2RhdGUiOiAiMjAwOS0wNy0wNSIsCiAgICAiYmlydGhfY291bnRyeSI6ICLQo9C60YDQsNGX0L3QsCIsCiAgICAiYmlydGhfc2V0dGxlbWVudCI6ICLQktGW0L3QvdC40YbRjyIsCiAgICAiZ2VuZGVyIjogIk1BTEUiLAogICAgImVtYWlsIjogImVtYWlsQGV4YW1wbGUuY29tIiwKICAgICJub190YXhfaWQiOiBmYWxzZSwKICAgICJ0YXhfaWQiOiAiMzk5OTg2OTM5NCIsCiAgICAic2VjcmV0IjogInNlY3JldCIsCiAgICAiZG9jdW1lbnRzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiQklSVEhfQ0VSVElGSUNBVEUiLAogICAgICAgICJudW1iZXIiOiAi0JDQkDEyMDUxOCIsCiAgICAgICAgImlzc3VlZF9ieSI6ICLQoNC+0LrQuNGC0L3Rj9C90YHRjNC60LjQvCDQoNCSINCT0KMg0JzQktChINCa0LjRl9Cy0YHRjNC60L7RlyDQvtCx0LvQsNGB0YLRliIsCiAgICAgICAgImlzc3VlZF9hdCI6ICIyMDE3LTAyLTI4IiwKICAgICAgICAiZXhwaXJhdGlvbl9kYXRlIjogIjIwMjctMDItMjgiCiAgICAgIH0KICAgIF0sCiAgICAiYWRkcmVzc2VzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiUkVTSURFTkNFIiwKICAgICAgICAiY291bnRyeSI6ICJVQSIsCiAgICAgICAgImFyZWEiOiAi0JbQuNGC0L7QvNC40YDRgdGM0LrQsCIsCiAgICAgICAgInJlZ2lvbiI6ICLQkdC10YDQtNC40YfRltCy0YHRjNC60LjQuSIsCiAgICAgICAgInNldHRsZW1lbnQiOiAi0JrQuNGX0LIiLAogICAgICAgICJzZXR0bGVtZW50X3R5cGUiOiAiQ0lUWSIsCiAgICAgICAgInNldHRsZW1lbnRfaWQiOiAiYjA3NWYxNDgiLAogICAgICAgICJzdHJlZXRfdHlwZSI6ICJTVFJFRVQiLAogICAgICAgICJzdHJlZXQiOiAi0LLRg9C7LiDQndGW0LbQuNC90YHRjNC60LAiLAogICAgICAgICJidWlsZGluZyI6ICIxNSIsCiAgICAgICAgImFwYXJ0bWVudCI6ICIyMyIsCiAgICAgICAgInppcCI6ICIwMjA5MCIKICAgICAgfQogICAgXSwKICAgICJwaG9uZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgfQogICAgXSwKICAgICJhdXRoZW50aWNhdGlvbl9tZXRob2RzIjogWwogICAgICB7CiAgICAgICAgInR5cGUiOiAiVEhJUkRfUEVSU09OIiwKICAgICAgICAidmFsdWUiOiAiKzM4MDUwODg4NzcwMCIsCiAgICAgICAgImFsaWFzIjogImh1c2JhbmQiCiAgICAgIH0KICAgIF0sCiAgICAidW56ciI6ICIyMDA5MDcwNS0wMDAxMSIsCiAgICAiZW1lcmdlbmN5X2NvbnRhY3QiOiB7CiAgICAgICJmaXJzdF9uYW1lIjogItCf0LXRgtGA0L4iLAogICAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAgICJzZWNvbmRfbmFtZSI6ICLQnNC40LrQvtC70LDQudC+0LLQuNGHIiwKICAgICAgInBob25lcyI6IFsKICAgICAgICB7CiAgICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICAgIH0KICAgICAgXQogICAgfSwKICAgICJjb25maWRhbnRfcGVyc29uIjogWwogICAgICB7CiAgICAgICAgInJlbGF0aW9uX3R5cGUiOiAiUFJJTUFSWSIsCiAgICAgICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAgICJzZWNvbmRfbmFtZSI6ICLQnNC40LrQvtC70LDQudC+0LLQuNGHIiwKICAgICAgICAiYmlydGhfZGF0ZSI6ICIxOTcyLTEwLTI2IiwKICAgICAgICAiYmlydGhfY291bnRyeSI6ICLQo9C60YDQsNGX0L3QsCIsCiAgICAgICAgImJpcnRoX3NldHRsZW1lbnQiOiAi0JLRltC90L3QuNGG0Y8iLAogICAgICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAgICAgInRheF9pZCI6ICIyNjU5NzE5MzUwIiwKICAgICAgICAic2VjcmV0IjogInNlY3JldCIsCiAgICAgICAgImRvY3VtZW50c19wZXJzb24iOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJ0eXBlIjogIlBBU1NQT1JUIiwKICAgICAgICAgICAgIm51bWJlciI6ICLQkNCQMTIwNTE4IiwKICAgICAgICAgICAgImlzc3VlZF9ieSI6ICLQoNC+0LrQuNGC0L3Rj9C90YHRjNC60LjQvCDQoNCSINCT0KMg0JzQktChINCa0LjRl9Cy0YHRjNC60L7RlyDQvtCx0LvQsNGB0YLRliIsCiAgICAgICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJkb2N1bWVudHNfcmVsYXRpb25zaGlwIjogWwogICAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgICAgICJudW1iZXIiOiAi0JDQkDEyMDUxOCIsCiAgICAgICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICAgICAiaXNzdWVkX2F0IjogIjIwMTctMDItMjgiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicGhvbmVzIjogWwogICAgICAgICAgewogICAgICAgICAgICAidHlwZSI6ICJNT0JJTEUiLAogICAgICAgICAgICAibnVtYmVyIjogIiszODA1MDM0MTA4NzAiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAiZW1haWwiOiAiZW1haWxsQGV4YW1wbGUuY29tIgogICAgICB9CiAgICBdLAogICAgInByZWZlcnJlZF93YXlfY29tbXVuaWNhdGlvbiI6ICJlbWFpbCIKICB9LAogICJwYXRpZW50X3NpZ25lZCI6IHRydWUsCiAgInByb2Nlc3NfZGlzY2xvc3VyZV9kYXRhX2NvbnNlbnQiOiB0cnVlLAogICJjb250ZW50IjogIjxodG1sPjxib2R5PjxwPnNpZ25lZCBwZXJzb24gZGF0YTwvcD48L2JvZHk+PC9odG1sPiIsCiAgImNoYW5uZWwiOiAiTUlTIgp9
               signed_content_encoding: base64
             schema:
               type: object
@@ -3747,11 +3742,9 @@ paths:
                       patient_signed:
                         example: true
                         type: boolean
-                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         example: true
                         type: boolean
-                        description: Person's evidence of information about consent to data disclosure
                       content:
                         example: "Person content"
                         type: string
@@ -4088,11 +4081,9 @@ paths:
                       patient_signed:
                         example: true
                         type: boolean
-                        description: Person's evidence of sign the declaration request
                       process_disclosure_data_consent:
                         example: true
                         type: boolean
-                        description: Person's evidence of information about consent to data disclosure
                       content:
                         example: "Person content"
                         type: string
@@ -4504,7 +4495,7 @@ paths:
                     id: ba3a41c7-ea43-4e95-952c-a46cd04cc8b7
                   status: terminated
                   scope: family_doctor
-                  declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                  declaration_request_id: '`74a6fae6-4207-4e03-a136-f2e70c6b0c02` c'
                   content: Declaration content
                   inserted_at: '2017-03-02T10:45:16.000Z'
                   updated_at: '2017-03-02T10:45:16.000Z'
@@ -5073,7 +5064,7 @@ paths:
                             properties:
                               educations:
                                 type: array
-                                description: Information about the employee's education
+                                description: освіта
                                 items:
                                   allOf:
                                     - $ref: '#/components/schemas/Education'
@@ -5095,7 +5086,7 @@ paths:
                                           example: "Педіатр"
                               qualifications:
                                 type: array
-                                description: Information about employee qualification improvement
+                                description: підвищення кваліфікації
                                 items:
                                   allOf:
                                     - $ref: '#/components/schemas/Qualification'
@@ -5117,7 +5108,7 @@ paths:
                                           example: "додаткова інофрмація"
                               specialities:
                                 type: array
-                                description: Block of information on obtaining a specialist certificate and passing attestations
+                                description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
                                 items:
                                   allOf:
                                     - $ref: '#/components/schemas/Speciality'
@@ -5325,18 +5316,18 @@ paths:
                               issued_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: The date when document was issued
+                                description: дата видачі
                               expiry_date:
                                 example: "2017-02-28"
                                 type: string
                               order_no:
                                 example: "fd123443"
                                 type: string
-                                description: Ministry of Health order number
+                                description: номер наказу МОЗ
                               order_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: Ministry of Health order date
+                                description: дата наказу МОЗ
                             required:
                               - category
                               - order_no
@@ -5424,7 +5415,7 @@ paths:
                                   order_no:
                                     example: "ВА43234"
                                     type: string
-                                    description: Order number
+                                    description: номер наказу
                                 required:
                                   - type
                                   - issued_by
@@ -5947,18 +5938,18 @@ paths:
                                   issued_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: The date when document was issued
+                                    description: дата видачі
                                   expiry_date:
                                     example: "2017-02-28"
                                     type: string
                                   order_no:
                                     example: "fd123443"
                                     type: string
-                                    description: Ministry of Health order number
+                                    description: номер наказу МОЗ
                                   order_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: Ministry of Health order date
+                                    description: дата наказу МОЗ
                                 required:
                                   - category
                                   - order_no
@@ -7020,7 +7011,7 @@ paths:
                           speciality:
                             example: "FAMILY_DOCTOR"
                             type: string
-                            description: Information about the employee's specialty
+                            description: інформація про спеціальність лікаря
                         required:
                           - id
                           - position
@@ -7075,18 +7066,18 @@ paths:
                               issued_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: The date when document was issued
+                                description: дата видачі
                               expiry_date:
                                 example: "2017-02-28"
                                 type: string
                               order_no:
                                 example: "fd123443"
                                 type: string
-                                description: Ministry of Health order number
+                                description: номер наказу МОЗ
                               order_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: Ministry of Health order date
+                                description: дата наказу МОЗ
                             required:
                               - category
                               - order_no
@@ -7602,18 +7593,18 @@ paths:
                                   issued_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: The date when document was issued
+                                    description: дата видачі
                                   expiry_date:
                                     example: "2017-02-28"
                                     type: string
                                   order_no:
                                     example: "fd123443"
                                     type: string
-                                    description: Ministry of Health order number
+                                    description: номер наказу МОЗ
                                   order_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: Ministry of Health order date
+                                    description: дата наказу МОЗ
                                 required:
                                   - category
                                   - order_no
@@ -8509,7 +8500,7 @@ paths:
                           speciality:
                             example: "FAMILY_DOCTOR"
                             type: string
-                            description: Information about the employee's specialty
+                            description: інформація про спеціальність лікаря
                         required:
                           - id
                           - position
@@ -8564,18 +8555,18 @@ paths:
                               issued_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: The date when document was issued
+                                description: дата видачі
                               expiry_date:
                                 example: "2017-02-28"
                                 type: string
                               order_no:
                                 example: "fd123443"
                                 type: string
-                                description: Ministry of Health order number
+                                description: номер наказу МОЗ
                               order_date:
                                 example: "2017-02-28"
                                 type: string
-                                description: Ministry of Health order date
+                                description: дата наказу МОЗ
                             required:
                               - category
                               - order_no
@@ -9091,18 +9082,18 @@ paths:
                                   issued_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: The date when document was issued
+                                    description: дата видачі
                                   expiry_date:
                                     example: "2017-02-28"
                                     type: string
                                   order_no:
                                     example: "fd123443"
                                     type: string
-                                    description: Ministry of Health order number
+                                    description: номер наказу МОЗ
                                   order_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: Ministry of Health order date
+                                    description: дата наказу МОЗ
                                 required:
                                   - category
                                   - order_no
@@ -10120,18 +10111,18 @@ paths:
                                   issued_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: The date when document was issued
+                                    description: дата видачі
                                   expiry_date:
                                     example: "2017-02-28"
                                     type: string
                                   order_no:
                                     example: "fd123443"
                                     type: string
-                                    description: Ministry of Health order number
+                                    description: номер наказу МОЗ
                                   order_date:
                                     example: "2017-02-28"
                                     type: string
-                                    description: Ministry of Health order date
+                                    description: дата наказу МОЗ
                                 required:
                                   - category
                                   - order_no
@@ -10634,9 +10625,6 @@ paths:
                           example: "MALE"
                           type: string
                           description: '`Dictionary: GENDER`'
-                        tax_id:
-                          example: "1234567890"
-                          type: string
                         inserted_at:
                           example: "2021-11-09T00:00:00.000Z"
                           type: string
@@ -10774,6 +10762,7 @@ paths:
                     second_name: Миколайович
                     year_of_birth: '1975'
                     gender: MALE
+                    tax_id: '1234567890'
                     inserted_at: '2021-11-09T00:00:00.000Z'
                     updated_at: '2021-11-09T00:00:00.000Z'
                     educations:
@@ -11048,7 +11037,7 @@ paths:
                             speciality_officio:
                               example: true
                               type: boolean
-                              description: Main specialty, only one must be true
+                              description: основна спеціалазація, лише одна має бути true
                             level:
                               example: "FIRST"
                               type: string
@@ -11060,15 +11049,15 @@ paths:
                             attestation_name:
                               example: "Академія Богомольця"
                               type: string
-                              description: Authority which issued the document
+                              description: орган що видав
                             attestation_date:
                               example: "2017-02-28"
                               type: string
-                              description: The date when document was issued
+                              description: дата отримання
                             valid_to_date:
                               example: "2020-02-28"
                               type: string
-                              description: Document expiration date
+                              description: дата дії до
                             certificate_number:
                               example: "AB/21331"
                               type: string
@@ -11615,9 +11604,6 @@ paths:
                         website:
                           example: "www.msp.com.ua"
                           type: string
-                        status_reason:
-                          type: string
-                          description: Division status
                         residence_address:
                           type: object
                           properties:
@@ -11688,22 +11674,26 @@ paths:
                             issued_date:
                               example: "2017-02-28"
                               type: string
-                              description: The date when document was issued
+                              description: дата видачі
                             expiry_date:
                               example: "2017-02-28"
                               type: string
                             order_no:
                               example: "fd123443"
                               type: string
-                              description: Ministry of Health order number
+                              description: номер наказу МОЗ
                             order_date:
                               example: "2017-02-28"
                               type: string
-                              description: Ministry of Health order date
+                              description: дата наказу МОЗ
                           required:
                             - category
                             - order_no
                             - order_date
+                        status_reason:
+                          example: AUTO_SUSPEND
+                          type: string
+                          description: Division status
                       required:
                         - id
                         - name
@@ -11757,7 +11747,6 @@ paths:
                     inserted_at: '2021-11-09T00:00:00.000Z'
                     updated_at: '2021-11-09T00:00:00.000Z'
                     website: www.msp.com.ua
-                    status_reason: AUTO_SUSPEND
                     residence_address:
                       type: RESIDENCE
                       country: UA
@@ -13486,14 +13475,8 @@ paths:
                         child_values:
                           - is_active: true
                             child_values: []
-                            id: df9f70ee-4b12-4740-b0f5-bb5aea116863
-                            inserted_at: '2021-11-09T00:00:00.000Z'
-                            updated_at: '2021-11-09T00:00:00.000Z'
                             code: b11429
                             description: Орієнтація в особі неуточнена
-                        id: df9f70ee-4b12-4740-b0f5-bb5aea116863
-                        inserted_at: '2021-11-09T00:00:00.000Z'
-                        updated_at: '2021-11-09T00:00:00.000Z'
                     labels:
                       - SYSTEM
                       - EXTERNAL
@@ -13509,9 +13492,6 @@ paths:
                         description: Апендицит
                         is_active: true
                         child_values: []
-                        id: df9f70ee-4b12-4740-b0f5-bb5aea116863
-                        inserted_at: '2021-11-09T00:00:00.000Z'
-                        updated_at: '2021-11-09T00:00:00.000Z'
       summary: Get dictionaries v2
       operationId: Get dictionaries v2
       description: |-
@@ -13549,6 +13529,183 @@ paths:
           example: 'true'
           schema:
             type: string
+  /api/pis/minfin_validations_details:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          example: eeebb86d-5cba-43c9-885b-6482ecaf82
+                          type: string
+                          description: recommendation internal identifier
+                        minfin_request_id:
+                          example: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                          type: string
+                          description: minfin request identifier
+                        resource_id:
+                          example: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                          type: string
+                          description: Person unique identifier
+                        resource:
+                          example: PERSON
+                          type: string
+                          enum:
+                            - PERSON
+                          description: Type of resource
+                        recommendation_id:
+                          example: XXXXXXXXXXXXX02
+                          type: string
+                          description: recommendation identifier
+                        recommendation_result:
+                          example: '101'
+                          type: string
+                          enum:
+                            - '101'
+                          description: decision based on results of recommendation
+                        result_date:
+                          example: '2025-11-11T11:11:11Z'
+                          type: string
+                          description: decision result date
+                        non_compliance_info:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - code
+                              - status
+                              - inserted_at
+                            properties:
+                              code:
+                                type: string
+                                example: '487'
+                              process_type:
+                                type: string
+                                example: auto
+                              status:
+                                type: string
+                                example: NEW
+                              data_sourse:
+                                type: string
+                                example: D2
+                              updated_by:
+                                type: string
+                                example: eeebb86d-5cba-43c9-885b-6482ecaf826b
+                              inserted_at:
+                                type: string
+                                example: '2025-11-11T11:11:11Z'
+                              discrepancy_result:
+                                type: string
+                                example: '101'
+                      required:
+                        - id
+                        - minfin_request_id
+                        - resource_id
+                        - resource
+                        - recommendation_id
+                  paging:
+                    type: object
+                    properties:
+                      page_number:
+                        example: 2
+                        type: number
+                        description: Page number.
+                      page_size:
+                        example: 50
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+                      total_entries:
+                        example: 1000
+                        type: number
+                        description: Total number of objects in collection.
+                      total_pages:
+                        example: 23
+                        type: number
+                        description: Total number of pages.
+                    required:
+                      - page_number
+                      - page_size
+                      - total_entries
+                      - total_pages
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  - id: eeebb86d-5cba-43c9-885b-6482ecaf82
+                    minfin_request_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                    resource_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+                    resource: PERSON
+                    recommendation_id: XXXXXXXXXXXXX02
+                    recommendation_result: '101'
+                    result_date: '2025-11-11T11:11:11Z'
+                    non_compliance_info:
+                      - code: '487'
+                        process_type: auto
+                        status: NEW
+                        data_sourse: D2
+                        updated_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
+                        inserted_at: '2025-11-11T11:11:11Z'
+                        discrepancy_result: '101'
+                paging:
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
+      summary: Get Minfin validation details
+      operationId: Get Minfin validation details
+      description: This method returns current person's Minfin validation details.
+      tags:
+        - Public. Patient Information System
+      parameters:
+        - name: page
+          in: query
+          description: Page number.
+          example: '2'
+          schema:
+            type: number
+        - name: page_size
+          in: query
+          description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+          example: '50'
+          schema:
+            type: number
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: api-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
 components:
   schemas:
     Response_OK:
@@ -15373,66 +15530,6 @@ components:
                 verification_reason:
                   type: string
                   description: Verification reason according to `PERSON_VERIFICATION_STATUS_REASONS` dictionary.
-    Minfin_Validation_Details:
-      type: object
-      required:
-        - id
-        - minfin_request_id
-        - resource_id
-        - resource
-        - recommendation_id
-      properties:
-        id:
-          type: string
-          description: recommendation internal identifier
-        minfin_request_id:
-          type: string
-          description: minfin request identifier
-        resource_id:
-          type: string
-          description: Person unique identifier
-        resource:
-          type: string
-          enum:
-            - PERSON
-          description: Type of resource
-        recommendation_id:
-          type: string
-          description: recommendation identifier
-        recommendation_result:
-          type: string
-          enum:
-            - '101'
-          description: decision based on results of recommendation
-        result_date:
-          type: string
-          description: decision result date
-        non_compliance_info:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: '487'
-              process_type:
-                type: string
-                example: auto
-              status:
-                type: string
-                example: NEW
-              data_sourse:
-                type: string
-                example: D2
-              updated_by:
-                type: string
-                example: eeebb86d-5cba-43c9-885b-6482ecaf826b
-              inserted_at:
-                type: string
-                example: '2025-11-11T11:11:11Z'
-              discrepancy_result:
-                type: string
-                example: '101'
     pis_person_response:
       type: object
       required:
@@ -15909,17 +16006,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Education'
-          description: Information about the employee's education
+          description: освіта
         qualifications:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
-          description: Information about employee qualification improvement
+          description: підвищення кваліфікації
         specialities:
           type: array
           items:
             $ref: '#/components/schemas/Speciality'
-          description: Block of information on obtaining a specialist certificate and passing attestations
+          description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
         science_degree:
           $ref: '#/components/schemas/ScienceDegree'
     ScienceDegree:
@@ -15964,7 +16061,7 @@ components:
           description: '`Dictionary SPECIALITY_TYPE`'
         speciality_officio:
           type: boolean
-          description: Main specialty, only one must be true
+          description: основна спеціалазація, лише одна має бути true
         level:
           type: string
           description: '`Dictionary SPECIALITY_LEVEL`'
@@ -15973,13 +16070,13 @@ components:
           description: '`Dictionary SPEC_QUALIFICATION_TYPE`'
         attestation_name:
           type: string
-          description: Authority which issued the document
+          description: орган що видав
         attestation_date:
           type: string
-          description: The date when document was issued
+          description: дата отримання
         valid_to_date:
           type: string
-          description: Document expiration date
+          description: дата дії до
         certificate_number:
           type: string
     Qualification:
@@ -16000,15 +16097,15 @@ components:
           type: string
         issued_date:
           type: string
-          description: Document issue date
+          description: дата отримання сертифікату
         certificate_number:
           type: string
         valid_to:
           type: string
-          description: Document expiration date
+          description: дійсний до
         additional_info:
           type: string
-          description: Additional information
+          description: додаткова інформація
     Education:
       type: object
       required:
@@ -16166,7 +16263,7 @@ components:
           type: string
         birth_country:
           type: string
-          description: Country of birth
+          description: країна народження
     Person_Short_person_request:
       type: object
       required:
@@ -16191,15 +16288,15 @@ components:
           description: '`Dictionary ACCREDITATION_CATEGORY` category of accreditation legal entity. At least one of type must be present. Each type can be represented only once.'
         issued_date:
           type: string
-          description: The date when document was issued
+          description: дата видачі
         expiry_date:
           type: string
         order_no:
           type: string
-          description: Ministry of Health order number
+          description: номер наказу МОЗ
         order_date:
           type: string
-          description: Ministry of Health order date
+          description: дата наказу МОЗ
     Division_Declaration:
       type: object
       required:
@@ -16313,7 +16410,7 @@ components:
           type: string
         order_no:
           type: string
-          description: Order number
+          description: номер наказу
     Employee_Minimal:
       type: object
       required:
@@ -16388,7 +16485,7 @@ components:
           $ref: '#/components/schemas/Division_Declaration'
         employee:
           $ref: '#/components/schemas/Employee_Minimal'
-          description: 'Information about the employee''s specialty'
+          description: 'інформація про спеціальність лікаря'
         legal_entity:
           $ref: '#/components/schemas/Medical_Service_Provider'
         seed:
@@ -16783,7 +16880,7 @@ components:
               properties:
                 speciality:
                   type: string
-                  description: Information about the employee's specialty
+                  description: інформація про спеціальність лікаря
         legal_entity:
           allOf:
             - $ref: '#/components/schemas/Medical_Service_Provider'
@@ -16833,7 +16930,7 @@ components:
               properties:
                 speciality:
                   type: string
-                  description: Information about the employee's specialty
+                  description: інформація про спеціальність лікаря
         legal_entity:
           allOf:
             - $ref: '#/components/schemas/Medical_Service_Provider'
@@ -17354,10 +17451,8 @@ components:
           description: ISO Datetime
         patient_signed:
           type: boolean
-          description: Person's evidence of sign the declaration request
         process_disclosure_data_consent:
           type: boolean
-          description: Person's evidence of information about consent to data disclosure
         content:
           type: string
           description: HTML document
@@ -17397,17 +17492,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Education'
-          description: Information about the employee's education
+          description: освіта
         qualifications:
           type: array
           items:
             $ref: '#/components/schemas/Qualification'
-          description: Information about employee qualification improvement
+          description: підвищення кваліфікації
         specialities:
           type: array
           items:
             $ref: '#/components/schemas/Speciality'
-          description: Block of information on obtaining a specialist certificate and passing attestations
+          description: блок інформації про отримання сертифікату спеціалісту та проходження атестацій
         science_degree:
           $ref: '#/components/schemas/ScienceDegree'
         employees:
@@ -18024,13 +18119,13 @@ components:
           description: ISO Datetime
         website:
           type: string
-        status_reason:
-          type: string
-          description: Division status
         residence_address:
           $ref: '#/components/schemas/Address'
         accreditation:
           $ref: '#/components/schemas/MSP_Accreditation'
+        status_reason:
+          type: string
+          description: Division status
     Employee_role_bulk:
       type: object
       required:
@@ -18547,3 +18642,90 @@ components:
         new_value:
           type: string
           description: new status of entity
+    Minfin_Validation_Details:
+      type: object
+      required:
+        - id
+        - minfin_request_id
+        - resource_id
+        - resource
+        - recommendation_id
+      properties:
+        id:
+          type: string
+          description: recommendation internal identifier
+          example: eeebb86d-5cba-43c9-885b-6482ecaf82
+        minfin_request_id:
+          type: string
+          description: minfin request identifier
+          example: 9547da91-bfcf-4fef-9b41-05af690d7de0
+        resource_id:
+          type: string
+          description: Person unique identifier
+          example: 9547da91-bfcf-4fef-9b41-05af690d7de0
+        resource:
+          type: string
+          enum:
+            - PERSON
+          description: Type of resource
+          example: PERSON
+        recommendation_id:
+          type: string
+          description: recommendation identifier
+          example: XXXXXXXXXXXXX02
+        recommendation_result:
+          type: string
+          enum:
+            - '101'
+          description: decision based on results of recommendation
+          example: '101'
+        result_date:
+          type: string
+          description: decision result date
+          example: '2025-11-11T11:11:11Z'
+        non_compliance_info:
+          type: array
+          items:
+            type: object
+            required:
+              - code
+              - status
+              - inserted_at
+            properties:
+              code:
+                type: string
+                example: '487'
+              process_type:
+                type: string
+                example: auto
+              status:
+                type: string
+                example: NEW
+              data_sourse:
+                type: string
+                example: D2
+              updated_by:
+                type: string
+                example: eeebb86d-5cba-43c9-885b-6482ecaf826b
+              inserted_at:
+                type: string
+                example: '2025-11-11T11:11:11Z'
+              discrepancy_result:
+                type: string
+                example: '101'
+      example:
+        id: eeebb86d-5cba-43c9-885b-6482ecaf82
+        minfin_request_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+        resource_id: 9547da91-bfcf-4fef-9b41-05af690d7de0
+        resource: PERSON
+        recommendation_id: XXXXXXXXXXXXX02
+        recommendation_result: '101'
+        result_date: '2025-11-11T11:11:11Z'
+        non_compliance_info:
+          - code: '487'
+            process_type: auto
+            status: NEW
+            data_sourse: D2
+            updated_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
+            inserted_at: '2025-11-11T11:11:11Z'
+            discrepancy_result: '101'

@@ -61,6 +61,7 @@ tags:
 
 
       - If PIS don''t send api-key in Request HEADER, API return 401 error wih message "API-KEY header required".'
+  - name: Public. Dummy methods
 paths:
   /oauth/nonce:
     post:
@@ -75,17 +76,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 200
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 200
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -145,17 +146,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -323,17 +324,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -432,7 +433,7 @@ paths:
 
         Signed content must contain patient data to search and identify patient and validate relation
 
-        Look at [**Dummy Confidant patient sign-in**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
+        Look at [**Dummy Confidant patient sign-in**](#reference/public.-dummy-methods/sign-in/dummy-confidant-patient-sign-in) for more details
       tags:
         - Public. Patient Information System
       parameters:
@@ -497,6 +498,8 @@ paths:
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+
+           The decoded structure of `signed_data` is `Person_Request_PIS`, [documented here](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in).
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
   /oauth/tokens:
     post:
@@ -511,17 +514,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -661,17 +664,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 200
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 200
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties: {}
@@ -718,17 +721,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 200
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 200
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -820,17 +823,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -877,72 +880,72 @@ paths:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Document'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "PASSPORT"
-                                    number:
-                                      example: "АА120518"
-                                    expiration_date:
-                                      example: "2021-02-28"
-                                    issued_by:
-                                      example: "Рокитнянським РВ ГУ МВС Київської області"
-                                    issued_at:
-                                      example: "2017-02-28"
+                              - $ref: '#/components/schemas/Document'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "PASSPORT"
+                                  number:
+                                    example: "АА120518"
+                                  expiration_date:
+                                    example: "2021-02-28"
+                                  issued_by:
+                                    example: "Рокитнянським РВ ГУ МВС Київської області"
+                                  issued_at:
+                                    example: "2017-02-28"
                           addresses:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Address'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "RESIDENCE"
-                                    country:
-                                      example: "UA"
-                                    area:
-                                      example: "Житомирська"
-                                    region:
-                                      example: "Бердичівський"
-                                    settlement:
-                                      example: "Київ"
-                                    settlement_type:
-                                      example: "CITY"
-                                    settlement_id:
-                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
-                                    street_type:
-                                      example: "STREET"
-                                    street:
-                                      example: "вул. Ніжинська"
-                                    building:
-                                      example: "15"
-                                    apartment:
-                                      example: "23"
-                                    zip:
-                                      example: '02090'
+                              - $ref: '#/components/schemas/Address'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "RESIDENCE"
+                                  country:
+                                    example: "UA"
+                                  area:
+                                    example: "Житомирська"
+                                  region:
+                                    example: "Бердичівський"
+                                  settlement:
+                                    example: "Київ"
+                                  settlement_type:
+                                    example: "CITY"
+                                  settlement_id:
+                                    example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                  street_type:
+                                    example: "STREET"
+                                  street:
+                                    example: "вул. Ніжинська"
+                                  building:
+                                    example: "15"
+                                  apartment:
+                                    example: "23"
+                                  zip:
+                                    example: 2090
                           phones:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Phone'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "MOBILE"
-                                    number:
-                                      example: "+380503410870"
+                              - $ref: '#/components/schemas/Phone'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "MOBILE"
+                                  number:
+                                    example: "+380503410870"
                           authentication_methods:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Authentication_Method'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "OTP"
-                                    phone_number:
-                                      example: "+38093*****85"
+                              - $ref: '#/components/schemas/Authentication_Method'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "OTP"
+                                  phone_number:
+                                    example: "+38093*****85"
                           preferred_way_communication:
                             example: "email"
                             type: string
@@ -966,13 +969,13 @@ paths:
                                 type: array
                                 items:
                                   allOf:
-                                    - $ref: '#/components/schemas/Phone'
-                                    - type: object
-                                      properties:
-                                        type:
-                                          example: "MOBILE"
-                                        number:
-                                          example: "+380503410870"
+                                  - $ref: '#/components/schemas/Phone'
+                                  - type: object
+                                    properties:
+                                      type:
+                                        example: "MOBILE"
+                                      number:
+                                        example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -1105,7 +1108,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: '02090'
+                        zip: 2090
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -1146,7 +1149,7 @@ paths:
 
         Signed content must contain nonce that was generated for trusted PIS.
 
-        Look at [**Dummy Patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
+        Look at [**Dummy Patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-patient-sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1216,6 +1219,8 @@ paths:
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+
+           The decoded structure of `signed_data` is `Person_Request_PIS`, [documented here](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up).
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
   /api/pis/confidant/sign-up:
     post:
@@ -1230,17 +1235,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -1287,72 +1292,72 @@ paths:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Document'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "PASSPORT"
-                                    number:
-                                      example: "АА120518"
-                                    expiration_date:
-                                      example: "2021-02-28"
-                                    issued_by:
-                                      example: "Рокитнянським РВ ГУ МВС Київської області"
-                                    issued_at:
-                                      example: "2017-02-28"
+                              - $ref: '#/components/schemas/Document'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "PASSPORT"
+                                  number:
+                                    example: "АА120518"
+                                  expiration_date:
+                                    example: "2021-02-28"
+                                  issued_by:
+                                    example: "Рокитнянським РВ ГУ МВС Київської області"
+                                  issued_at:
+                                    example: "2017-02-28"
                           addresses:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Address'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "RESIDENCE"
-                                    country:
-                                      example: "UA"
-                                    area:
-                                      example: "Житомирська"
-                                    region:
-                                      example: "Бердичівський"
-                                    settlement:
-                                      example: "Київ"
-                                    settlement_type:
-                                      example: "CITY"
-                                    settlement_id:
-                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
-                                    street_type:
-                                      example: "STREET"
-                                    street:
-                                      example: "вул. Ніжинська"
-                                    building:
-                                      example: "15"
-                                    apartment:
-                                      example: "23"
-                                    zip:
-                                      example: '02090'
+                              - $ref: '#/components/schemas/Address'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "RESIDENCE"
+                                  country:
+                                    example: "UA"
+                                  area:
+                                    example: "Житомирська"
+                                  region:
+                                    example: "Бердичівський"
+                                  settlement:
+                                    example: "Київ"
+                                  settlement_type:
+                                    example: "CITY"
+                                  settlement_id:
+                                    example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                  street_type:
+                                    example: "STREET"
+                                  street:
+                                    example: "вул. Ніжинська"
+                                  building:
+                                    example: "15"
+                                  apartment:
+                                    example: "23"
+                                  zip:
+                                    example: 2090
                           phones:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Phone'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "MOBILE"
-                                    number:
-                                      example: "+380503410870"
+                              - $ref: '#/components/schemas/Phone'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "MOBILE"
+                                  number:
+                                    example: "+380503410870"
                           authentication_methods:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Authentication_Method'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "OTP"
-                                    phone_number:
-                                      example: "+38093*****85"
+                              - $ref: '#/components/schemas/Authentication_Method'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "OTP"
+                                  phone_number:
+                                    example: "+38093*****85"
                           preferred_way_communication:
                             example: "email"
                             type: string
@@ -1376,13 +1381,13 @@ paths:
                                 type: array
                                 items:
                                   allOf:
-                                    - $ref: '#/components/schemas/Phone'
-                                    - type: object
-                                      properties:
-                                        type:
-                                          example: "MOBILE"
-                                        number:
-                                          example: "+380503410870"
+                                  - $ref: '#/components/schemas/Phone'
+                                  - type: object
+                                    properties:
+                                      type:
+                                        example: "MOBILE"
+                                      number:
+                                        example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -1515,7 +1520,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: '02090'
+                        zip: 2090
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -1558,7 +1563,7 @@ paths:
 
         Signed content must contain patient data needed to create new MPI record
 
-        Look at [**Dummy Confidant patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
+        Look at [**Dummy Confidant patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-confidant-patient-sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1623,6 +1628,8 @@ paths:
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+
+           The decoded structure of `signed_data` is `Person_Request_PIS_With_Confidant`, [documented here](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up).
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS_With_Confidant'
   /api/pis/trusted/person_requests:
     post:
@@ -1637,17 +1644,17 @@ paths:
                 properties:
                   meta:
                     allOf:
-                      - $ref: '#/components/schemas/Response__Meta'
-                      - type: object
-                        properties:
-                          code:
-                            example: 201
-                          url:
-                            example: "https://example.com/resource"
-                          type:
-                            example: "object"
-                          request_id:
-                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
+                    - $ref: '#/components/schemas/Response__Meta'
+                    - type: object
+                      properties:
+                        code:
+                          example: 201
+                        url:
+                          example: "https://example.com/resource"
+                        type:
+                          example: "object"
+                        request_id:
+                          example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -1732,61 +1739,61 @@ paths:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Document'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "PASSPORT"
-                                    number:
-                                      example: "АА120518"
-                                    expiration_date:
-                                      example: "2021-02-28"
-                                    issued_by:
-                                      example: "Рокитнянським РВ ГУ МВС Київської області"
-                                    issued_at:
-                                      example: "2017-02-28"
+                              - $ref: '#/components/schemas/Document'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "PASSPORT"
+                                  number:
+                                    example: "АА120518"
+                                  expiration_date:
+                                    example: "2021-02-28"
+                                  issued_by:
+                                    example: "Рокитнянським РВ ГУ МВС Київської області"
+                                  issued_at:
+                                    example: "2017-02-28"
                           addresses:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Address'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "RESIDENCE"
-                                    country:
-                                      example: "UA"
-                                    area:
-                                      example: "Житомирська"
-                                    region:
-                                      example: "Бердичівський"
-                                    settlement:
-                                      example: "Київ"
-                                    settlement_type:
-                                      example: "CITY"
-                                    settlement_id:
-                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
-                                    street_type:
-                                      example: "STREET"
-                                    street:
-                                      example: "вул. Ніжинська"
-                                    building:
-                                      example: "15"
-                                    apartment:
-                                      example: "23"
-                                    zip:
-                                      example: '02090'
+                              - $ref: '#/components/schemas/Address'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "RESIDENCE"
+                                  country:
+                                    example: "UA"
+                                  area:
+                                    example: "Житомирська"
+                                  region:
+                                    example: "Бердичівський"
+                                  settlement:
+                                    example: "Київ"
+                                  settlement_type:
+                                    example: "CITY"
+                                  settlement_id:
+                                    example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                  street_type:
+                                    example: "STREET"
+                                  street:
+                                    example: "вул. Ніжинська"
+                                  building:
+                                    example: "15"
+                                  apartment:
+                                    example: "23"
+                                  zip:
+                                    example: 2090
                           phones:
                             type: array
                             items:
                               allOf:
-                                - $ref: '#/components/schemas/Phone'
-                                - type: object
-                                  properties:
-                                    type:
-                                      example: "MOBILE"
-                                    number:
-                                      example: "+380503410870"
+                              - $ref: '#/components/schemas/Phone'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "MOBILE"
+                                  number:
+                                    example: "+380503410870"
                           preferred_way_communication:
                             example: "email"
                             type: string
@@ -1813,13 +1820,13 @@ paths:
                                 type: array
                                 items:
                                   allOf:
-                                    - $ref: '#/components/schemas/Phone'
-                                    - type: object
-                                      properties:
-                                        type:
-                                          example: "MOBILE"
-                                        number:
-                                          example: "+380503410870"
+                                  - $ref: '#/components/schemas/Phone'
+                                  - type: object
+                                    properties:
+                                      type:
+                                        example: "MOBILE"
+                                      number:
+                                        example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -1850,11 +1857,11 @@ paths:
                         type: array
                         items:
                           allOf:
-                            - $ref: '#/components/schemas/Document'
-                            - type: object
-                              properties:
-                                type:
-                                  example: "PASSPORT"
+                          - $ref: '#/components/schemas/Document'
+                          - type: object
+                            properties:
+                              type:
+                                example: "PASSPORT"
                 required:
                   - data
                   - urgent
@@ -1904,7 +1911,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: '02090'
+                        zip: 2090
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -1981,7 +1988,7 @@ paths:
                     street: вул. Ніжинська
                     building: '15'
                     apartment: '23'
-                    zip: '02090'
+                    zip: 2090
                 phones:
                   - type: MOBILE
                     number: '+380503410870'
@@ -2042,61 +2049,61 @@ paths:
                       type: array
                       items:
                         allOf:
-                          - $ref: '#/components/schemas/Document'
-                          - type: object
-                            properties:
-                              type:
-                                example: "PASSPORT"
-                              number:
-                                example: "АА120518"
-                              issued_by:
-                                example: "Рокитнянським РВ ГУ МВС Київської області"
-                              issued_at:
-                                example: "2017-02-28"
-                              expiration_date:
-                                example: "2027-02-28"
+                        - $ref: '#/components/schemas/Document'
+                        - type: object
+                          properties:
+                            type:
+                              example: "PASSPORT"
+                            number:
+                              example: "АА120518"
+                            issued_by:
+                              example: "Рокитнянським РВ ГУ МВС Київської області"
+                            issued_at:
+                              example: "2017-02-28"
+                            expiration_date:
+                              example: "2027-02-28"
                     addresses:
                       type: array
                       items:
                         allOf:
-                          - $ref: '#/components/schemas/Address'
-                          - type: object
-                            properties:
-                              type:
-                                example: "RESIDENCE"
-                              country:
-                                example: "UA"
-                              area:
-                                example: "Житомирська"
-                              region:
-                                example: "Бердичівський"
-                              settlement:
-                                example: "Київ"
-                              settlement_type:
-                                example: "CITY"
-                              settlement_id:
-                                example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
-                              street_type:
-                                example: "STREET"
-                              street:
-                                example: "вул. Ніжинська"
-                              building:
-                                example: "15"
-                              apartment:
-                                example: "23"
-                              zip:
-                                example: '02090'
+                        - $ref: '#/components/schemas/Address'
+                        - type: object
+                          properties:
+                            type:
+                              example: "RESIDENCE"
+                            country:
+                              example: "UA"
+                            area:
+                              example: "Житомирська"
+                            region:
+                              example: "Бердичівський"
+                            settlement:
+                              example: "Київ"
+                            settlement_type:
+                              example: "CITY"
+                            settlement_id:
+                              example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                            street_type:
+                              example: "STREET"
+                            street:
+                              example: "вул. Ніжинська"
+                            building:
+                              example: "15"
+                            apartment:
+                              example: "23"
+                            zip:
+                              example: 2090
                     phones:
                       type: array
                       items:
                         allOf:
-                          - $ref: '#/components/schemas/Phone'
-                          - type: object
-                            properties:
-                              type:
-                                example: "MOBILE"
-                              number:
-                                example: "+380503410870"
+                        - $ref: '#/components/schemas/Phone'
+                        - type: object
+                          properties:
+                            type:
+                              example: "MOBILE"
+                            number:
+                              example: "+380503410870"
                     unzr:
                       example: "20090705-00011"
                       type: string
@@ -2117,13 +2124,13 @@ paths:
                           type: array
                           items:
                             allOf:
-                              - $ref: '#/components/schemas/Phone'
-                              - type: object
-                                properties:
-                                  type:
-                                    example: "MOBILE"
-                                  number:
-                                    example: "+380503410870"
+                            - $ref: '#/components/schemas/Phone'
+                            - type: object
+                              properties:
+                                type:
+                                  example: "MOBILE"
+                                number:
+                                  example: "+380503410870"
                       required:
                         - first_name
                         - last_name
@@ -2715,7 +2722,6 @@ components:
         - documents
         - addresses
         - emergency_contact
-        - process_disclosure_data_consent
       properties:
         first_name:
           type: string
@@ -2787,10 +2793,6 @@ components:
             - email
             - phone
           description: the way how a patient wants to be reached
-        process_disclosure_data_consent:
-          type: boolean
-          example: true
-          description: ознака погодження на використання персональних даних
     Person_Request_PIS_With_Confidant:
       type: object
       required:
