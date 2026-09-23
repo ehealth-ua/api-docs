@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
-  title: MEDICAL EVENTS MIS API — PROD
-  version: "9.15.3"
-  description: "**Version: 9.15.3**\n\n**Environment: PROD**\n\n> Read more about\
+  title: MEDICAL EVENTS MIS API — STAGE
+  version: "9.15.6"
+  description: "**Version: 9.15.6**\n\n**Environment: STAGE**\n\n> Read more about\
     \ eHealth API Manifest [here](https://ehealthapimanifest.docs.apiary.io/#introduction/interacting-with-api)\n\
     \nAll the medical data, stored in eHealth, belongs to the patient and must be\
     \ properly protected. eHealth provides several mechanisms to secure patient's\

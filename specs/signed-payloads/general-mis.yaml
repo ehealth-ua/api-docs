@@ -15,7 +15,7 @@ paths:
         - Deprecated methods
       summary: 'Payload: Sign Person Request'
       operationId: dummy-patch-api-person-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public`** into `signed_content`. → [Sign Person Request](/#general-mis/tag/deprecated-methods/PATCH//api/person_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public`** into `signed_content`. → [Sign Person Request](reference.html#general-mis-prod/tag/deprecated-methods/PATCH//api/person_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -165,7 +165,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Sign Person Request v2'
       operationId: dummy-patch-api-v2-person-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public`** into `signed_content`. → [Sign Person Request v2](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH//api/v2/person_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public`** into `signed_content`. → [Sign Person Request v2](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PATCH//api/v2/person_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -315,7 +315,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Sign Person Request v3'
       operationId: dummy-patch-api-v3-person-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public_request_v3_with_names_array`** into `signed_content`. → [Sign Person Request v3](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH//api/v3/person_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Person_info_Public_request_v3_with_names_array`** into `signed_content`. → [Sign Person Request v3](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PATCH//api/v3/person_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -465,7 +465,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Create Employee Request v2'
       operationId: dummy-post-api-v2-employee-requests
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Employee_Create_v2`** into `signed_content`. → [Create Employee Request v2](/#general-mis/tag/public-medical-service-provider-integration-layer/POST//api/v2/employee_requests)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Employee_Create_v2`** into `signed_content`. → [Create Employee Request v2](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/POST//api/v2/employee_requests)
       requestBody:
         required: true
         content:
@@ -486,7 +486,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Sign merge request'
       operationId: dummy-patch-api-merge-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Merge_request_sign_data`** into `signed_content`. → [Sign merge request](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH//api/merge_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Merge_request_sign_data`** into `signed_content`. → [Sign merge request](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PATCH//api/merge_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -502,7 +502,7 @@ paths:
         - Public. Contracts
       summary: 'Payload: Public. Create Contract Request'
       operationId: dummy-post-api-contract-requests-contract-type-id
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Contract_request_Request`** (capitation) / **`Contract_request_Request_reimbursement`** into `signed_content`. → [Public. Create Contract Request](/#general-mis/tag/public-contracts/POST//api/contract_requests/{contract_type}/{id})
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Contract_request_Request`** (capitation) / **`Contract_request_Request_reimbursement`** into `signed_content`. → [Public. Create Contract Request](reference.html#general-mis-prod/tag/public-contracts/POST//api/contract_requests/{contract_type}/{id})
       requestBody:
         required: true
         content:
@@ -522,7 +522,7 @@ paths:
         - Public. Contracts
       summary: 'Payload: Public. Sign Contract Request by MSP'
       operationId: dummy-patch-api-contract-requests-contract-type-id-actions-sign-msp
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Contract_request_Request`** (capitation) / **`Contract_request_Request_reimbursement`** into `signed_content`. → [Public. Sign Contract Request by MSP](/#general-mis/tag/public-contracts/PATCH//api/contract_requests/{contract_type}/{id}/actions/sign_msp)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Contract_request_Request`** (capitation) / **`Contract_request_Request_reimbursement`** into `signed_content`. → [Public. Sign Contract Request by MSP](reference.html#general-mis-prod/tag/public-contracts/PATCH//api/contract_requests/{contract_type}/{id}/actions/sign_msp)
       requestBody:
         required: true
         content:
@@ -542,7 +542,7 @@ paths:
         - Public. Contracts
       summary: 'Payload: Create Medical program provision'
       operationId: dummy-post-api-medical-program-provision
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medical_program_provision_request`** into `signed_content`. → [Create Medical program provision](/#general-mis/tag/public-contracts/POST//api/medical_program_provision)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medical_program_provision_request`** into `signed_content`. → [Create Medical program provision](reference.html#general-mis-prod/tag/public-contracts/POST//api/medical_program_provision)
       requestBody:
         required: true
         content:
@@ -558,7 +558,7 @@ paths:
         - Deprecated methods
       summary: 'Payload: Sign Declaration Request - Deprecated'
       operationId: dummy-patch-api-declaration-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Decl_req_data_to_be_signed`** into `signed_content`. → [Sign Declaration Request - Deprecated](/#general-mis/tag/deprecated-methods/PATCH//api/declaration_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Decl_req_data_to_be_signed`** into `signed_content`. → [Sign Declaration Request - Deprecated](reference.html#general-mis-prod/tag/deprecated-methods/PATCH//api/declaration_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -574,7 +574,7 @@ paths:
         - Public. Reimbursement
       summary: 'Payload: Sign Medication Request Request'
       operationId: dummy-patch-api-medication-request-requests-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Request_Sign`** into `signed_content`. → [Sign Medication Request Request](/#general-mis/tag/public-reimbursement/PATCH//api/medication_request_requests/{id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Request_Sign`** into `signed_content`. → [Sign Medication Request Request](reference.html#general-mis-prod/tag/public-reimbursement/PATCH//api/medication_request_requests/{id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -590,7 +590,7 @@ paths:
         - Public. Reimbursement
       summary: 'Payload: Reject Medication Request'
       operationId: dummy-patch-api-medication-requests-id-actions-reject
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Reject`** into `signed_content`. → [Reject Medication Request](/#general-mis/tag/public-reimbursement/PATCH//api/medication_requests/{id}/actions/reject)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Reject`** into `signed_content`. → [Reject Medication Request](reference.html#general-mis-prod/tag/public-reimbursement/PATCH//api/medication_requests/{id}/actions/reject)
       requestBody:
         required: true
         content:
@@ -606,7 +606,7 @@ paths:
         - Public. Reimbursement
       summary: 'Payload: Reject Medication Request by Pharmacy User'
       operationId: dummy-patch-api-pharmacy-medication-requests-id-actions-reject
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Reject`** into `signed_content`. → [Reject Medication Request by Pharmacy User](/#general-mis/tag/public-reimbursement/PATCH//api/pharmacy/medication_requests/{id}/actions/reject)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_request_Reject`** into `signed_content`. → [Reject Medication Request by Pharmacy User](reference.html#general-mis-prod/tag/public-reimbursement/PATCH//api/pharmacy/medication_requests/{id}/actions/reject)
       requestBody:
         required: true
         content:
@@ -622,7 +622,7 @@ paths:
         - Deprecated methods
       summary: 'Payload: Process Medication Dispense - Deprecated'
       operationId: dummy-patch-api-medication-dispenses-id-actions-process
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_Dispense_Process_Request`** into `signed_content`. → [Process Medication Dispense - Deprecated](/#general-mis/tag/deprecated-methods/PATCH//api/medication_dispenses/{id}/actions/process)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_Dispense_Process_Request`** into `signed_content`. → [Process Medication Dispense - Deprecated](reference.html#general-mis-prod/tag/deprecated-methods/PATCH//api/medication_dispenses/{id}/actions/process)
       requestBody:
         required: true
         content:
@@ -638,7 +638,7 @@ paths:
         - Public. Reimbursement
       summary: 'Payload: Process Medication Dispense by Pharmacy User'
       operationId: dummy-patch-api-pharmacy-medication-dispenses-id-actions-process
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_Dispense_Process_Request_for_Pharmacist`** into `signed_content`. → [Process Medication Dispense by Pharmacy User](/#general-mis/tag/public-reimbursement/PATCH//api/pharmacy/medication_dispenses/{id}/actions/process)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **`Medication_Dispense_Process_Request_for_Pharmacist`** into `signed_content`. → [Process Medication Dispense by Pharmacy User](reference.html#general-mis-prod/tag/public-reimbursement/PATCH//api/pharmacy/medication_dispenses/{id}/actions/process)
       requestBody:
         required: true
         content:
@@ -654,7 +654,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Update Person verification status'
       operationId: dummy-patch-api-persons-id-verification
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **the structure below** into `signed_content`. → [Update Person verification status](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH//api/persons/{id}/verification)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **the structure below** into `signed_content`. → [Update Person verification status](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PATCH//api/persons/{id}/verification)
       requestBody:
         required: true
         content:
@@ -722,7 +722,7 @@ paths:
         - Public. Medical Service Provider Integration Layer
       summary: 'Payload: Sign Confidant Person relationship request'
       operationId: dummy-patch-api-persons-id-confidant-person-relationship-requests-confidant-person-relationship-request-id-actions-sign
-      description: Build, sign (КЕП / UA-EDS) and base64-encode **the structure below** into `signed_content`. → [Sign Confidant Person relationship request](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH//api/persons/{id}/confidant_person_relationship_requests/{confidant_person_relationship_request_id}/actions/sign)
+      description: Build, sign (КЕП / UA-EDS) and base64-encode **the structure below** into `signed_content`. → [Sign Confidant Person relationship request](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PATCH//api/persons/{id}/confidant_person_relationship_requests/{confidant_person_relationship_request_id}/actions/sign)
       requestBody:
         required: true
         content:
@@ -862,7 +862,7 @@ paths:
       summary: 'Payload: Create/Update Legal Entity - Deprecated'
       operationId: dummy-put-api-legal-entities
       description: |-
-        → [Create/Update Legal Entity - Deprecated](/#general-mis/tag/deprecated-methods/PUT/api/legal_entities)
+        → [Create/Update Legal Entity - Deprecated](reference.html#general-mis-prod/tag/deprecated-methods/PUT/api/legal_entities)
 
         Build, sign (КЕП / UA-EDS) and base64-encode **`Legal_Entity_Request_Public`** into `signed_content`.
       requestBody:
@@ -951,7 +951,7 @@ paths:
       summary: 'Payload: Create/Update Legal Entity V2'
       operationId: dummy-put-api-v2-legal-entities
       description: |-
-        → [Create/Update Legal Entity V2](/#general-mis/tag/public-medical-service-provider-integration-layer/PUT/api/v2/legal_entities)
+        → [Create/Update Legal Entity V2](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PUT/api/v2/legal_entities)
 
         Build, sign (КЕП / UA-EDS) and base64-encode **`Legal_Entity_Request_Public_V2`** into `signed_content`.
       requestBody:
@@ -970,7 +970,7 @@ paths:
       summary: 'Payload: Create/Update Institutional Legal Entity'
       operationId: dummy-put-api-institutional-legal-entities
       description: |-
-        → [Create/Update Institutional Legal Entity](/#general-mis/tag/public-medical-service-provider-integration-layer/PUT/api/institutional/legal_entities)
+        → [Create/Update Institutional Legal Entity](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/PUT/api/institutional/legal_entities)
 
         Build, sign (КЕП / UA-EDS) and base64-encode **`Institutional_Legal_Entity_Request_Public`** into `signed_content`.
       requestBody:

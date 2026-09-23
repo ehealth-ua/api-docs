@@ -62,14 +62,14 @@ tags:
       ### Sign-in
 
       Patient Sign-in process:
-      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
-      2. Client UI: redirects user to [Patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
+      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
+      2. Client UI: redirects user to [Patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -79,13 +79,13 @@ tags:
 
       Confidant Patient Sign-in process:
       1. Client BE: forms patient data, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
+      2. Client UI: redirects user to [Confidant patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -95,7 +95,7 @@ tags:
 
       **Notes:**
       - If User does not exist, but patient exists in `mpi`, User is created before scopes approval step.
-      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) method.
+      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) method.
 
       **API-key:**
       - For identifiers of PIS clients (as a broker) we use term api-key. PIS must **mandatory** send api-key when called any eHealth API.
@@ -106,14 +106,14 @@ tags:
       ### Sign-up
 
       PIS Sign-up process:
-      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
+      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
       2. User: fills in data to registration form, applies users digital signature;
-      3. Client UI: redirects user to [Patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      3. Client UI: redirects user to [Patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       4. Sign-up UI: shows patient registration form with patient data to confirm;
       5. Sign-up UI: completes patient registration with `app:authorize` scope;
       6. Login UI: renders page with Approval (that lists requested scopes);
       7. User: approves scopes;
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -123,12 +123,12 @@ tags:
 
       PIS Confidant Patient Sign-up process:
       1. User: fills in data to registration form, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      2. Client UI: redirects user to [Confidant patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       3. Sign-up UI: shows patient registration form with patient data to confirm;
       4. Sign-up UI: completes patient registration with `app:authorize` scope;
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
-      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       8. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       9. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
