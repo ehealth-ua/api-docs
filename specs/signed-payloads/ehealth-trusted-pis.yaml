@@ -6,7 +6,6 @@ info:
     Decoded `signed_data` payloads for signed endpoints. Each entry shows the structure to build, sign (КЕП / UA-EDS), and base64-encode. → [eHealth Trusted PIS API](reference.html)
 tags:
   - name: Public. Patient Information System
-  - name: Public. Dummy methods
 paths:
   /api/pis/confidant/sign-in:
     post:
@@ -15,59 +14,40 @@ paths:
       summary: 'Payload: Confidant patient sign-in'
       operationId: dummy-post-api-pis-confidant-sign-in
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Person_Request_PIS`** into `signed_data`. → [Confidant patient sign-in](reference.html#ehealth-trusted-pis-prod/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-in`) -- a plain (unsigned), much smaller reference payload Apiary provides for MIS integration testing, distinct from the real signed `Person_Request_PIS` content (verified separately). → [Confidant patient sign-in](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person_Request_PIS'
-            example:
-              first_name: Петро
-              last_name: Іванов
-              second_name: Миколайович
-              birth_date: '2009-07-05'
-              birth_country: Україна
-              birth_settlement: Вінниця
-              gender: MALE
-              email: email@example.com
-              no_tax_id: false
-              tax_id: '3999869394'
-              secret: secret
-              documents:
-                - type: PASSPORT
-                  number: АА120518
-                  issued_by: Рокитнянським РВ ГУ МВС Київської області
-                  issued_at: '2017-02-28'
-                  expiration_date: '2027-02-28'
-              addresses:
-                - type: RESIDENCE
-                  country: UA
-                  area: Житомирська
-                  region: Бердичівський
-                  settlement: Київ
-                  settlement_type: CITY
-                  settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
-                  street_type: STREET
-                  street: вул. Ніжинська
-                  building: '15'
-                  apartment: '23'
-                  zip: '02090'
-              phones:
-                - type: MOBILE
-                  number: '+380503410870'
-              authentication_methods:
-                - type: OTP
-                  phone_number: '+380508887700'
-              unzr: 20090705-00011
-              emergency_contact:
-                first_name: Петро
-                last_name: Іванов
-                second_name: Миколайович
-                phones:
-                  - type: MOBILE
-                    number: '+380503410870'
-              preferred_way_communication: email
+              type: object
+              required:
+                - last_name
+                - given_name
+              properties:
+                last_name:
+                  type: string
+                  example: Петров
+                given_name:
+                  type: string
+                  example: Петро Петрович
+                tax_id:
+                  type: string
+                  example: '2323232323'
+                document:
+                  type: object
+                  required:
+                    - type
+                    - number
+                  properties:
+                    type:
+                      type: string
+                      example: PASSPORT
+                      description: '`Dictionary DOCUMENT_TYPE`'
+                    number:
+                      type: string
+                      example: АА120518
+                      description: document issue number
       responses:
         '200':
           description: Success
@@ -78,59 +58,80 @@ paths:
       summary: 'Payload: Patient sign-up'
       operationId: dummy-post-api-pis-sign-up
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Person_Request_PIS`** into `signed_data`. → [Patient sign-up](reference.html#ehealth-trusted-pis-prod/tag/public-patient-information-system/POST/api/pis/sign-up)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/sign-up`) -- a plain (unsigned) `person` body plus a `jwt`, used for MIS integration testing instead of the real signed `Person_Request_PIS` content (verified separately). → [Patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person_Request_PIS'
+              type: object
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+                - jwt
+              properties:
+                person:
+                  $ref: '#/components/schemas/Person_Request_PIS'
+                patient_signed:
+                  type: boolean
+                  example: true
+                process_disclosure_data_consent:
+                  type: boolean
+                  example: true
+                jwt:
+                  type: string
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
             example:
-              first_name: Петро
-              last_name: Іванов
-              second_name: Миколайович
-              birth_date: '2009-07-05'
-              birth_country: Україна
-              birth_settlement: Вінниця
-              gender: MALE
-              email: email@example.com
-              no_tax_id: false
-              tax_id: '3999869394'
-              secret: secret
-              documents:
-                - type: PASSPORT
-                  number: АА120518
-                  issued_by: Рокитнянським РВ ГУ МВС Київської області
-                  issued_at: '2017-02-28'
-                  expiration_date: '2027-02-28'
-              addresses:
-                - type: RESIDENCE
-                  country: UA
-                  area: Житомирська
-                  region: Бердичівський
-                  settlement: Київ
-                  settlement_type: CITY
-                  settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
-                  street_type: STREET
-                  street: вул. Ніжинська
-                  building: '15'
-                  apartment: '23'
-                  zip: '02090'
-              phones:
-                - type: MOBILE
-                  number: '+380503410870'
-              authentication_methods:
-                - type: OTP
-                  phone_number: '+380508887700'
-              unzr: 20090705-00011
-              emergency_contact:
+              person:
                 first_name: Петро
                 last_name: Іванов
                 second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: PASSPORT
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: '02090'
                 phones:
                   - type: MOBILE
                     number: '+380503410870'
-              preferred_way_communication: email
+                authentication_methods:
+                  - type: OTP
+                    phone_number: '+380508887700'
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+              jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
       responses:
         '200':
           description: Success
@@ -141,68 +142,84 @@ paths:
       summary: 'Payload: Confidant patient sign-up'
       operationId: dummy-post-api-pis-confidant-sign-up
       description: |-
-        Build, sign (КЕП / UA-EDS) and base64-encode **`Person_Request_PIS_With_Confidant`** into `signed_data`. → [Confidant patient sign-up](reference.html#ehealth-trusted-pis-prod/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-up`) -- a plain (unsigned) `person` body, used for MIS integration testing instead of the real signed `Person_Request_PIS_With_Confidant` content (verified separately). → [Confidant patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person_Request_PIS_With_Confidant'
+              type: object
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+              properties:
+                person:
+                  $ref: '#/components/schemas/Person_Request_PIS_With_Confidant'
+                patient_signed:
+                  type: boolean
+                  example: true
+                process_disclosure_data_consent:
+                  type: boolean
+                  example: true
             example:
-              first_name: Петро
-              last_name: Іванов
-              second_name: Миколайович
-              birth_date: '2009-07-05'
-              birth_country: Україна
-              birth_settlement: Вінниця
-              gender: MALE
-              email: email@example.com
-              no_tax_id: false
-              tax_id: '3999869394'
-              secret: secret
-              documents:
-                - type: BIRTH_CERTIFICATE
-                  number: АА120518
-                  issued_by: Рокитнянським РВ ГУ МВС Київської області
-                  issued_at: '2017-02-28'
-                  expiration_date: '2027-02-28'
-              addresses:
-                - type: RESIDENCE
-                  country: UA
-                  area: Житомирська
-                  region: Бердичівський
-                  settlement: Київ
-                  settlement_type: CITY
-                  settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
-                  street_type: STREET
-                  street: вул. Ніжинська
-                  building: '15'
-                  apartment: '23'
-                  zip: '02090'
-              phones:
-                - type: MOBILE
-                  number: '+380503410870'
-              authentication_methods:
-                - type: THIRD_PERSON
-                  value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
-                  alias: husband
-              unzr: 20090705-00011
-              emergency_contact:
+              person:
                 first_name: Петро
                 last_name: Іванов
                 second_name: Миколайович
-                phones:
-                  - type: MOBILE
-                    number: '+380503410870'
-              confidant_person:
-                person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
-                relation_type: PRIMARY
-                documents_relationship:
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
                   - type: BIRTH_CERTIFICATE
                     number: АА120518
                     issued_by: Рокитнянським РВ ГУ МВС Київської області
                     issued_at: '2017-02-28'
-              preferred_way_communication: email
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: '02090'
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: THIRD_PERSON
+                    value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                    alias: husband
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+                confidant_person:
+                  person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  relation_type: PRIMARY
+                  documents_relationship:
+                    - type: BIRTH_CERTIFICATE
+                      number: АА120518
+                      issued_by: Рокитнянським РВ ГУ МВС Київської області
+                      issued_at: '2017-02-28'
+              patient_signed: true
+              process_disclosure_data_consent: true
       responses:
         '200':
           description: Success
@@ -762,6 +779,7 @@ components:
         - documents
         - addresses
         - emergency_contact
+        - process_disclosure_data_consent
       properties:
         first_name:
           type: string
@@ -833,6 +851,10 @@ components:
             - email
             - phone
           description: the way how a patient wants to be reached
+        process_disclosure_data_consent:
+          type: boolean
+          example: true
+          description: ознака погодження на використання персональних даних
     Person_Request_PIS_With_Confidant:
       type: object
       required:
