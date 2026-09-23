@@ -1460,12 +1460,10 @@ paths:
                     updated_at: '2018-08-02T10:45:16.000Z'
                     updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
-                  limit: 20
-                  cursors:
-                    starting_after: 56c31536a60ad644060041af
-                    ending_before: 56c31536a60ad644060041aa
-                  size: 50
-                  has_more: false
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
       summary: Get Composition Configurations by search params
       operationId: Get Composition Configurations by search params
       description: ''
@@ -1662,12 +1660,10 @@ paths:
                     updated_at: '2018-08-02T10:45:16.000Z'
                     updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
-                  limit: 20
-                  cursors:
-                    starting_after: 56c31536a60ad644060041af
-                    ending_before: 56c31536a60ad644060041aa
-                  size: 50
-                  has_more: false
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
       summary: Get Devices Configurations by search params
       operationId: Get Devices Configurations by search params
       description: ''
@@ -1864,12 +1860,10 @@ paths:
                     updated_at: '2018-08-02T10:45:16.000Z'
                     updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
-                  limit: 20
-                  cursors:
-                    starting_after: 56c31536a60ad644060041af
-                    ending_before: 56c31536a60ad644060041aa
-                  size: 50
-                  has_more: false
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
       summary: Get Device Parameters Configurations by search params
       operationId: Get Device Parameters Configurations by search params
       description: ''
@@ -2061,12 +2055,10 @@ paths:
                     updated_at: '2018-08-02T10:45:16.000Z'
                     updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
-                  limit: 20
-                  cursors:
-                    starting_after: 56c31536a60ad644060041af
-                    ending_before: 56c31536a60ad644060041aa
-                  size: 50
-                  has_more: false
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
       summary: Get Dictionaries Configurations by search params
       operationId: Get Dictionaries Configurations by search params
       description: ''
@@ -2257,12 +2249,10 @@ paths:
                     updated_at: '2018-08-02T10:45:16.000Z'
                     updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
-                  limit: 20
-                  cursors:
-                    starting_after: 56c31536a60ad644060041af
-                    ending_before: 56c31536a60ad644060041aa
-                  size: 50
-                  has_more: false
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
       summary: Get Observation Configurations by search params
       operationId: Get Observation Configurations by search params
       description: ''
@@ -23474,6 +23464,10 @@ paths:
                   mountain_group: false
                   dls_id: '2872985'
                   dls_verified: true
+                  inserted_at: '2017-04-20T19:14:13Z'
+                  inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
+                  updated_at: '2017-04-20T19:14:13Z'
+                  updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
                 paging:
                   page_number: 2
                   page_size: 50
@@ -23805,6 +23799,10 @@ paths:
                   mountain_group: false
                   dls_id: '2872985'
                   dls_verified: true
+                  inserted_at: '2017-04-20T19:14:13Z'
+                  inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
+                  updated_at: '2017-04-20T19:14:13Z'
+                  updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
       summary: Create division
       operationId: Create division
       description: 'This method must be used to create new division in the system
@@ -24263,6 +24261,10 @@ paths:
                   mountain_group: false
                   dls_id: '2872985'
                   dls_verified: true
+                  inserted_at: '2017-04-20T19:14:13Z'
+                  inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
+                  updated_at: '2017-04-20T19:14:13Z'
+                  updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
       summary: Update division
       operationId: Update division
       description: 'This method must be used to update existing division in the system
@@ -25647,6 +25649,10 @@ paths:
                   mountain_group: false
                   dls_id: '2872985'
                   dls_verified: true
+                  inserted_at: '2017-04-20T19:14:13Z'
+                  inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
+                  updated_at: '2017-04-20T19:14:13Z'
+                  updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
       summary: Deactivate division
       operationId: Deactivate division
       description: ''
@@ -25934,6 +25940,10 @@ paths:
                   mountain_group: false
                   dls_id: '2872985'
                   dls_verified: true
+                  inserted_at: '2017-04-20T19:14:13Z'
+                  inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
+                  updated_at: '2017-04-20T19:14:13Z'
+                  updated_by: 2922a240-63db-404e-b730-09222bfeb2dd
       summary: Activate division
       operationId: Activate division
       description: ''
