@@ -61,7 +61,6 @@ tags:
 
 
       - If PIS don''t send api-key in Request HEADER, API return 401 error wih message "API-KEY header required".'
-  - name: Public. Dummy methods
 paths:
   /oauth/nonce:
     post:
@@ -75,11 +74,23 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 200
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       token:
+                        example: "'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtaXRocmlsLWxvZ2luIiwiZXhwIjoxNTIzNDM5MjAxLCJpYXQiOjE1MjM0MzgzMDEsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiJlZmUxZjA4ZS1kNGI0LTRjZWYtYTAyYy03OGVhNGExZGRhMjUiLCJuYmYiOjE1MjM0MzgzMDAsIm5vbmNlIjoxMjMsInN1YiI6MTIzLCJ0eXAiOiJhY2Nlc3MifQ.UZ6S92h3nAG"
                         type: string
                     required:
                       - token
@@ -111,9 +122,11 @@ paths:
               type: object
               properties:
                 client_id:
+                  example: "30074b6e-fbab-4dc1-9d37-88c21dab1847"
                   type: string
                   description: Client identifier in the system.
                 client_secret:
+                  example: "c2778f3064753ea70de870a53795f5c9"
                   type: string
                   description: Required only for clients with `TRUSTED_PIS` client type.
               required:
@@ -131,46 +144,69 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       value:
+                        example: "SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09"
                         type: string
                         description: oAuth access token.
                       user_id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: User identifier
                       name:
+                        example: "access_token"
                         type: string
                         description: oAuth token name
                       id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: oAuth token identifier
                       expires_at:
+                        example: 1498749591
                         type: number
                         description: expiration date-time timestamp
                       details:
                         type: object
                         properties:
                           app_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of approval between user, applicant user and client that was used to issue access token
                           applicant_user_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of user that initiated access token generation
                           applicant_person_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of person that is accosiated with user who initiated access token generation
                           scope:
+                            example: "capitation_contracts:view capitation_contracts:create patients:view patients:create"
                             type: string
                             description: List of scopes that is required in application business logic, separated by space
                           refresh_token:
+                            example: "my-oauth-refresh-token"
                             type: string
                             description: oAuth refresh token
                           grant_type:
+                            example: "pis_auth"
                             type: string
                           client_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Client ID of authorized user
                         required:
@@ -220,7 +256,7 @@ paths:
         - name: api-key
           in: header
           description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
-          required: false
+          required: true
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
@@ -242,21 +278,27 @@ paths:
                   type: object
                   properties:
                     grant_type:
+                      example: "pis_auth"
                       type: string
                       enum:
                         - pis_auth
                       description: Auth Grant Type. Currently only `pis_auth` is supported.
                     client_id:
+                      example: "4fc161ad-5e3d-4c5e-9a9e-189e2ddffe56"
                       type: string
                       description: Patient information system ID. Used to identify the context of the PIS.
                     client_secret:
+                      example: "UXhEczJacXh3Ri9SUkc4enhHTVVpQ119"
                       type: string
                       description: Patient information system secret key issued upon integration request. Used to identify application developer.
                     signed_content:
+                      example: "eyJqd3QiOiJleUpoYkdjaU9pSklVelV4TWlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUowY25WemRHVmtMV05zYVdWdWRDSXNJbVY0Y0NJNk1UWTRNak14TnprME9Dd2lhV0YwSWpveE5qZ3lNekUwTXpRNExDSnBjM01pT2lKRlNHVmhiSFJvSWl3aWFuUnBJam9pWWpZMk1USTROVGN0TlRCaVlTMDBZV0V6TFdFNE56QXRPR0U1T0dZNU1tTmpNalUwSWl3aWJtSm1Jam94TmpneU16RTBNelEzTENKdWIyNWpaU0k2SW1RMU5XUmxOMkkxTFRZeFlURXROREZsWWkxaE9Ua3hMV1ZsWm1VNVptRmlZbU00WlNJc0luTjFZaUk2SW1RMU5XUmxOMkkxTFRZeFlURXROREZsWWkxaE9Ua3hMV1ZsWm1VNVptRmlZbU00WlNJc0luUjVjQ0k2SW1GalkyVnpjeUo5LkhXTzZlbmxyUE5hYlNIM0xfaWtJU3ZaSjFadnpEV3VkaUNNTEJadkFpcksxQW5SeE5ERW5BY0JKUWVxM2pLdWJsSHBpWUFmNktOZXY5a3daeTJLMXp3In0="
                       type: string
                     signed_content_encoding:
+                      example: "base64"
                       type: string
                     scope:
+                      example: "declaration_request:read declaration_request:terminate declaration:read person:read app:read authentication_factor:read profile:read"
                       type: string
                       description: List of scopes that is required in application business logic, separated by space.
                   required:
@@ -280,46 +322,69 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       value:
+                        example: "SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09"
                         type: string
                         description: oAuth access token.
                       user_id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: User identifier
                       name:
+                        example: "access_token"
                         type: string
                         description: oAuth token name
                       id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: oAuth token identifier
                       expires_at:
+                        example: 1498749591
                         type: number
                         description: expiration date-time timestamp
                       details:
                         type: object
                         properties:
                           app_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of approval between user, applicant user and client that was used to issue access token
                           applicant_user_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of user that initiated access token generation
                           applicant_person_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of person that is accosiated with user who initiated access token generation
                           scope:
+                            example: "capitation_contracts:view capitation_contracts:create patients:view patients:create"
                             type: string
                             description: List of scopes that is required in application business logic, separated by space
                           refresh_token:
+                            example: "my-oauth-refresh-token"
                             type: string
                             description: oAuth refresh token
                           grant_type:
+                            example: "pis_auth"
                             type: string
                           client_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Client ID of authorized user
                         required:
@@ -356,29 +421,25 @@ paths:
                     client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
       summary: Confidant patient sign-in
       operationId: Confidant patient sign-in
-      description: 'This endpoint is used to authenticate, approve scopes and sign-in as a confidant patient.
-
+      description: |-
+        This endpoint is used to authenticate, approve scopes and sign-in as a confidant patient.
 
         > **Note:** It could be done only if there is a registered relation between actor (authenticated patient) and related patient
 
-
         If user does not exist - search for active patient and create user.
-
 
         This endpoint must be used only by trusted PIS clients.
 
-
         Signed content must contain patient data to search and identify patient and validate relation
 
-
-        Look at [**Dummy Confidant patient sign-in**](#reference/public.-dummy-methods/sign-in/dummy-confidant-patient-sign-in) for more details'
+        Look at [**Dummy Confidant patient sign-in**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
       tags:
         - Public. Patient Information System
       parameters:
         - name: api-key
           in: header
           description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
-          required: false
+          required: true
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
@@ -397,22 +458,27 @@ paths:
               type: object
               properties:
                 signed_content_encoding:
+                  example: "base64"
                   type: string
                 token:
                   type: object
                   properties:
                     grant_type:
+                      example: "pis_auth"
                       type: string
                       enum:
                         - pis_auth
                       description: Auth Grant Type. Currently only `pis_auth` is supported.
                     client_id:
+                      example: "4fc161ad-5e3d-4c5e-9a9e-189e2ddffe56"
                       type: string
                       description: Patient information system ID. Used to identify the context of the PIS.
                     client_secret:
+                      example: "UXhEczJacXh3Ri9SUkc4enhHTVVpQ119"
                       type: string
                       description: Patient information system secret key issued upon integration request. Used to identify application developer.
                     scope:
+                      example: "declaration_request:read declaration_request:terminate declaration:read person:read app:read authentication_factor:read profile:read"
                       type: string
                       description: List of scopes that is required in application business logic, separated by space.
                   required:
@@ -426,9 +492,11 @@ paths:
                 - token
         required: true
         description: |-
-          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+          <!-- signed-payload-xref -->
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-in](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)**.
+          <!-- /signed-payload-xref -->
 
-           The decoded structure of `signed_data` is `Person_Request_PIS`, [documented here](signed-payloads-ehealth-trusted-pis.html#tag/public-patient-information-system/POST/api/pis/confidant/sign-in).
+          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
   /oauth/tokens:
     post:
@@ -442,43 +510,65 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       value:
+                        example: "SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09"
                         type: string
                         description: oAuth access token.
                       user_id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: User identifier
                       name:
+                        example: "access_token"
                         type: string
                         description: oAuth token name
                       id:
+                        example: "3ff33ced-69dc-415a-b231-c6446898335a"
                         type: string
                         description: oAuth token identifier
                       expires_at:
+                        example: 1498749591
                         type: number
                         description: expiration date-time timestamp
                       details:
                         type: object
                         properties:
                           app_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of approval between user, applicant user and client that was used to issue access token
                           applicant_user_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of user that initiated access token generation
                           applicant_person_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Identifier of person that is accosiated with user who initiated access token generation
                           scope:
+                            example: "capitation_contracts:view capitation_contracts:create patients:view patients:create"
                             type: string
                             description: List of scopes that is required in application business logic, separated by space
                           grant_type:
+                            example: "refresh_token"
                             type: string
                           client_id:
+                            example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                             type: string
                             description: Client ID of authorized user.
                         required:
@@ -536,15 +626,19 @@ paths:
                   type: object
                   properties:
                     client_id:
+                      example: "6498d88e-97fb-47e2-85a5-99e884f888aa"
                       type: string
                       description: Medical Service provider ID issued after legal_entity registration. Used to identify the context of the MSP/Pharmacy.
                     client_secret:
+                      example: "msp-001-secret-key"
                       type: string
                       description: Medical Service provider secret key issued upon integration request. Used to identify MSP.
                     refresh_token:
+                      example: "my-oauth-refresh-token"
                       type: string
                       description: oAuth refresh token.
                     grant_type:
+                      example: "refresh_token"
                       type: string
                       enum:
                         - refresh_token
@@ -566,7 +660,18 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 200
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties: {}
@@ -590,10 +695,16 @@ paths:
         - name: Authorization
           in: header
           description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
-          required: false
+          required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: Content-Type
+          in: header
+          required: true
+          schema:
+            type: string
+          example: application/json
   /api/sms_verifications:
     post:
       responses:
@@ -606,11 +717,23 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 200
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       result:
+                        example: "OTP sent"
                         type: string
                         enum:
                           - OTP sent
@@ -622,6 +745,7 @@ paths:
                     type: object
                     properties:
                       next_step:
+                        example: "REQUEST_OTP"
                         type: string
                         description: next step that needs to be taken in phone verification process.
                 required:
@@ -651,7 +775,7 @@ paths:
         - name: Authorization
           in: header
           description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjYWJpbmV0LXJlZ2lzdHJhdGlvbiIsImVtYWlsIjoiYXByb2tvcHBoYXJtZGlyNEB1a3IubmV0IiwiZXhwIjoxNjgyNjkzNTc3LCJpYXQiOjE2ODI2NjQ3NzcsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiIxOTAyYTkyYS00MDcyLTQ3MWEtYmU4NS1iZWU0MzQzNmNlYjEiLCJuYmYiOjE2ODI2NjQ3NzYsInN1YiI6ImFwcm9rb3BwaGFybWRpcjRAdWtyLm5ldCIsInR5cCI6ImFjY2VzcyJ9.EXTuYRQenjqzsjNAJ5agmEbSHcg_XRKwc3VOGAtSjfMOy4uIJ_BBMUeUWSVzy4_OezPjEIiVcnaLTN4pZbtgow
-          required: false
+          required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjYWJpbmV0LXJlZ2lzdHJhdGlvbiIsImVtYWlsIjoiYXByb2tvcHBoYXJtZGlyNEB1a3IubmV0IiwiZXhwIjoxNjgyNjkzNTc3LCJpYXQiOjE2ODI2NjQ3NzcsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiIxOTAyYTkyYS00MDcyLTQ3MWEtYmU4NS1iZWU0MzQzNmNlYjEiLCJuYmYiOjE2ODI2NjQ3NzYsInN1YiI6ImFwcm9rb3BwaGFybWRpcjRAdWtyLm5ldCIsInR5cCI6ImFjY2VzcyJ9.EXTuYRQenjqzsjNAJ5agmEbSHcg_XRKwc3VOGAtSjfMOy4uIJ_BBMUeUWSVzy4_OezPjEIiVcnaLTN4pZbtgow
@@ -666,14 +790,17 @@ paths:
               type: object
               properties:
                 factor:
+                  example: "+380501112233"
                   type: string
                   description: phone number that needs to be verified.
                 type:
+                  example: "SMS"
                   type: string
                   enum:
                     - SMS
                   description: verification type.
                 content_hash:
+                  example: "76dea970d89477ed03dc5289f297443c"
                   type: string
                   description: MD5 hash of content with phone number that needs to be verified.
               required:
@@ -692,7 +819,18 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -700,47 +838,113 @@ paths:
                         type: object
                         properties:
                           id:
+                            example: "1380df72-275a-11e7-93ae-92361f002671"
                             type: string
                           first_name:
+                            example: "Петро"
                             type: string
                           last_name:
+                            example: "Іванов"
                             type: string
                           second_name:
+                            example: "Миколайович"
                             type: string
                           birth_date:
+                            example: "1991-08-19"
                             type: string
                           birth_country:
+                            example: "Україна"
                             type: string
                           birth_settlement:
+                            example: "Вінниця"
                             type: string
                           gender:
+                            example: "MALE"
                             type: string
                             enum:
                               - MALE
                               - FEMALE
                           email:
+                            example: "email@example.com"
                             type: string
                           tax_id:
+                            example: "3126509816"
                             type: string
                           secret:
+                            example: "secret"
                             type: string
                           documents:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Document'
+                              allOf:
+                                - $ref: '#/components/schemas/Document'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "PASSPORT"
+                                    number:
+                                      example: "АА120518"
+                                    expiration_date:
+                                      example: "2021-02-28"
+                                    issued_by:
+                                      example: "Рокитнянським РВ ГУ МВС Київської області"
+                                    issued_at:
+                                      example: "2017-02-28"
                           addresses:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Address'
+                              allOf:
+                                - $ref: '#/components/schemas/Address'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "RESIDENCE"
+                                    country:
+                                      example: "UA"
+                                    area:
+                                      example: "Житомирська"
+                                    region:
+                                      example: "Бердичівський"
+                                    settlement:
+                                      example: "Київ"
+                                    settlement_type:
+                                      example: "CITY"
+                                    settlement_id:
+                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                    street_type:
+                                      example: "STREET"
+                                    street:
+                                      example: "вул. Ніжинська"
+                                    building:
+                                      example: "15"
+                                    apartment:
+                                      example: "23"
+                                    zip:
+                                      example: '02090'
                           phones:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Phone'
+                              allOf:
+                                - $ref: '#/components/schemas/Phone'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "MOBILE"
+                                    number:
+                                      example: "+380503410870"
                           authentication_methods:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Authentication_Method'
+                              allOf:
+                                - $ref: '#/components/schemas/Authentication_Method'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "OTP"
+                                    phone_number:
+                                      example: "+38093*****85"
                           preferred_way_communication:
+                            example: "email"
                             type: string
                             enum:
                               - email
@@ -750,15 +954,25 @@ paths:
                             type: object
                             properties:
                               first_name:
+                                example: "Петро"
                                 type: string
                               last_name:
+                                example: "Іванов"
                                 type: string
                               second_name:
+                                example: "Миколайович"
                                 type: string
                               phones:
                                 type: array
                                 items:
-                                  $ref: '#/components/schemas/Phone'
+                                  allOf:
+                                    - $ref: '#/components/schemas/Phone'
+                                    - type: object
+                                      properties:
+                                        type:
+                                          example: "MOBILE"
+                                        number:
+                                          example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -780,8 +994,10 @@ paths:
                         type: object
                         properties:
                           id:
+                            example: "7673eb5a-0cae-4fa8-9f81-e6da46aa2940"
                             type: string
                           tax_id:
+                            example: "3000080053"
                             type: string
                         required:
                           - tax_id
@@ -789,41 +1005,53 @@ paths:
                         type: object
                         properties:
                           value:
+                            example: "SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09"
                             type: string
                             description: oAuth access token.
                           user_id:
+                            example: "3ff33ced-69dc-415a-b231-c6446898335a"
                             type: string
                             description: User identifier
                           name:
+                            example: "access_token"
                             type: string
                             description: oAuth token name
                           id:
+                            example: "3ff33ced-69dc-415a-b231-c6446898335a"
                             type: string
                             description: oAuth token identifier
                           expires_at:
+                            example: 1498749591
                             type: number
                             description: expiration date-time timestamp
                           details:
                             type: object
                             properties:
                               app_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of approval between user, applicant user and client that was used to issue access token
                               applicant_user_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of user that initiated access token generation
                               applicant_person_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of person that is accosiated with user who initiated access token generation
                               scope:
+                                example: "capitation_contracts:view capitation_contracts:create patients:view patients:create"
                                 type: string
                                 description: List of scopes that is required in application business logic, separated by space
                               refresh_token:
+                                example: "my-oauth-refresh-token"
                                 type: string
                                 description: oAuth refresh token
                               grant_type:
+                                example: "pis_auth"
                                 type: string
                               client_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Client ID of authorized user
                             required:
@@ -877,7 +1105,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: 2090
+                        zip: '02090'
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -911,23 +1139,21 @@ paths:
                       client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
       summary: Patient sign-up
       operationId: Patient sign-up
-      description: 'This endpoint is used to authenticate, create mpi record for patient if needed, create user for patient if needed, approve scopes and sign-in user.
-
+      description: |-
+        This endpoint is used to authenticate, create mpi record for patient if needed, create user for patient if needed, approve scopes and sign-in user.
 
         This endpoint must be used only by trusted PIS clients.
 
-
         Signed content must contain nonce that was generated for trusted PIS.
 
-
-        Look at [**Dummy Patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-patient-sign-up) for more details.'
+        Look at [**Dummy Patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
         - name: api-key
           in: header
           description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
-          required: false
+          required: true
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
@@ -947,25 +1173,31 @@ paths:
               type: object
               properties:
                 signed_content_encoding:
+                  example: "base64"
                   type: string
                 otp:
+                  example: 1234
                   type: number
                   description: optional OTP that was sent to authentication method phone number via `Verify phone number` method
                 token:
                   type: object
                   properties:
                     grant_type:
+                      example: "pis_auth"
                       type: string
                       enum:
                         - pis_auth
                       description: Auth Grant Type. Currently only `pis_auth` is supported.
                     client_id:
+                      example: "4fc161ad-5e3d-4c5e-9a9e-189e2ddffe56"
                       type: string
                       description: Patient information system ID. Used to identify the context of the PIS.
                     client_secret:
+                      example: "UXhEczJacXh3Ri9SUkc4enhHTVVpQ119"
                       type: string
                       description: Patient information system secret key issued upon integration request. Used to identify application developer.
                     scope:
+                      example: "declaration_request:read declaration_request:terminate declaration:read person:read app:read authentication_factor:read profile:read"
                       type: string
                       description: List of scopes that is required in application business logic, separated by space.
                   required:
@@ -979,9 +1211,11 @@ paths:
                 - token
         required: true
         description: |-
-          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+          <!-- signed-payload-xref -->
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Patient sign-up](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up)**.
+          <!-- /signed-payload-xref -->
 
-           The decoded structure of `signed_data` is `Person_Request_PIS`, [documented here](signed-payloads-ehealth-trusted-pis.html#tag/public-patient-information-system/POST/api/pis/sign-up).
+          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
   /api/pis/confidant/sign-up:
     post:
@@ -995,7 +1229,18 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
@@ -1003,47 +1248,113 @@ paths:
                         type: object
                         properties:
                           id:
+                            example: "1380df72-275a-11e7-93ae-92361f002671"
                             type: string
                           first_name:
+                            example: "Петро"
                             type: string
                           last_name:
+                            example: "Іванов"
                             type: string
                           second_name:
+                            example: "Миколайович"
                             type: string
                           birth_date:
+                            example: "1991-08-19"
                             type: string
                           birth_country:
+                            example: "Україна"
                             type: string
                           birth_settlement:
+                            example: "Вінниця"
                             type: string
                           gender:
+                            example: "MALE"
                             type: string
                             enum:
                               - MALE
                               - FEMALE
                           email:
+                            example: "email@example.com"
                             type: string
                           tax_id:
+                            example: "3126509816"
                             type: string
                           secret:
+                            example: "secret"
                             type: string
                           documents:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Document'
+                              allOf:
+                                - $ref: '#/components/schemas/Document'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "PASSPORT"
+                                    number:
+                                      example: "АА120518"
+                                    expiration_date:
+                                      example: "2021-02-28"
+                                    issued_by:
+                                      example: "Рокитнянським РВ ГУ МВС Київської області"
+                                    issued_at:
+                                      example: "2017-02-28"
                           addresses:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Address'
+                              allOf:
+                                - $ref: '#/components/schemas/Address'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "RESIDENCE"
+                                    country:
+                                      example: "UA"
+                                    area:
+                                      example: "Житомирська"
+                                    region:
+                                      example: "Бердичівський"
+                                    settlement:
+                                      example: "Київ"
+                                    settlement_type:
+                                      example: "CITY"
+                                    settlement_id:
+                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                    street_type:
+                                      example: "STREET"
+                                    street:
+                                      example: "вул. Ніжинська"
+                                    building:
+                                      example: "15"
+                                    apartment:
+                                      example: "23"
+                                    zip:
+                                      example: '02090'
                           phones:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Phone'
+                              allOf:
+                                - $ref: '#/components/schemas/Phone'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "MOBILE"
+                                    number:
+                                      example: "+380503410870"
                           authentication_methods:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Authentication_Method'
+                              allOf:
+                                - $ref: '#/components/schemas/Authentication_Method'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "OTP"
+                                    phone_number:
+                                      example: "+38093*****85"
                           preferred_way_communication:
+                            example: "email"
                             type: string
                             enum:
                               - email
@@ -1053,15 +1364,25 @@ paths:
                             type: object
                             properties:
                               first_name:
+                                example: "Петро"
                                 type: string
                               last_name:
+                                example: "Іванов"
                                 type: string
                               second_name:
+                                example: "Миколайович"
                                 type: string
                               phones:
                                 type: array
                                 items:
-                                  $ref: '#/components/schemas/Phone'
+                                  allOf:
+                                    - $ref: '#/components/schemas/Phone'
+                                    - type: object
+                                      properties:
+                                        type:
+                                          example: "MOBILE"
+                                        number:
+                                          example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -1083,8 +1404,10 @@ paths:
                         type: object
                         properties:
                           id:
+                            example: "7673eb5a-0cae-4fa8-9f81-e6da46aa2940"
                             type: string
                           tax_id:
+                            example: "3000080053"
                             type: string
                         required:
                           - tax_id
@@ -1092,41 +1415,53 @@ paths:
                         type: object
                         properties:
                           value:
+                            example: "SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09"
                             type: string
                             description: oAuth access token.
                           user_id:
+                            example: "3ff33ced-69dc-415a-b231-c6446898335a"
                             type: string
                             description: User identifier
                           name:
+                            example: "access_token"
                             type: string
                             description: oAuth token name
                           id:
+                            example: "3ff33ced-69dc-415a-b231-c6446898335a"
                             type: string
                             description: oAuth token identifier
                           expires_at:
+                            example: 1498749591
                             type: number
                             description: expiration date-time timestamp
                           details:
                             type: object
                             properties:
                               app_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of approval between user, applicant user and client that was used to issue access token
                               applicant_user_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of user that initiated access token generation
                               applicant_person_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Identifier of person that is accosiated with user who initiated access token generation
                               scope:
+                                example: "capitation_contracts:view capitation_contracts:create patients:view patients:create"
                                 type: string
                                 description: List of scopes that is required in application business logic, separated by space
                               refresh_token:
+                                example: "my-oauth-refresh-token"
                                 type: string
                                 description: oAuth refresh token
                               grant_type:
+                                example: "pis_auth"
                                 type: string
                               client_id:
+                                example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
                                 type: string
                                 description: Client ID of authorized user
                             required:
@@ -1180,7 +1515,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: 2090
+                        zip: '02090'
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -1214,26 +1549,23 @@ paths:
                       client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
       summary: Confidant patient sign-up
       operationId: Confidant patient sign-up
-      description: 'This endpoint is used to register patient (Legally Incapacitated) in the system by the hands of their confidant patient
-
+      description: |-
+        This endpoint is used to register patient (Legally Incapacitated) in the system by the hands of their confidant patient
 
         > Note: It could be done ONLY when the system is able to validate their relation using trusted external DBs (eg. GOV services)
 
-
         This endpoint must be used only by trusted PIS clients.
-
 
         Signed content must contain patient data needed to create new MPI record
 
-
-        Look at [**Dummy Confidant patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-confidant-patient-sign-up) for more details.'
+        Look at [**Dummy Confidant patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
         - name: api-key
           in: header
           description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
-          required: false
+          required: true
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
@@ -1252,22 +1584,27 @@ paths:
               type: object
               properties:
                 signed_content_encoding:
+                  example: "base64"
                   type: string
                 token:
                   type: object
                   properties:
                     grant_type:
+                      example: "pis_auth"
                       type: string
                       enum:
                         - pis_auth
                       description: Auth Grant Type. Currently only `pis_auth` is supported.
                     client_id:
+                      example: "4fc161ad-5e3d-4c5e-9a9e-189e2ddffe56"
                       type: string
                       description: Patient information system ID. Used to identify the context of the PIS.
                     client_secret:
+                      example: "UXhEczJacXh3Ri9SUkc4enhHTVVpQ119"
                       type: string
                       description: Patient information system secret key issued upon integration request. Used to identify application developer.
                     scope:
+                      example: "declaration_request:read declaration_request:terminate declaration:read person:read app:read authentication_factor:read profile:read"
                       type: string
                       description: List of scopes that is required in application business logic, separated by space.
                   required:
@@ -1281,9 +1618,11 @@ paths:
                 - token
         required: true
         description: |-
-          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
+          <!-- signed-payload-xref -->
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-up](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)**.
+          <!-- /signed-payload-xref -->
 
-           The decoded structure of `signed_data` is `Person_Request_PIS_With_Confidant`, [documented here](signed-payloads-ehealth-trusted-pis.html#tag/public-patient-information-system/POST/api/pis/confidant/sign-up).
+          **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS_With_Confidant'
   /api/pis/trusted/person_requests:
     post:
@@ -1297,13 +1636,26 @@ paths:
                 type: object
                 properties:
                   meta:
-                    $ref: '#/components/schemas/Response__Meta'
+                    allOf:
+                      - $ref: '#/components/schemas/Response__Meta'
+                      - type: object
+                        properties:
+                          code:
+                            example: 201
+                          url:
+                            example: "https://example.com/resource"
+                          type:
+                            example: "object"
+                          request_id:
+                            example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                   data:
                     type: object
                     properties:
                       id:
+                        example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
                         type: string
                       status:
+                        example: "APPROVED"
                         type: string
                         enum:
                           - NEW
@@ -1313,85 +1665,162 @@ paths:
                           - EXPIRED
                           - CANCELED
                       channel:
+                        example: "PIS"
                         type: string
                       inserted_at:
+                        example: "2021-11-09T00:00:00.000Z"
                         type: string
                         description: ISO Datetime
                       updated_at:
+                        example: "2021-11-09T00:00:00.000Z"
                         type: string
                         description: ISO Datetime
                       patient_signed:
+                        example: true
                         type: boolean
                       process_disclosure_data_consent:
+                        example: true
                         type: boolean
                         description: ознакf погодження на використання персональних даних
                       content:
+                        example: "Person content"
                         type: string
                         description: HTML document
                       person:
                         type: object
                         properties:
                           id:
+                            example: "7e9cffd9-c75f-45fb-badf-6e8d20b6a8a8"
                             type: string
                             description: person id
                           first_name:
+                            example: "Петро"
                             type: string
                           last_name:
+                            example: "Іванов"
                             type: string
                           second_name:
+                            example: "Миколайович"
                             type: string
                           birth_date:
+                            example: "1991-08-19"
                             type: string
                           birth_country:
+                            example: "Україна"
                             type: string
                           birth_settlement:
+                            example: "Вінниця"
                             type: string
                           gender:
+                            example: "MALE"
                             type: string
                             enum:
                               - MALE
                               - FEMALE
                           email:
+                            example: "email@example.com"
                             type: string
                           tax_id:
+                            example: "3126509816"
                             type: string
                           no_tax_id:
+                            example: true
                             type: boolean
                           secret:
+                            example: "secret"
                             type: string
                           documents:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Document'
+                              allOf:
+                                - $ref: '#/components/schemas/Document'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "PASSPORT"
+                                    number:
+                                      example: "АА120518"
+                                    expiration_date:
+                                      example: "2021-02-28"
+                                    issued_by:
+                                      example: "Рокитнянським РВ ГУ МВС Київської області"
+                                    issued_at:
+                                      example: "2017-02-28"
                           addresses:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Address'
+                              allOf:
+                                - $ref: '#/components/schemas/Address'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "RESIDENCE"
+                                    country:
+                                      example: "UA"
+                                    area:
+                                      example: "Житомирська"
+                                    region:
+                                      example: "Бердичівський"
+                                    settlement:
+                                      example: "Київ"
+                                    settlement_type:
+                                      example: "CITY"
+                                    settlement_id:
+                                      example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                                    street_type:
+                                      example: "STREET"
+                                    street:
+                                      example: "вул. Ніжинська"
+                                    building:
+                                      example: "15"
+                                    apartment:
+                                      example: "23"
+                                    zip:
+                                      example: '02090'
                           phones:
                             type: array
                             items:
-                              $ref: '#/components/schemas/Phone'
+                              allOf:
+                                - $ref: '#/components/schemas/Phone'
+                                - type: object
+                                  properties:
+                                    type:
+                                      example: "MOBILE"
+                                    number:
+                                      example: "+380503410870"
                           preferred_way_communication:
+                            example: "email"
                             type: string
                             enum:
                               - email
                               - phone
                             description: the way how a patient wants to be reached
                           unzr:
+                            example: "19900101-00099"
                             type: string
                           emergency_contact:
                             type: object
                             properties:
                               first_name:
+                                example: "Петро"
                                 type: string
                               last_name:
+                                example: "Іванов"
                                 type: string
                               second_name:
+                                example: "Миколайович"
                                 type: string
                               phones:
                                 type: array
                                 items:
-                                  $ref: '#/components/schemas/Phone'
+                                  allOf:
+                                    - $ref: '#/components/schemas/Phone'
+                                    - type: object
+                                      properties:
+                                        type:
+                                          example: "MOBILE"
+                                        number:
+                                          example: "+380503410870"
                             required:
                               - first_name
                               - last_name
@@ -1421,7 +1850,12 @@ paths:
                       documents:
                         type: array
                         items:
-                          $ref: '#/components/schemas/Document'
+                          allOf:
+                            - $ref: '#/components/schemas/Document'
+                            - type: object
+                              properties:
+                                type:
+                                  example: "PASSPORT"
                 required:
                   - data
                   - urgent
@@ -1471,7 +1905,7 @@ paths:
                         street: вул. Ніжинська
                         building: '15'
                         apartment: '23'
-                        zip: 2090
+                        zip: '02090'
                     phones:
                       - type: MOBILE
                         number: '+380503410870'
@@ -1503,14 +1937,14 @@ paths:
         - name: Authorization
           in: header
           description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
-          required: false
+          required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
           description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
-          required: false
+          required: true
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
@@ -1548,7 +1982,7 @@ paths:
                     street: вул. Ніжинська
                     building: '15'
                     apartment: '23'
-                    zip: 2090
+                    zip: '02090'
                 phones:
                   - type: MOBILE
                     number: '+380503410870'
@@ -1570,63 +2004,133 @@ paths:
                   type: object
                   properties:
                     first_name:
+                      example: "Петро"
                       type: string
                     last_name:
+                      example: "Іванов"
                       type: string
                     second_name:
+                      example: "Миколайович"
                       type: string
                     birth_date:
+                      example: "2009-07-05"
                       type: string
                     birth_country:
+                      example: "Україна"
                       type: string
                     birth_settlement:
+                      example: "Вінниця"
                       type: string
                     gender:
+                      example: "MALE"
                       type: string
                       enum:
                         - MALE
                         - FEMALE
                     email:
+                      example: "email@example.com"
                       type: string
                     no_tax_id:
+                      example: false
                       type: boolean
                     tax_id:
+                      example: "3999869394"
                       type: string
                     secret:
+                      example: "secret"
                       type: string
                     documents:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Document'
+                        allOf:
+                          - $ref: '#/components/schemas/Document'
+                          - type: object
+                            properties:
+                              type:
+                                example: "PASSPORT"
+                              number:
+                                example: "АА120518"
+                              issued_by:
+                                example: "Рокитнянським РВ ГУ МВС Київської області"
+                              issued_at:
+                                example: "2017-02-28"
+                              expiration_date:
+                                example: "2027-02-28"
                     addresses:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Address'
+                        allOf:
+                          - $ref: '#/components/schemas/Address'
+                          - type: object
+                            properties:
+                              type:
+                                example: "RESIDENCE"
+                              country:
+                                example: "UA"
+                              area:
+                                example: "Житомирська"
+                              region:
+                                example: "Бердичівський"
+                              settlement:
+                                example: "Київ"
+                              settlement_type:
+                                example: "CITY"
+                              settlement_id:
+                                example: "b075f148-7f93-4fc2-b2ec-2d81b19a9b7b"
+                              street_type:
+                                example: "STREET"
+                              street:
+                                example: "вул. Ніжинська"
+                              building:
+                                example: "15"
+                              apartment:
+                                example: "23"
+                              zip:
+                                example: '02090'
                     phones:
                       type: array
                       items:
-                        $ref: '#/components/schemas/Phone'
+                        allOf:
+                          - $ref: '#/components/schemas/Phone'
+                          - type: object
+                            properties:
+                              type:
+                                example: "MOBILE"
+                              number:
+                                example: "+380503410870"
                     unzr:
+                      example: "20090705-00011"
                       type: string
                       description: the record number in the demographic register
                     emergency_contact:
                       type: object
                       properties:
                         first_name:
+                          example: "Петро"
                           type: string
                         last_name:
+                          example: "Іванов"
                           type: string
                         second_name:
+                          example: "Миколайович"
                           type: string
                         phones:
                           type: array
                           items:
-                            $ref: '#/components/schemas/Phone'
+                            allOf:
+                              - $ref: '#/components/schemas/Phone'
+                              - type: object
+                                properties:
+                                  type:
+                                    example: "MOBILE"
+                                  number:
+                                    example: "+380503410870"
                       required:
                         - first_name
                         - last_name
                         - phones
                     preferred_way_communication:
+                      example: "email"
                       type: string
                       enum:
                         - email
@@ -1644,8 +2148,10 @@ paths:
                     - addresses
                     - emergency_contact
                 patient_signed:
+                  example: false
                   type: boolean
                 process_disclosure_data_consent:
+                  example: true
                   type: boolean
               required:
                 - person
@@ -2069,6 +2575,10 @@ components:
           description: the record number in the demographic register
         emergency_contact:
           type: object
+          required:
+            - first_name
+            - last_name
+            - phones
           properties:
             first_name:
               type: string
@@ -2085,6 +2595,10 @@ components:
                 $ref: '#/components/schemas/Phone'
         confidant_person:
           type: object
+          required:
+            - person_id
+            - relation_type
+            - documents_relationship
           properties:
             person_id:
               type: string
@@ -2202,6 +2716,7 @@ components:
         - documents
         - addresses
         - emergency_contact
+        - process_disclosure_data_consent
       properties:
         first_name:
           type: string
@@ -2249,6 +2764,10 @@ components:
           description: the record number in the demographic register
         emergency_contact:
           type: object
+          required:
+            - first_name
+            - last_name
+            - phones
           properties:
             first_name:
               type: string
@@ -2269,6 +2788,10 @@ components:
             - email
             - phone
           description: the way how a patient wants to be reached
+        process_disclosure_data_consent:
+          type: boolean
+          example: true
+          description: ознака погодження на використання персональних даних
     Person_Request_PIS_With_Confidant:
       type: object
       required:
@@ -2332,6 +2855,10 @@ components:
           description: the record number in the demographic register
         emergency_contact:
           type: object
+          required:
+            - first_name
+            - last_name
+            - phones
           properties:
             first_name:
               type: string
@@ -2348,6 +2875,10 @@ components:
                 $ref: '#/components/schemas/Phone'
         confidant_person:
           type: object
+          required:
+            - person_id
+            - relation_type
+            - documents_relationship
           properties:
             person_id:
               type: string
@@ -2423,6 +2954,10 @@ components:
           description: the record number in the demographic register
         emergency_contact:
           type: object
+          required:
+            - first_name
+            - last_name
+            - phones
           properties:
             first_name:
               type: string
