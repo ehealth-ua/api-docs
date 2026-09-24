@@ -6,11 +6,12 @@
 #
 # Usage: scripts/stamp_deploy_badge.sh [<index.html path>] [<timestamp>]
 #        (path defaults to ./index.html; timestamp defaults to now, format
-#        "14 Sep 15:30")
+#        "14 Sep 2026 15:30 EEST" -- matches api-docs-platform's sandbox
+#        portal badge format, scripts/stamp_deploy_badge.py there)
 set -euo pipefail
 
 FILE="${1:-index.html}"
-STAMP="${2:-$(date '+%-d %b %H:%M')}"
+STAMP="${2:-$(date '+%-d %b %Y %H:%M %Z')}"
 
 if [[ ! -f "$FILE" ]]; then
   echo "no such file: $FILE" >&2
