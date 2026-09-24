@@ -56942,8 +56942,6 @@ paths:
                     coding:
                     - system: PROVIDING_CONDITION
                       code: INPATIENT
-                  inform_with:
-                    auth_method_id: cc949559-5dfe-420f-ac05-065e443b2cc6
       summary: Get Short Care Plans by search params
       operationId: Get Short Care Plans by search params (Summary)
       description: 'Returns care plan short list filtered by submitted parameters withtin specified patient.
@@ -79501,8 +79499,6 @@ paths:
                     coding:
                     - system: PROVIDING_CONDITION
                       code: INPATIENT
-                  inform_with:
-                    auth_method_id: cc949559-5dfe-420f-ac05-065e443b2cc6
       summary: Get Care Plans by search params
       operationId: Get Care Plans by search params
       description: 'Returns care plan list filtered by submitted parameters withtin specified patient.
@@ -82994,8 +82990,6 @@ paths:
                     coding:
                     - system: PROVIDING_CONDITION
                       code: INPATIENT
-                  inform_with:
-                    auth_method_id: cc949559-5dfe-420f-ac05-065e443b2cc6
       summary: Get Care Plans by search params V2
       operationId: Get Care Plans by search params V2
       description: 'Returns care plan list filtered by submitted parameters withtin specified patient.
@@ -83501,8 +83495,6 @@ paths:
                     coding:
                     - system: PROVIDING_CONDITION
                       code: INPATIENT
-                  inform_with:
-                    auth_method_id: cc949559-5dfe-420f-ac05-065e443b2cc6
                   identity:
                     last_name: Іванов
                     first_name: І.

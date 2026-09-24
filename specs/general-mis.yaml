@@ -1661,10 +1661,7 @@ paths:
                     settings: '{"DEVICE_REQUIRED_PARAMETERS": [{"check": [{"code": "presence_of_brakes",
                       "system": "device_request_code_parameter"}]}]}'
                     system: device_code_system
-                    device_code: '12_18_06'
-                    device_code_system: device_code_system
                     is_active: true
-                    config: '{"DEVICE_REQUIRED_PARAMETERS": [{"check": [{"code": "presence_of_brakes", "system": "device_request_code_parameter"}]}]}'
                     inserted_at: '2017-04-20T19:14:13Z'
                     inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
                     updated_at: '2018-08-02T10:45:16.000Z'
@@ -1865,10 +1862,7 @@ paths:
                     settings: '{"DEVICE_PARAMETER_DATA_TYPE": {"check": "codeable_concept"}, "DEVICE_PARAMETER_DICTIONARY":
                       {"check": "device_properties"}}'
                     system: device_request_code_parameter
-                    parameter_code: presence_of_a_hygienic_hole
-                    parameter_system: device_request_code_parameter
                     is_active: true
-                    config: '{"DEVICE_PARAMETER_DATA_TYPE": {"check": "codeable_concept"}, "DEVICE_PARAMETER_DICTIONARY": {"check": "device_properties"}}'
                     inserted_at: '2017-04-20T19:14:13Z'
                     inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
                     updated_at: '2018-08-02T10:45:16.000Z'
@@ -2078,7 +2072,6 @@ paths:
                       "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
                     name: assistive_devices
                     is_active: true
-                    content: '[{"codes": ["18_03_06", "12_22_06", "06_03_15", "18_12_10", "09_33_07", "06_06_15", "22_27_12", "09_12_15", "09_12_12", "06_24_09", "12_06_06", "12_22_18", "12_36_12", "09_12_03", "06_18_18", "04_48_15", "12_03_12", "12_06_12", "09_33_05", "09_06_24", "06_18_03", "06_18_06", "04_33_03", "09_06_15", "18_18_06", "06_06_13", "06_18_15", "18_09_03", "18_18_03", "12_22_09", "18_03_15", "06_12_19", "09_12_09", "06_12_17", "06_12_16", "06_06_21", "06_03_12", "06_03_18", "12_03_16", "06_24_03", "12_18_06", "18_12_07", "06_24_06", "06_12_13", "12_06_03", "12_23_06", "06_24_18", "09_03_24", "06_24_40", "12_06_09", "12_07_05", "12_23_03", "09_12_25", "12_03_09", "06_03_06", "06_06_24", "06_24_15", "06_12_09", "15_03_03", "06_24_12", "06_06_06", "06_12_18", "06_06_20", "09_06_18", "04_33_06", "04_48_07", "18_09_39", "18_09_21", "12_27_15", "06_18_21", "06_06_30", "05_36_03", "06_18_12", "18_12_18", "06_18_45", "12_39_03", "09_06_12", "06_30_18", "05_36_06", "06_06_12", "06_06_19", "06_03_03", "06_12_12", "04_06_06", "06_06_03", "06_18_09", "06_12_03", "12_03_06", "22_24_06", "12_22_03", "18_30_21", "22_27_04", "06_03_09", "12_24_24", "12_36_03", "22_18_03", "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
                     inserted_at: '2017-04-20T19:14:13Z'
                     inserted_by: e1453f4c-1077-4e85-8c98-c13ffca0063e
                     updated_at: '2018-08-02T10:45:16.000Z'
@@ -35002,7 +34995,6 @@ paths:
                         data_sourse: D2
                         updated_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
                         updated_at: '2025-11-11T11:11:11Z'
-                        extention_json: json structure
                         inserted_at: '2025-11-11T11:11:11Z'
                         inserted_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
                         discrepancy_result: '101'
@@ -35367,10 +35359,6 @@ paths:
                       skip_request_employee_declaration_verify: true
                       skip_request_legal_entity_declaration_verify: true
                       skip_treatment_period: true
-                      employee_types_to_create_medication_request:
-                        - SPECIALIST
-                        - DOCTOR
-                      skip_mnn_in_treatment_period: true
                       skip_employee_validation: true
                       speciality_types_allowed:
                         - ENDOCRINOLOGY
@@ -35390,14 +35378,9 @@ paths:
                       providing_conditions_allowed:
                         - INPATIENT
                         - OUTPATIENT
-                      medication_request_max_period_day: 90
-                      skip_medication_request_employee_declaration_verify: true
-                      skip_medication_request_legal_entity_declaration_verify: true
                       multi_medication_dispense_allowed: true
                       skip_medication_dispense_sign: true
-                      medication_request_notification_disabled: true
                       skip_contract_provision_verify: true
-                      medication_dispense_period_day: 90
                       medical_program_change_on_dispense_allowed: true
                       patient_categories_allowed:
                         - insulin_1
@@ -35707,10 +35690,6 @@ paths:
                     skip_request_employee_declaration_verify: true
                     skip_request_legal_entity_declaration_verify: true
                     skip_treatment_period: true
-                    employee_types_to_create_medication_request:
-                      - SPECIALIST
-                      - DOCTOR
-                    skip_mnn_in_treatment_period: true
                     skip_employee_validation: true
                     speciality_types_allowed:
                       - ENDOCRINOLOGY
@@ -35730,14 +35709,9 @@ paths:
                     providing_conditions_allowed:
                       - INPATIENT
                       - OUTPATIENT
-                    medication_request_max_period_day: 90
-                    skip_medication_request_employee_declaration_verify: true
-                    skip_medication_request_legal_entity_declaration_verify: true
                     multi_medication_dispense_allowed: true
                     skip_medication_dispense_sign: true
-                    medication_request_notification_disabled: true
                     skip_contract_provision_verify: true
-                    medication_dispense_period_day: 90
                     medical_program_change_on_dispense_allowed: true
                     patient_categories_allowed:
                       - insulin_1

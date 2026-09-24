@@ -10762,7 +10762,6 @@ paths:
                     second_name: Миколайович
                     year_of_birth: '1975'
                     gender: MALE
-                    tax_id: '1234567890'
                     inserted_at: '2021-11-09T00:00:00.000Z'
                     updated_at: '2021-11-09T00:00:00.000Z'
                     educations:
