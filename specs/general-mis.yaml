@@ -17695,7 +17695,7 @@ paths:
                         example: "INSERT"
                         type: string
                         enum:
-                          - UPDATE
+                          - INSERT
                         description: action that initiates by request creation.
                       channel:
                         example: "MIS"
@@ -17749,21 +17749,6 @@ paths:
                   status: NEW
                   action: INSERT
                   channel: MIS
-                  confidant_person_id: 7b100a9c-daaa-490e-b88d-2a911059b055
-                  documents_relationship:
-                    - type: DEPRIVATION_OF_PARENTAL_RIGHTS
-                      number: АА120518
-                      issued_by: Рокитнянським РВ ГУ МВС Київської області
-                      issued_at: '2017-02-28'
-                      active_to: '2025-08-19'
-                  confidant_person_relationship:
-                    id: 7b100a9c-daaa-490e-b88d-2a911059b055
-                    documents_relationship:
-                      - type: DEPRIVATION_OF_PARENTAL_RIGHTS
-                        number: АА120518
-                        issued_by: Рокитнянським РВ ГУ МВС Київської області
-                        issued_at: '2017-02-28'
-                  authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6
                 urgent:
                   authentication_method_current:
                     type: OTP
@@ -18054,7 +18039,7 @@ paths:
                         example: "DEACTIVATE"
                         type: string
                         enum:
-                          - UPDATE
+                          - DEACTIVATE
                         description: action that initiates by request creation.
                       channel:
                         example: "MIS"
@@ -18108,21 +18093,6 @@ paths:
                   status: NEW
                   action: DEACTIVATE
                   channel: MIS
-                  confidant_person_id: 7b100a9c-daaa-490e-b88d-2a911059b055
-                  documents_relationship:
-                    - type: DEPRIVATION_OF_PARENTAL_RIGHTS
-                      number: АА120518
-                      issued_by: Рокитнянським РВ ГУ МВС Київської області
-                      issued_at: '2017-02-28'
-                      active_to: '2025-08-19'
-                  confidant_person_relationship:
-                    id: 7b100a9c-daaa-490e-b88d-2a911059b055
-                    documents_relationship:
-                      - type: DEPRIVATION_OF_PARENTAL_RIGHTS
-                        number: АА120518
-                        issued_by: Рокитнянським РВ ГУ МВС Київської області
-                        issued_at: '2017-02-28'
-                  authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6
                 urgent:
                   authentication_method_current:
                     type: OTP
