@@ -11,8 +11,12 @@
          see scripts/stamp_deploy_badge.sh). No env label: the hostname
          itself (docs./docs-demo./docs-preprod./docs-stage.) already tells
          the visitor which environment they're on, so a redundant in-page
-         PROD/DEMO/... badge was dropped. */
-      #deploy-badge{position:fixed;top:6px;right:10px;z-index:9999;
+         PROD/DEMO/... badge was dropped. z-index is the max signed 32-bit
+         int, matching api-docs-platform's sandbox portal badge
+         (scripts/stamp_deploy_badge.py) -- 9999 was invisible in practice,
+         covered by this Scalar fork's own fixed-position UI, which uses
+         higher values of its own. */
+      #deploy-badge{position:fixed;top:6px;right:10px;z-index:2147483647;
         font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
         font-size:11px;font-weight:600;letter-spacing:.02em;
         color:#fff;background:rgba(0,118,189,.92);padding:2px 9px;border-radius:11px;
