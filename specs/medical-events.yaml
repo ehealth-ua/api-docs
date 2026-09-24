@@ -87939,6 +87939,7 @@ paths:
               example:
                 data:
                   id: 1f8444a0-e48b-440b-a082-c4703233efa2
+                  items_comparator: and
                   name: Some name
                   code:
                     system: eHealth/clinical_impression_patient_categories

@@ -11716,6 +11716,7 @@ paths:
                   date: '2023-04-20T00:00:00.000Z'
                 data:
                   - id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    status_reason: AUTO_SUSPEND
                     name: Клініка Ноунейм
                     short_name: Ноунейм
                     status: ACTIVE

@@ -1143,6 +1143,8 @@ paths:
                     description: Класифікатори МКФ
                     values:
                       - code: b1142
+                        inserted_at: '2017-04-20T19:14:13Z'
+                        id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
                         description: Орієнтація в особі
                         is_active: true
                         child_values:
@@ -1162,6 +1164,8 @@ paths:
                     description: Коди станів за ICPC2
                     values:
                       - code: D88
+                        inserted_at: '2017-04-20T19:14:13Z'
+                        id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
                         description: Апендицит
                         is_active: true
                         child_values: []
@@ -1651,6 +1655,10 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
+                    code: '3114'
+                    settings: '{"DEVICE_REQUIRED_PARAMETERS": [{"check": [{"code": "presence_of_brakes",
+                      "system": "device_request_code_parameter"}]}]}'
+                    system: device_code_system
                     device_code: '12_18_06'
                     device_code_system: device_code_system
                     is_active: true
@@ -1851,6 +1859,10 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
+                    code: presence_of_a_hygienic_hole
+                    settings: '{"DEVICE_PARAMETER_DATA_TYPE": {"check": "codeable_concept"}, "DEVICE_PARAMETER_DICTIONARY":
+                      {"check": "device_properties"}}'
+                    system: device_request_code_parameter
                     parameter_code: presence_of_a_hygienic_hole
                     parameter_system: device_request_code_parameter
                     is_active: true
@@ -2047,6 +2059,21 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
+                    settings: '[{"codes": ["18_03_06", "12_22_06", "06_03_15", "18_12_10", "09_33_07",
+                      "06_06_15", "22_27_12", "09_12_15", "09_12_12", "06_24_09", "12_06_06", "12_22_18",
+                      "12_36_12", "09_12_03", "06_18_18", "04_48_15", "12_03_12", "12_06_12", "09_33_05",
+                      "09_06_24", "06_18_03", "06_18_06", "04_33_03", "09_06_15", "18_18_06", "06_06_13",
+                      "06_18_15", "18_09_03", "18_18_03", "12_22_09", "18_03_15", "06_12_19", "09_12_09",
+                      "06_12_17", "06_12_16", "06_06_21", "06_03_12", "06_03_18", "12_03_16", "06_24_03",
+                      "12_18_06", "18_12_07", "06_24_06", "06_12_13", "12_06_03", "12_23_06", "06_24_18",
+                      "09_03_24", "06_24_40", "12_06_09", "12_07_05", "12_23_03", "09_12_25", "12_03_09",
+                      "06_03_06", "06_06_24", "06_24_15", "06_12_09", "15_03_03", "06_24_12", "06_06_06",
+                      "06_12_18", "06_06_20", "09_06_18", "04_33_06", "04_48_07", "18_09_39", "18_09_21",
+                      "12_27_15", "06_18_21", "06_06_30", "05_36_03", "06_18_12", "18_12_18", "06_18_45",
+                      "12_39_03", "09_06_12", "06_30_18", "05_36_06", "06_06_12", "06_06_19", "06_03_03",
+                      "06_12_12", "04_06_06", "06_06_03", "06_18_09", "06_12_03", "12_03_06", "22_24_06",
+                      "12_22_03", "18_30_21", "22_27_04", "06_03_09", "12_24_24", "12_36_03", "22_18_03",
+                      "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
                     name: assistive_devices
                     is_active: true
                     content: '[{"codes": ["18_03_06", "12_22_06", "06_03_15", "18_12_10", "09_33_07", "06_06_15", "22_27_12", "09_12_15", "09_12_12", "06_24_09", "12_06_06", "12_22_18", "12_36_12", "09_12_03", "06_18_18", "04_48_15", "12_03_12", "12_06_12", "09_33_05", "09_06_24", "06_18_03", "06_18_06", "04_33_03", "09_06_15", "18_18_06", "06_06_13", "06_18_15", "18_09_03", "18_18_03", "12_22_09", "18_03_15", "06_12_19", "09_12_09", "06_12_17", "06_12_16", "06_06_21", "06_03_12", "06_03_18", "12_03_16", "06_24_03", "12_18_06", "18_12_07", "06_24_06", "06_12_13", "12_06_03", "12_23_06", "06_24_18", "09_03_24", "06_24_40", "12_06_09", "12_07_05", "12_23_03", "09_12_25", "12_03_09", "06_03_06", "06_06_24", "06_24_15", "06_12_09", "15_03_03", "06_24_12", "06_06_06", "06_12_18", "06_06_20", "09_06_18", "04_33_06", "04_48_07", "18_09_39", "18_09_21", "12_27_15", "06_18_21", "06_06_30", "05_36_03", "06_18_12", "18_12_18", "06_18_45", "12_39_03", "09_06_12", "06_30_18", "05_36_06", "06_06_12", "06_06_19", "06_03_03", "06_12_12", "04_06_06", "06_06_03", "06_18_09", "06_12_03", "12_03_06", "22_24_06", "12_22_03", "18_30_21", "22_27_04", "06_03_09", "12_24_24", "12_36_03", "22_18_03", "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
@@ -18508,6 +18535,13 @@ paths:
                   url: https://example.com/resource
                   type: object
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                urgent:
+                  authentication_method_current:
+                    type: OTP
+                    phone_number: +38093*****81
+                  documents:
+                    - type: PASSPORT
+                      url: https://storage.ehealth.world
                 data:
                   id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
                   status: NEW
@@ -24975,6 +25009,18 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  addresses:
+                    - type: RESIDENCE
+                      country: UA
+                      area: Житомирська
+                      region: Бердичівський
+                      settlement: Київ
+                      settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      street_type: STREET
+                      street: вул. Ніжинська
+                      building: '15'
+                      apartment: '23'
+                      zip: '02090'
                   name: Бориспільське відділення Клініки Ноунейм
                   phones:
                     - type: MOBILE
@@ -25326,6 +25372,18 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  addresses:
+                    - type: RESIDENCE
+                      country: UA
+                      area: Житомирська
+                      region: Бердичівський
+                      settlement: Київ
+                      settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      street_type: STREET
+                      street: вул. Ніжинська
+                      building: '15'
+                      apartment: '23'
+                      zip: '02090'
                   name: Бориспільське відділення Клініки Ноунейм
                   phones:
                     - type: MOBILE
@@ -35300,6 +35358,13 @@ paths:
                     name: Доступні ліки
                     medical_program_settings:
                       care_plan_required: true
+                      dispense_allowed: true
+                      dispense_period_day: 90
+                      request_allowed: true
+                      request_max_period_day: 90
+                      skip_request_employee_declaration_verify: true
+                      skip_request_legal_entity_declaration_verify: true
+                      skip_treatment_period: true
                       employee_types_to_create_medication_request:
                         - SPECIALIST
                         - DOCTOR
@@ -35633,6 +35698,13 @@ paths:
                   name: Доступні ліки
                   medical_program_settings:
                     care_plan_required: true
+                    dispense_allowed: true
+                    dispense_period_day: 90
+                    request_allowed: true
+                    request_max_period_day: 90
+                    skip_request_employee_declaration_verify: true
+                    skip_request_legal_entity_declaration_verify: true
+                    skip_treatment_period: true
                     employee_types_to_create_medication_request:
                       - SPECIALIST
                       - DOCTOR
