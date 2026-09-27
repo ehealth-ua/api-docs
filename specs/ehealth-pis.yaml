@@ -43,7 +43,16 @@ info:
 
     PREPROD | https://auth-preprod.ehealth.gov.ua
 
-    PROD    | https://auth-preprod.ehealth.gov.ua'
+    PROD    | https://auth-preprod.ehealth.gov.ua
+
+
+    ## API Conventions
+
+    **Request ID.** Send a request-tracing value in the `X-Request-ID` header; the same value is echoed back in every response, in the `meta.request_id` field. Quote it when reporting an issue so support can locate the exact request server-side.
+
+    **Idempotency Key.** For requests that support safe retries, send a client-generated value in the `X-Idempotency-Key` header; a repeated request with the same key and body returns the original response instead of re-executing the operation. The response echoes it back in `meta.idempotency_key`.
+
+    **Error format.** Every error response follows the same envelope: `meta` (as above) plus an `error` object with `type` (a machine-readable error code) and `message` (a human-readable, developer-facing description).'
 servers:
   - url: https://api-demo.ehealth.gov.ua
     description: DEMO — eHealth ehealth-pis API
@@ -62,14 +71,14 @@ tags:
       ### Sign-in
 
       Patient Sign-in process:
-      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
-      2. Client UI: redirects user to [Patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
+      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), applies users digital signature;
+      2. Client UI: redirects user to [Patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-in) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed nonce;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -79,13 +88,13 @@ tags:
 
       Confidant Patient Sign-in process:
       1. Client BE: forms patient data, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient login UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
+      2. Client UI: redirects user to [Confidant patient login UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-in) with `client_id`, `redirect_uri`, `scope`, `user_data` that contains base64 encoded signed patient data;
       3. Login UI: completes Session auth flow with `app:authorize` scope;
       4. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
       7. (Optional). Login UI: in case of error redirects user to `redirect_uri` with `error` and `error_description` ([RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1))
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -95,7 +104,7 @@ tags:
 
       **Notes:**
       - If User does not exist, but patient exists in `mpi`, User is created before scopes approval step.
-      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) method.
+      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) method.
 
       **API-key:**
       - For identifiers of PIS clients (as a broker) we use term api-key. PIS must **mandatory** send api-key when called any eHealth API.
@@ -106,14 +115,14 @@ tags:
       ### Sign-up
 
       PIS Sign-up process:
-      1. Client BE: obtains nonce from [Get nonce](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
+      1. Client BE: obtains nonce from [Get nonce](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/nonce), adds it to patient registration form;
       2. User: fills in data to registration form, applies users digital signature;
-      3. Client UI: redirects user to [Patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      3. Client UI: redirects user to [Patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       4. Sign-up UI: shows patient registration form with patient data to confirm;
       5. Sign-up UI: completes patient registration with `app:authorize` scope;
       6. Login UI: renders page with Approval (that lists requested scopes);
       7. User: approves scopes;
-      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      8. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       9. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       10. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -123,12 +132,12 @@ tags:
 
       PIS Confidant Patient Sign-up process:
       1. User: fills in data to registration form, applies users digital signature;
-      2. Client UI: redirects user to [Confidant patient sign-up UI](reference.html#ehealth-pis-prod/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
+      2. Client UI: redirects user to [Confidant patient sign-up UI](/#ehealth-pis/tag/public-patient-information-system/GET/confidant/sign-up) with `client_id`, `redirect_uri`, `scope` and `user_data` that contains base64 encoded signed patient registration request;
       3. Sign-up UI: shows patient registration form with patient data to confirm;
       4. Sign-up UI: completes patient registration with `app:authorize` scope;
       5. Login UI: renders page with Approval (that lists requested scopes);
       6. User: approves scopes;
-      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](reference.html#ehealth-pis-prod/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
+      7. Client BE: exchanges `code` from query parameters to an `access_token` by sending [Exchange oAuth Code Grant to Access Token](/#ehealth-pis/tag/public-patient-information-system/POST/oauth/tokens) request with `grant_type=authorization_code`;
       8. Client BE: stores `refresh_token` (in back-end!) and sends `access_token` to Client UI;
       9. Client UI: stores `access_token` (in local storage, cookie, etc.) and makes all future requests with `Authorization: Bearer <access_token>` header.
 
@@ -1141,7 +1150,7 @@ paths:
         Endpoint returns list of documents that need to be uploaded for person and urls. In case no documents must be uploaded - empty list is returned.
 
 
-        After documents upload to urls, [Complete Person documents upload](#reference/public.-patient-information-system/documents/complete-person-documents-upload) method must be called.'
+        After documents upload to urls, [Complete Person documents upload](/#ehealth-pis/tag/public-patient-information-system/PATCH/api/pis/documents/actions/complete) method must be called.'
       tags:
         - Public. Patient Information System
       parameters:
@@ -10589,7 +10598,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -10862,7 +10871,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -11203,7 +11212,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -11494,7 +11503,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -11827,7 +11836,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -11954,7 +11963,7 @@ paths:
                       request_id:
                         example: "6617aeec-15e2-4d6f-b9bd-53559c358f97#17810"
                         type: string
-                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                       date:
                         example: "2023-04-20T00:00:00.000Z"
                         type: string
@@ -12640,11 +12649,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -12778,11 +12787,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -12966,11 +12975,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -13089,11 +13098,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -13231,11 +13240,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -13349,11 +13358,11 @@ paths:
                       idempotency_key:
                         example: "idemp-ssjssdjoa8308u0us0"
                         type: string
-                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                        description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
                       request_id:
                         example: "req-adasdoijasdojsda"
                         type: string
-                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                        description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
                     required:
                       - code
                       - url
@@ -13739,7 +13748,7 @@ components:
             - `list` — data attribute is a list.
         request_id:
           type: string
-          description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
     Response_Meta:
       type: object
       properties:
@@ -13761,10 +13770,10 @@ components:
             - `list` — data attribute is a list.
         idempotency_key:
           type: string
-          description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+          description: '[Idempotency key](/#ehealth-pis/description/api-conventions). Send it trough `X-Idempotency-Key` header.'
         request_id:
           type: string
-          description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
     Response__Meta_Date:
       type: object
       required:
@@ -13788,7 +13797,7 @@ components:
             - `list` — data attribute is a list.
         request_id:
           type: string
-          description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#ehealth-pis/description/api-conventions). Send it with `X-Request-ID` header.'
         date:
           type: string
           description: The date the limit and declarations count valid for
