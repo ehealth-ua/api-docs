@@ -3,12 +3,12 @@ info:
   title: MEDICAL EVENTS MIS API — STAGE
   version: "9.15.6"
   description: "**Version: 9.15.6**\n\n**Environment: STAGE**\n\n> Read more about\
-    \ eHealth API Manifest [here](https://ehealthapimanifest.docs.apiary.io/#introduction/interacting-with-api)\n\
+    \ eHealth API Manifest [here](/?r=1#general-mis/description/api-design-principles)\n\
     \nAll the medical data, stored in eHealth, belongs to the patient and must be\
     \ properly protected. eHealth provides several mechanisms to secure patient's\
     \ data and limitate access.\n\n1. Only authenticated user with appropriate scope\
     \ can access medical dataverifi\nList of scopes available for the specific user\
-    \ role can be recieved using [/roles endpoint](https://ehealthmisapi1.docs.apiary.io/#reference/public.-medical-service-provider-integration-layer/roles/list-roles)\
+    \ role can be recieved using [/roles endpoint](/?r=1#general-mis/tag/public-medical-service-provider-integration-layer/GET/admin/roles)\
     \ [wiki: Scopes data model](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/583404101/Scopes+model)\n\
     \n2. Access to Patient Medical Data is driven by Attribute-based access control(ABAC).\
     \ Rules [https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/17049388207/ABAC+rules+EN]\n\
@@ -28,7 +28,7 @@ info:
     \n## About Forbidden Groups filtration\n\nSome routes in eHealth are managed not\
     \ only by scope-based  model and ABAC rules, but Forbidden Groups model.\n\nAfter\
     \ successfull access with ABAC response will be filtered according to [Medical\
-    \ Events filtration by Forbidden groups](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/5056954517/Medical+Events+filtration+by+Forbidden+groups+EN)"
+    \ Events filtration by Forbidden groups](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/5056954517/Medical+Events+filtration+by+Forbidden+groups+EN)\n\n## API Conventions\n\n**Request ID.** Send a request-tracing value in the `X-Request-ID` header; the same value is echoed back in every response, in the `meta.request_id` field. Quote it when reporting an issue so support can locate the exact request server-side.\n\n**Idempotency Key.** For requests that support safe retries, send a client-generated value in the `X-Idempotency-Key` header; a repeated request with the same key and body returns the original response instead of re-executing the operation. The response echoes it back in `meta.idempotency_key`.\n\n**Error format.** Every error response follows the same envelope: `meta` (as above) plus an `error` object with `type` (a machine-readable error code) and `message` (a human-readable, developer-facing description)."
 servers:
 - url: https://api-stage.ehealth.gov.ua
   description: STAGE — eHealth medical-events API
@@ -74,12 +74,12 @@ tags:
 
     ### Manage Service Requests in patient context
 
-    Use [GET Service Catalog](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-programs/medical-program/get-services-dictionary) to receive current catalog of services.
+    Use [GET Service Catalog](/?r=1#general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
 - name: Service Requests
   description: |-
     ### Manage Service Requests in patient context
 
-    Use [GET Service Catalog](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-programs/medical-program/get-services-dictionary) to receive current catalog of services.
+    Use [GET Service Catalog](/?r=1#general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
 - name: Device requests
 - name: Device dispenses
 - name: Approvals
@@ -803,7 +803,7 @@ paths:
                             type: string
                             description: type of an error.
                           message:
-                            example: "Validation failed. You can find validators description at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting"
+                            example: "Validation failed. You can find validators description at our API Manifest: /#medical-events"
                             type: string
                             description: with-api/errors. (string)
                           invalid:
@@ -859,7 +859,7 @@ paths:
                   error:
                     type: validation_failed
                     message: 'Validation failed. You can find validators description
-                      at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting'
+                      at our API Manifest: /#medical-events'
                     invalid:
                     - entry_type: json_data_proprty
                       entry: $.cvv
@@ -28422,7 +28422,7 @@ paths:
       summary: Create procedure
       operationId: Create procedure
       description: |-
-        This WS allows to register procedure by its own. Also prosedure can be registered as a part of [encounter package](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package).
+        This WS allows to register procedure by its own. Also prosedure can be registered as a part of [encounter package](/#medical-events/tag/medical-events/POST/api/patients/{id}/encounter_package).
         **Scopes required:** `procedure:write`
       tags:
       - Medical Events
@@ -28544,7 +28544,7 @@ paths:
                                 description: This field is required in the Reference, so it may be returned empty.
                             required:
                             - display_value
-                            description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+                            description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
                           paper_referral:
                             type: object
                             properties:
@@ -29341,7 +29341,7 @@ paths:
                           description: This field is required in the Reference, so it may be returned empty.
                       required:
                       - display_value
-                      description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+                      description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
                     paper_referral:
                       type: object
                       properties:
@@ -30659,7 +30659,7 @@ paths:
         Method receives signed message (pkcs7) that consists of signed content, digital signature and signer public key. All signature fields will be validated (including signer certificate authority)
 
         **Important**
-        1. Signed content of procedure must be equal to procedure stored in DB. See [Get Procedure by search params](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/procedures/get-procedure-by-search-params)
+        1. Signed content of procedure must be equal to procedure stored in DB. See [Get Procedure by search params](/#medical-events/tag/medical-events/GET/api/patients/{patient_id}/procedures)
         2. `status_reason` and `explanatory_letter` (optional) must be added to signed content
 
         Please see [Cancel Procedure]() and [Dummy Cancel Procedure for more details
@@ -30784,7 +30784,7 @@ paths:
       summary: Create Specimen
       operationId: Create Specimen
       description: |-
-        This WS allows to register Specimen by its own. Also Specimen can be registered as a part of [encounter package](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package).
+        This WS allows to register Specimen by its own. Also Specimen can be registered as a part of [encounter package](/#medical-events/tag/medical-events/POST/api/patients/{id}/encounter_package).
         **Scopes required:** `specimen:write`
       tags:
       - Medical Events
@@ -33094,7 +33094,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -33225,7 +33225,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -33377,7 +33377,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -33535,7 +33535,7 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Medical Events
       parameters:
@@ -33870,7 +33870,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -37915,7 +37915,7 @@ paths:
                               description: This field is required in the Reference, so it may be returned empty.
                           required:
                           - display_value
-                          description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+                          description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
                         paper_referral:
                           type: object
                           properties:
@@ -44740,7 +44740,7 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Medical Events
       parameters:
@@ -49626,7 +49626,7 @@ paths:
       operationId: Get active Diagnoses
       description: 'This endpoint returns current diagnoses related only to active
         episodes. In order to get specific condition details, use [Get Condition by
-        ID](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/patient-summary/get-condition-by-id)
+        ID](/#medical-events/tag/medical-events/GET/api/patients/{patient_id}/conditions/{condition_id})
 
 
         **Scopes required:** `patient_summary:read`'
@@ -53961,7 +53961,7 @@ paths:
                               description: This field is required in the Reference, so it may be returned empty.
                           required:
                           - display_value
-                          description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+                          description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
                         paper_referral:
                           type: object
                           properties:
@@ -54712,7 +54712,7 @@ paths:
                                 description: This field is required in the Reference, so it may be returned empty.
                             required:
                             - display_value
-                            description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+                            description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
                           paper_referral:
                             type: object
                             properties:
@@ -57560,7 +57560,7 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `service_request:write`
       tags:
@@ -63655,7 +63655,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -67937,7 +67937,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -68733,11 +68733,11 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `device_request:write`
 
-        Look at [Dummy Device request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/device-requests/create-device-request/dummy-device-request) for more details
+        Look at [Dummy Device request](/?r=1#medical-events-signed/tag/device-requests/POST/api/patients/{patient_id}/device_requests) for more details
       tags:
       - Device requests
       parameters:
@@ -71706,7 +71706,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -71817,7 +71817,7 @@ paths:
         This method must be used to revoke existing Device Request. Method receives signed message (pkcs7) that consists of signed content, digital signature and signer public key. All signature fields will be validated (including signer certificate authority)
 
         **Important**
-        1. Signed content of Device request must be equal to Device request stored in DB. See [Get Device request details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/device-requests/get-device-request-details/get-device-request-details)
+        1. Signed content of Device request must be equal to Device request stored in DB. See [Get Device request details](/#medical-events/tag/device-requests/GET/api/patients/{patient_id}/device_requests/{device_request_id})
         2. status_reason must be added to signed content
         3. status must be changed to revoked for the purpose of displaying in the signed content
 
@@ -71828,7 +71828,7 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Device requests
       parameters:
@@ -72063,7 +72063,7 @@ paths:
         This method must be used to cancel existing Device Request. Method receives signed message (pkcs7) that consists of signed content, digital signature and signer public key. All signature fields will be validated (including signer certificate authority)
 
         **Important**
-        1. Signed content of Device request must be equal to Device request stored in DB. See [Get Device request details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/device-requests/get-device-request-details/get-device-request-details)
+        1. Signed content of Device request must be equal to Device request stored in DB. See [Get Device request details](/#medical-events/tag/device-requests/GET/api/patients/{patient_id}/device_requests/{device_request_id})
         2. `status_reason`  must be added to signed content
         2. status must be changed to entered_in_error for the purpose of displaying in the signed content
 
@@ -72074,7 +72074,7 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Device requests
       parameters:
@@ -72203,7 +72203,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -73524,11 +73524,11 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `device_dispense:complete`
 
-        Look at [Dummy Complete Device dispense](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/device-dispenses/complete-device-dispense/dummy-complete-device-dispense) for more details
+        Look at [Dummy Complete Device dispense](/?r=1#medical-events-signed/tag/device-dispenses/PATCH/api/patients/{patient_id}/device_dispenses/{device_dispense_id}/actions/complete) for more details
       tags:
       - Device dispenses
       parameters:
@@ -75494,7 +75494,7 @@ paths:
 
         --|--|--
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -75592,7 +75592,7 @@ paths:
         This method must be used to cancel existing Device dispense. Method receives signed message (pkcs7) that consists of signed content, digital signature and signer public key. All signature fields will be validated (including signer certificate authority)
 
         **Important**
-        1. Signed content of Device dispense must be equal to Device dispense stored in DB. See [Get Device dispense details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/device-dispenses/get-device-dispense-details/get-device-dispense-details)
+        1. Signed content of Device dispense must be equal to Device dispense stored in DB. See [Get Device dispense details](/#medical-events/tag/device-dispenses/GET/api/patients/{patient_id}/device_dispenses/{device_dispense_id})
         2. `status_reason`  must be added to signed content
         3. status must be changed to entered_in_error for the purpose of displaying in the signed content
 
@@ -75603,7 +75603,7 @@ paths:
         It can be processed in async way only, so Server might answer with:
         http code| processing method | Client recommendations
         --|--|--
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Device dispenses
       parameters:
@@ -75990,7 +75990,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -77230,7 +77230,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -78069,7 +78069,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -78807,11 +78807,11 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `care_plan:write`
 
-        Look at [Dummy Care Plan](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/care-plan/dummy-care-plan/dummy-care-plan) for more details
+        Look at [Dummy Care Plan](/?r=1#medical-events-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans) for more details
       tags:
       - Care plan
       parameters:
@@ -80710,11 +80710,11 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `care_plan:write`
 
-        Look at [Dummy Create Care Plan activity](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/care-plan/create-care-plan-activity/dummy-care-plan-activity) for more details
+        Look at [Dummy Create Care Plan activity](/?r=1#medical-events-signed/tag/care-plan/POST/api/patients/{patient_id}/care_plans/{care_plan_id}/activities) for more details
       tags:
       - Care plan
       parameters:
@@ -84869,7 +84869,7 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `care_plan:write`
       tags:
@@ -85623,7 +85623,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details)
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id})
         to get processing result. Response payload will be returned in the job details
 
 
@@ -86522,7 +86522,7 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
 
         **Scopes required:** `care_plan:write`
       tags:
@@ -87407,7 +87407,7 @@ paths:
 
         201 | sync | use payload from response
 
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details'
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details'
       tags:
       - Care plan
       parameters:
@@ -89532,7 +89532,7 @@ paths:
         http code| processing method | Client recommendations
         --|--|--
         201 | sync | use payload from response
-        202 | async: **default** method | use [Get job details](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/medical-events/encounter-data-package/get-async-job-processing-details) to get processing result. Response payload will be returned in the job details
+        202 | async: **default** method | use [Get job details](/#medical-events/tag/medical-events/GET/api/jobs/{id}) to get processing result. Response payload will be returned in the job details
       tags:
       - Service Requests
       parameters:
@@ -89802,7 +89802,7 @@ components:
           description: Type of data that is located in `data` attribute.
         request_id:
           type: string
-          description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id).
+          description: '[Request ID](/#medical-events/description/api-conventions).
             Send it with `X-Request-ID` header.'
     Response__Error:
       type: object
@@ -89835,7 +89835,7 @@ components:
           description: type of an error.
         message:
           type: string
-          example: 'Validation failed. You can find validators description at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/errors.'
+          example: 'Validation failed. You can find validators description at our API Manifest: /#medical-events.'
           description: with-api/errors. (string)
         invalid:
           type: array
@@ -100047,7 +100047,7 @@ components:
                                   code:
                                     type: string
                                     example: service_request
-          description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests);
+          description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id});
             One of (based_on OR paper_referral) is required
         paper_referral:
           $ref: '#/components/schemas/Paper_referral'
@@ -100364,7 +100364,7 @@ components:
                                   code:
                                     type: string
                                     example: service_request
-          description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+          description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
         paper_referral:
           $ref: '#/components/schemas/Paper_referral'
         status:
