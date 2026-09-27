@@ -346,7 +346,7 @@ components:
           description: Type of data that is located in `data` attribute.
         request_id:
           type: string
-          description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#ehealth-trusted-pis/description/api-conventions). Send it with `X-Request-ID` header.'
     Response_Collection:
       type: object
       properties:

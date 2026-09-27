@@ -1305,7 +1305,7 @@ components:
           example: object
         request_id:
           type: string
-          description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#medical-events/description/api-conventions). Send it with `X-Request-ID` header.'
           example: req-adasdoijasdojsda
       example:
         code: 200
@@ -1350,7 +1350,7 @@ components:
         message:
           type: string
           description: with-api/errors. (string)
-          example: 'Validation failed. You can find validators description at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/errors.'
+          example: 'Validation failed. You can find validators description at our API Manifest: /#medical-events.'
         invalid:
           type: array
           items:
@@ -1378,7 +1378,7 @@ components:
                       example: must be present
       example:
         type: validation_failed
-        message: 'Validation failed. You can find validators description at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/errors.'
+        message: 'Validation failed. You can find validators description at our API Manifest: /#medical-events.'
         invalid:
           - entry_type: json_data_proprty
             entry: $.cvv
@@ -20621,7 +20621,7 @@ components:
         status_code: '422'
         error:
           type: validation_failed
-          message: 'Validation failed. You can find validators description at our API Manifest: http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/errors.'
+          message: 'Validation failed. You can find validators description at our API Manifest: /#medical-events.'
           invalid:
             - entry_type: json_data_proprty
               entry: $.cvv
@@ -20748,7 +20748,7 @@ components:
                               type: string
                               example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                               description: The value that is unique
-              description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests); One of (based_on OR paper_referral) is required
+              description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id}); One of (based_on OR paper_referral) is required
             paper_referral:
               $ref: '#/components/schemas/Paper_referral'
               description: One of (based_on OR paper_referral) is required
@@ -21268,7 +21268,7 @@ components:
                               type: string
                               example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                               description: The value that is unique
-              description: reference to [Service Request](https://ehealthmedicaleventsapi.docs.apiary.io/#reference/service-requests)
+              description: reference to [Service Request](/#medical-events/tag/service-requests/GET/api/patients/{patient_id}/service_requests/{service_request_id})
             paper_referral:
               $ref: '#/components/schemas/Paper_referral'
             status:
