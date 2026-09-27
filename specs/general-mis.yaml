@@ -20,7 +20,7 @@ info:
     * Partnership Relation Management (PRM) module that describes business relations between this 3 entities.
 
 
-    This API design in based on [Nebo #15 API Design Manifest](http://docs.apimanifest.apiary.io/).
+    This API design in based on [Nebo #15 API Design Manifest](https://github.com/Nebo15/playbook/blob/master/api-design.md).
 
 
     ## Context Switching for end-users
@@ -32,7 +32,25 @@ info:
     Thus you will make sure that end-user understand from which context entities are managed.
 
 
-    If our API returns only one work context, you are free to hide context picker.'
+    If our API returns only one work context, you are free to hide context picker.
+
+
+    ## API Conventions
+
+    **Request ID.** Send a request-tracing value in the `X-Request-ID` header; the same value is echoed back in every response, in the `meta.request_id` field. Quote it when reporting an issue so support can locate the exact request server-side.
+
+    **Idempotency Key.** For requests that support safe retries, send a client-generated value in the `X-Idempotency-Key` header; a repeated request with the same key and body returns the original response instead of re-executing the operation. The response echoes it back in `meta.idempotency_key`.
+
+    **Error format.** Every error response follows the same envelope: `meta` (as above) plus an `error` object with `type` (a machine-readable error code) and `message` (a human-readable, developer-facing description).
+
+
+    ## API Design Principles
+
+    This API follows the [Nebo #15 API Design Manifest](https://github.com/Nebo15/playbook/blob/master/api-design.md) conventions: standard HTTP verbs (`GET` to read, `POST` to create, `PUT`/`PATCH` to update, `DELETE` to remove), snake_case field names, and the consistent response envelope described in API Conventions above.
+
+    **Pagination.** A list endpoint that supports cursor pagination returns a `paging` object: `limit`, `size` (items in this page), `has_more`, and a `cursors` object with `starting_after`/`ending_before` -- pass the last item ID back as `starting_after` to fetch the next page, or `ending_before` for the previous one.
+
+    **Validation errors.** A 422 validation failure error.invalid is an array of entry_type/entry/rules objects: entry_type names the kind of input that failed (for example json_data_property), entry is its path (for example $.cvv), and rules lists each failed rule with its name and a human-readable description.'
 servers:
   - url: https://api-demo.ehealth.gov.ua
     description: DEMO — eHealth general-mis API
@@ -296,7 +314,7 @@ tags:
       Initially 2 login strategies will be supported:
       - via email/password and 2nd factor
       - via Digital Signature
-      MIS can get access/refresh tokens via the [oauth2.0 flow](reference.html#general-mis-prod/tag/public-medical-service-provider-integration-layer/GET/sign-in).
+      MIS can get access/refresh tokens via the [oauth2.0 flow](/#general-mis/tag/public-medical-service-provider-integration-layer/GET/sign-in).
       MIS should pass it's own client_id to the sign-in form.
       Using access token MIS can access all the endpoints described in this chapter to provide functionality for the patient.
   - name: Public. Contracts
@@ -3558,7 +3576,7 @@ paths:
                   total_pages: 23
       summary: Get Person Requests List
       operationId: Get Person Requests List
-      description: "Use this method to obtain list of Person Requests. \nIf you want to reduce amount of data that is going trough your application, use `status` filter and show only requests that Doctor or Admin is interested in current UI.\n\nService returns only person request related to the same legal entity as the user.\n\nMethod returns shortened details, to obtain full information - get Person Request by it's ID using appropriate version of endpoint based on `version` value in response.\nThat is, for `version: 1` use [**Get Person Request by ID**](#reference/public.-medical-service-provider-integration-layer/person-requests/get-person-request-by-id) endpoint, for `version: 2` use [**Get Person Request by ID V2**](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-service-provider-integration-layer/person-requests/get-person-request-by-id-v2) endpoint.\n\nMore detailed information - https://e-health-ua.atlassian.net/wiki/x/BADDIw"
+      description: "Use this method to obtain list of Person Requests. \nIf you want to reduce amount of data that is going trough your application, use `status` filter and show only requests that Doctor or Admin is interested in current UI.\n\nService returns only person request related to the same legal entity as the user.\n\nMethod returns shortened details, to obtain full information - get Person Request by it's ID using appropriate version of endpoint based on `version` value in response.\nThat is, for `version: 1` use [**Get Person Request by ID**](/#general-mis/tag/deprecated-methods/GET/api/person_requests/{id}) endpoint, for `version: 2` use [**Get Person Request by ID V2**](/#general-mis/tag/public-medical-service-provider-integration-layer/GET/api/v2/person_requests/{id}) endpoint.\n\nMore detailed information - https://e-health-ua.atlassian.net/wiki/x/BADDIw"
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -5940,7 +5958,7 @@ paths:
         More detailed information - https://e-health-ua.atlassian.net/wiki/x/QQAiIw
 
 
-        Look at [**Dummy Sign Person Request**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-person-request/sign-person-request) for more details.'
+        Look at [**Dummy Sign Person Request**](/?r=1#general-mis-signed/tag/deprecated-methods/PATCH/api/person_requests/{id}/actions/sign) for more details.'
       tags:
         - Deprecated methods
       parameters:
@@ -6059,7 +6077,7 @@ paths:
                   inserted_at: '2017-07-06T16:54:05.161571Z'
       summary: Sign Person Request v2
       operationId: Sign Person Request v2
-      description: "This method will be deprecated. Use **Sign Person Request v3**.\n\nThis method is used to sign Person Request. Method receives signed message (pkcs7) including signed content, digital signature and signer public key in `signed_content` property.\nAll signature fields will be validated (including signer certificate authority).\n\nThis service will store signed copy of Person Request in Media Content Storage, created or update MPI records  if signature is all checks is passed.\n\nSigned content MUST consists of JSON object with Person Request data and printout template. Object that need to be signed is returned by `Get Person request by ID v2` or `Approve Person request v2` response, `JSON.Path: $.data`.\nPerson must re-read and sign person request print form and after that `patient_signed` should be changed to TRUE.\n\nPerson request can be signed either by doctor or admin (user with scope `person_request:write`) from legal entity as in person request.\n\nLook at [**Dummy Sign Person Request**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-person-request/sign-person-request) for more details."
+      description: "This method will be deprecated. Use **Sign Person Request v3**.\n\nThis method is used to sign Person Request. Method receives signed message (pkcs7) including signed content, digital signature and signer public key in `signed_content` property.\nAll signature fields will be validated (including signer certificate authority).\n\nThis service will store signed copy of Person Request in Media Content Storage, created or update MPI records  if signature is all checks is passed.\n\nSigned content MUST consists of JSON object with Person Request data and printout template. Object that need to be signed is returned by `Get Person request by ID v2` or `Approve Person request v2` response, `JSON.Path: $.data`.\nPerson must re-read and sign person request print form and after that `patient_signed` should be changed to TRUE.\n\nPerson request can be signed either by doctor or admin (user with scope `person_request:write`) from legal entity as in person request.\n\nLook at [**Dummy Sign Person Request**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/v2/person_requests/{id}/actions/sign) for more details."
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -9390,7 +9408,7 @@ paths:
         Invoke Get Declaration Request by ID to obtain seed - Hash of previous block in declarations chain or other random component that should be signed with declaration.
 
 
-        There is a [**dummy method**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-declaration-request/sign-declaration-request) that describes the signed date example.'
+        There is a [**dummy method**](/?r=1#general-mis-signed/tag/deprecated-methods/PATCH/api/declaration_requests/{id}/actions/sign) that describes the signed date example.'
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -11883,7 +11901,7 @@ paths:
       operationId: Get Employees list
       description: |-
         Use this end-point to obtain all Employees of the legal entity.
-        Method returns shortened data structure. Use [**Get Employee details**](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-service-provider-integration-layer/employees/get-employee-details) to get detailed information.
+        Method returns shortened data structure. Use [**Get Employee details**](/#general-mis/tag/public-medical-service-provider-integration-layer/GET/api/employees/{employee_id}) to get detailed information.
 
         **Scopes required:** `employee:read`
       tags:
@@ -13860,7 +13878,7 @@ paths:
                   updated_at: '2017-05-05T14:09:59.232112'
       summary: Create Employee Request v2
       operationId: Create Employee Request v2
-      description: "Employee_Request consist of the three mandatory parts:\n\n* Person info\n\n* Employee info\n    * the specialties block should contain all the specialties of the employee\n\n* User Info\n\n**MED_ADMIN, MED_COORDINATOR:**\n\n* Employee could have zero or one record with `speciality_officio=true` value\n\n**For DOCTOR or PHARMACIST:**\n\n* Doctor ot Pharmacist info\n\nAdditionally to register/update Physician the `Doctor info` for Doctors and `Pharmacist info` for Pharmacist should be passed.\n\nWhen the `Employee_Request` will be posted the Invitation e-mail with a request\nsecret token will be sent to the User specified in the request.\n\nIn case the employee doesn't have tax_id no_tax_id must be true and in fields tax_id input passport number (serial number in cyrillic without spaces)\n\nIt can be also used to update employee data. In this case `employee_id` should be passed in the payload.\n\nUser may accept or decline Invitation.\n\nFor changes to take effect employee must confirm the changes.\nMethod receives signed message (pkcs7) including signed content, digital signature and signer public key.\nAll signature fields will be validated (including signer certificate authority).\nSigned content MUST consists of JSON object with the `employee_request` block of [data](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-employee-request/create-employee-request-v2):"
+      description: "Employee_Request consist of the three mandatory parts:\n\n* Person info\n\n* Employee info\n    * the specialties block should contain all the specialties of the employee\n\n* User Info\n\n**MED_ADMIN, MED_COORDINATOR:**\n\n* Employee could have zero or one record with `speciality_officio=true` value\n\n**For DOCTOR or PHARMACIST:**\n\n* Doctor ot Pharmacist info\n\nAdditionally to register/update Physician the `Doctor info` for Doctors and `Pharmacist info` for Pharmacist should be passed.\n\nWhen the `Employee_Request` will be posted the Invitation e-mail with a request\nsecret token will be sent to the User specified in the request.\n\nIn case the employee doesn't have tax_id no_tax_id must be true and in fields tax_id input passport number (serial number in cyrillic without spaces)\n\nIt can be also used to update employee data. In this case `employee_id` should be passed in the payload.\n\nUser may accept or decline Invitation.\n\nFor changes to take effect employee must confirm the changes.\nMethod receives signed message (pkcs7) including signed content, digital signature and signer public key.\nAll signature fields will be validated (including signer certificate authority).\nSigned content MUST consists of JSON object with the `employee_request` block of [data](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/POST/api/v2/employee_requests):"
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -18788,7 +18806,7 @@ paths:
         Object that need to be signed is returned by `Get Confidant Person relationship request by ID` or `Approve Confidant Person relationship request` response, `JSON.Path: $.data`.
 
 
-        Look at [**Dummy Sign Confidant Person relationship request**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-person-methods/sign-confidant-person-relationship-request) for more details.
+        Look at [**Dummy Sign Confidant Person relationship request**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/persons/{id}/confidant_person_relationship_requests/{confidant_person_relationship_request_id}/actions/sign) for more details.
 
 
         **Scopes required:** `confidant_person_relationship_request:write`'
@@ -19542,7 +19560,7 @@ paths:
         **Scopes required:** `person_verification:write`
 
 
-        Look at [**Dummy Update Person verification status**](#reference/dummy-methods/dummy-for-person-methods/dummy-update-person-verification-status) for more details.'
+        Look at [**Dummy Update Person verification status**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/persons/{id}/verification) for more details.'
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -32694,7 +32712,7 @@ paths:
                   total_pages: 23
       summary: Get merge requests
       operationId: Get merge requests
-      description: Method returns a list of merge requests. Service returns only merge requests related to the same legal entity as the user. To obtain more detailed information about merge request use [**Get merge request by ID**](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-service-provider-integration-layer/merge-request/get-merge-request-by-id). Note that person and preperson data of SIGNED merge request avaliable limited period of time (depends on schedule of [Auto cleaning person data process](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/624328717/Auto+cleaning+of+person+data+from+merge+requests))
+      description: Method returns a list of merge requests. Service returns only merge requests related to the same legal entity as the user. To obtain more detailed information about merge request use [**Get merge request by ID**](/#general-mis/tag/public-medical-service-provider-integration-layer/GET/api/merge_requests/{id}). Note that person and preperson data of SIGNED merge request avaliable limited period of time (depends on schedule of [Auto cleaning person data process](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/624328717/Auto+cleaning+of+person+data+from+merge+requests))
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -33488,7 +33506,7 @@ paths:
 
         Preperson merge request can be signed either by specialist or receptionist (user with scope `merge_request:write`) from legal entity as in merge request.
 
-        There is a [**dummy method**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-merge-request/sign-merge-request) that describes the latest merge request data model for sign and can be used as documentation.'
+        There is a [**dummy method**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/merge_requests/{id}/actions/sign) that describes the latest merge request data model for sign and can be used as documentation.'
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -34125,7 +34143,7 @@ paths:
                       url: https://storage.ehealth.world
       summary: Get merge request by ID
       operationId: Get merge request by ID
-      description: 'Method returns merge request details by it''s ID. Depending on merge request status different data returned in response: if status is NEW, REJECTED (after NEW) or EXPIRED (after NEW) - `data_to_be_signed` section returns null in response. If status is APPROVED, REJECTED or EXPIRED (after APPROVED), SIGNED - `data_to_be_signed` section returns with detailed information of person, preperson, printout form e.t.c that will be needed for Sign merge request (look [**dummy method**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-merge-request/sign-merge-request)).
+      description: 'Method returns merge request details by it''s ID. Depending on merge request status different data returned in response: if status is NEW, REJECTED (after NEW) or EXPIRED (after NEW) - `data_to_be_signed` section returns null in response. If status is APPROVED, REJECTED or EXPIRED (after APPROVED), SIGNED - `data_to_be_signed` section returns with detailed information of person, preperson, printout form e.t.c that will be needed for Sign merge request (look [**dummy method**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/merge_requests/{id}/actions/sign)).
 
 
         **Note!** that `data_to_be_signed` of SIGNED, REJECTED (after APPROVED) or EXPIRED merge request avaliable limited period of time which depends on [**Auto cleaning of person data from merge requests process**](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/624328717/Auto+cleaning+of+person+data+from+merge+requests).'
@@ -36346,7 +36364,7 @@ paths:
 
         The method contains is_primary parameter, which indicates whether the ingredient is the primary in the drug.
 
-        [Get drugs list](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/drugs/get-drugs-list) method will be deprecated in the future.
+        [Get drugs list](/#general-mis/tag/public-reimbursement/GET/api/drugs) method will be deprecated in the future.
 
 
         **Scopes required:** `drugs:read`'
@@ -38913,7 +38931,7 @@ paths:
         Also we suggest use `employee_id` and `legal_entity_id` to make sure that end-user understands context of actions that he or she will perform.
 
 
-        Use [**Get Medication request requests by ID**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request-requests/get-medication-request-request-by-id) to get Medication request Request by ID.'
+        Use [**Get Medication request requests by ID**](/#general-mis/tag/deprecated-methods/GET/api/medication_request_requests/{id}) to get Medication request Request by ID.'
       tags:
         - Deprecated methods
       parameters:
@@ -39612,7 +39630,7 @@ paths:
                     additionalProperties: false
       summary: Get medication request requests by search params
       operationId: Get medication request requests by search params
-      description: "Use this method to obtain list of Medication request Requests. \nUse [**Get Medication request requests details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request-requests/get-medication-request-requests-details) to get Medication request Request by ID."
+      description: "Use this method to obtain list of Medication request Requests. \nUse [**Get Medication request requests details**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_request_requests/{id}) to get Medication request Request by ID."
       tags:
         - Public. Reimbursement
       parameters:
@@ -40333,7 +40351,7 @@ paths:
                     additionalProperties: false
       summary: Get Medication Request Requests in care plan context
       operationId: Get Medication Request Requests in care plan context
-      description: "The method returns a list of medication request requests in the context of a care plan. \nUser must have an approval on the care plan from url.\n\nUse [**Get Medication request requests details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request-requests/get-medication-request-requests-details) to get Medication request Request by ID."
+      description: "The method returns a list of medication request requests in the context of a care plan. \nUser must have an approval on the care plan from url.\n\nUse [**Get Medication request requests details**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_request_requests/{id}) to get Medication request Request by ID."
       tags:
         - Public. Reimbursement
       parameters:
@@ -41775,7 +41793,7 @@ paths:
         This service will store signed copy of Medication request Request in Media Content Storage and create Medication request if signature is all checks is passed.
 
 
-        Signed content MUST consists of JSON object with Medication request Request data. Object that need to be signed is returned by [**Get medication request requests details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request-requests/get-medication-request-requests-details) response, `JSON.Path: $.data`.
+        Signed content MUST consists of JSON object with Medication request Request data. Object that need to be signed is returned by [**Get medication request requests details**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_request_requests/{id}) response, `JSON.Path: $.data`.
 
 
         **Important**
@@ -41783,7 +41801,7 @@ paths:
         Invoke Get Medication request Request by ID to obtain seed - Hash of previous block in Medication request Request chain or other random component that should be signed with Medication request Request.
 
 
-        Look at [**Dummy Sign Medication Request Requests**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-medication-request-requests/sign-medication-request-requests) for more details.'
+        Look at [**Dummy Sign Medication Request Requests**](/?r=1#general-mis-signed/tag/public-reimbursement/PATCH/api/medication_request_requests/{id}/actions/sign) for more details.'
       tags:
         - Public. Reimbursement
       parameters:
@@ -43344,7 +43362,7 @@ paths:
                     additionalProperties: false
       summary: Get medication requests by search params
       operationId: Get medication requests by search params
-      description: "Use this method to obtain list of Medication Requests. \nUse [**Get medication requests details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request/get-medication-requests-details) to get Medication Request by ID."
+      description: "Use this method to obtain list of Medication Requests. \nUse [**Get medication requests details**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_requests/{id}) to get Medication Request by ID."
       tags:
         - Public. Reimbursement
       parameters:
@@ -44216,7 +44234,7 @@ paths:
                     additionalProperties: false
       summary: Get Medication requests in care plan context
       operationId: Get Medication requests in care plan context
-      description: "The method returns a list of medication requests in the context of a care plan. \nUser must have an approval on the care plan from url.\n\nUse [**Get medication requests details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request/get-medication-requests-details) to get Medication Request by ID."
+      description: "The method returns a list of medication requests in the context of a care plan. \nUser must have an approval on the care plan from url.\n\nUse [**Get medication requests details**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_requests/{id}) to get Medication Request by ID."
       tags:
         - Public. Reimbursement
       parameters:
@@ -45789,7 +45807,7 @@ paths:
         * *Medical program* is absent in *plan*
 
 
-        Look at [**Dummy Reject Medication Request**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-medication-request/reject-medication-request) for more details.'
+        Look at [**Dummy Reject Medication Request**](/?r=1#general-mis-signed/tag/public-reimbursement/PATCH/api/medication_requests/{id}/actions/reject) for more details.'
       tags:
         - Public. Reimbursement
       parameters:
@@ -46290,7 +46308,7 @@ paths:
         * *Medical program* is absent in *plan*
 
 
-        Look at [**Dummy Reject Medication Request by Pharmacy User**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-medication-request/dummy-reject-medication-request-by-pharmacy-user) for more details.'
+        Look at [**Dummy Reject Medication Request by Pharmacy User**](/?r=1#general-mis-signed/tag/public-reimbursement/PATCH/api/pharmacy/medication_requests/{id}/actions/reject) for more details.'
       tags:
         - Public. Reimbursement
       parameters:
@@ -47844,7 +47862,7 @@ paths:
         Only Medication dispenses linked to medication request id will be shown. If you want to reduce amount of data that is going trough your application, use `status` filter and show only dispenses that Doctor is interested in.
 
 
-        Use [**Get Medication dispense details in person context**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-dispense/get-medication-dispense-details-in-person-context) to get Medication Dispense by ID.'
+        Use [**Get Medication dispense details in person context**](/#general-mis/tag/public-reimbursement/GET/api/persons/{person_id}/medication_dispenses/{id}) to get Medication Dispense by ID.'
       tags:
         - Public. Reimbursement
       parameters:
@@ -49843,7 +49861,7 @@ paths:
 
         This method can''t be used by employees with type ''PHARMACIST''.
 
-        For pharmacists please use [**Block Medication Request by Pharmacy User**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request/block-medication-request-by-pharmacy-user).
+        For pharmacists please use [**Block Medication Request by Pharmacy User**](/#general-mis/tag/public-reimbursement/PATCH/api/pharmacy/medication_requests/{id}/actions/block).
 
 
         **Scopes required:** `medication_request:block`'
@@ -54067,7 +54085,7 @@ paths:
         **Scopes required:** `medication_dispense:read_pharm`
 
 
-        Use [**Get Medication dispense  by Pharmacy User**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-dispense/get-medication-dispense-details-by-pharmacy-user) to get Medication Dispense by ID.'
+        Use [**Get Medication dispense  by Pharmacy User**](/#general-mis/tag/public-reimbursement/GET/api/pharmacy/medication_dispenses/{id}) to get Medication Dispense by ID.'
       tags:
         - Public. Reimbursement
       parameters:
@@ -54942,7 +54960,7 @@ paths:
         Invoke Get Medication dispense details by Pharmacy User to obtain previously created medication dispense. In order to process dispense `payment_id (optional)` and `payment_amount (optional, if medical program has funding sourse != NHS)` should be added.
 
 
-        Look at [**Dummy Process Medication Dispense by Pharmacy User**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-medication-dispense/process-medication-dispense-by-pharmacy-user) for more details.
+        Look at [**Dummy Process Medication Dispense by Pharmacy User**](/?r=1#general-mis-signed/tag/public-reimbursement/PATCH/api/pharmacy/medication_dispenses/{id}/actions/process) for more details.
 
 
         **Scopes required:** `medication_dispense:process`'
@@ -75738,7 +75756,7 @@ paths:
         **Scopes required:** `medical_program_provision:write`
 
 
-        Look at [Dummy Create Medical program provision](https://uaehealthapi.docs.apiary.io/#reference/public.-contracts/medical-program-provision/dummy-create-medical-program-provision) for more details'
+        Look at [Dummy Create Medical program provision](/?r=1#general-mis-signed/tag/public-contracts/POST/api/medical_program_provision) for more details'
       tags:
         - Public. Contracts
       parameters:
@@ -85947,7 +85965,7 @@ paths:
         Invoke Get Declaration Request by ID to obtain seed - Hash of previous block in declarations chain or other random component that should be signed with declaration
 
 
-        Look at [**Dummy Sign Declaration Request**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-declaration-request/sign-declaration-request) for more details.'
+        Look at [**Dummy Sign Declaration Request**](/?r=1#general-mis-signed/tag/deprecated-methods/PATCH/api/declaration_requests/{id}/actions/sign) for more details.'
       tags:
         - Deprecated methods
       parameters:
@@ -89146,7 +89164,7 @@ paths:
         Also we suggest use `employee_id` to make sure that end-user understands context of actions that he or she will perform.
 
 
-        Use [**Get Medication request by ID**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-request/get-medication-request-by-id) to get Medication Request by ID.'
+        Use [**Get Medication request by ID**](/#general-mis/tag/deprecated-methods/GET/api/medication_requests/{id}) to get Medication Request by ID.'
       tags:
         - Deprecated methods
       parameters:
@@ -90316,7 +90334,7 @@ paths:
         Only Medication dispenses linked to medication request id will be shown. If you want to reduce amount of data that is going trough your application, use `status` filter and show only dispenses that Doctor is interested in.
 
 
-        Use [**Get Medication dispense details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-dispense/get-medication-dispense-details) to get Medication Dispense by ID.'
+        Use [**Get Medication dispense details**](/#general-mis/tag/deprecated-methods/GET/api/medication_dispenses/{id}) to get Medication Dispense by ID.'
       tags:
         - Deprecated methods
       parameters:
@@ -92493,7 +92511,7 @@ paths:
       description: 'Please see a similar endpoint with role context ("Get Medication dispenses by search params by Pharmacy User") below.
 
 
-        Use [**Get Medication dispense details**](https://uaehealthapi.docs.apiary.io/#reference/public.-reimbursement/medication-dispense/get-medication-dispense-details) to get Medication Dispense by ID.
+        Use [**Get Medication dispense details**](/#general-mis/tag/deprecated-methods/GET/api/medication_dispenses/{id}) to get Medication Dispense by ID.
 
 
         **Scopes required:** `medication_dispense:read`'
@@ -95894,7 +95912,7 @@ paths:
         Invoke Get Medication dispanse details to obtain previously created medication dispense. In order to process dispense `payment_id (optional)` and `payment_amount (optional, if medical program has funding sourse != NHS)` should be added.
 
 
-        Look at [**Dummy Process Medication Dispense**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-medication-dispense/process-medication-dispense) for more details.
+        Look at [**Dummy Process Medication Dispense**](/?r=1#general-mis-signed/tag/deprecated-methods/PATCH/api/medication_dispenses/{id}/actions/process) for more details.
 
 
         **Scopes required:** `medication_dispense:process`'
@@ -96818,7 +96836,7 @@ paths:
                   total_pages: 23
       summary: Get Person Requests List v3
       operationId: Get Person Requests List v3
-      description: "Use this method to obtain list of Person Requests. \nIf you want to reduce amount of data that is going trough your application, use `status` filter and show only requests that Doctor or Admin is interested in current UI.\n\nService returns only person request related to the same legal entity as the user.\n\nMethod returns shortened details, to obtain full information - get Person Request by it's ID using appropriate version of endpoint based on `version` value in response.\nThat is, use [**Get Person Request by ID V3**](https://uaehealthapi.docs.apiary.io/#reference/public.-medical-service-provider-integration-layer/person-requests/get-person-request-by-id-v3) endpoint\n\nMore detailed information - https://e-health-ua.atlassian.net/wiki/x/BADDIw"
+      description: "Use this method to obtain list of Person Requests. \nIf you want to reduce amount of data that is going trough your application, use `status` filter and show only requests that Doctor or Admin is interested in current UI.\n\nService returns only person request related to the same legal entity as the user.\n\nMethod returns shortened details, to obtain full information - get Person Request by it's ID using appropriate version of endpoint based on `version` value in response.\nThat is, use [**Get Person Request by ID V3**](/#general-mis/tag/public-medical-service-provider-integration-layer/GET/api/v3/person_requests/{id}) endpoint\n\nMore detailed information - https://e-health-ua.atlassian.net/wiki/x/BADDIw"
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -97674,7 +97692,7 @@ paths:
                   inserted_at: '2017-07-06T16:54:05.161571Z'
       summary: Sign Person Request v3
       operationId: Sign Person Request v3
-      description: "This method is used to sign Person Request. Method receives signed message (pkcs7) including signed content, digital signature and signer public key in `signed_content` property.\nAll signature fields will be validated (including signer certificate authority).\n\nThis service will store signed copy of Person Request in Media Content Storage, created or update MPI records  if signature is all checks is passed.\n\nSigned content MUST consists of JSON object with Person Request data and printout template. Object that need to be signed is returned by `Get Person request by ID v3` or `Approve Person request v3` response, `JSON.Path: $.data`.\nPerson must re-read and sign person request print form and after that `patient_signed` should be changed to TRUE.\n\nPerson request can be signed either by doctor or admin (user with scope `person_request:write`) from legal entity as in person request.\n\nLook at [**Dummy Sign Person Request v3**](https://uaehealthapi.docs.apiary.io/#reference/dummy-methods/dummy-for-person-request/sign-person-request-v3) for more details."
+      description: "This method is used to sign Person Request. Method receives signed message (pkcs7) including signed content, digital signature and signer public key in `signed_content` property.\nAll signature fields will be validated (including signer certificate authority).\n\nThis service will store signed copy of Person Request in Media Content Storage, created or update MPI records  if signature is all checks is passed.\n\nSigned content MUST consists of JSON object with Person Request data and printout template. Object that need to be signed is returned by `Get Person request by ID v3` or `Approve Person request v3` response, `JSON.Path: $.data`.\nPerson must re-read and sign person request print form and after that `patient_signed` should be changed to TRUE.\n\nPerson request can be signed either by doctor or admin (user with scope `person_request:write`) from legal entity as in person request.\n\nLook at [**Dummy Sign Person Request v3**](/?r=1#general-mis-signed/tag/public-medical-service-provider-integration-layer/PATCH/api/v3/person_requests/{id}/actions/sign) for more details."
       tags:
         - Public. Medical Service Provider Integration Layer
       parameters:
@@ -101569,7 +101587,7 @@ components:
             - `list` — data attribute is a list.
         request_id:
           type: string
-          description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#general-mis/description/api-conventions). Send it with `X-Request-ID` header.'
     Response__Error:
       type: object
       properties:
