@@ -19,7 +19,16 @@ info:
 
     * Patient data management
 
-    > In order to get specification for PIS-related consumers part of API documentation please proceed [here](https://ehealthpisapi.docs.apiary.io/#)
+    > In order to get specification for PIS-related consumers part of API documentation please proceed [here](/?r=1#ehealth-pis)
+
+    ## API Conventions
+    
+    **Request ID.** Send a request-tracing value in the `X-Request-ID` header; the same value is echoed back in every response, in the `meta.request_id` field. Quote it when reporting an issue so support can locate the exact request server-side.
+    
+    **Idempotency Key.** For requests that support safe retries, send a client-generated value in the `X-Idempotency-Key` header; a repeated request with the same key and body returns the original response instead of re-executing the operation. The response echoes it back in `meta.idempotency_key`.
+    
+    **Error format.** Every error response follows the same envelope: `meta` (as above) plus an `error` object with `type` (a machine-readable error code) and `message` (a human-readable, developer-facing description).
+    
 servers:
   - url: https://api-stage.ehealth.gov.ua
     description: STAGE — eHealth ehealth-trusted-pis API
@@ -45,7 +54,7 @@ tags:
       - Every sign-in and sign-up method described here must be used only by Clients with `TRUSTED_PIS` client type.
 
 
-      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](#reference/public.-patient-information-system/sign-in/use-refresh-token-for-access-token-extension) method.
+      - When `access_token` expires, Client must renew it using `refresh_token` with [Use Refresh Token for Access Token extension](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/oauth/tokens) method.
 
 
       **API-key:**
@@ -433,7 +442,7 @@ paths:
 
         Signed content must contain patient data to search and identify patient and validate relation
 
-        Look at [**Dummy Confidant patient sign-in**](#reference/public.-dummy-methods/sign-in/dummy-confidant-patient-sign-in) for more details
+        Look at [**Dummy Confidant patient sign-in**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
       tags:
         - Public. Patient Information System
       parameters:
@@ -1149,7 +1158,7 @@ paths:
 
         Signed content must contain nonce that was generated for trusted PIS.
 
-        Look at [**Dummy Patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-patient-sign-up) for more details.
+        Look at [**Dummy Patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1563,7 +1572,7 @@ paths:
 
         Signed content must contain patient data needed to create new MPI record
 
-        Look at [**Dummy Confidant patient sign-up**](#reference/public.-dummy-methods/sign-up/dummy-confidant-patient-sign-up) for more details.
+        Look at [**Dummy Confidant patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1937,7 +1946,7 @@ paths:
         This endpoint must be used only by trusted PIS clients.
 
 
-        After person request is created, [Complete Update Person details](https://ehealthpisapi.docs.apiary.io/#reference/public.-patient-information-system/person-requests/complete-update-person-details) method must be called.'
+        After person request is created, [Complete Update Person details](/?r=1#ehealth-pis/tag/public-patient-information-system/PATCH/api/pis/person_requests/{id}/actions/complete) method must be called.'
       tags:
         - Public. Patient Information System
       parameters:
@@ -2291,7 +2300,7 @@ components:
             - `list` — data attribute is a list.
         request_id:
           type: string
-          description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+          description: '[Request ID](/#ehealth-trusted-pis/description/api-conventions). Send it with `X-Request-ID` header.'
     Response_Collection:
       type: object
       properties:
