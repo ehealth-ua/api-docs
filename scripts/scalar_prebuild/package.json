@@ -1,0 +1,9 @@
+{
+  "name": "scalar-prebuild",
+  "private": true,
+  "description": "Pre-processes portal specs into Scalar's own in-memory document form (see prebuild.mjs)",
+  "type": "module",
+  "dependencies": {
+    "puppeteer-core": "23.11.1"
+  }
+}
