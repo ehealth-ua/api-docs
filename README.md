@@ -32,7 +32,8 @@ assets/
   fonts/                 # e-Ukraine
 specs/
   <service>.yaml         # OpenAPI 3.1 кожного сервісу цього середовища
-  signed-payloads/       # декодовані підписані контенти (частина specs)
+                         #   (декодований payload підписаних запитів -- inline,
+                         #   як сусідня <path>/decoded-payload операція)
 nginx.conf               # референс віддачі: gzip / кеш / CORS
 scripts/
   stamp_deploy_badge.sh  # ставить "deployed <час>" у верхній правий кут при деплої

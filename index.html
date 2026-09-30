@@ -32,13 +32,15 @@
       to its own docs host and this page simply lists the SERVICES of that env.
 
       The left-panel document switcher cycles through the services (Medical
-      Events, General MIS, eHealth PIS, eHealth Trusted PIS) plus the decoded
-      signed-content documents. Every spec URL is RELATIVE -> deployable at any
-      path on any static host (nginx, CDN, ...). The correct API `servers:` host
-      is already baked into each spec per environment.
+      Events, General MIS, eHealth PIS, eHealth Trusted PIS). Every spec URL is
+      RELATIVE -> deployable at any path on any static host (nginx, CDN, ...).
+      The correct API `servers:` host is already baked into each spec per
+      environment. Each signed operation's decoded-payload doc renders inline,
+      as a <path>/decoded-payload sibling operation right in its own service's
+      spec -- no separate signed-content source anymore.
 
       To add/remove a service: edit SOURCES below and drop/remove the spec under
-      specs/<service>.yaml. Signed-content docs live under specs/signed-payloads/.
+      specs/<service>.yaml.
     -->
     <div id="deploy-badge" title="Last deployed"></div>
     <div id="app"></div>
@@ -51,9 +53,6 @@
         { slug: 'general-mis',         title: 'General MIS',                    url: 'specs/general-mis.yaml' },
         { slug: 'ehealth-pis',         title: 'eHealth PIS',                    url: 'specs/ehealth-pis.yaml' },
         { slug: 'ehealth-trusted-pis', title: 'eHealth Trusted PIS',            url: 'specs/ehealth-trusted-pis.yaml' },
-        { slug: 'me-signed',           title: 'Medical Events — Signed Content',    url: 'specs/signed-payloads/medical-events.yaml' },
-        { slug: 'gm-signed',           title: 'General MIS — Signed Content',       url: 'specs/signed-payloads/general-mis.yaml' },
-        { slug: 'tpis-signed',         title: 'eHealth Trusted PIS — Signed Content', url: 'specs/signed-payloads/ehealth-trusted-pis.yaml' },
       ];
 
       const sources = SOURCES.map((s, i) => ({ ...s, default: i === 0 }));
