@@ -24,8 +24,9 @@ jobs:
       - name: Assemble static bundle
         # Сайт уже статичний — артефакт це сам чекаут (index.html + assets + specs).
         run: |
+          node scripts/scalar_prebuild/prebuild.mjs --check .   # stale JSON = old spec shown
           mkdir -p _site
-          cp -R index.html assets specs _site/
+          cp -R index.html assets specs scalar-docs _site/
           scripts/stamp_deploy_badge.sh _site/index.html
           echo "bundle: $(du -sh _site | cut -f1)"
 
