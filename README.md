@@ -34,9 +34,17 @@ specs/
   <service>.yaml         # OpenAPI 3.1 кожного сервісу цього середовища
                          #   (декодований payload підписаних запитів -- inline,
                          #   як сусідня <path>/decoded-payload операція)
+scalar-docs/
+  <service>.json         # ГЕНЕРОВАНО з specs/<service>.yaml (не редагувати):
+                         #   той самий документ, уже оброблений Scalar
+                         #   (bundle, coercion, навігація) -- саме його
+                         #   вантажить index.html, сторінка ~2x швидша
+  manifest.json          # sha256 YAML + бандла + index.html для --check
 nginx.conf               # референс віддачі: gzip / кеш / CORS
 scripts/
   stamp_deploy_badge.sh  # ставить "deployed <час>" у верхній правий кут при деплої
+  scalar_prebuild/       # prebuild.mjs: specs/*.yaml -> scalar-docs/*.json
+                         #   (синхронізується з api-docs-platform)
 .github/workflows/       # preview + env-deploy (обидва кличуть stamp_deploy_badge.sh)
 ```
 
@@ -53,7 +61,7 @@ scripts/
 `nginx.conf` — референс, який відображає вимоги:
 - **gzip/brotli** на YAML (файли по кілька МБ) — обов'язково для швидкої передачі;
 - `assets/` — immutable‑кеш (контент‑адресований через `?v=`);
-- `specs/` — `no-cache` + `Access-Control-Allow-Origin: *`.
+- `specs/`, `scalar-docs/` — `no-cache` + `Access-Control-Allow-Origin: *`.
 
 Вибір хостингу (CDN Cloudflare vs self‑hosted статика в периметрі ЕСОЗ) — за
 рішенням DevOps. Крок деплою в обох воркфлоу позначено `TODO` — його наповнює
@@ -61,7 +69,15 @@ DevOps під обраний хост.
 
 ## Оновлення контенту (для авторів / вендора)
 
-Редагуємо OpenAPI напряму (як зараз з Apiary) → PR у гілку‑середовище →
-технічний письменник рев'ю → CI деплоїть (прев'ю на коміт, середовище на merge).
+Редагуємо OpenAPI напряму (як зараз з Apiary) → перегенеровуємо
+`scalar-docs/` (потрібен локальний Chrome):
+
+```
+(cd scripts/scalar_prebuild && npm ci) && node scripts/scalar_prebuild/prebuild.mjs . index.html
+```
+
+→ PR у гілку‑середовище → технічний письменник рев'ю → CI деплоїть (прев'ю на
+коміт, середовище на merge). CI падає, якщо `scalar-docs/` застарів відносно
+`specs/`, бандла чи `index.html`.
 Конвертація apib→OpenAPI більше не запускається — вона одноразова й живе в
 тулінг‑репі `ehealth-ua/api-docs-platform` (`scripts/`).
