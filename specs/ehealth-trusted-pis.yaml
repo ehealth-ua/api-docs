@@ -441,7 +441,7 @@ paths:
 
         Signed content must contain patient data to search and identify patient and validate relation
 
-        Look at [**Dummy Confidant patient sign-in**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in) for more details
+        Look at [**Dummy Confidant patient sign-in**](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in/decoded-payload) for more details
       tags:
         - Public. Patient Information System
       parameters:
@@ -502,11 +502,55 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-in](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-in](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in/decoded-payload)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
+  /api/pis/confidant/sign-in/decoded-payload:
+    post:
+      tags:
+        - Public. Patient Information System
+      summary: 'Payload: Confidant patient sign-in'
+      operationId: dummy-post-api-pis-confidant-sign-in
+      description: |-
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-in`) -- a plain (unsigned), much smaller reference payload Apiary provides for MIS integration testing, distinct from the real signed `Person_Request_PIS` content (verified separately). → [Confidant patient sign-in](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-in)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - last_name
+                - given_name
+              properties:
+                last_name:
+                  type: string
+                  example: Петров
+                given_name:
+                  type: string
+                  example: Петро Петрович
+                tax_id:
+                  type: string
+                  example: '2323232323'
+                document:
+                  type: object
+                  required:
+                    - type
+                    - number
+                  properties:
+                    type:
+                      type: string
+                      example: PASSPORT
+                      description: '`Dictionary DOCUMENT_TYPE`'
+                    number:
+                      type: string
+                      example: АА120518
+                      description: document issue number
+      responses:
+        '200':
+          description: Success
   /oauth/tokens:
     post:
       responses:
@@ -1155,7 +1199,7 @@ paths:
 
         Signed content must contain nonce that was generated for trusted PIS.
 
-        Look at [**Dummy Patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up) for more details.
+        Look at [**Dummy Patient sign-up**](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up/decoded-payload) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1221,11 +1265,95 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Patient sign-up](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/sign-up)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up/decoded-payload)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS'
+  /api/pis/sign-up/decoded-payload:
+    post:
+      tags:
+        - Public. Patient Information System
+      summary: 'Payload: Patient sign-up'
+      operationId: dummy-post-api-pis-sign-up
+      description: |-
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/sign-up`) -- a plain (unsigned) `person` body plus a `jwt`, used for MIS integration testing instead of the real signed `Person_Request_PIS` content (verified separately). → [Patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/sign-up)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+                - jwt
+              properties:
+                person:
+                  $ref: '#/components/schemas/Person_Request_PIS_DecodedPayload'
+                patient_signed:
+                  type: boolean
+                  example: true
+                process_disclosure_data_consent:
+                  type: boolean
+                  example: true
+                jwt:
+                  type: string
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: PASSPORT
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: '02090'
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: OTP
+                    phone_number: '+380508887700'
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+              jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+      responses:
+        '200':
+          description: Success
   /api/pis/confidant/sign-up:
     post:
       responses:
@@ -1567,7 +1695,7 @@ paths:
 
         Signed content must contain patient data needed to create new MPI record
 
-        Look at [**Dummy Confidant patient sign-up**](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up) for more details.
+        Look at [**Dummy Confidant patient sign-up**](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up/decoded-payload) for more details.
       tags:
         - Public. Patient Information System
       parameters:
@@ -1628,11 +1756,99 @@ paths:
         required: true
         description: |-
           <!-- signed-payload-xref -->
-          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-up](/?r=1#ehealth-trusted-pis-signed/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)**.
+          > 🔒 **Signed content** — The request body is submitted as the base64 of a digitally-signed (КЕП / UA-EDS) document. Decoded payload schema: **[Payload: Confidant patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up/decoded-payload)**.
           <!-- /signed-payload-xref -->
 
           **Signed request.** Send only **`signed_data`** — the base64 of a digitally-signed (КЕП / UA-EDS) document.
       x-signed-content-schema: '#/components/schemas/Person_Request_PIS_With_Confidant'
+  /api/pis/confidant/sign-up/decoded-payload:
+    post:
+      tags:
+        - Public. Patient Information System
+      summary: 'Payload: Confidant patient sign-up'
+      operationId: dummy-post-api-pis-confidant-sign-up
+      description: |-
+        This is Apiary's own **Dummy** test-method body for this operation (`POST /dummy/pis/confidant/sign-up`) -- a plain (unsigned) `person` body, used for MIS integration testing instead of the real signed `Person_Request_PIS_With_Confidant` content (verified separately). → [Confidant patient sign-up](/#ehealth-trusted-pis/tag/public-patient-information-system/POST/api/pis/confidant/sign-up)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+              properties:
+                person:
+                  $ref: '#/components/schemas/Person_Request_PIS_With_Confidant_DecodedPayload'
+                patient_signed:
+                  type: boolean
+                  example: true
+                process_disclosure_data_consent:
+                  type: boolean
+                  example: true
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: BIRTH_CERTIFICATE
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: '02090'
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: THIRD_PERSON
+                    value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                    alias: husband
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+                confidant_person:
+                  person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  relation_type: PRIMARY
+                  documents_relationship:
+                    - type: BIRTH_CERTIFICATE
+                      number: АА120518
+                      issued_by: Рокитнянським РВ ГУ МВС Київської області
+                      issued_at: '2017-02-28'
+              patient_signed: true
+              process_disclosure_data_consent: true
+      responses:
+        '200':
+          description: Success
   /api/pis/trusted/person_requests:
     post:
       responses:
@@ -3091,3 +3307,312 @@ components:
           type: string
         emergency_contact:
           $ref: '#/components/schemas/Emergency_Contact'
+    Address_DecodedPayload:
+      type: object
+      required:
+        - type
+        - country
+        - area
+        - settlement
+        - settlement_type
+        - settlement_id
+      properties:
+        type:
+          type: string
+          description: '`Dictionary ADDRESS_TYPE`.'
+        country:
+          type: string
+          enum:
+            - UA
+          description: '`Dictionary COUNTRY`'
+        area:
+          type: string
+          description: one of Ukraianian area
+        region:
+          type: string
+          description: district of area
+        settlement:
+          type: string
+          description: city name
+        settlement_type:
+          type: string
+          description: '`Dictionary SETTLEMENT_TYPE` - type of settlement as city/town/village etc'
+        settlement_id:
+          type: string
+          description: settlement identificator from uaadresses
+        street_type:
+          type: string
+          description: '`Dictionary STREET_TYPE` - type of street as street/road/line etc'
+        street:
+          type: string
+          description: street name
+        building:
+          type: string
+          description: number of building
+        apartment:
+          type: string
+          description: number of appartment
+        zip:
+          type: string
+          description: system of postal codes
+    Authentication_Method_DecodedPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - OTP
+            - OFFLINE
+            - NA
+        phone_number:
+          type: string
+          description: required for type = OTP
+    Document_DecodedPayload:
+      type: object
+      required:
+        - type
+        - number
+      properties:
+        type:
+          type: string
+          description: '`Dictionary DOCUMENT_TYPE`'
+        number:
+          type: string
+          description: document issue number
+        expiration_date:
+          type: string
+          description: '`document expiration date. Required for NATIONAL_ID document type`'
+        issued_by:
+          type: string
+          description: authority which issued the document
+        issued_at:
+          type: string
+          description: the date when document was issued
+    Person_Request_PIS_DecodedPayload:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - birth_date
+        - birth_country
+        - birth_settlement
+        - gender
+        - no_tax_id
+        - secret
+        - documents
+        - addresses
+        - emergency_contact
+        - process_disclosure_data_consent
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        second_name:
+          type: string
+        birth_date:
+          type: string
+        birth_country:
+          type: string
+        birth_settlement:
+          type: string
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+        email:
+          type: string
+        no_tax_id:
+          type: boolean
+        tax_id:
+          type: string
+        secret:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document_DecodedPayload'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address_DecodedPayload'
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone_DecodedPayload'
+        authentication_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authentication_Method_DecodedPayload'
+        unzr:
+          type: string
+          description: the record number in the demographic register
+        emergency_contact:
+          type: object
+          required:
+            - first_name
+            - last_name
+            - phones
+          properties:
+            first_name:
+              type: string
+              example: Петро
+            last_name:
+              type: string
+              example: Іванов
+            second_name:
+              type: string
+              example: Миколайович
+            phones:
+              type: array
+              items:
+                $ref: '#/components/schemas/Phone_DecodedPayload'
+        preferred_way_communication:
+          type: string
+          enum:
+            - email
+            - phone
+          description: the way how a patient wants to be reached
+        process_disclosure_data_consent:
+          type: boolean
+          example: true
+          description: ознака погодження на використання персональних даних
+    Person_Request_PIS_With_Confidant_DecodedPayload:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - birth_date
+        - birth_country
+        - birth_settlement
+        - gender
+        - no_tax_id
+        - secret
+        - documents
+        - addresses
+        - authentication_methods
+        - emergency_contact
+        - confidant_person
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        second_name:
+          type: string
+        birth_date:
+          type: string
+        birth_country:
+          type: string
+        birth_settlement:
+          type: string
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+        email:
+          type: string
+        no_tax_id:
+          type: boolean
+        tax_id:
+          type: string
+        secret:
+          type: string
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document_DecodedPayload'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address_DecodedPayload'
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone_DecodedPayload'
+        authentication_methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authentication_Method_DecodedPayload'
+        unzr:
+          type: string
+          description: the record number in the demographic register
+        emergency_contact:
+          type: object
+          required:
+            - first_name
+            - last_name
+            - phones
+          properties:
+            first_name:
+              type: string
+              example: Петро
+            last_name:
+              type: string
+              example: Іванов
+            second_name:
+              type: string
+              example: Миколайович
+            phones:
+              type: array
+              items:
+                $ref: '#/components/schemas/Phone_DecodedPayload'
+        confidant_person:
+          type: object
+          required:
+            - person_id
+            - relation_type
+            - documents_relationship
+          properties:
+            person_id:
+              type: string
+              example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+            relation_type:
+              type: string
+              enum:
+                - PRIMARY
+                - SECONDARY
+            documents_relationship:
+              type: array
+              items:
+                $ref: '#/components/schemas/RelationshipDocument_DecodedPayload'
+        preferred_way_communication:
+          type: string
+          enum:
+            - email
+            - phone
+          description: the way how a patient wants to be reached
+    Phone_DecodedPayload:
+      type: object
+      required:
+        - type
+        - number
+      properties:
+        type:
+          type: string
+          description: '`Dictionary PHONE_TYPE` type of phone Land Line or Mobile. At least one of type must be present. Each type can be represented only once.'
+        number:
+          type: string
+          description: phone number in format '+38/'
+    RelationshipDocument_DecodedPayload:
+      type: object
+      required:
+        - type
+        - number
+      properties:
+        type:
+          type: string
+          description: '`Dictionary DOCUMENT_RELATIONSHIP_TYPE`'
+        number:
+          type: string
+          description: document issue number
+        issued_by:
+          type: string
+          description: authority which issued the document
+        issued_at:
+          type: string
+          description: the date when document was issued
