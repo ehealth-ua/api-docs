@@ -39,20 +39,28 @@
       as a <path>/decoded-payload sibling operation right in its own service's
       spec -- no separate signed-content source anymore.
 
-      To add/remove a service: edit SOURCES below and drop/remove the spec under
-      specs/<service>.yaml.
+      Scalar loads scalar-docs/<service>.json, NOT specs/<service>.yaml: the
+      same document already run through Scalar's own processing (bundle,
+      coercion, sidebar navigation), generated from the YAML by
+      scripts/scalar_prebuild/prebuild.mjs -- ~2x faster page load. The YAML
+      stays the source of truth; after editing it, regenerate:
+        (cd scripts/scalar_prebuild && npm ci) && node scripts/scalar_prebuild/prebuild.mjs . index.html
+      CI (prebuild.mjs --check .) fails a PR whose JSON is stale.
+
+      To add/remove a service: edit SOURCES below, drop/remove the spec under
+      specs/<service>.yaml, and regenerate as above.
     -->
     <div id="deploy-badge" title="Last deployed"></div>
     <div id="app"></div>
 
-    <script src="assets/scalar.standalone.js?v=1.62.9-ehealth-custom.9e0e2368"></script>
+    <script src="assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>
     <script>
       // Document switcher entries, in display order. title -> left-panel label.
       const SOURCES = [
-        { slug: 'medical-events',      title: 'Medical Events',                 url: 'specs/medical-events.yaml' },
-        { slug: 'general-mis',         title: 'General MIS',                    url: 'specs/general-mis.yaml' },
-        { slug: 'ehealth-pis',         title: 'eHealth PIS',                    url: 'specs/ehealth-pis.yaml' },
-        { slug: 'ehealth-trusted-pis', title: 'eHealth Trusted PIS',            url: 'specs/ehealth-trusted-pis.yaml' },
+        { slug: 'medical-events',      title: 'Medical Events',                 url: 'scalar-docs/medical-events.json' },
+        { slug: 'general-mis',         title: 'General MIS',                    url: 'scalar-docs/general-mis.json' },
+        { slug: 'ehealth-pis',         title: 'eHealth PIS',                    url: 'scalar-docs/ehealth-pis.json' },
+        { slug: 'ehealth-trusted-pis', title: 'eHealth Trusted PIS',            url: 'scalar-docs/ehealth-trusted-pis.json' },
       ];
 
       const sources = SOURCES.map((s, i) => ({ ...s, default: i === 0 }));
