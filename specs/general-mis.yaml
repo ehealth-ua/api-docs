@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: GENERAL MIS API — STAGE
-  version: "9.15.6"
-  description: '**Version: 9.15.6**
+  version: "9.15.8"
+  description: '**Version: 9.15.8**
 
 
     Environment: **STAGE**
@@ -16866,13 +16866,8 @@ paths:
                         example: "forbidden"
                         type: string
                         description: Atom that represents error type.
-                      message:
-                        example: "Active declaration belongs to another msp"
-                        type: string
-                        description: Human-readable error message. This is for developers, not end-users.
                     required:
                       - type
-                      - message
                     additionalProperties: false
               example:
                 meta:
@@ -16882,7 +16877,6 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 error:
                   type: forbidden
-                  message: Active declaration belongs to another msp
       summary: Get Person Declaration
       operationId: Get Person Declaration
       description: 'This method allows to receive active person declarations issued by current legal entity (based on access_token). It can be used to check if Patient has active declarations in other Legal Entities.
@@ -35417,15 +35411,6 @@ paths:
                               example: true
                               type: boolean
                               description: posibility to create medication request with reference on care plan
-                            employee_types_to_create_medication_request:
-                              type: array
-                              description: posibility to create medication request for particular types of employees
-                              items:
-                                type: string
-                            skip_mnn_in_treatment_period:
-                              example: true
-                              type: boolean
-                              description: posibility to create new medication request with the same mnn in one treatment period
                             skip_employee_validation:
                               example: true
                               type: boolean
@@ -35460,18 +35445,6 @@ paths:
                               description: posibility to create care plan activity for particular terms of service. - `Dictionary PROVIDING_CONDITION`
                               items:
                                 type: string
-                            medication_request_max_period_day:
-                              example: 90
-                              type: number
-                              description: maximum period length (in days) allowed for the Medication request with the medical program
-                            skip_medication_request_employee_declaration_verify:
-                              example: true
-                              type: boolean
-                              description: allows to skip verification if employee has declaration with patient to create medication request
-                            skip_medication_request_legal_entity_declaration_verify:
-                              example: true
-                              type: boolean
-                              description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request
                             multi_medication_dispense_allowed:
                               example: true
                               type: boolean
@@ -35480,18 +35453,10 @@ paths:
                               example: true
                               type: boolean
                               description: check if process medication dispense should be invoked using digital sign
-                            medication_request_notification_disabled:
-                              example: true
-                              type: boolean
-                              description: check if patient should not be notified via SMS on operations with medication request (create/reject/resend)
                             skip_contract_provision_verify:
                               example: true
                               type: boolean
                               description: check if validations of Contract and Medical Program Provisions should be invoked for the medical program
-                            medication_dispense_period_day:
-                              example: 90
-                              type: number
-                              description: medication dispense period (in days)
                             medical_program_change_on_dispense_allowed:
                               example: true
                               type: boolean
@@ -35519,18 +35484,39 @@ paths:
                               example: true
                               type: boolean
                               description: Check if validation of DLS license should be invoked for the medical program
-                          required:
-                            - care_plan_required
-                            - employee_types_to_create_medication_request
-                            - skip_mnn_in_treatment_period
-                            - skip_employee_validation
-                            - skip_medication_request_employee_declaration_verify
-                            - skip_medication_request_legal_entity_declaration_verify
-                            - multi_medication_dispense_allowed
-                            - skip_medication_dispense_sign
-                            - medication_request_notification_disabled
-                            - skip_contract_provision_verify
-                            - medical_program_change_on_dispense_allowed
+                            employee_types_to_create_request:
+                              type: array
+                              description: posibility to create medication request or device request for particular types of employees
+                              items:
+                                type: string
+                            skip_treatment_period:
+                              example: true
+                              type: boolean
+                              description: posibility to create new medication request with the same mnn or device request with the same code in one treatment period
+                            request_max_period_day:
+                              example: 90
+                              type: number
+                              description: maximum period length (in days) allowed for the Medication request or Device request with the medical program
+                            skip_request_employee_declaration_verify:
+                              example: true
+                              type: boolean
+                              description: allows to skip verification if employee has declaration with patient to create medication request or device request
+                            skip_request_legal_entity_declaration_verify:
+                              example: true
+                              type: boolean
+                              description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request or device request
+                            dispense_period_day:
+                              example: 90
+                              type: number
+                              description: period of medication dispense or device dispense (in days)
+                            request_allowed:
+                              example: true
+                              type: boolean
+                              description: Creation of device request or medication request allowed for the medical program
+                            dispense_allowed:
+                              example: true
+                              type: boolean
+                              description: Creation of device dispense or medication dispense allowed for the medical program
                           description: some conditions for using program
                         medical_program_settings_text:
                           example: "Some text"
@@ -35540,22 +35526,6 @@ paths:
                           example: true
                           type: boolean
                           description: Is medical program active or not. True - Active; False - Inactive
-                        medication_dispense_allowed:
-                          example: true
-                          type: boolean
-                          description: posibility to create medication dispense with program
-                        medication_dispense_allowed_text:
-                          example: "Some text"
-                          type: string
-                          description: justification of the possibility or impossibility of using the program on medication dispense
-                        medication_request_allowed:
-                          example: true
-                          type: boolean
-                          description: posibility to create medication request with program
-                        medication_request_allowed_text:
-                          example: "Some text"
-                          type: string
-                          description: justification of the possibility or impossibility of using the program on medication request
                         type:
                           example: "MEDICATION"
                           type: string
@@ -35624,10 +35594,13 @@ paths:
                     name: Доступні ліки
                     medical_program_settings:
                       care_plan_required: true
-                      employee_types_to_create_medication_request:
-                        - SPECIALIST
-                        - DOCTOR
-                      skip_mnn_in_treatment_period: true
+                      dispense_period_day: 90
+                      request_max_period_day: 90
+                      skip_request_employee_declaration_verify: true
+                      skip_request_legal_entity_declaration_verify: true
+                      skip_treatment_period: true
+                      request_allowed: true
+                      dispense_allowed: true
                       skip_employee_validation: true
                       speciality_types_allowed:
                         - ENDOCRINOLOGY
@@ -35647,14 +35620,9 @@ paths:
                       providing_conditions_allowed:
                         - INPATIENT
                         - OUTPATIENT
-                      medication_request_max_period_day: 90
-                      skip_medication_request_employee_declaration_verify: true
-                      skip_medication_request_legal_entity_declaration_verify: true
                       multi_medication_dispense_allowed: true
                       skip_medication_dispense_sign: true
-                      medication_request_notification_disabled: true
                       skip_contract_provision_verify: true
-                      medication_dispense_period_day: 90
                       medical_program_change_on_dispense_allowed: true
                       patient_categories_allowed:
                         - insulin_1
@@ -35669,10 +35637,6 @@ paths:
                       skip_dispense_division_dls_verify: true
                     medical_program_settings_text: Some text
                     is_active: true
-                    medication_dispense_allowed: true
-                    medication_dispense_allowed_text: Some text
-                    medication_request_allowed: true
-                    medication_request_allowed_text: Some text
                     type: MEDICATION
                     funding_source: NHS
                     mr_blank_type: F-1
@@ -35798,15 +35762,6 @@ paths:
                             example: true
                             type: boolean
                             description: posibility to create medication request with reference on care plan
-                          employee_types_to_create_medication_request:
-                            type: array
-                            description: posibility to create medication request for particular types of employees
-                            items:
-                              type: string
-                          skip_mnn_in_treatment_period:
-                            example: true
-                            type: boolean
-                            description: posibility to create new medication request with the same mnn in one treatment period
                           skip_employee_validation:
                             example: true
                             type: boolean
@@ -35841,18 +35796,6 @@ paths:
                             description: posibility to create care plan activity for particular terms of service. - `Dictionary PROVIDING_CONDITION`
                             items:
                               type: string
-                          medication_request_max_period_day:
-                            example: 90
-                            type: number
-                            description: maximum period length (in days) allowed for the Medication request with the medical program
-                          skip_medication_request_employee_declaration_verify:
-                            example: true
-                            type: boolean
-                            description: allows to skip verification if employee has declaration with patient to create medication request
-                          skip_medication_request_legal_entity_declaration_verify:
-                            example: true
-                            type: boolean
-                            description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request
                           multi_medication_dispense_allowed:
                             example: true
                             type: boolean
@@ -35861,18 +35804,10 @@ paths:
                             example: true
                             type: boolean
                             description: check if process medication dispense should be invoked using digital sign
-                          medication_request_notification_disabled:
-                            example: true
-                            type: boolean
-                            description: check if patient should not be notified via SMS on operations with medication request (create/reject/resend)
                           skip_contract_provision_verify:
                             example: true
                             type: boolean
                             description: check if validations of Contract and Medical Program Provisions should be invoked for the medical program
-                          medication_dispense_period_day:
-                            example: 90
-                            type: number
-                            description: medication dispense period (in days)
                           medical_program_change_on_dispense_allowed:
                             example: true
                             type: boolean
@@ -35900,18 +35835,39 @@ paths:
                             example: true
                             type: boolean
                             description: Check if validation of DLS license should be invoked for the medical program
-                        required:
-                          - care_plan_required
-                          - employee_types_to_create_medication_request
-                          - skip_mnn_in_treatment_period
-                          - skip_employee_validation
-                          - skip_medication_request_employee_declaration_verify
-                          - skip_medication_request_legal_entity_declaration_verify
-                          - multi_medication_dispense_allowed
-                          - skip_medication_dispense_sign
-                          - medication_request_notification_disabled
-                          - skip_contract_provision_verify
-                          - medical_program_change_on_dispense_allowed
+                          employee_types_to_create_request:
+                            type: array
+                            description: posibility to create medication request or device request for particular types of employees
+                            items:
+                              type: string
+                          skip_treatment_period:
+                            example: true
+                            type: boolean
+                            description: posibility to create new medication request with the same mnn or device request with the same code in one treatment period
+                          request_max_period_day:
+                            example: 90
+                            type: number
+                            description: maximum period length (in days) allowed for the Medication request or Device request with the medical program
+                          skip_request_employee_declaration_verify:
+                            example: true
+                            type: boolean
+                            description: allows to skip verification if employee has declaration with patient to create medication request or device request
+                          skip_request_legal_entity_declaration_verify:
+                            example: true
+                            type: boolean
+                            description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request or device request
+                          dispense_period_day:
+                            example: 90
+                            type: number
+                            description: period of medication dispense or device dispense (in days)
+                          request_allowed:
+                            example: true
+                            type: boolean
+                            description: Creation of device request or medication request allowed for the medical program
+                          dispense_allowed:
+                            example: true
+                            type: boolean
+                            description: Creation of device dispense or medication dispense allowed for the medical program
                         description: some conditions for using program
                       medical_program_settings_text:
                         example: "Some text"
@@ -35921,22 +35877,6 @@ paths:
                         example: true
                         type: boolean
                         description: Is medical program active or not. True - Active; False - Inactive
-                      medication_dispense_allowed:
-                        example: true
-                        type: boolean
-                        description: posibility to create medication dispense with program
-                      medication_dispense_allowed_text:
-                        example: "Some text"
-                        type: string
-                        description: justification of the possibility or impossibility of using the program on medication dispense
-                      medication_request_allowed:
-                        example: true
-                        type: boolean
-                        description: posibility to create medication request with program
-                      medication_request_allowed_text:
-                        example: "Some text"
-                        type: string
-                        description: justification of the possibility or impossibility of using the program on medication request
                       type:
                         example: "MEDICATION"
                         type: string
@@ -35981,10 +35921,13 @@ paths:
                   name: Доступні ліки
                   medical_program_settings:
                     care_plan_required: true
-                    employee_types_to_create_medication_request:
-                      - SPECIALIST
-                      - DOCTOR
-                    skip_mnn_in_treatment_period: true
+                    dispense_period_day: 90
+                    request_max_period_day: 90
+                    skip_request_employee_declaration_verify: true
+                    skip_request_legal_entity_declaration_verify: true
+                    skip_treatment_period: true
+                    request_allowed: true
+                    dispense_allowed: true
                     skip_employee_validation: true
                     speciality_types_allowed:
                       - ENDOCRINOLOGY
@@ -36004,14 +35947,9 @@ paths:
                     providing_conditions_allowed:
                       - INPATIENT
                       - OUTPATIENT
-                    medication_request_max_period_day: 90
-                    skip_medication_request_employee_declaration_verify: true
-                    skip_medication_request_legal_entity_declaration_verify: true
                     multi_medication_dispense_allowed: true
                     skip_medication_dispense_sign: true
-                    medication_request_notification_disabled: true
                     skip_contract_provision_verify: true
-                    medication_dispense_period_day: 90
                     medical_program_change_on_dispense_allowed: true
                     patient_categories_allowed:
                       - insulin_1
@@ -36026,10 +35964,6 @@ paths:
                     skip_dispense_division_dls_verify: true
                   medical_program_settings_text: Some text
                   is_active: true
-                  medication_dispense_allowed: true
-                  medication_dispense_allowed_text: Some text
-                  medication_request_allowed: true
-                  medication_request_allowed_text: Some text
                   type: MEDICATION
                   funding_source: NHS
                   mr_blank_type: F-1
@@ -38203,22 +38137,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -39151,22 +39069,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -39873,22 +39775,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -40610,22 +40496,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -41326,22 +41196,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -42003,22 +41857,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -42803,22 +42641,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -48062,22 +47884,6 @@ paths:
                                   example: true
                                   type: boolean
                                   description: Is medical program active or not. True - Active; False - Inactive
-                                medication_dispense_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication dispense with program
-                                medication_dispense_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication dispense
-                                medication_request_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication request with program
-                                medication_request_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication request
                                 type:
                                   example: "MEDICATION"
                                   type: string
@@ -48398,22 +48204,6 @@ paths:
                               example: true
                               type: boolean
                               description: Is medical program active or not. True - Active; False - Inactive
-                            medication_dispense_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication dispense with program
-                            medication_dispense_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication dispense
-                            medication_request_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication request with program
-                            medication_request_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication request
                             type:
                               example: "MEDICATION"
                               type: string
@@ -53094,22 +52884,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -53515,22 +53289,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -54104,22 +53862,6 @@ paths:
                                   example: true
                                   type: boolean
                                   description: Is medical program active or not. True - Active; False - Inactive
-                                medication_dispense_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication dispense with program
-                                medication_dispense_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication dispense
-                                medication_request_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication request with program
-                                medication_request_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication request
                                 type:
                                   example: "MEDICATION"
                                   type: string
@@ -54525,22 +54267,6 @@ paths:
                               example: true
                               type: boolean
                               description: Is medical program active or not. True - Active; False - Inactive
-                            medication_dispense_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication dispense with program
-                            medication_dispense_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication dispense
-                            medication_request_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication request with program
-                            medication_request_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication request
                             type:
                               example: "MEDICATION"
                               type: string
@@ -55032,22 +54758,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -55453,22 +55163,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -55921,22 +55615,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -56342,22 +56020,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -56750,22 +56412,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -57171,22 +56817,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -57833,22 +57463,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -58169,22 +57783,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -58443,22 +58041,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -58864,22 +58446,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -66961,22 +66527,6 @@ paths:
                                   example: true
                                   type: boolean
                                   description: Is medical program active or not. True - Active; False - Inactive
-                                medication_dispense_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication dispense with program
-                                medication_dispense_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication dispense
-                                medication_request_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication request with program
-                                medication_request_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication request
                                 type:
                                   example: "MEDICATION"
                                   type: string
@@ -67397,22 +66947,6 @@ paths:
                               example: true
                               type: boolean
                               description: Is medical program active or not. True - Active; False - Inactive
-                            medication_dispense_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication dispense with program
-                            medication_dispense_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication dispense
-                            medication_request_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication request with program
-                            medication_request_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication request
                             type:
                               example: "MEDICATION"
                               type: string
@@ -68123,22 +67657,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -68559,22 +68077,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -79464,10 +78966,13 @@ paths:
                       name: Доступні ліки
                       medical_program_settings:
                         care_plan_required: true
-                        employee_types_to_create_medication_request:
-                          - SPECIALIST
-                          - DOCTOR
-                        skip_mnn_in_treatment_period: true
+                        dispense_period_day: 90
+                        request_max_period_day: 90
+                        skip_request_employee_declaration_verify: true
+                        skip_request_legal_entity_declaration_verify: true
+                        skip_treatment_period: true
+                        request_allowed: true
+                        dispense_allowed: true
                         skip_employee_validation: true
                         speciality_types_allowed:
                           - ENDOCRINOLOGY
@@ -79487,14 +78992,9 @@ paths:
                         providing_conditions_allowed:
                           - INPATIENT
                           - OUTPATIENT
-                        medication_request_max_period_day: 90
-                        skip_medication_request_employee_declaration_verify: true
-                        skip_medication_request_legal_entity_declaration_verify: true
                         multi_medication_dispense_allowed: true
                         skip_medication_dispense_sign: true
-                        medication_request_notification_disabled: true
                         skip_contract_provision_verify: true
-                        medication_dispense_period_day: 90
                         medical_program_change_on_dispense_allowed: true
                         patient_categories_allowed:
                           - insulin_1
@@ -79509,10 +79009,6 @@ paths:
                         skip_dispense_division_dls_verify: true
                       medical_program_settings_text: Some text
                       is_active: true
-                      medication_dispense_allowed: true
-                      medication_dispense_allowed_text: Some text
-                      medication_request_allowed: true
-                      medication_request_allowed_text: Some text
                       type: MEDICATION
                       funding_source: NHS
                       mr_blank_type: F-1
@@ -89293,22 +88789,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -90791,22 +90271,6 @@ paths:
                                   example: true
                                   type: boolean
                                   description: Is medical program active or not. True - Active; False - Inactive
-                                medication_dispense_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication dispense with program
-                                medication_dispense_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication dispense
-                                medication_request_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication request with program
-                                medication_request_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication request
                                 type:
                                   example: "MEDICATION"
                                   type: string
@@ -91227,22 +90691,6 @@ paths:
                               example: true
                               type: boolean
                               description: Is medical program active or not. True - Active; False - Inactive
-                            medication_dispense_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication dispense with program
-                            medication_dispense_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication dispense
-                            medication_request_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication request with program
-                            medication_request_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication request
                             type:
                               example: "MEDICATION"
                               type: string
@@ -91929,22 +91377,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -92365,22 +91797,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -93030,22 +92446,6 @@ paths:
                                   example: true
                                   type: boolean
                                   description: Is medical program active or not. True - Active; False - Inactive
-                                medication_dispense_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication dispense with program
-                                medication_dispense_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication dispense
-                                medication_request_allowed:
-                                  example: true
-                                  type: boolean
-                                  description: posibility to create medication request with program
-                                medication_request_allowed_text:
-                                  example: "Some text"
-                                  type: string
-                                  description: justification of the possibility or impossibility of using the program on medication request
                                 type:
                                   example: "MEDICATION"
                                   type: string
@@ -93466,22 +92866,6 @@ paths:
                               example: true
                               type: boolean
                               description: Is medical program active or not. True - Active; False - Inactive
-                            medication_dispense_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication dispense with program
-                            medication_dispense_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication dispense
-                            medication_request_allowed:
-                              example: true
-                              type: boolean
-                              description: posibility to create medication request with program
-                            medication_request_allowed_text:
-                              example: "Some text"
-                              type: string
-                              description: justification of the possibility or impossibility of using the program on medication request
                             type:
                               example: "MEDICATION"
                               type: string
@@ -94207,22 +93591,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -94643,22 +94011,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -95469,22 +94821,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -95905,22 +95241,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -96545,22 +95865,6 @@ paths:
                                 example: true
                                 type: boolean
                                 description: Is medical program active or not. True - Active; False - Inactive
-                              medication_dispense_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication dispense with program
-                              medication_dispense_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication dispense
-                              medication_request_allowed:
-                                example: true
-                                type: boolean
-                                description: posibility to create medication request with program
-                              medication_request_allowed_text:
-                                example: "Some text"
-                                type: string
-                                description: justification of the possibility or impossibility of using the program on medication request
                               type:
                                 example: "MEDICATION"
                                 type: string
@@ -96981,22 +96285,6 @@ paths:
                             example: true
                             type: boolean
                             description: Is medical program active or not. True - Active; False - Inactive
-                          medication_dispense_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication dispense with program
-                          medication_dispense_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication dispense
-                          medication_request_allowed:
-                            example: true
-                            type: boolean
-                            description: posibility to create medication request with program
-                          medication_request_allowed_text:
-                            example: "Some text"
-                            type: string
-                            description: justification of the possibility or impossibility of using the program on medication request
                           type:
                             example: "MEDICATION"
                             type: string
@@ -101337,6 +100625,577 @@ paths:
                   description: Dictionary `care_team_participant_status_reasons`
               required:
                 - status
+  /api/v2/declarations:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                          type: string
+                          description: id of the signed document stored on the Media content storage
+                        declaration_number:
+                          example: 0000-12H4-245D
+                          type: string
+                          description: unique number of declaration.
+                        employee_id:
+                          example: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                          type: string
+                          description: Unique doctor identifier.
+                        division_id:
+                          example: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                          type: string
+                          description: '`Division identifier`'
+                        start_date:
+                          example: '2017-03-02'
+                          type: string
+                        end_date:
+                          example: '2017-03-02'
+                          type: string
+                        status:
+                          example: active
+                          type: string
+                          enum:
+                            - active
+                            - closed
+                            - terminated
+                        reason:
+                          example: manual_employee
+                          type: string
+                        reason_description:
+                          example: Згідно постанови 1 від 10.01.20171111
+                          type: string
+                        person_id:
+                          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                          type: string
+                          description: person_id of a patient.
+                        legal_entity_id:
+                          example: a89f6a26-4221-4597-a1d2-542d5e40b565
+                          type: string
+                          description: '`Legal entity identifier`'
+                        declaration_request_id:
+                          example: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                          type: string
+                        inserted_at:
+                          example: '2017-04-20T19:14:13Z'
+                          type: string
+                          description: ISO 8601 date and time in UTC timezone.
+                        updated_at:
+                          example: '2017-04-20T19:14:13Z'
+                          type: string
+                          description: ISO 8601 date and time in UTC timezone.
+                      required:
+                        - id
+                        - declaration_number
+                        - division_id
+                        - start_date
+                        - end_date
+                        - person_id
+                        - declaration_request_id
+                        - inserted_at
+                        - updated_at
+                  paging:
+                    type: object
+                    properties:
+                      page_number:
+                        example: 2
+                        type: number
+                        description: Page number.
+                      page_size:
+                        example: 50
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+                      total_entries:
+                        example: 1000
+                        type: number
+                        description: Total number of objects in collection.
+                      total_pages:
+                        example: 23
+                        type: number
+                        description: Total number of pages.
+                    required:
+                      - page_number
+                      - page_size
+                      - total_entries
+                      - total_pages
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  - id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    declaration_number: 0000-12H4-245D
+                    employee_id: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                    division_id: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                    start_date: '2017-03-02'
+                    end_date: '2017-03-02'
+                    status: active
+                    reason: manual_employee
+                    reason_description: Згідно постанови 1 від 10.01.20171111
+                    person_id: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                    legal_entity_id: a89f6a26-4221-4597-a1d2-542d5e40b565
+                    declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                    inserted_at: '2017-04-20T19:14:13Z'
+                    updated_at: '2017-04-20T19:14:13Z'
+                paging:
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
+      summary: Get Declarations List V2
+      operationId: Get Declarations List V2
+      description: "Use this method to obtain list of Declarations for an `empolee_id` and legal_entity_id. If you want to reduce amount of data that is going trough your application, use `status` filter and show only requests that Doctor is interested in current UI section.\n\n**Scopes required:** `declaration:read`\n\nMethod returns shortened details, to obtain full information - get Declaration Details by it's ID."
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: employee_id
+          in: query
+          description: '`user_id` of a Doctor.'
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: legal_entity_id
+          in: query
+          description: MSP ID.
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: declaration_number
+          in: query
+          description: unique human redable number of declaration.
+          example: 0000-12H4-245D
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: ''
+          example: active
+          schema:
+            type: string
+            default: active
+        - name: reason
+          in: query
+          description: filter declaration by reason
+          example: offline
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number.
+          example: '2'
+          schema:
+            type: number
+        - name: page_size
+          in: query
+          description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+          example: '50'
+          schema:
+            type: number
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/v2/declarations/{id}:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        type: string
+                      declaration_number:
+                        example: 0000-12H4-245D
+                        type: string
+                        description: unique number of declaration.
+                      start_date:
+                        example: '2017-03-02'
+                        type: string
+                      end_date:
+                        example: '2017-03-02'
+                        type: string
+                      signed_at:
+                        example: '2017-03-02T00:00:00.000Z'
+                        type: string
+                      person_id:
+                        example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                        type: string
+                        description: person_id of a patient.
+                      employee_id:
+                        example: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                        type: string
+                        description: Unique doctor identifier.
+                      division_id:
+                        example: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                        type: string
+                        description: '`Division identifier`'
+                      legal_entity_id:
+                        example: a89f6a26-4221-4597-a1d2-542d5e40b565
+                        type: string
+                        description: Legal entity ID
+                      status:
+                        example: active
+                        type: string
+                        enum:
+                          - active
+                          - pending_verification
+                          - terminated
+                      scope:
+                        example: family_doctor
+                        type: string
+                        enum:
+                          - family_doctor
+                      declaration_request_id:
+                        example: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                        type: string
+                      inserted_at:
+                        example: '2017-03-02T10:45:16.000Z'
+                        type: string
+                      updated_at:
+                        example: '2017-03-02T10:45:16.000Z'
+                        type: string
+                      reason:
+                        example: manual_employee
+                        type: string
+                      reason_description:
+                        example: Згідно постанови 1 від 10.01.2017
+                        type: string
+                      content:
+                        example: Declaration content
+                        type: string
+                        description: HTML document that MUST be shown to a end-user and signed by hes key. - Should be defined on the client side.
+                    required:
+                      - id
+                      - declaration_number
+                      - start_date
+                      - end_date
+                      - signed_at
+                      - person_id
+                      - division_id
+                      - status
+                      - declaration_request_id
+                      - content
+                    additionalProperties: false
+                  urgent:
+                    type: object
+                    properties:
+                      authentication_method_current:
+                        type: object
+                        properties:
+                          type:
+                            example: OTP
+                            type: string
+                            enum:
+                              - OTP
+                              - OFFLINE
+                              - NA
+                            description: '`Dictionary PHONE_TYPE` type of phone Land Line or Mobile. At least one of type must be present. Each type can be represented only once.'
+                          number:
+                            example: +38093*****85
+                            type: string
+                            description: phone number
+                        required:
+                          - type
+                          - number
+                    required:
+                      - authentication_method_current
+                required:
+                  - urgent
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  declaration_number: 0000-12H4-245D
+                  start_date: '2017-03-02'
+                  end_date: '2017-03-02'
+                  signed_at: '2017-03-02T00:00:00.000Z'
+                  person_id: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                  employee_id: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                  division_id: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                  legal_entity_id: a89f6a26-4221-4597-a1d2-542d5e40b565
+                  status: active
+                  scope: family_doctor
+                  declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                  inserted_at: '2017-03-02T10:45:16.000Z'
+                  updated_at: '2017-03-02T10:45:16.000Z'
+                  reason: manual_employee
+                  reason_description: Згідно постанови 1 від 10.01.2017
+                  content: Declaration content
+                urgent:
+                  authentication_method_current:
+                    type: OTP
+                    number: +38093*****85
+      summary: Get Declaration by ID V2
+      operationId: Get Declaration by ID V2
+      description: "This method allows to receive detailed information about person Declaration by declaration ID.\n\n**Scopes required:** `declaration:read`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: request identifier
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/v2/persons/{id}/declaration:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                          type: string
+                        declaration_number:
+                          example: 0000-12H4-245D
+                          type: string
+                          description: unique number of declaration.
+                        start_date:
+                          example: '2017-03-02'
+                          type: string
+                        end_date:
+                          example: '2017-03-02'
+                          type: string
+                        signed_at:
+                          example: '2017-03-02T00:00:00.000Z'
+                          type: string
+                        person_id:
+                          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                          type: string
+                          description: person_id of a patient.
+                        employee_id:
+                          example: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                          type: string
+                          description: Unique doctor identifier.
+                        division_id:
+                          example: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                          type: string
+                          description: '`Division identifier`'
+                        legal_entity_id:
+                          example: a89f6a26-4221-4597-a1d2-542d5e40b565
+                          type: string
+                          description: Legal entity ID
+                        status:
+                          example: active
+                          type: string
+                          enum:
+                            - active
+                            - pending_verification
+                            - terminated
+                        scope:
+                          example: family_doctor
+                          type: string
+                          enum:
+                            - family_doctor
+                        declaration_request_id:
+                          example: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                          type: string
+                        inserted_at:
+                          example: '2017-03-02T10:45:16.000Z'
+                          type: string
+                        updated_at:
+                          example: '2017-03-02T10:45:16.000Z'
+                          type: string
+                        reason:
+                          example: manual_employee
+                          type: string
+                        reason_description:
+                          example: Згідно постанови 1 від 10.01.2017
+                          type: string
+                      required:
+                        - id
+                        - declaration_number
+                        - start_date
+                        - end_date
+                        - signed_at
+                        - person_id
+                        - division_id
+                        - status
+                        - declaration_request_id
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        example: 20
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            example: 56c31536a60ad644060041af
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            example: 56c31536a60ad644060041aa
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        example: 50
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        example: false
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  - id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    declaration_number: 0000-12H4-245D
+                    start_date: '2017-03-02'
+                    end_date: '2017-03-02'
+                    signed_at: '2017-03-02T00:00:00.000Z'
+                    person_id: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+                    employee_id: 7124259c-eeb1-4cbb-acac-ada2162675d1
+                    division_id: 2848a935-5fd7-48ba-b235-a9b5d475c647
+                    legal_entity_id: a89f6a26-4221-4597-a1d2-542d5e40b565
+                    status: active
+                    scope: family_doctor
+                    declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+                    inserted_at: '2017-03-02T10:45:16.000Z'
+                    updated_at: '2017-03-02T10:45:16.000Z'
+                    reason: manual_employee
+                    reason_description: Згідно постанови 1 від 10.01.2017
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 50
+                  has_more: false
+        '403':
+          description: Forbidden
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        example: forbidden
+                        type: string
+                        description: Atom that represents error type.
+                    required:
+                      - type
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 403
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                error:
+                  type: forbidden
+      summary: Get Person Declaration V2
+      operationId: Get Person Declaration V2
+      description: "This method allows to receive active person declarations issued by current legal entity (based on access_token). It can be used to check if Patient has active declarations in other Legal Entities.\n\nIt returns:\n1. Short declaration info if **active declaration found** AND issued by legal entity that is available for `access_token` scope.\n2. 404 error if **active declaration not found**.\n3. 403 if **active declaration found** issued by **other** (not available by access scopes) legal entity.\n\n**Scopes required:** `declaration:read`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
 components:
   schemas:
     Responses:
@@ -113872,10 +113731,6 @@ components:
             - medical_program_settings
             - medical_program_settings_text
             - is_active
-            - medication_dispense_allowed
-            - medication_dispense_allowed_text
-            - medication_request_allowed
-            - medication_request_allowed_text
             - type
             - funding_source
             - mr_blank_type
@@ -113895,18 +113750,6 @@ components:
             is_active:
               type: boolean
               description: Is medical program active or not. True - Active; False - Inactive
-            medication_dispense_allowed:
-              type: boolean
-              description: posibility to create medication dispense with program
-            medication_dispense_allowed_text:
-              type: string
-              description: justification of the possibility or impossibility of using the program on medication dispense
-            medication_request_allowed:
-              type: boolean
-              description: posibility to create medication request with program
-            medication_request_allowed_text:
-              type: string
-              description: justification of the possibility or impossibility of using the program on medication request
             type:
               type: string
               description: '`Dictionary MEDICAL_PROGRAM_TYPE`'
@@ -115452,18 +115295,6 @@ components:
         is_active:
           type: boolean
           description: Is medical program active or not. True - Active; False - Inactive
-        medication_dispense_allowed:
-          type: boolean
-          description: posibility to create medication dispense with program
-        medication_dispense_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication dispense
-        medication_request_allowed:
-          type: boolean
-          description: posibility to create medication request with program
-        medication_request_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication request
         type:
           type: string
           description: '`Dictionary MEDICAL_PROGRAM_TYPE`'
@@ -115503,22 +115334,6 @@ components:
           type: boolean
           description: Is medical program active or not. True - Active; False - Inactive
           example: true
-        medication_dispense_allowed:
-          type: boolean
-          description: posibility to create medication dispense with program
-          example: true
-        medication_dispense_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication dispense
-          example: Some text
-        medication_request_allowed:
-          type: boolean
-          description: posibility to create medication request with program
-          example: true
-        medication_request_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication request
-          example: Some text
         type:
           type: string
           description: '`Dictionary MEDICAL_PROGRAM_TYPE`'
@@ -118822,18 +118637,6 @@ components:
         is_active:
           type: boolean
           description: Is medical program active or not. True - Active; False - Inactive
-        medication_dispense_allowed:
-          type: boolean
-          description: posibility to create medication dispense with program
-        medication_dispense_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication dispense
-        medication_request_allowed:
-          type: boolean
-          description: posibility to create medication request with program
-        medication_request_allowed_text:
-          type: string
-          description: justification of the possibility or impossibility of using the program on medication request
         type:
           type: string
           description: '`Dictionary MEDICAL_PROGRAM_TYPE`'
@@ -118855,30 +118658,10 @@ components:
           type: string
     Medical_program_settings:
       type: object
-      required:
-        - care_plan_required
-        - employee_types_to_create_medication_request
-        - skip_mnn_in_treatment_period
-        - skip_employee_validation
-        - skip_medication_request_employee_declaration_verify
-        - skip_medication_request_legal_entity_declaration_verify
-        - multi_medication_dispense_allowed
-        - skip_medication_dispense_sign
-        - medication_request_notification_disabled
-        - skip_contract_provision_verify
-        - medical_program_change_on_dispense_allowed
       properties:
         care_plan_required:
           type: boolean
           description: posibility to create medication request with reference on care plan
-        employee_types_to_create_medication_request:
-          type: array
-          items:
-            type: string
-          description: posibility to create medication request for particular types of employees
-        skip_mnn_in_treatment_period:
-          type: boolean
-          description: posibility to create new medication request with the same mnn in one treatment period
         skip_employee_validation:
           type: boolean
           description: posibility to create medication request by any user who has a scope
@@ -118912,30 +118695,15 @@ components:
           items:
             type: string
           description: posibility to create care plan activity for particular terms of service. - `Dictionary PROVIDING_CONDITION`
-        medication_request_max_period_day:
-          type: number
-          description: maximum period length (in days) allowed for the Medication request with the medical program
-        skip_medication_request_employee_declaration_verify:
-          type: boolean
-          description: allows to skip verification if employee has declaration with patient to create medication request
-        skip_medication_request_legal_entity_declaration_verify:
-          type: boolean
-          description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request
         multi_medication_dispense_allowed:
           type: boolean
           description: check if medication request can be dispensed partially
         skip_medication_dispense_sign:
           type: boolean
           description: check if process medication dispense should be invoked using digital sign
-        medication_request_notification_disabled:
-          type: boolean
-          description: check if patient should not be notified via SMS on operations with medication request (create/reject/resend)
         skip_contract_provision_verify:
           type: boolean
           description: check if validations of Contract and Medical Program Provisions should be invoked for the medical program
-        medication_dispense_period_day:
-          type: number
-          description: medication dispense period (in days)
         medical_program_change_on_dispense_allowed:
           type: boolean
           description: check if medication request can be dispensed with another medical program.
@@ -118960,6 +118728,39 @@ components:
         skip_dispense_division_dls_verify:
           type: boolean
           description: Check if validation of DLS license should be invoked for the medical program
+        employee_types_to_create_request:
+          type: array
+          items:
+            type: string
+          description: posibility to create medication request or device request for particular types of employees
+        skip_treatment_period:
+          type: boolean
+          description: posibility to create new medication request with the same mnn or device request with the same code in one treatment period
+          example: true
+        request_max_period_day:
+          type: number
+          description: maximum period length (in days) allowed for the Medication request or Device request with the medical program
+          example: 90
+        skip_request_employee_declaration_verify:
+          type: boolean
+          description: allows to skip verification if employee has declaration with patient to create medication request or device request
+          example: true
+        skip_request_legal_entity_declaration_verify:
+          type: boolean
+          description: allows to skip verification if employee in legal entity that has declaration with patient to create medication request or device request
+          example: true
+        dispense_period_day:
+          type: number
+          description: period of medication dispense or device dispense (in days)
+          example: 90
+        request_allowed:
+          type: boolean
+          description: Creation of device request or medication request allowed for the medical program
+          example: true
+        dispense_allowed:
+          type: boolean
+          description: Creation of device dispense or medication dispense allowed for the medical program
+          example: true
     medical_programs_list:
       type: object
       required:
@@ -135368,3 +135169,183 @@ components:
             type: array
             items:
               type: string
+    Response___Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Atom that represents error type.
+          example: type_atom
+      example:
+        type: type_atom
+    Declaration_Details_V2:
+      type: object
+      required:
+        - id
+        - declaration_number
+        - start_date
+        - end_date
+        - signed_at
+        - person_id
+        - division_id
+        - status
+        - declaration_request_id
+      properties:
+        id:
+          type: string
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        declaration_number:
+          type: string
+          description: unique number of declaration.
+          example: 0000-12H4-245D
+        start_date:
+          type: string
+          example: '2017-03-02'
+        end_date:
+          type: string
+          example: '2017-03-02'
+        signed_at:
+          type: string
+          example: '2017-03-02T00:00:00.000Z'
+        person_id:
+          type: string
+          description: person_id of a patient.
+          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+        employee_id:
+          type: string
+          description: Unique doctor identifier.
+          example: 7124259c-eeb1-4cbb-acac-ada2162675d1
+        division_id:
+          type: string
+          description: '`Division identifier`'
+          example: 2848a935-5fd7-48ba-b235-a9b5d475c647
+        legal_entity_id:
+          type: string
+          description: Legal entity ID
+          example: a89f6a26-4221-4597-a1d2-542d5e40b565
+        status:
+          type: string
+          enum:
+            - active
+            - pending_verification
+            - terminated
+          example: active
+        scope:
+          type: string
+          enum:
+            - family_doctor
+          example: family_doctor
+        declaration_request_id:
+          type: string
+          example: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+        inserted_at:
+          type: string
+          example: '2017-03-02T10:45:16.000Z'
+        updated_at:
+          type: string
+          example: '2017-03-02T10:45:16.000Z'
+        reason:
+          type: string
+          example: manual_employee
+        reason_description:
+          type: string
+          example: Згідно постанови 1 від 10.01.2017
+      example:
+        id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        declaration_number: 0000-12H4-245D
+        start_date: '2017-03-02'
+        end_date: '2017-03-02'
+        signed_at: '2017-03-02T00:00:00.000Z'
+        person_id: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+        employee_id: 7124259c-eeb1-4cbb-acac-ada2162675d1
+        division_id: 2848a935-5fd7-48ba-b235-a9b5d475c647
+        legal_entity_id: a89f6a26-4221-4597-a1d2-542d5e40b565
+        status: active
+        scope: family_doctor
+        declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+        inserted_at: '2017-03-02T10:45:16.000Z'
+        updated_at: '2017-03-02T10:45:16.000Z'
+        reason: manual_employee
+        reason_description: Згідно постанови 1 від 10.01.2017
+    nhs_declaration_list_Public_V2:
+      type: object
+      required:
+        - id
+        - declaration_number
+        - division_id
+        - start_date
+        - end_date
+        - person_id
+        - declaration_request_id
+        - inserted_at
+        - updated_at
+      properties:
+        id:
+          type: string
+          description: id of the signed document stored on the Media content storage
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        declaration_number:
+          type: string
+          description: unique number of declaration.
+          example: 0000-12H4-245D
+        employee_id:
+          type: string
+          description: Unique doctor identifier.
+          example: 7124259c-eeb1-4cbb-acac-ada2162675d1
+        division_id:
+          type: string
+          description: '`Division identifier`'
+          example: 2848a935-5fd7-48ba-b235-a9b5d475c647
+        start_date:
+          type: string
+          example: '2017-03-02'
+        end_date:
+          type: string
+          example: '2017-03-02'
+        status:
+          type: string
+          enum:
+            - active
+            - closed
+            - terminated
+          example: active
+        reason:
+          type: string
+          example: manual_employee
+        reason_description:
+          type: string
+          example: Згідно постанови 1 від 10.01.20171111
+        person_id:
+          type: string
+          description: person_id of a patient.
+          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+        legal_entity_id:
+          type: string
+          description: '`Legal entity identifier`'
+          example: a89f6a26-4221-4597-a1d2-542d5e40b565
+        declaration_request_id:
+          type: string
+          example: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+        inserted_at:
+          type: string
+          description: ISO 8601 date and time in UTC timezone.
+          example: '2017-04-20T19:14:13Z'
+        updated_at:
+          type: string
+          description: ISO 8601 date and time in UTC timezone.
+          example: '2017-04-20T19:14:13Z'
+      example:
+        id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        declaration_number: 0000-12H4-245D
+        employee_id: 7124259c-eeb1-4cbb-acac-ada2162675d1
+        division_id: 2848a935-5fd7-48ba-b235-a9b5d475c647
+        start_date: '2017-03-02'
+        end_date: '2017-03-02'
+        status: active
+        reason: manual_employee
+        reason_description: Згідно постанови 1 від 10.01.20171111
+        person_id: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+        legal_entity_id: a89f6a26-4221-4597-a1d2-542d5e40b565
+        declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
+        inserted_at: '2017-04-20T19:14:13Z'
+        updated_at: '2017-04-20T19:14:13Z'
