@@ -26933,7 +26933,7 @@ paths:
                         properties:
                           performer:
                             oneOf:
-                            - type: array
+                            - type: object
                               title: reference
                               required:
                               - reference
@@ -26953,20 +26953,20 @@ paths:
                                                 type: object
                                                 properties:
                                                   system:
-                                                    example: "eHealth/resources"
+                                                    example: eHealth/resources
                                                     type: string
                                                   code:
-                                                    example: "employee"
+                                                    example: employee
                                                     type: string
                                                 required:
                                                 - system
                                         value:
-                                          example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                          example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                           type: string
                                       required:
                                       - value
                                     display_value:
-                                      example: "Галина Олександрівна"
+                                      example: Галина Олександрівна
                                       type: string
                                   required:
                                   - display_value
@@ -26978,7 +26978,6 @@ paths:
                                 text:
                                   type: string
                             description: required if primary_source=true
-                            items: {}
                       - type: object
                         title: report_origin
                         required:
@@ -27670,7 +27669,7 @@ paths:
                           properties:
                             performer:
                               oneOf:
-                              - type: array
+                              - type: object
                                 title: reference
                                 required:
                                 - reference
@@ -27690,20 +27689,20 @@ paths:
                                                   type: object
                                                   properties:
                                                     system:
-                                                      example: "eHealth/resources"
+                                                      example: eHealth/resources
                                                       type: string
                                                     code:
-                                                      example: "employee"
+                                                      example: employee
                                                       type: string
                                                   required:
                                                   - system
                                           value:
-                                            example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                            example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                             type: string
                                         required:
                                         - value
                                       display_value:
-                                        example: "Галина Олександрівна"
+                                        example: Галина Олександрівна
                                         type: string
                                     required:
                                     - display_value
@@ -27715,7 +27714,6 @@ paths:
                                   text:
                                     type: string
                               description: required if primary_source=true
-                              items: {}
                         - type: object
                           title: report_origin
                           required:
@@ -28792,7 +28790,7 @@ paths:
                           properties:
                             performer:
                               oneOf:
-                              - type: array
+                              - type: object
                                 title: reference
                                 required:
                                 - reference
@@ -28812,20 +28810,20 @@ paths:
                                                   type: object
                                                   properties:
                                                     system:
-                                                      example: "eHealth/resources"
+                                                      example: eHealth/resources
                                                       type: string
                                                     code:
-                                                      example: "employee"
+                                                      example: employee
                                                       type: string
                                                   required:
                                                   - system
                                           value:
-                                            example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                            example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                             type: string
                                         required:
                                         - value
                                       display_value:
-                                        example: "Галина Олександрівна"
+                                        example: Галина Олександрівна
                                         type: string
                                     required:
                                     - display_value
@@ -28837,7 +28835,6 @@ paths:
                                   text:
                                     type: string
                               description: required if primary_source=true
-                              items: {}
                         - type: object
                           title: report_origin
                           required:
@@ -37101,7 +37098,7 @@ paths:
                         properties:
                           performer:
                             oneOf:
-                            - type: array
+                            - type: object
                               title: reference
                               required:
                               - reference
@@ -37121,20 +37118,20 @@ paths:
                                                 type: object
                                                 properties:
                                                   system:
-                                                    example: "eHealth/resources"
+                                                    example: eHealth/resources
                                                     type: string
                                                   code:
-                                                    example: "employee"
+                                                    example: employee
                                                     type: string
                                                 required:
                                                 - system
                                         value:
-                                          example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                          example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                           type: string
                                       required:
                                       - value
                                     display_value:
-                                      example: "Галина Олександрівна"
+                                      example: Галина Олександрівна
                                       type: string
                                   required:
                                   - display_value
@@ -37146,7 +37143,6 @@ paths:
                                 text:
                                   type: string
                             description: required if primary_source=true
-                            items: {}
                       - type: object
                         title: report_origin
                         required:
@@ -54139,7 +54135,7 @@ paths:
                         properties:
                           performer:
                             oneOf:
-                            - type: array
+                            - type: object
                               title: reference
                               required:
                               - reference
@@ -54159,20 +54155,20 @@ paths:
                                                 type: object
                                                 properties:
                                                   system:
-                                                    example: "eHealth/resources"
+                                                    example: eHealth/resources
                                                     type: string
                                                   code:
-                                                    example: "employee"
+                                                    example: employee
                                                     type: string
                                                 required:
                                                 - system
                                         value:
-                                          example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                          example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                           type: string
                                       required:
                                       - value
                                     display_value:
-                                      example: "Галина Олександрівна"
+                                      example: Галина Олександрівна
                                       type: string
                                   required:
                                   - display_value
@@ -54184,7 +54180,6 @@ paths:
                                 text:
                                   type: string
                             description: required if primary_source=true
-                            items: {}
                       - type: object
                         title: report_origin
                         required:
@@ -54864,7 +54859,7 @@ paths:
                           properties:
                             performer:
                               oneOf:
-                              - type: array
+                              - type: object
                                 title: reference
                                 required:
                                 - reference
@@ -54884,20 +54879,20 @@ paths:
                                                   type: object
                                                   properties:
                                                     system:
-                                                      example: "eHealth/resources"
+                                                      example: eHealth/resources
                                                       type: string
                                                     code:
-                                                      example: "employee"
+                                                      example: employee
                                                       type: string
                                                   required:
                                                   - system
                                           value:
-                                            example: "97d57238-ffbe-4335-92ea-28d4de117ea2"
+                                            example: 97d57238-ffbe-4335-92ea-28d4de117ea2
                                             type: string
                                         required:
                                         - value
                                       display_value:
-                                        example: "Галина Олександрівна"
+                                        example: Галина Олександрівна
                                         type: string
                                     required:
                                     - display_value
@@ -54909,7 +54904,6 @@ paths:
                                   text:
                                     type: string
                               description: required if primary_source=true
-                              items: {}
                         - type: object
                           title: report_origin
                           required:
@@ -110533,7 +110527,8 @@ components:
           description: receipt amount which was paid by patient (UAH)
         signed_content_links:
           type: array
-          items: {}
+          items:
+            type: string
     Device_Dispense_Response:
       type: object
       required:
@@ -113562,7 +113557,24 @@ components:
                                       example: encounter
           categories:
             type: array
-            items: {}
+            items:
+              type: object
+              required:
+              - coding
+              properties:
+                coding:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                        example: eHealth/observation_categories
+                      code:
+                        type: string
+                        example: survey
+                text:
+                  type: string
           code:
             allOf:
             - $ref: '#/components/schemas/Codeable_Concept'
@@ -113705,7 +113717,24 @@ components:
                                       example: encounter
           categories:
             type: array
-            items: {}
+            items:
+              type: object
+              required:
+              - coding
+              properties:
+                coding:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      system:
+                        type: string
+                        example: eHealth/observation_categories
+                      code:
+                        type: string
+                        example: survey
+                text:
+                  type: string
           code:
             allOf:
             - $ref: '#/components/schemas/Codeable_Concept'
@@ -113876,7 +113905,24 @@ components:
                                             example: diagnostic_report
                 categories:
                   type: array
-                  items: {}
+                  items:
+                    type: object
+                    required:
+                    - coding
+                    properties:
+                      coding:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            system:
+                              type: string
+                              example: eHealth/observation_categories
+                            code:
+                              type: string
+                              example: survey
+                      text:
+                        type: string
                 code:
                   allOf:
                   - $ref: '#/components/schemas/Codeable_Concept'
@@ -114225,7 +114271,24 @@ components:
                                             example: diagnostic_report
                 categories:
                   type: array
-                  items: {}
+                  items:
+                    type: object
+                    required:
+                    - coding
+                    properties:
+                      coding:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            system:
+                              type: string
+                              example: eHealth/observation_categories
+                            code:
+                              type: string
+                              example: survey
+                      text:
+                        type: string
                 code:
                   allOf:
                   - $ref: '#/components/schemas/Codeable_Concept'
