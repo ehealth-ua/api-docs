@@ -6705,7 +6705,36 @@ paths:
                           properties:
                             asserter:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                              required:
+                                              - system
+                                          text:
+                                            example: ''
+                                            type: string
+                                      value:
+                                        example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                        type: string
+                                    required:
+                                    - value
                         - type: object
                           title: report_origin
                           required:
@@ -7093,7 +7122,36 @@ paths:
                         properties:
                           asserter:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: ''
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -7809,7 +7867,34 @@ paths:
                           properties:
                             performer:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          text:
+                                            example: Галина Олександрівна
+                                            type: string
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                  display_value:
+                                    example: Шевченко Олесь Вікторович
+                                    type: string
+                                required:
+                                - display_value
                         - type: object
                           title: report_origin
                           required:
@@ -8853,7 +8938,34 @@ paths:
                         properties:
                           performer:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              code:
+                                                example: employee
+                                                type: string
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                display_value:
+                                  example: Шевченко Олесь Вікторович
+                                  type: string
+                              required:
+                              - display_value
                       - type: object
                         title: report_origin
                         required:
@@ -13240,7 +13352,36 @@ paths:
                         properties:
                           asserter:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: ''
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -13594,7 +13735,36 @@ paths:
                           properties:
                             asserter:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                              required:
+                                              - system
+                                          text:
+                                            example: ''
+                                            type: string
+                                      value:
+                                        example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                        type: string
+                                    required:
+                                    - value
                         - type: object
                           title: report_origin
                           required:
@@ -14473,7 +14643,34 @@ paths:
                         properties:
                           performer:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              code:
+                                                example: employee
+                                                type: string
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                display_value:
+                                  example: Шевченко Олесь Вікторович
+                                  type: string
+                              required:
+                              - display_value
                       - type: object
                         title: report_origin
                         required:
@@ -15482,7 +15679,34 @@ paths:
                           properties:
                             performer:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          text:
+                                            example: Галина Олександрівна
+                                            type: string
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                  display_value:
+                                    example: Шевченко Олесь Вікторович
+                                    type: string
+                                required:
+                                - display_value
                         - type: object
                           title: report_origin
                           required:
@@ -29419,7 +29643,36 @@ paths:
                             performer:
                               type: array
                               description: if primary_source=true
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                              required:
+                                              - system
+                                          text:
+                                            example: Галина Олександрівна
+                                            type: string
+                                      value:
+                                        example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                        type: string
+                                    required:
+                                    - value
                         - type: object
                           title: report_origin
                           required:
@@ -30241,7 +30494,36 @@ paths:
                       performer:
                         type: array
                         description: if primary_source=true
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                        required:
+                                        - system
+                                    text:
+                                      example: Галина Олександрівна
+                                      type: string
+                                value:
+                                  example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                  type: string
+                              required:
+                              - value
                   - type: object
                     title: report_origin
                     required:
@@ -39008,7 +39290,36 @@ paths:
                           performer:
                             type: array
                             description: if primary_source=true
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -39527,7 +39838,36 @@ paths:
                         properties:
                           asserter:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: ''
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -40222,7 +40562,34 @@ paths:
                         properties:
                           performer:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              code:
+                                                example: employee
+                                                type: string
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                display_value:
+                                  example: Шевченко Олесь Вікторович
+                                  type: string
+                              required:
+                              - display_value
                       - type: object
                         title: report_origin
                         required:
@@ -44249,7 +44616,40 @@ paths:
                       author:
                         type: array
                         description: '`author of the activity`'
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                              - type
+                              - value
                       care_plan:
                         type: object
                         properties:
@@ -47809,7 +48209,34 @@ paths:
                           properties:
                             performer:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          text:
+                                            example: Галина Олександрівна
+                                            type: string
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                  display_value:
+                                    example: Шевченко Олесь Вікторович
+                                    type: string
+                                required:
+                                - display_value
                         - type: object
                           title: report_origin
                           required:
@@ -48839,7 +49266,34 @@ paths:
                         properties:
                           performer:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              code:
+                                                example: employee
+                                                type: string
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                display_value:
+                                  example: Шевченко Олесь Вікторович
+                                  type: string
+                              required:
+                              - display_value
                       - type: object
                         title: report_origin
                         required:
@@ -49500,7 +49954,36 @@ paths:
                           properties:
                             asserter:
                               type: array
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                              required:
+                                              - system
+                                          text:
+                                            example: ''
+                                            type: string
+                                      value:
+                                        example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                        type: string
+                                    required:
+                                    - value
                         - type: object
                           title: report_origin
                           required:
@@ -49874,7 +50357,36 @@ paths:
                         properties:
                           asserter:
                             type: array
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: ''
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -54909,7 +55421,36 @@ paths:
                           performer:
                             type: array
                             description: if primary_source=true
-                            items: {}
+                            items:
+                              type: object
+                              properties:
+                                identifier:
+                                  type: object
+                                  properties:
+                                    type:
+                                      type: object
+                                      properties:
+                                        coding:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              system:
+                                                example: eHealth/resources
+                                                type: string
+                                              code:
+                                                example: employee
+                                                type: string
+                                            required:
+                                            - system
+                                        text:
+                                          example: Галина Олександрівна
+                                          type: string
+                                    value:
+                                      example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                      type: string
+                                  required:
+                                  - value
                       - type: object
                         title: report_origin
                         required:
@@ -55659,7 +56200,36 @@ paths:
                             performer:
                               type: array
                               description: if primary_source=true
-                              items: {}
+                              items:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: eHealth/resources
+                                                  type: string
+                                                code:
+                                                  example: employee
+                                                  type: string
+                                              required:
+                                              - system
+                                          text:
+                                            example: Галина Олександрівна
+                                            type: string
+                                      value:
+                                        example: 97d57238-ffbe-4335-92ea-28d4de117ea2
+                                        type: string
+                                    required:
+                                    - value
                         - type: object
                           title: report_origin
                           required:
@@ -80574,7 +81144,40 @@ paths:
                     author:
                       type: array
                       description: '`author of the activity`'
-                      items: {}
+                      items:
+                        type: object
+                        properties:
+                          identifier:
+                            type: object
+                            properties:
+                              type:
+                                type: object
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          example: eHealth/resources
+                                          type: string
+                                        code:
+                                          example: employee
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                      - system
+                                      - code
+                                  text:
+                                    type: string
+                                description: Description of identifier
+                              value:
+                                example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                type: string
+                                description: The value that is unique
+                            required:
+                            - type
+                            - value
                     care_plan:
                       type: object
                       properties:
@@ -80974,7 +81577,40 @@ paths:
                       author:
                         type: array
                         description: '`author of the activity`'
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                              - type
+                              - value
                       care_plan:
                         type: object
                         properties:
@@ -81863,7 +82499,40 @@ paths:
                         author:
                           type: array
                           description: '`author of the activity`'
-                          items: {}
+                          items:
+                            type: object
+                            properties:
+                              identifier:
+                                type: object
+                                properties:
+                                  type:
+                                    type: object
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              example: eHealth/resources
+                                              type: string
+                                            code:
+                                              example: employee
+                                              type: string
+                                              description: Symbol in syntax defined by the system
+                                          required:
+                                          - system
+                                          - code
+                                      text:
+                                        type: string
+                                    description: Description of identifier
+                                  value:
+                                    example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                    type: string
+                                    description: The value that is unique
+                                required:
+                                - type
+                                - value
                         care_plan:
                           type: object
                           properties:
@@ -84433,7 +85102,40 @@ paths:
                       author:
                         type: array
                         description: '`author of the activity`'
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                              - type
+                              - value
                       care_plan:
                         type: object
                         properties:
@@ -86912,7 +87614,40 @@ paths:
                       author:
                         type: array
                         description: '`author of the activity`'
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                              - type
+                              - value
                       care_plan:
                         type: object
                         properties:
@@ -87837,7 +88572,40 @@ paths:
                       author:
                         type: array
                         description: '`author of the activity`'
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: employee
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                              - type
+                              - value
                       care_plan:
                         type: object
                         properties:
