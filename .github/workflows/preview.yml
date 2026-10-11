@@ -1,0 +1,52 @@
+# Ефемерний прев'ю-хост на КОЖЕН коміт у PR; авто-видалення на merge/close.
+# Крок деплою/тіардауну (позначено TODO) наповнює DevOps під обраний хост
+# (Cloudflare Pages preview, S3 bucket, nginx vhost, ...).
+name: preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+# Один запуск на PR; новий коміт скасовує попередній прев'ю-білд.
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    # Динамічна назва: env (гілка-ціль PR) + номер PR.
+    name: Preview (${{ github.base_ref }} PR #${{ github.event.number }})
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # per-service deploy time is read from git history
+
+      - name: Assemble static bundle
+        # Сайт уже статичний — артефакт це сам чекаут (index.html + assets + specs).
+        run: |
+          node scripts/scalar_prebuild/prebuild.mjs --check .   # stale JSON = old spec shown
+          mkdir -p _site
+          cp -R index.html assets specs scalar-docs _site/
+          # base branch -> <env>; services changed by this PR get the current time
+          ENV_NAME="${{ github.base_ref }}"; ENV_NAME="${ENV_NAME#env/}"; [ "$ENV_NAME" = main ] && ENV_NAME=prod
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" \
+            | sed -n -E 's#^(base|overlay)/([^/]+)/.*#\2#p' | sort -u | paste -sd, -)
+          build/stamp_deploy_badge.sh _site/index.html "$ENV_NAME" --now "$CHANGED"
+          echo "bundle: $(du -sh _site | cut -f1)"
+
+      # TODO(DevOps): задеплоїти ./_site на ефемерний хост
+      #   ${{ github.event.number }}.docs-<env>.ehealth.gov.ua
+      # (Cloudflare Pages / S3 / nginx vhost). Виставити URL у вивід кроку.
+      - name: Deploy preview
+        run: echo "TODO(DevOps): deploy ./_site to ${{ github.event.number }}.docs-<env>.ehealth.gov.ua"
+
+  teardown-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Teardown preview (PR #${{ github.event.number }})
+    steps:
+      # TODO(DevOps): знести прев'ю-хост цього PR.
+      - name: Teardown
+        run: echo "TODO(DevOps): teardown ${{ github.event.number }}.docs-<env>.ehealth.gov.ua"
