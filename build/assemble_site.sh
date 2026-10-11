@@ -13,7 +13,7 @@
 #
 # It then runs prebuild.mjs --check, which fails when a generated document no
 # longer matches its spec, the Scalar bundle or index.html (needs only Node, no
-# npm install and no browser).
+# npm install and no browser). Set SKIP_PREBUILD_CHECK=1 on machines without Node.
 #
 # Usage: build/assemble_site.sh <env> <out-dir>
 #   <env>  prod | preprod | stage | demo
@@ -54,5 +54,9 @@ done
 [[ -f "dist/$ENV_NAME/manifest.json" ]] || { echo "missing dist/$ENV_NAME/manifest.json" >&2; exit 1; }
 cp "dist/$ENV_NAME/manifest.json" "$OUT/scalar-docs/manifest.json"
 
-node build/scalar_prebuild/prebuild.mjs --check "$OUT"
+if [[ "${SKIP_PREBUILD_CHECK:-}" == "1" ]]; then
+  echo "prebuild check skipped (SKIP_PREBUILD_CHECK=1); CI runs it on every PR"
+else
+  node build/scalar_prebuild/prebuild.mjs --check "$OUT"
+fi
 echo "assembled $ENV_NAME: $count services -> $OUT ($(du -sh "$OUT" | cut -f1))"

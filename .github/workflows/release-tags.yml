@@ -1,0 +1,38 @@
+# Після merge в env/<env> створює git-теги <service>/<env>/<version> для кожного
+# сервісу цього середовища (версія береться з info.version у base/). Ідемпотентно:
+# вже існуючі теги пропускаються, тож зміна лише overlay/ нових тегів не дає.
+name: release-tags
+
+on:
+  push:
+    branches: ["env/prod", "env/preprod", "env/stage", "env/demo"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-tags-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    name: Tag (${{ github.ref_name }})
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Create missing tags
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          env_name="${REF_NAME#env/}"
+          case "$env_name" in
+            prod|preprod|stage|demo) ;;
+            *) echo "unexpected branch" >&2; exit 1 ;;
+          esac
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          build/tag_releases.sh "$env_name" --push
