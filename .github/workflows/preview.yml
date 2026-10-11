@@ -1,52 +1,85 @@
-# Ефемерний прев'ю-хост на КОЖЕН коміт у PR; авто-видалення на merge/close.
-# Крок деплою/тіардауну (позначено TODO) наповнює DevOps під обраний хост
-# (Cloudflare Pages preview, S3 bucket, nginx vhost, ...).
+# Прев'ю на кожен коміт у PR в гілку середовища (env/prod|preprod|stage|demo).
+# Хост прев'ю: <PR-number>.docs-<env>.ehealth.gov.ua (prod: <PR-number>.docs.ehealth.gov.ua).
+# Збірка працює вже зараз і лишає сайт як artifact; крок публікації на хост
+# позначено TODO і чекає на сервер.
 name: preview
 
 on:
   pull_request:
+    branches: ["env/**"]
     types: [opened, synchronize, reopened, closed]
 
-# Один запуск на PR; новий коміт скасовує попередній прев'ю-білд.
+permissions:
+  contents: read
+
+# Один запуск на PR; новий коміт скасовує попередній.
 concurrency:
   group: preview-${{ github.event.number }}
   cancel-in-progress: true
 
 jobs:
-  deploy-preview:
+  build-preview:
     if: github.event.action != 'closed'
-    runs-on: ubuntu-latest
-    # Динамічна назва: env (гілка-ціль PR) + номер PR.
     name: Preview (${{ github.base_ref }} PR #${{ github.event.number }})
+    runs-on: ubuntu-latest
+    env:
+      BASE_REF: ${{ github.base_ref }}
+      PR_NUMBER: ${{ github.event.number }}
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # per-service deploy time is read from git history
+          fetch-depth: 0   # час деплою сервісу береться з git-історії
 
-      - name: Assemble static bundle
-        # Сайт уже статичний — артефакт це сам чекаут (index.html + assets + specs).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Resolve environment and host
+        id: target
         run: |
-          node scripts/scalar_prebuild/prebuild.mjs --check .   # stale JSON = old spec shown
-          mkdir -p _site
-          cp -R index.html assets specs scalar-docs _site/
-          # base branch -> <env>; services changed by this PR get the current time
-          ENV_NAME="${{ github.base_ref }}"; ENV_NAME="${ENV_NAME#env/}"; [ "$ENV_NAME" = main ] && ENV_NAME=prod
-          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" \
-            | sed -n -E 's#^(base|overlay)/([^/]+)/.*#\2#p' | sort -u | paste -sd, -)
-          build/stamp_deploy_badge.sh _site/index.html "$ENV_NAME" --now "$CHANGED"
-          echo "bundle: $(du -sh _site | cut -f1)"
+          # лише відомі середовища: ім'я гілки не потрапляє в shell без перевірки
+          env_name="${BASE_REF#env/}"
+          case "$env_name" in
+            prod)                     host="${PR_NUMBER}.docs.ehealth.gov.ua" ;;
+            preprod|stage|demo)       host="${PR_NUMBER}.docs-${env_name}.ehealth.gov.ua" ;;
+            *) echo "unexpected base branch" >&2; exit 1 ;;
+          esac
+          {
+            echo "env=$env_name"
+            echo "host=$host"
+          } >> "$GITHUB_OUTPUT"
 
-      # TODO(DevOps): задеплоїти ./_site на ефемерний хост
-      #   ${{ github.event.number }}.docs-<env>.ehealth.gov.ua
-      # (Cloudflare Pages / S3 / nginx vhost). Виставити URL у вивід кроку.
-      - name: Deploy preview
-        run: echo "TODO(DevOps): deploy ./_site to ${{ github.event.number }}.docs-<env>.ehealth.gov.ua"
+      - name: Assemble site
+        run: build/assemble_site.sh "${{ steps.target.outputs.env }}" _site
+
+      - name: Stamp deploy badge
+        run: |
+          # сервіси, які змінює цей PR, отримують поточний час
+          changed=$(git diff --name-only "origin/${BASE_REF}...HEAD" \
+            | sed -n -E 's#^(base|overlay)/([^/]+)/.*#\2#p' | sort -u | paste -sd, -)
+          build/stamp_deploy_badge.sh _site/index.html "${{ steps.target.outputs.env }}" --now "$changed"
+
+      - name: Upload site
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ github.event.number }}
+          path: _site
+          retention-days: 7
+
+      # TODO(DevOps): опублікувати ./_site на ефемерний хост (Cloudflare Pages /
+      # S3 / nginx vhost) і вивести URL. Сервер ще не готовий.
+      - name: Publish preview (pending server)
+        run: |
+          echo "Preview site is built and uploaded as artifact preview-${PR_NUMBER}."
+          echo "TODO(DevOps): publish to ${{ steps.target.outputs.host }}"
+          echo "::notice title=Preview not published::Hosting is not configured yet. Download artifact preview-${PR_NUMBER}."
 
   teardown-preview:
     if: github.event.action == 'closed'
-    runs-on: ubuntu-latest
     name: Teardown preview (PR #${{ github.event.number }})
+    runs-on: ubuntu-latest
     steps:
-      # TODO(DevOps): знести прев'ю-хост цього PR.
-      - name: Teardown
-        run: echo "TODO(DevOps): teardown ${{ github.event.number }}.docs-<env>.ehealth.gov.ua"
+      # TODO(DevOps): прибрати прев'ю-хост цього PR, коли він з'явиться.
+      - name: Teardown (pending server)
+        run: |
+          echo "TODO(DevOps) teardown preview host for PR ${{ github.event.number }}"

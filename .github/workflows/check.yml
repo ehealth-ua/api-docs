@@ -1,0 +1,42 @@
+# Перевірка PR: для кожного середовища збираємо сайт і впевнюємось, що згенеровані
+# документи (dist/) відповідають base/ і portal/. Нічого не публікує.
+name: check
+
+on:
+  pull_request:
+    branches: [main, "env/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  scripts:
+    name: Scripts syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: bash -n
+        run: |
+          for f in build/*.sh; do
+            bash -n "$f"
+            echo "ok $f"
+          done
+
+  site:
+    name: Assemble (${{ matrix.env }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: [prod, preprod, stage, demo]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Assemble and check for stale generated docs
+        run: build/assemble_site.sh "${{ matrix.env }}" _site
