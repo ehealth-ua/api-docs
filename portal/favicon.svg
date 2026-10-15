@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="15.7 15.5 172 172">
+  <title>eHealth</title>
+  <rect x="-50" y="-50" width="300" height="300" fill="#fff"/>
+  <g transform="translate(15.71 0) skewX(-8.928)">
+   <g fill="#FDDD3E">
+    <rect x="56.5" y="27.9" width="27.8" height="147.1"/>
+    <rect x="116.4" y="27.9" width="27.8" height="147.1"/>
+    <rect x="28.6" y="56.1" width="145.7" height="27.9"/>
+    <rect x="28.6" y="113.0" width="145.7" height="27.8"/>
+   </g>
+   <g fill="#005DA6">
+    <rect x="84.4" y="113.0" width="89.9" height="27.8"/>
+    <rect x="116.4" y="84.0" width="27.8" height="91.1"/>
+   </g>
+  </g>
+</svg>

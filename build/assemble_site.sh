@@ -10,7 +10,7 @@
 #   <out>/specs/<service>.yaml          <- base/<service>/<env>.yaml
 #   <out>/scalar-docs/<service>.json    <- dist/<env>/<service>.json
 #   <out>/scalar-docs/manifest.json     <- dist/<env>/manifest.json
-#   <out>/favicon.ico                   <- portal/favicon.ico
+#   <out>/favicon.svg, favicon.ico      <- portal/favicon.svg, portal/favicon.ico
 #
 # It then runs prebuild.mjs --check, which fails when a generated document no
 # longer matches its spec, the Scalar bundle or index.html (needs only Node, no
@@ -60,17 +60,19 @@ if [[ "${SKIP_PREBUILD_CHECK:-}" == "1" ]]; then
 else
   node build/scalar_prebuild/prebuild.mjs --check "$OUT"
 fi
-# Favicon. Added after the staleness check on purpose: index.html in the repo
-# keeps its icon placeholder (so its hash, recorded in the manifests, does not
-# change) and the published copy points at portal/favicon.ico.
-if [[ -f portal/favicon.ico ]]; then
-  cp portal/favicon.ico "$OUT/favicon.ico"
+# Favicon: an SVG (sharp at any size) with an .ico fallback for older browsers.
+# Added after the staleness check on purpose: index.html in the repo keeps its
+# icon placeholder (so its hash, recorded in the manifests, does not change) and
+# the published copy points at the files in portal/.
+if [[ -f portal/favicon.svg && -f portal/favicon.ico ]]; then
+  cp portal/favicon.svg portal/favicon.ico "$OUT/"
   python3 - "$OUT/index.html" <<'PYEOF'
 import re, sys
 path = sys.argv[1]
 with open(path, encoding="utf-8") as fh:
     html = fh.read()
-new, n = re.subn(r'<link rel="icon"[^>]*>', '<link rel="icon" href="favicon.ico" sizes="any" />', html, count=1)
+links = '<link rel="icon" href="favicon.ico" sizes="32x32" />\n    <link rel="icon" href="favicon.svg" type="image/svg+xml" />'
+new, n = re.subn(r'<link rel="icon"[^>]*>', links, html, count=1)
 if n != 1:
     sys.exit(f"no <link rel=\"icon\"> found in {path}")
 with open(path, "w", encoding="utf-8") as fh:
