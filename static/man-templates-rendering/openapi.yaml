@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: eHealth Man Templates Rendering API — STAGE
-  version: "2.0.0"
+  title: eHealth Man Templates Rendering API
+  version: 2.0.0
   description: 'It is capable to store templates (in `iex`, `mustache`) or `markdown`, render it and dispatch in PDF, JSON or HTML formats.
 
 
@@ -158,9 +158,6 @@ info:
 
 
     You MUST always set `Content-Type: application/json` header when requesting Man''s API.'
-servers:
-  - url: https://api-stage.ehealth.gov.ua
-    description: STAGE — eHealth Man templates rendering API
 tags:
   - name: Templates
     description: Store, manage and render templates (mustache / iex / markdown) into HTML, JSON or PDF.

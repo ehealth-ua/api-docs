@@ -52,6 +52,15 @@ for dir in base/*/; do
 done
 [[ "$count" -gt 0 ]] || { echo "no services found in base/" >&2; exit 1; }
 
+# Static, environment-less docs (static/<name>/{index.html,openapi.yaml}): published once, on PROD only, each under its own
+# path /<name>/ (e.g. /man-templates-rendering/). They are not services of the main page, so they need no base/<env> files.
+if [[ "$ENV_NAME" == "prod" && -d static ]]; then
+  for d in static/*/; do
+    cp -R "$d" "$OUT/$(basename "$d")"
+    echo "  static: /$(basename "$d")/"
+  done
+fi
+
 [[ -f "dist/$ENV_NAME/manifest.json" ]] || { echo "missing dist/$ENV_NAME/manifest.json" >&2; exit 1; }
 cp "dist/$ENV_NAME/manifest.json" "$OUT/scalar-docs/manifest.json"
 
