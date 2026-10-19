@@ -65,6 +65,9 @@ api-docs/
 ├── dist/
 │   └── {prod,preprod,stage,demo}/
 │
+├── static/                       статичні специфікації БЕЗ середовищ: static/<name>/{index.html,openapi.yaml},
+│                                 публікуються лише в PROD за власним шляхом /<name>/ (напр. /man-templates-rendering/)
+│
 ├── portal/
 │   ├── index.html                єдина Scalar‑оболонка (віддається на /)
 │   ├── assets/                   scalar.standalone.js · fonts/ (e‑Ukraine)
