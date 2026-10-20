@@ -117139,10 +117139,8 @@ components:
             properties:
               system:
                 type: string
-                example: eHealth/resources
               code:
                 type: string
-                example: patient
         text:
           type: string
     Coding:
@@ -131740,10 +131738,8 @@ components:
             properties:
               system:
                 type: string
-                example: eHealth/resources
               code:
                 type: string
-                example: patient
         text:
           type: string
     Coding_DecodedPayload:
