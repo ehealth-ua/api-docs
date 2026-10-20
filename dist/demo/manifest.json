@@ -20,14 +20,14 @@
       "page": "index.html",
       "slug": "general-mis",
       "source": "specs/general-mis.yaml",
-      "source_sha256": "7a1547d846d0732b44a6763fa60bebf8e213407f2c1a566c431617e141db8c59",
+      "source_sha256": "2d790a3aafdec627fc3ae760c7f7b8fc0b959786471192893c06920a5c9b1233",
       "page_sha256": "e9df86045eb89521a58d40b73cad9bdbc49a2afe9772b33af1367b86861d6b8f"
     },
     "scalar-docs/medical-events.json": {
       "page": "index.html",
       "slug": "medical-events",
       "source": "specs/medical-events.yaml",
-      "source_sha256": "8944add325b2284bda708329b92944249cc2dfc61363349812224230b79b0cf8",
+      "source_sha256": "d96b0b0cad9838c68de045e363a62216fc52c061c152007fac7387c0f76a4569",
       "page_sha256": "e9df86045eb89521a58d40b73cad9bdbc49a2afe9772b33af1367b86861d6b8f"
     }
   }
