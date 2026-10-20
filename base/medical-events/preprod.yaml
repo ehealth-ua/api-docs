@@ -31808,6 +31808,8 @@ paths:
                                                           code:
                                                             type: string
                                                             example: device
+                                        value:
+                                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           description: Implanted Device used for this procedure
       responses:
         '200':
@@ -114448,6 +114450,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             code:
@@ -114680,6 +114684,8 @@ components:
                                         required:
                                           - coding
                                     description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                                 required:
                                   - type
                   status:
@@ -116127,6 +116133,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
                 display_value:
@@ -116390,6 +116398,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: '`Care plan to which the activity belongs`'
@@ -117381,6 +117391,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
                     display_value:
@@ -117422,6 +117434,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: '`reference to one of previous clinical impression`'
@@ -117519,6 +117533,8 @@ components:
                                         required:
                                           - coding
                                     description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                                 required:
                                   - type
                   basis:
@@ -118102,6 +118118,8 @@ components:
                                     required:
                                       - coding
                                 description: Description of identifier
+                              value:
+                                example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                             required:
                               - type
         attester:
@@ -118344,6 +118362,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             code:
@@ -118669,6 +118689,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: The employee who registered the issue
@@ -118755,6 +118777,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: device which caused an issue in the subject
@@ -120357,6 +120381,8 @@ components:
                                 code:
                                   type: string
                                   example: prozoro
+                  value:
+                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
         definition:
           allOf:
             - $ref: '#/components/schemas/Reference_request_DecodedPayload'
@@ -120392,6 +120418,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         name:
@@ -120456,6 +120484,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         recorder:
@@ -120493,6 +120523,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         context:
@@ -120530,6 +120562,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         property:
@@ -121734,6 +121768,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: Item used during observation.
@@ -121809,6 +121845,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         recorder:
@@ -121846,6 +121884,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
       example:
@@ -121991,6 +122031,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         role:
@@ -122404,6 +122446,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             division:
@@ -122441,6 +122485,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Division of legal_entity where DR have been performed.
@@ -122966,6 +123012,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             division:
@@ -123003,6 +123051,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Division of legal_entity where DR have been performed.
@@ -123446,6 +123496,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             division:
@@ -123483,6 +123535,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Division of legal_entity where DR have been performed.
@@ -123740,6 +123794,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         paper_referral:
@@ -123779,6 +123835,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         episode:
@@ -123816,6 +123874,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         class:
@@ -124057,6 +124117,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         prescriptions:
@@ -124186,6 +124248,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             discharge_disposition:
@@ -124496,6 +124560,8 @@ components:
                                         required:
                                           - coding
                                     description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                                 required:
                                   - type
               - $ref: '#/components/schemas/Observation_Request_1_DecodedPayload'
@@ -124555,7 +124621,14 @@ components:
       type: object
       properties:
         reference:
-          $ref: '#/components/schemas/Reference_request_DecodedPayload'
+          allOf:
+            - $ref: '#/components/schemas/Reference_request_DecodedPayload'
+            - type: object
+              properties:
+                identifier:
+                  properties:
+                    value:
+                      example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
         text:
           type: string
           example: string
@@ -124601,7 +124674,6 @@ components:
           description: Description of identifier
         value:
           type: string
-          example: 9183a36b-4d45-4244-9339-63d81cd08d9c
           description: The value that is unique
     Immunization_Request_DecodedPayload:
       allOf:
@@ -124674,6 +124746,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             date:
@@ -125092,6 +125166,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: What was administered, medication with type BRAND
@@ -125130,6 +125206,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: Encounter or Episode of Care administered as part of
@@ -125257,6 +125335,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: Request administration performed against
@@ -125358,6 +125438,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             primary_source:
@@ -125520,6 +125602,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
         - $ref: '#/components/schemas/Observation_Request_Base_DecodedPayload'
@@ -125568,6 +125652,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             categories:
@@ -126079,6 +126165,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             components:
@@ -126407,6 +126495,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             device:
@@ -126444,6 +126534,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Item used during observation.
@@ -126492,6 +126584,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             categories:
@@ -126959,6 +127053,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             components:
@@ -127269,6 +127365,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             device:
@@ -127306,6 +127404,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Item used during observation.
@@ -127354,6 +127454,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             categories:
@@ -127821,6 +127923,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             components:
@@ -128131,6 +128235,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             device:
@@ -128168,6 +128274,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Item used during observation.
@@ -128341,6 +128449,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: code of procedure
@@ -128456,6 +128566,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: employee who submit procedure to e-Health
@@ -128577,6 +128689,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Division of legal_entity where procedure have been performed.
@@ -128615,6 +128729,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Organization where procedure have been performed. Reference to legal_entity
@@ -128890,6 +129006,8 @@ components:
                                       required:
                                         - coding
                                   description: Description of identifier
+                                value:
+                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                               required:
                                 - type
                   description: Implanted Device used for this procedure
@@ -129017,6 +129135,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: code of procedure
@@ -129089,6 +129209,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: employee who submit procedure to e-Health
@@ -129210,6 +129332,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Division of legal_entity where procedure have been performed.
@@ -129248,6 +129372,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Organization where procedure have been performed. Reference to legal_entity
@@ -129599,6 +129725,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             asserted_date:
@@ -130231,6 +130359,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
                   required:
@@ -130344,6 +130474,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             subject:
@@ -130417,6 +130549,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: encounter on which the service request is based on, optional if focus is set
@@ -130493,6 +130627,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             requester_legal_entity:
@@ -130759,6 +130895,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
                   required:
@@ -131327,6 +131465,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             program:
@@ -131406,6 +131546,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: encounter on which service request is based on, optional if focus is set
@@ -131480,6 +131622,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
             requester_legal_entity:
@@ -131948,6 +132092,8 @@ components:
                                   required:
                                     - coding
                               description: Description of identifier
+                            value:
+                              example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                           required:
                             - type
               description: Who collected the Specimen.
@@ -132491,6 +132637,8 @@ components:
                                       required:
                                         - coding
                                   description: Description of identifier
+                                value:
+                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                               required:
                                 - type
                   description: Procedure that collects the specimen.
@@ -132535,6 +132683,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
         received_time:
@@ -132673,6 +132823,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: Legal entity where the specimen was created
@@ -132713,6 +132865,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
           description: Who registered the specimen.
@@ -132921,6 +133075,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
                 display_value:
@@ -132966,6 +133122,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
                 display_value:
@@ -133109,6 +133267,8 @@ components:
                                       required:
                                         - coding
                                   description: Description of identifier
+                                value:
+                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                               required:
                                 - type
                         display_value:
@@ -133201,6 +133361,8 @@ components:
                                       required:
                                         - coding
                                   description: Description of identifier
+                                value:
+                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                               required:
                                 - type
                       required:
@@ -133292,6 +133454,8 @@ components:
                               required:
                                 - coding
                           description: Description of identifier
+                        value:
+                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                       required:
                         - type
               required:
@@ -133432,6 +133596,8 @@ components:
                                         required:
                                           - coding
                                     description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                                 required:
                                   - type
                 required:
@@ -133485,6 +133651,8 @@ components:
                                         required:
                                           - coding
                                     description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
                                 required:
                                   - type
                 required:
