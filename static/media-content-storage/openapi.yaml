@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: eHealth Media Content Storage (Ael) API
+  version: 1.0.0
+  description: "Ael is a media content storage access control system that allows to generate secrets \n([Signed URL's](https://cloud.google.com/storage/docs/access-control/create-signed-urls-program))\non demand. Secrets have configured TTL and allow to perform required actions within specific bucket \nsubtree, that allows to have fine-grained control over media storage contents.\n\nClients can use secrets to directly access Google Cloud Storage or Amazon S3 via their API \n([Google Cloud Storage API](https://cloud.google.com/storage/docs/xml-api/put-object-upload)), reducing \ndata delivery complexity, number places that have access to critical data and trafic costs for your project.\n\nCloud storage buckets can have most restricted access rights, being available only for cloud account owners.\n\nSource code is available [on GitHub](https://github.com/Nebo15/ael.api).\n\n## Storage structure\n\nWe expect following storage canical schema: `/{bucket}/{resource_id}/{resource_name}`.\n\n## Configuration structure\n\n```\nconfig Ael, :clients,\n    integration_layer: [\n        api_secret: \"integration_layer_api_secret\",\n        allows: [\n            %{methods: [\"PUT\", \"HEAD\"], canonical_url: \"/testbucket/*\"}\n        ]\n    ]\n```\n\n## Installation\n\n### Heroku One-click deployment\n\n[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nebo15/ael.api)\n\n### Docker\n\nImages are available on [nebo15/ael_api](https://hub.docker.com/r/nebo15/ael_api/) Docker Hub.\n\n## License\n\nSee [LICENSE.md](https://github.com/Nebo15/ael.api/blob/master/LICENSE.md)"
+tags:
+  - name: Media Content Storage
+paths:
+  /media_content_storage_secrets:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      idempotency_key:
+                        type: string
+                        description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+                      request_id:
+                        type: string
+                        description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      action:
+                        type: string
+                        enum:
+                          - PUT
+                          - GET
+                          - HEAD
+                        description: HTTP Verb that described action upon resource.
+                      bucket:
+                        type: string
+                      resource_id:
+                        type: string
+                      resource_name:
+                        type: string
+                        description: If omited, access will be requested for all resources within `resource_id` scope.
+                      signed_url:
+                        type: string
+                        description: Signed URL.
+                      expires_at:
+                        type: string
+                        description: ISO 8601 date and time in UTC timezone when Signed URL expires.
+                      created_at:
+                        type: string
+                        description: ISO 8601 date and time in UTC timezone when Signed URL was created.
+                    required:
+                      - action
+                      - bucket
+                      - resource_id
+                      - resource_name
+                      - signed_url
+                      - expires_at
+                      - created_at
+                    additionalProperties: false
+              example:
+                meta:
+                  url: http://example.com/resource
+                  type: object
+                  code: 201
+                  idempotency_key: idemp-ssjssdjoa8308u0us0
+                  request_id: req-adasdoijasdojsda
+                data:
+                  action: PUT
+                  bucket: google-testbucket
+                  resource_id: declaration-226eeacc-29a0-11e7-93ae-92361f002671
+                  resource_name: passport.jpeg
+                  signed_url: http://storage.googleapis.com/google-testbucket/declaration-226eeacc-29a0-11e7-93ae-92361f002671/passport.jpeg?GoogleAccessId=1234567890123@developer.gserviceaccount.com&Expires=1331155464&Signature=BClz9e4UA2MRRDX62TPd8sNpUCxVsqUDG3YGPWvPcwN%2BmWBPqwgUYcOSszCPlgWREeF7oPGowkeKk7J4WApzkzxERdOQmAdrvshKSzUHg8Jqp1lw9tbiJfE2ExdOOIoJVmGLoDeAGnfzCd4fTsWcLbal9sFpqXsQI8IQi1493mw%3D
+                  expires_at: '2017-04-20T19:14:13Z'
+                  created_at: '2017-04-20T19:14:13Z'
+      summary: Request a Secret
+      operationId: Request a Secret
+      description: 'Resource controller MAY use any authorization means to make sure that requesting side can have access to selected resource.
+
+
+        Also it MAY NOT generate `PUT` or `POST` Signed URL''s, so nobody could override existing resource.'
+      tags:
+        - Media Content Storage
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              secret:
+                action: PUT
+                bucket: google-testbucket
+                resource_id: declaration-226eeacc-29a0-11e7-93ae-92361f002671
+                resource_name: passport.jpeg
+            schema:
+              type: object
+              properties:
+                secret:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      enum:
+                        - PUT
+                        - GET
+                        - HEAD
+                      description: HTTP Verb that described action upon resource.
+                    bucket:
+                      type: string
+                    resource_id:
+                      type: string
+                    resource_name:
+                      type: string
+                      description: If omited, access will be requested for all resources within `resource_id` scope.
+                  required:
+                    - bucket
+                    - resource_id
+                    - resource_name
+components:
+  schemas:
+    Responses:
+      type: object
+      properties: {}
+    Response_Collection:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Response__Meta'
+        data:
+          type: array
+          items:
+            type: object
+            properties: {}
+        paging:
+          $ref: '#/components/schemas/Response__Pagination'
+    Response_OK:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Response__Meta'
+        data:
+          type: object
+          properties: {}
+    Response_Error:
+      type: object
+      properties:
+        meta:
+          allOf:
+            - $ref: '#/components/schemas/Response__Meta'
+            - type: object
+              properties:
+                code:
+                  type: number
+        error:
+          $ref: '#/components/schemas/Response__Error'
+    Response__Meta:
+      type: object
+      properties:
+        code:
+          type: number
+          description: HTTP response code.
+        url:
+          type: string
+          description: URL to requested resource.
+        type:
+          type: string
+          enum:
+            - object
+            - list
+          description: Type of data that is located in `data` attribute.
+        idempotency_key:
+          type: string
+          description: '[Idempotency key](http://docs.apimanifest.apiary.io/#introduction/optional-features/idempotent-requests). Send it trough `X-Idempotency-Key` header.'
+        request_id:
+          type: string
+          description: '[Request ID](http://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+    Response__Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Atom that represents error type.
+        message:
+          type: string
+          description: Human-readable error message. This is for developers, not end-users.
+    Response__Error_DuplicateEntity:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Atom that represents error type.
+        message:
+          type: string
+          description: Human-readable error message. This is for developers, not end-users.
+    Response__Error_ValidationFailed:
+      type: object
+      properties:
+        type:
+          type: string
+          description: type of an error.
+        message:
+          type: string
+          description: with-api/errors. (string)
+        invalid:
+          type: array
+          items: {}
+    Response__Pagination:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+        cursors:
+          type: object
+          properties:
+            starting_after:
+              type: string
+              description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+            ending_before:
+              type: string
+              description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+        size:
+          type: number
+          description: Total number of objects in collection.
+        has_more:
+          type: boolean
+          description: Is this collection have more data to load in the same style as last request loaded it.
+    HTTP_Verb:
+      type: string
+      enum:
+        - PUT
+        - GET
+        - HEAD
+    MCS_Secrets:
+      type: object
+      properties: {}
+    MCS_Secret:
+      type: object
+      required:
+        - bucket
+        - resource_id
+        - resource_name
+      properties:
+        action:
+          $ref: '#/components/schemas/HTTP_Verb'
+          description: HTTP Verb that described action upon resource.
+        bucket:
+          type: string
+        resource_id:
+          type: string
+        resource_name:
+          type: string
+          description: If omited, access will be requested for all resources within `resource_id` scope.
+    MCS_Secret_Response:
+      allOf:
+        - $ref: '#/components/schemas/MCS_Secret'
+        - type: object
+          required:
+            - signed_url
+            - expires_at
+            - created_at
+          properties:
+            signed_url:
+              type: string
+              description: Signed URL.
+            expires_at:
+              type: string
+              description: ISO 8601 date and time in UTC timezone when Signed URL expires.
+            created_at:
+              type: string
+              description: ISO 8601 date and time in UTC timezone when Signed URL was created.
