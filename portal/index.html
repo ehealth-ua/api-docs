@@ -53,7 +53,17 @@
     <div id="deploy-badge" title="Last deployed"></div>
     <div id="app"></div>
 
-    <script src="assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>
+    <!-- path-routing-runtime: legacy "/#<service>/..." links -> "/<service>/..." -->
+    <script>
+      (function () {
+        var m = location.hash.match(/^#\/?(medical-events|general-mis|ehealth-pis|ehealth-trusted-pis)(\/.*)?$/);
+        if (!m || location.pathname !== '/') return;
+        var q = new URLSearchParams(location.search); q.delete('r');
+        var qs = q.toString();
+        history.replaceState(null, '', '/' + m[1] + (m[2] || '') + (qs ? '?' + qs : ''));
+      })();
+    </script>
+    <script src="/assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>
     <script>
       // Document switcher entries, in display order. title -> left-panel label.
       const SOURCES = [
@@ -63,12 +73,32 @@
         { slug: 'ehealth-trusted-pis', title: 'eHealth Trusted PIS',            url: 'scalar-docs/ehealth-trusted-pis.json' },
       ];
 
+      // Tab title = "<Service> | eHealth API". nginx serves the same string in
+      // <title>/og:title for /<service>/..., so link previews match the tab.
+      function syncTitle() {
+        var seg = location.pathname.replace(/^\//, '').split('/')[0];
+        var src = SOURCES.find(function (x) { return x.slug === seg; }) || SOURCES[0];
+        var t = src.title + ' | eHealth API';
+        if (document.title !== t) document.title = t;
+      }
+      ['pushState', 'replaceState'].forEach(function (m) {
+        var orig = history[m];
+        history[m] = function () { var r = orig.apply(this, arguments); syncTitle(); return r; };
+      });
+      window.addEventListener('popstate', syncTitle);
+      syncTitle();
+
       const sources = SOURCES.map((s, i) => ({ ...s, default: i === 0 }));
+
+      // Pages live at /<service>/..., so Scalar must fetch the documents from the
+      // site root. `sources` keeps the relative urls (prebuild.mjs reads them).
+      const apiSources = sources.map((s) => ({ ...s, url: '/' + s.url }));
 
       // Stock Scalar — no theme overrides. Keep schema fields in the spec's own
       // (apiary) order rather than Scalar's alphabetical-with-required-first sort.
       Scalar.createApiReference('#app', {
-        sources: sources,
+        sources: apiSources,
+        pathRouting: { basePath: '/' },
         orderSchemaPropertiesBy: 'preserve',
         orderRequiredPropertiesFirst: false,
       });
