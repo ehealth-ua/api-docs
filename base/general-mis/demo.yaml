@@ -99401,6 +99401,33 @@ paths:
                             number: '+380503410870'
                     unzr: 20090705-00011
                     preferred_way_communication: email
+                    confidant_person_relationship:
+                      - id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        active_to: '2025-08-19'
+                        documents_relationship:
+                          - type: BIRTH_CERTIFICATE
+                            number: АА120518
+                            issued_by: Рокитнянським РВ ГУ МВС Київської області
+                            issued_at: '2017-02-28'
+                            active_to: '2025-08-19'
+                            record_type: relationship_confirmation
+                        relationship_verification_details:
+                          verification_status: VERIFICATION_NEEDED
+                          verification_reason: MANUAL_CREATED_BY_DOCTOR
+                          verification_comment: Підтверджено на підставі свідоцтва про народження
+                        confidant_person:
+                          person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                          name: Петров А.А.
+                          gender: MALE
+                          tax_id: '******50'
+                          no_tax_id: false
+                          unzr: '**********99'
+                          documents_person:
+                            - type: PASSPORT
+                              number: '******18'
+                          phones:
+                            - type: MOBILE
+                              number: +38093*****85
         '403':
           description: Forbidden
           headers: {}
