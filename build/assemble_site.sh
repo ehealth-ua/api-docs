@@ -80,7 +80,7 @@ import re, sys
 path = sys.argv[1]
 with open(path, encoding="utf-8") as fh:
     html = fh.read()
-links = '<link rel="icon" href="favicon.ico" sizes="32x32" />\n    <link rel="icon" href="favicon.svg" type="image/svg+xml" />'
+links = '<link rel="icon" href="/favicon.ico" sizes="32x32" />\n    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />'
 new, n = re.subn(r'<link rel="icon"[^>]*>', links, html, count=1)
 if n != 1:
     sys.exit(f"no <link rel=\"icon\"> found in {path}")
