@@ -1,4 +1,5 @@
-# Прев'ю на кожен коміт у PR в гілку середовища (env/prod|preprod|stage|demo).
+# Прев'ю на кожен коміт у PR у main — для кожного середовища, яке зачіпає PR
+# (за шляхами, build/changed_envs.sh).
 # Хост прев'ю: <PR-number>.docs-<env>.ehealth.gov.ua (prod: <PR-number>.docs.ehealth.gov.ua).
 # Збірка працює вже зараз і лишає сайт як artifact; крок публікації на хост
 # позначено TODO і чекає на сервер.
@@ -6,7 +7,7 @@ name: preview
 
 on:
   pull_request:
-    branches: ["env/**"]
+    branches: [main]
     types: [opened, synchronize, reopened, closed]
 
 permissions:
@@ -18,10 +19,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-preview:
+  target:
     if: github.event.action != 'closed'
-    name: Preview (${{ github.base_ref }} PR #${{ github.event.number }})
+    name: Resolve environments
     runs-on: ubuntu-latest
+    outputs:
+      envs: ${{ steps.resolve.outputs.envs }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: resolve
+        run: |
+          envs=$(build/changed_envs.sh --json "origin/${{ github.base_ref }}" HEAD)
+          echo "envs=$envs" >> "$GITHUB_OUTPUT"
+
+  build-preview:
+    name: Preview (${{ matrix.env }} PR #${{ github.event.number }})
+    needs: target
+    if: needs.target.outputs.envs != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: ${{ fromJSON(needs.target.outputs.envs) }}
     env:
       BASE_REF: ${{ github.base_ref }}
       PR_NUMBER: ${{ github.event.number }}
@@ -34,35 +55,32 @@ jobs:
         with:
           node-version: 20
 
-      - name: Resolve environment and host
+      - name: Resolve host
         id: target
+        env:
+          ENV_NAME: ${{ matrix.env }}
         run: |
-          # лише відомі середовища: ім'я гілки не потрапляє в shell без перевірки
-          env_name="${BASE_REF#env/}"
-          case "$env_name" in
+          case "$ENV_NAME" in
             prod)                     host="${PR_NUMBER}.docs.ehealth.gov.ua" ;;
-            preprod|stage|demo)       host="${PR_NUMBER}.docs-${env_name}.ehealth.gov.ua" ;;
-            *) echo "unexpected base branch" >&2; exit 1 ;;
+            preprod|stage|demo)       host="${PR_NUMBER}.docs-${ENV_NAME}.ehealth.gov.ua" ;;
+            *) echo "unexpected environment" >&2; exit 1 ;;
           esac
-          {
-            echo "env=$env_name"
-            echo "host=$host"
-          } >> "$GITHUB_OUTPUT"
+          echo "host=$host" >> "$GITHUB_OUTPUT"
 
       - name: Assemble site
-        run: build/assemble_site.sh "${{ steps.target.outputs.env }}" _site
+        run: build/assemble_site.sh "${{ matrix.env }}" _site
 
       - name: Stamp deploy badge
         run: |
           # сервіси, які змінює цей PR, отримують поточний час
           changed=$(git diff --name-only "origin/${BASE_REF}...HEAD" \
             | sed -n -E 's#^(base|overlay)/([^/]+)/.*#\2#p' | sort -u | paste -sd, -)
-          build/stamp_deploy_badge.sh _site/index.html "${{ steps.target.outputs.env }}" --now "$changed"
+          build/stamp_deploy_badge.sh _site/index.html "${{ matrix.env }}" --now "$changed"
 
       - name: Upload site
         uses: actions/upload-artifact@v4
         with:
-          name: preview-${{ github.event.number }}
+          name: preview-${{ github.event.number }}-${{ matrix.env }}
           path: _site
           retention-days: 7
 
@@ -70,9 +88,9 @@ jobs:
       # S3 / nginx vhost) і вивести URL. Сервер ще не готовий.
       - name: Publish preview (pending server)
         run: |
-          echo "Preview site is built and uploaded as artifact preview-${PR_NUMBER}."
+          echo "Preview site is built and uploaded as artifact preview-${PR_NUMBER}-${{ matrix.env }}."
           echo "TODO(DevOps): publish to ${{ steps.target.outputs.host }}"
-          echo "::notice title=Preview not published::Hosting is not configured yet. Download artifact preview-${PR_NUMBER}."
+          echo "::notice title=Preview not published::Hosting is not configured yet. Download the artifact."
 
   teardown-preview:
     if: github.event.action == 'closed'

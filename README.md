@@ -14,7 +14,7 @@
 ![OpenAPI](https://img.shields.io/badge/OpenAPI-3.1-6ba539?style=flat-square&logo=openapiinitiative&logoColor=white)
 ![Scalar](https://img.shields.io/badge/Scalar-1.62.9--ehealth--custom-0f1a24?style=flat-square)
 
-[Модель](#модель) · [Структура](#структура) · [Гілки](#гілки--середовища) · [Оновлення контенту](#оновлення-контенту)
+[Модель](#модель) · [Структура](#структура) · [Гілка і середовища](#гілка-і-середовища) · [Оновлення контенту](#оновлення-контенту)
 
 </div>
 
@@ -32,25 +32,21 @@
 | **`overlay/`** | Конфіг шар поверх `base/`: gov IDs, badges, description, version. Дані з ключем `(service, METHOD, path)`. |
 | **`dist/<env>/`** | Згенеровані артефакти, які публікує сайт. |
 
-## Гілки = середовища
+## Гілка і середовища
 
-Кожне середовище деплоїться на власний хост.
+Одна гілка — `main`. Специфікації: `base/<service>/<env>.yaml`, згенероване: `dist/<env>/`.
 
-| Гілка | Середовище | Docs URL |
-|---|---|---|
-| `env/prod` | **PROD** | https://docs.ehealth.gov.ua |
-| `env/preprod` | **PREPROD** | https://docs-preprod.ehealth.gov.ua |
-| `env/demo` | **DEMO** | https://docs-demo.ehealth.gov.ua |
-| `env/stage` | **STAGE** | https://docs-stage.ehealth.gov.ua |
+| Середовище | Docs URL |
+|---|---|
+| **PROD** | https://docs.ehealth.gov.ua |
+| **PREPROD** | https://docs-preprod.ehealth.gov.ua |
+| **DEMO** | https://docs-demo.ehealth.gov.ua |
+| **STAGE** | https://docs-stage.ehealth.gov.ua |
 
-- `main` — інтеграційна (default) гілка, поки що збігається з `env/*`.
-- `env/*` захищені: лише PR, без force‑push; кожен реліз — читабельний diff.
-- Версії сервісів по середовищах живуть у даних (`base/<service>/<env>.yaml`), а
-  не в додаткових гілках: новий сервіс — це нові файли, не нові гілки.
-
-> [!TIP]
-> Прев'ю з PR: `https://<PR-number>.docs-<env>.ehealth.gov.ua` — напр. PR 157 у
-> гілку `env/demo` → `157.docs-demo.ehealth.gov.ua`.
+- PR, що змінює `base/<service>/<env>.yaml` або `dist/<env>/`, деплоїть це середовище.
+- Зміни спільних файлів (`portal/`, `build/`, `overlay/`, `static/`, `.github/`) деплоять усі середовища.
+- Зміни `portal/` спершу тестуються на пісочниці 8095, потім виходять в усі середовища.
+- `overlay/` глобальний: ID та порядок диктує Confluence.
 
 ## Структура
 
@@ -65,6 +61,9 @@ api-docs/
 ├── dist/
 │   └── {prod,preprod,stage,demo}/
 │
+├── static/                       статичні специфікації БЕЗ середовищ: static/<name>/{index.html,openapi.yaml},
+│                                 публікуються лише в PROD за власним шляхом /<name>/ (напр. /man-templates-rendering/)
+│
 ├── portal/
 │   ├── index.html                єдина Scalar‑оболонка (віддається на /)
 │   ├── assets/                   scalar.standalone.js · fonts/ (e‑Ukraine)
@@ -72,6 +71,7 @@ api-docs/
 │
 ├── build/
 │   ├── scalar_prebuild/          prebuild.mjs: специфікації → dist/<env>/*.json
+│   ├── changed_envs.sh           за змінами шляхів визначає, які середовища деплоїти
 │   └── stamp_deploy_badge.sh     ставить "deployed <час>" при деплої
 │
 └── .github/workflows/            CI: preview + env‑deploy
@@ -104,7 +104,7 @@ api-docs/
 в нього: якщо вийшов деплой Medical Events на stage, то на `docs-stage.ehealth.gov.ua`
 у PIS час лишається попереднім.
 
-Час сервісу — це час останнього merge в гілку середовища, що змінив його файли
+Час сервісу — це час останнього merge в `main`, що змінив його файли
 (`base/<service>/<env>.yaml` або `overlay/<service>/`). Він береться з git‑історії
 під час деплою, окремо ніде не зберігається. `build/stamp_deploy_badge.sh`
 проставляє його в копію `index.html`, яка публікується; сам `index.html` у
@@ -150,4 +150,5 @@ flowchart LR
 ```
 
 CI на кожен PR перевіряє, що `dist/` відповідає `base/` і `overlay/`; прев'ю
-піднімається на коміт, середовище деплоїться на merge.
+піднімається на коміт (`<PR>.docs-<env>.ehealth.gov.ua` для кожного зачепленого середовища),
+а середовища, зачеплені змінами, деплояться на merge у `main`.

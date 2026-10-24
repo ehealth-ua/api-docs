@@ -6,7 +6,7 @@
 #                                       ehealth-pis/prod/9.11.0.3-v2   ("9.11.0.3 v.2")
 #
 # Idempotent: a tag that already exists is left alone, so it is safe to run on
-# every push. Annotated tags, created on HEAD of the checked-out env branch.
+# every push. Annotated tags, created on HEAD of the checked-out main.
 #
 # Usage: build/tag_releases.sh <env> [--push]
 set -euo pipefail

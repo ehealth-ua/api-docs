@@ -1,0 +1,1146 @@
+openapi: 3.0.0
+info:
+  description: >
+    Основна специфікація публічних інтерфейсів для проекту медвисновків в ІТ
+    Електронне здоровʼя. 
+    Діаграми робочих процесів
+    1. Загальний порядок роботи с асихронними задачами [Діграмма взаємодії](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUg0KHRgtCy0L7RgNC10L3QldGPINC80LXQtNCy0LjRgdC90L7QstC60ZbQsjog0JDRgdC40L3RhdGA0L4AKgWWINC30LDQtNCw0YfRlgoKTUlTL9Cb0ZbQutCw0YAtPtCSADsM0Lg6INCkAGkFvNGD0LLQsABuBiwg0LDQsdC-IABRBb7QstC7AHEegyBQT1NUIC9wYXRpZW50cy9jb21wb3NpdGlvbgoKAGUQAHIVl9Cw0L_Qu9Cw0L0AgQUG0YLQuCBBc3luYyBKb2IAMhMAgU4OOgAmBkpvYiBzY2hlZHVsZWQgKGV0YSkAgXQSACoQ0KLQsNC50LzQtdGAINC90LAgYXN5bkpvYi5kYXRhLmV0YQCCOREAgjcUR0UAgXkKAIF2DC9qb2JzL3thAIEZB0lkfQCCARIAgTQbcGVuZGluZwCBNhcAgRg2AIJvJACCcwkgQ29tcGxldGVkAIQtJACBSjwAgzoaYwB7CCAoAIRRCwCDawhTdGF0ZURhdGEubGlua3MAg2ATAIMQHnMvewCFNAdJZH0vZW5jb3VudGVyL3sAAglJZH0Ag0YNewCFVwsAgSUmAIZuDb7QuiDQvtGC0YDQuNC8AIZzBb4gCgo&s=default)
+    2. Створення медичного висновку (загальна логіка) [Діграмма
+    взаємодії](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUg0KHRgtCy0L7RgNC10L3QvdGPINC80LXQtNCy0LjRgdC90L7QstC60ZbQsjog0JfQsNCz0LDQu9GM0L3QsCDQu9C-0LPRltC60LAKCk1JUy_QmwAIBtGALT7QkgA3DNC4OiDQodGEAGcFvNGD0LLQsNGC0LggAF0NvtC6IFBPU1QgL3BhdGllbnRzL2NvbXBvc2l0aW9uCgBDEABQFZ_QtQCBSgWy0ZbRgNC4AF8GvdCw0Y_QstC90ZbRgdGC0Ywg0LDQstGCAIF2BbjQt9Cw0YbRltGXIGNvbmNsdXNpb246Y3JlYXRlAGMSLT4AgV0OOiBIVFRQLzQwMSAo0YMAgUwF0L_QsNC00LrRgyDQv9C-0LzQuNC70LoAgWkGsNC70ZbQtABrCCkKAIEyJpfQsNC_0LvQsNC9AII0C0FzeW5jIEpvYgCCChMAgRcQACMJINC00LXRggCBBAYKAG4SPC0-ZUhlYWx0aDog0KMAgiEFh9C9AIQaCdGWINC_0LAAglsLutCwINC00LDQvdC40YUg0L_RgNC-IACBYwUAhAkF0Y8sAAML0L3Rjiwg0LTRlgCETAW90L7Qt9GDINGW0YLQtACDPyYAhDYU0ZYg0LfQsQCDeAezAIRIFtC3AIUtBbTQvdC-INGI0LDQsQCFQgW90YMgWE1MAIJmJgCCPwpDb21wbGV0ZWQAhVwkR0VUIC8AhFcKL2pvYnMve2lkfQCDFChKb2IgYwBqCCAoAIUiCgAWCExpc3RJdGVtLmhyZWYpAGspAIZkCXsAhnAHSWR9L2VuY291bnRlci97AAIJSWR9AIcFDC97AIcTC0kAgSMlAIgJDQCDDAWyINGBAIUHBb3RliBQUkVMSU1JTkFSWQCIQBIAOxGfAIZDBb_QuNGB0YPRlCDQtNC-0LrRgwCJPwW90YIAhSUFstC4AIZoBZQAhS8GhtGW0ZTQvdGC0YMAiQ8lAFkLAIkZGUFUQ0gAiSoJAIITDmlkfS9hYwCCKAVzaWcAiFNwAF0WAIhdZACKDhUyMDAAhjAMAIpbBWQAiGMcIACELAUAiioHAIwpDL8Ag3AKAIkJBgCDGgzQvdGC0LAAii4oAIgiD77Qscq80ZTQutGCAIwyBSBTV0lGVC9TMwCKajzRggCMYgWzAI0WBb0AhRAGt9Cw0ZTQvNC-0LQAjHUFKERpaWEsIEVSTE4sIE1QSSwgQ2xvc3VyZQCHFzEAhxYNAIhfBmEAiDgHAIZ_JgCIB2YAiX8LAIleJwCIHh9GSU5BTAoKCg&s=default)
+  version: Prod
+  title: Prod. Ver. 2.32.2. Медичні висновки для системи Електронне Здоровʼя НСЗУ
+  contact:
+    email: pzhuk@wilded.io
+tags:
+  - name: compositions
+    description: Медвисновки
+
+servers:
+  - url: https://api-preprod.ehealth.gov.ua/api
+    description: Preprod середовище
+paths:
+  '/patients/composition/job/{asyncJobId}':
+    get:
+      description: Використовується для перевірки статусу виконання асинхронної задачі
+      operationId: getAsyncJobStatus
+      tags: ['async']
+      parameters:
+        - $ref: '#/components/parameters/asyncJobId'
+      responses:
+        '200':
+          description: Задачу знайдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/compositionAsyncJobStateResponse'
+        '404':
+          description: Задачу не знайдено
+        '400':
+          description: Невірний формат запиту
+
+  '/patients/composition':
+    post:
+      description: Створення запиту на отримання медвисновку. Більше прикладів за посиланням https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/5241143306/Composition+API
+      operationId: createComposition
+      tags: ['main']
+      responses:
+        '200':
+          description: У випадку успішного створення задачі на створення висновку
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/compositionAsyncJobStateResponse'
+        '400':
+          description: У випадку невірного формату запиту
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/compositionRequest'
+            example:
+              category:
+                coding:
+                  - system: COMPOSITION_CATEGORIES
+                    code: SICKNESS
+              type:
+                coding:
+                  - system: COMPOSITION_TYPES
+                    code: TEMP_DISABILITY
+              event:
+                - code:
+                    coding:
+                      - system: COMPOSITION_EVENTS
+                        code: COMPOSITION_VALIDITY_PERIOD
+                  period:
+                    start: '2022-10-24T10:45:16Z'
+                    end: '2022-10-28T10:45:16Z'
+              subject:
+                type:
+                  coding:
+                    - system: eHealth/resources
+                      code: person
+                  text: string
+                value: 52b504c7-0177-4078-834b-52d89154081c
+              encounter:
+                type:
+                  coding:
+                    - system: eHealth/resources
+                      code: encounter
+                  text: string
+                value: e39ee5ae-2644-4f04-8e64-bb359866e907
+              author:
+                type:
+                  coding:
+                    - system: eHealth/resources
+                      code: employee
+                  text: string
+                value: 43cc2161-1c2b-481b-a618-77e35817f850
+              section:
+                focus:
+                  type:
+                    coding:
+                      - system: eHealth/resources
+                        code: person
+                    text: string
+                  value: 52b504c7-0177-4078-834b-52d89154081c
+              extension:
+                - valueCode: AUTHORIZE_WITH
+                  valueUuid: e7ff2eef-712f-4676-960d-6aa16dce2103
+                - valueCode: IS_ACCIDENT
+                  valueBoolean: true
+                - valueCode: TREATMENT_VIOLATION
+                  valueString: reject_recommendation
+                - valueCode: TREATMENT_VIOLATION_DATE
+                  valueDate: '2022-10-24'
+                - valueCode: IS_INTOXICATED
+                  valueBoolean: true
+                - valueCode: IS_FOREIGN_TREATMENT
+                  valueBoolean: true
+                - valueCode: IS_FORCE_RENEW
+                  valueBoolean: true
+
+        required: true
+
+  '/patients/searchComposition':
+    get:
+      description: Пошук мед висновків
+      operationId: searchCompositions
+      tags: ['main']
+      parameters:
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
+        - name: subject
+          in: query
+          required: false
+          description: subject's MPI ID (пацієнт) (несумісний з focus)
+          schema:
+            type: string
+            format: uuid
+        - name: focus
+          in: query
+          required: false
+          description: focus MPI ID (фокус) (несумісний з subject)
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: '#/components/schemas/compositionTypeEnum'
+        - in: query
+          name: episodeOfCare
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: encounter
+          description: id ME-об'єкту Encounter
+          required: false
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: status
+          description: статус медвисновку
+          required: false
+          schema:
+            $ref: '#/components/schemas/compositionStatusEnum'
+      responses:
+        '200':
+          description: Результати пошуку
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/compositionSearchResponse'
+
+  '/patients/{patientId}/composition/{compositionId}/episode/{episodeId}/encounter/{encounterId}':
+    get:
+      description: 'Отримання мед висновку'
+      operationId: getComposition
+      tags: ['main']
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+        - $ref: '#/components/parameters/patientId'
+        - $ref: '#/components/parameters/episodeId'
+        - $ref: '#/components/parameters/encounterId'
+      responses:
+        '200':
+          description: У випадку коли обʼєкт інує і доступ авторизовано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/composition'
+              example:
+                author:
+                  type:
+                    coding:
+                      - code: employee
+                        system: eHealth/resources
+                    text: string
+                  value: 43cc2161-1c2b-481b-a618-77e35817f850
+                category:
+                  coding:
+                    - code: SICKNESS
+                      system: COMPOSITION_CATEGORIES
+                custodian:
+                  type:
+                    coding:
+                      - code: legal_entity
+                        system: eHealth/resources
+                  value: 0dccb76f-3ed0-40f4-8f73-e95e2f91ea29
+                date: '2022-10-24T12:34:49.956Z'
+                encounter:
+                  type:
+                    coding:
+                      - code: encounter
+                        system: eHealth/resources
+                    text: string
+                  value: e39ee5ae-2644-4f04-8e64-bb359866e907
+                event:
+                  - code:
+                      coding:
+                        - code: COMPOSITION_VALIDITY_PERIOD
+                          system: COMPOSITION_EVENTS
+                    period:
+                      end: '2022-10-28T10:45:16Z'
+                      start: '2022-10-24T10:45:16Z'
+                extension:
+                  - valueCode: AUTHORIZE_WITH
+                    valueUuid: e7ff2eef-712f-4676-960d-6aa16dce2103
+                  - valueBoolean: true
+                    valueCode: IS_FORCE_RENEW
+                  - valueBoolean: true
+                    valueCode: IS_ACCIDENT
+                  - valueCode: TREATMENT_VIOLATION
+                    valueString: reject_recommendation
+                  - valueCode: TREATMENT_VIOLATION_DATE
+                    valueDate: '2022-10-24'
+                  - valueBoolean: true
+                    valueCode: IS_FOREIGN_TREATMENT
+                  - valueBoolean: true
+                    valueCode: IS_INTOXICATED
+                identifier:
+                  type:
+                    coding:
+                      - code: composition
+                        system: eHealth/resources
+                  value: 2e629d9d-7d19-4bc4-937d-9000b567fd2a
+                relatesTo: []
+                section:
+                  focus:
+                    type:
+                      coding:
+                        - code: person
+                          system: eHealth/resources
+                      text: string
+                    value: 52b504c7-0177-4078-834b-52d89154081c
+                  text:
+                    div: ''
+                    status: empty
+                status: PRELIMINARY
+                subject:
+                  type:
+                    coding:
+                      - code: person
+                        system: eHealth/resources
+                    text: string
+                  value: 52b504c7-0177-4078-834b-52d89154081c
+                title: K5HP-HX65-4C8X-E85B
+                type:
+                  coding:
+                    - code: TEMP_DISABILITY
+                      system: COMPOSITION_TYPES
+
+        '404':
+          description: У випадку відсутності запиту на висноввок
+
+  '/patients/composition/{compositionId}/sign':
+    patch:
+      description: Підписання існуючого висновку
+      operationId: signComposition
+      tags: ['main']
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+      responses:
+        '200':
+          description: У випадку успішного створення задачі на підписання висновку
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/compositionAsyncJobStateResponse'
+              example:
+                data:
+                  eta: '2022-10-14T11:26:04.574Z'
+                  id: 3c5cd759-9dba-418b-86f8-7721e09c3af9
+                  links:
+                    - entity: eHealth/resources
+                      href: composition/bb55c87a-65c5-4225-9f8b-d767b6d2cb9d
+                  status: PENDING
+        '400':
+          description: 'Невірний формат запиту'
+        '500':
+          description: 'Помилка підпорядкованного сервісу'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/signature'
+        description: Тіло запиту з підписанним висновком. Підписаний контент має відповідати існуючому обʼєкту Composition
+        required: true
+
+  '/patients/composition/{compositionId}/cancel':
+    patch:
+      description: Відміна існуючого висновку
+      operationId: cancelComposition
+      tags: ['main']
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+      responses:
+        '200':
+          description: У випадку успішної відміни мед висновку
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/compositionAsyncJobStateResponse'
+              example:
+                data:
+                  eta: '2022-10-24T13:14:01.656Z'
+                  id: 89edcfb2-3479-4565-885b-d0ce7f9d081e
+                  links:
+                    - entity: eHealth/resources
+                      href: composition/1aecb5c4-60c8-4773-900a-64d01b382ce9
+                  status: PENDING
+        '400':
+          description: 'Невірний формат запиту'
+        '401':
+          description: 'Роль користувача не дозволяє виконання операції'
+        '404':
+          description: 'Обʼєкту висновку не знайдено'
+        '500':
+          description: 'Помилка підпорядкованного сервісу'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/signature'
+        description: Тіло запиту з підписанним висновком. Підписаний контент має відповідати схемі dummyCancelationSchema
+        required: true
+
+  '/patients/composition/{compositionId}/erln':
+    patch:
+      description: Повторне надсилання медичного висновку в ЄРЛН. Використовується тільки для МВ про тимчасову непрацездатність
+      tags: ['main']
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+      responses:
+        '200':
+          description: Запит успішно передано на обробку
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/compositionAsyncJobStateResponse'
+        '400':
+          description: Повторна відправка цього висновку не дозволена (невідповідний статус, або тип висновку)
+        '404':
+          description: Висновок не знайдено
+
+  '/patients/{patientId}/composition/{compositionId}/episode/{episodeId}/encounter/{encounterId}/printForm':
+    get:
+      description: 'Отримання форми для друку'
+      operationId: getPrintForm
+      tags: [ 'main' ]
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+        - $ref: '#/components/parameters/patientId'
+        - $ref: '#/components/parameters/episodeId'
+        - $ref: '#/components/parameters/encounterId'
+        - in: query
+          name: templateId
+          required: true
+          schema:
+            type: string
+          description: id шаблону (сервіс man), що використовується для рендерингу форми
+          examples:
+            newborn:
+              value: "20"
+              description: приклад id шаблону для МВН
+            disability:
+              value: "21"
+              description: приклад id шаблону для МВТН
+      responses:
+        '200':
+          description: 'Форма присутня'
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: 'Тіло форми для друку'
+        '404':
+          description: 'Форма відсутня'
+  '/patients/{patientId}/composition/{compositionId}/episode/{episodeId}/encounter/{encounterId}/integrationData':
+    get:
+      description: 'Отримання інформації про інтеграційні процеси'
+      operationId: getIntegrationData
+      tags: [ 'main' ]
+      parameters:
+        - $ref: '#/components/parameters/compositionId'
+        - $ref: '#/components/parameters/patientId'
+        - $ref: '#/components/parameters/episodeId'
+        - $ref: '#/components/parameters/encounterId'
+      responses:
+        '200':
+          description: 'Медвисновок присутній'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - component
+                    - type
+                    - statusCode
+                    - statusMessage
+                    - integrationStatus
+                    - taskStatus
+                    - updatedAt
+                    - details
+                  properties:
+                    component:
+                      type: string
+                      enum: [ "ERLN", "MJU_DRACZ", "DIIA" ]
+                      description: "Компонент, з яким відбувається взаємодія"
+                    type:
+                      type: string
+                      enum:
+                        - "NEWBORN_GET_COMPOSITION"
+                        - "NEWBORN_POST_COMPOSITION"
+                        - "CREATE_ERLN_RECORD"
+                        - "CANCEL_ERLN_RECORD"
+                    statusCode:
+                      type: integer
+                      description: "Результат виклику інтеграційного компоненту (визначається компонентом)"
+                    statusMessage:
+                      type: string
+                      description: "Повідомлення про помилку (визначається компонентом)"
+                    integrationStatus:
+                      type: string
+                      enum:
+                        - "PENDING"
+                        - "IN_PROGRESS"
+                        - "DONE"
+                        - "ERROR"
+                      description: "Статус інтеграційного процесу в інтерпретації сервісу медвисновків"
+                    taskStatus:
+                      type: string
+                      enum:
+                        - "PENDING"
+                        - "FAILED"
+                        - "DONE"
+                      description: "Статус задачі"
+                    updatedAt:
+                      type: string
+                      format: 'date-time'
+                      description: "Дата останнього оновлення стану інтеграційного процесу (UTC) (може бути null для старих задач)"
+                    details:
+                      type: object
+                      description: "Набір даних, визначений інтеграційним компонентом (у результаті взаємодії з сервісом медвисновків)"
+                example:
+                - component: ERLN
+                  details: 
+                    SL_NUM: 520-2000002848-1
+                    SL_REG_DATETIME: 2022-09-22T12:36:08Z
+                    SL_STOP: 2022-09-30T00:00:00Z
+                    SL_START: 2022-09-20T00:00:00Z
+                    IC_NUM: 520
+                - integrationStatus: DONE
+                  statusCode: 1101
+                  statusMessage: ЕЛН створено успішно
+                  taskStatus: DONE
+                  type: CREATE_ERLN_RECORD
+                  updatedAt: 2022-09-22T09:37:07.290Z
+        '404':
+          description: 'Медвисновок відсутній'
+
+components:
+  parameters:
+    compositionId:
+      name: compositionId
+      in: path
+      required: true
+      description: ID обʼєкту Composition
+      schema:
+        type: string
+        format: uuid
+    patientId:
+      name: patientId
+      in: path
+      required: true
+      description: ID обʼєкту Patient
+      schema:
+        type: string
+        format: uuid
+    encounterId:
+      name: encounterId
+      in: path
+      required: true
+      description: ID обʼєкту Encounter
+      schema:
+        type: string
+        format: uuid
+    episodeId:
+      name: episodeId
+      in: path
+      required: true
+      description: ID обʼєкту Episode of care
+      schema:
+        type: string
+        format: uuid
+    asyncJobId:
+      name: asyncJobId
+      in: path
+      required: true
+      description: ID обʼєкту Async Job
+      schema:
+        type: string
+        format: uuid
+    offsetParam:
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+      description: The number of items to skip before starting to collect the result set.
+    limitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+      description: The numbers of items to return.
+
+  schemas:
+    composition:
+      description: 'https://www.hl7.org/fhir/composition.html'
+      type: object
+      required:
+        - author
+        - identifier
+        - status
+        - category
+        - type
+        - date
+        - title
+        - subject
+        - custodian
+        - encounter
+        - section
+        - extension
+        - relatesTo
+      properties:
+        author:
+          $ref: '#/components/schemas/resourceIdentifier'
+        category:
+          $ref: '#/components/schemas/codeableConceptCompositionCategory'
+        custodian:
+          $ref: '#/components/schemas/resourceIdentifier'
+        identifier:
+          $ref: '#/components/schemas/resourceIdentifier'
+        status:
+          $ref: '#/components/schemas/compositionStatusEnum'
+        
+        type:
+          $ref: '#/components/schemas/codeableConceptCompositionType'
+        date:
+          type: string
+          format: dateTime
+        title:
+          type: string
+        relatesTo:
+          $ref: '#/components/schemas/compositionRelatesTo'
+        event:
+          type: array
+          items:
+            $ref: '#/components/schemas/compositionEvent'
+        subject:
+          $ref: '#/components/schemas/resourceIdentifier'
+        encounter:
+          $ref: '#/components/schemas/resourceIdentifier'
+        section:
+          $ref: '#/components/schemas/compositionSection'
+        extension:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/disabilityAccidentExtension'
+              - $ref: '#/components/schemas/disabillityTicketExtension'
+              - $ref: '#/components/schemas/disabilityTreatmentViolationExtension'
+              - $ref: '#/components/schemas/disabilityIntoxicationExtension'
+              - $ref: '#/components/schemas/disabilityForeignTreatmentExtension'
+              - $ref: '#/components/schemas/disabilityForceNewExtension'
+              - $ref: '#/components/schemas/authorizeWithExtension'
+              - $ref: '#/components/schemas/newbornBirthDateExtension'
+              - $ref: '#/components/schemas/newbornSexExtension'
+
+    compositionRequest:
+      description: 'Запит на створення висновку'
+      type: object
+      required:
+        - category
+        - type
+        - subject
+        - encounter
+        - author
+        - section
+        - extension
+      properties:
+        relatesTo:
+          $ref: '#/components/schemas/compositionRelationInput'
+        category:
+          $ref: '#/components/schemas/codeableConceptCompositionCategory'
+        type:
+          $ref: '#/components/schemas/codeableConceptCompositionType'
+        event:
+          type: array
+          items:
+            $ref: '#/components/schemas/compositionEvent'
+        subject:
+          $ref: '#/components/schemas/resourceIdentifier' # Patient
+        encounter:
+          $ref: '#/components/schemas/resourceIdentifier' # Encounter
+        author:
+          $ref: '#/components/schemas/resourceIdentifier' # Author
+        section:
+          $ref: '#/components/schemas/compositionSectionRequest'
+        extension:
+          type: array
+          description: Розширення обʼєкту для додаткових функцій обробки мед висновків
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/authorizeWithExtension'
+              - $ref: '#/components/schemas/disabilityAccidentExtension'
+              - $ref: '#/components/schemas/disabilityTreatmentViolationExtension'
+              - $ref: '#/components/schemas/disabilityTreatmentViolationDateExtension'
+              - $ref: '#/components/schemas/disabilityIntoxicationExtension'
+              - $ref: '#/components/schemas/disabilityForeignTreatmentExtension'
+              - $ref: '#/components/schemas/disabilityForceNewExtension'
+
+    compositionEvent:
+      description: "https://www.hl7.org/fhir/composition-definitions.html#Composition.event"
+      type: object
+      required:
+        - period
+      properties:
+        code:
+          $ref: '#/components/schemas/codeableConceptCompositionEvent'
+        period:
+          $ref: '#/components/schemas/compositionEventPeriod'
+
+    compositionEventPeriod:
+      description: "https://www.hl7.org/fhir/datatypes.html#Period"
+      type: object
+      required:
+        - start
+      properties:
+        start:
+          type: string
+          format: datetime
+          example: "2022-10-24T10:45:16Z"
+        end:
+          type: string
+          format: datetime
+          example: "2022-10-28T10:45:16Z"
+
+    codeableConceptCompositionEvent:
+      type: object
+      required:
+        - coding
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeableConceptCompositionEventCoding'
+
+    codeableConceptCompositionEventCoding:
+      type: object
+      required:
+        - system
+        - code
+      properties:
+        system:
+          type: string
+          example: 'COMPOSITION_EVENTS'
+        code:
+          $ref: '#/components/schemas/compositionEventEnum'
+
+    compositionEventEnum:
+      type: string
+      enum:
+        - COMPOSITION_VALIDITY_PERIOD
+
+    compositionSection:
+      type: object
+      properties:
+        focus:
+          description: "Субʼєкт якому видається висновок"
+          $ref: '#/components/schemas/resourceIdentifier'
+        text:
+          description: "Текст наративу медичного висновку"
+          $ref: '#/components/schemas/compositionNarrative'
+
+    compositionSectionRequest:
+      type: object
+      required:
+        - focus
+      properties:
+        focus:
+          $ref: '#/components/schemas/resourceIdentifier'
+        text:
+          $ref: '#/components/schemas/compositionNarrativeRequest'
+
+    compositionStatusEnum:
+      type: string
+      description: "Стан медвисновку https://wldd.atlassian.net/wiki/spaces/emal/pages/220397569"
+      enum:
+        - PRELIMINARY
+        - FINAL
+        - AMENDED
+        - ENTERED-IN-ERROR
+
+    newbornGenderEnum:
+      type: string
+      enum: [ 'MALE', 'FEMALE' ]
+
+    compositionNarrative:
+      type: object
+      description: >-
+        Текст медвисновку згідно шаблонів визначених в системі, завжди генерується сервером. Модель даних шаблонів https://dbdiagram.io/d/5e70a7624495b02c3b8858e0
+      required:
+        - status # Константа
+        - div # Завжди генерується сервером
+      properties:
+        status:
+          type: string
+          enum: ['generated','empty','additional']
+        div:
+          type: string
+          format: bytes
+
+    compositionNarrativeRequest:
+      type: object
+      description: >-
+        Текст медвисновку згідно шаблонів визначених в системі. Задається лікарем.
+      required:
+        - div
+      properties:
+        div:
+          type: string
+          format: bytes
+
+    compositionRelatesTo:
+      type: array
+      items:
+        $ref: '#/components/schemas/compositionRelationOutput'
+
+    compositionRelationInput:
+      type: object
+      description: Використовується у випадках продовження або дострокового лікарняного
+      required:
+        - code
+        - targetIdentifier
+      properties:
+        code:
+          type: string
+          enum:
+            - replaces # У випадку заміни лікарняного
+        targetIdentifier:
+          $ref: '#/components/schemas/resourceIdentifier'
+
+    compositionRelationOutput:
+      type: object
+      description: Використовується у випадках продовження або дострокового лікарняного
+      required:
+        - code
+        - targetIdentifier
+      properties:
+        code:
+          type: string
+          enum:
+            - replaces
+            - transforms
+            - amends
+        targetIdentifier:
+          $ref: '#/components/schemas/resourceIdentifier'
+
+    compositionSearchResponse:
+      description: "Результат пошуку активних медичних висновків"
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/resourceIdentifier'
+        status:
+          $ref: '#/components/schemas/compositionStatusEnum'
+        title:
+          type: string
+          description: Composition.title
+        type:
+          $ref: '#/components/schemas/codeableConceptCompositionType'
+        date:
+          description: "Дата створення мед висновку"
+          type: string
+          format: datetime
+        encounter:
+          $ref: '#/components/schemas/resourceIdentifier'
+        episodeOfCare:
+          $ref: '#/components/schemas/resourceIdentifier'
+
+    signature:
+      description: >-
+        Обʼєкт цифрового підпису.
+        FHIR: https://www.hl7.org/fhir/datatypes.html#Signature
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          description: Signed payload
+          type: string
+          format: base64
+
+    resourceIdentifier:
+      description: "http://hl7.org/fhir/STU3/datatypes.html#Identifier"
+      type: object
+      required:
+        - type
+        - value
+      properties:
+        type:
+          $ref: '#/components/schemas/codeableConcept'
+        value:
+          type: string
+          format: uuid
+          example: "52b504c7-0177-4078-834b-52d89154081c"
+          
+    codeableConcept:
+      type: object
+      required:
+        - coding
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeableConceptCoding'
+        text:
+          description: Описова частина
+          type: string
+          example: 'string'
+          
+    codeableConceptCoding:
+      type: object
+      required:
+        - system
+        - code
+      properties:
+        system:
+          type: string
+          example: 'eHealth/resources'
+        code:
+          type: string
+          example: 'person'
+          
+    codeableConceptCompositionType:
+      type: object
+      required:
+        - coding
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeableConceptCompositionTypeCoding'
+
+    codeableConceptCompositionTypeCoding:
+      type: object
+      required:
+        - system
+        - code
+      properties:
+        system:
+          type: string
+          example: 'COMPOSITION_TYPES'
+        code:
+          $ref: '#/components/schemas/compositionTypeEnum'
+
+    codeableConceptCompositionCategory:
+      type: object
+      required:
+        - coding
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/codeableConceptCompositionCategoryCoding'
+
+    codeableConceptCompositionCategoryCoding:
+      type: object
+      required:
+        - system
+        - code
+      properties:
+        system:
+          type: string
+          example: "COMPOSITION_CATEGORIES"
+        code:
+          oneOf:
+            - $ref: '#/components/schemas/compositionTempDisabilityCategoryEnum'
+            - $ref: '#/components/schemas/compositionNewbornCategoryEnum'
+          example: 'SICKNESS'
+
+    compositionNewbornCategoryEnum:
+      description: Категорія медичного висновку про народження
+      type: string
+      enum:
+        - LIVE_BIRTH
+
+    compositionTempDisabilityCategoryEnum:
+      description: Категорія медичного висновку тимчасової непрацездатності
+      type: string
+      enum:
+        - SICKNESS #внаслідок захворювання або травми, не пов’язаної з нещасним випадком на виробництві
+        - CHILD_CARE #необхідності догляду за хворою дитиною
+        - FAMILY_CARE #необхідності догляду за хворим членом сім’ї
+        - PARENTAL_CARE #догляду за дитиною віком до трьох років або дитиною з інвалідністю віком до 18 років у разі хвороби матері або іншої особи, яка доглядає за цією дитиною
+
+        - QUARANTINE #карантину, накладеного органами санітарно-епідеміологічної служби
+        - COVID19 #карантин по COVID-19
+        - TEMP_TRANSFER #тимчасового переведення застрахованої особи відповідно до медичного висновку на легшу, нижчеоплачувану роботу
+        - PROSTHETIC #протезування з поміщенням у стаціонар протезно-ортопедичного підприємства
+        - RESTORATION #перебування в реабілітаційних відділеннях санаторно-курортного закладу після перенесених захворювань і травм
+
+    compositionTypeEnum:
+      description: Тип медичного висновку
+      type: string
+      enum:
+        - "TEMP_DISABILITY"
+        - "NEWBORN"
+
+    disabilityAccidentExtension:
+      description: розширення, для вказання лікарем випадків, що непрацездатність викликана випадком на виробництві (тільки для висновків про тимчасову непрацездатність)
+      type: object
+      required:
+        - valueCode
+        - valueBoolean
+      properties:
+        valueCode:
+          type: string
+          enum: ["IS_ACCIDENT"]
+        valueBoolean:
+          description: Чи цей випадок пов'язаним із професійною діяльністю працівника
+          type: boolean
+
+    disabilityIntoxicationExtension:
+      description: розширення, для вказання лікарем випадків, що висновок створено при наявній інтоксикації пацієнта
+      type: object
+      required:
+        - valueCode
+        - valueBoolean
+      properties:
+        valueCode:
+          type: string
+          enum: ["IS_INTOXICATED"]
+        valueBoolean:
+          description: Чи виявлено алкогольну, наркотичну інтоксикацію
+          type: boolean
+
+    disabilityForeignTreatmentExtension:
+      description: розширення, для вказання лікарем випадків, які відносяться до лікування за кордоном
+      type: object
+      required:
+        - valueCode
+        - valueBoolean
+      properties:
+        valueCode:
+          type: string
+          enum: ["IS_FOREIGN_TREATMENT"]
+        valueBoolean:
+          description: Чи відбувалось лікування за кордоном
+          type: boolean
+
+
+    disabilityTreatmentViolationExtension:
+      description: розширення, для вказання лікарем випадків, що непрацездатність викликана порушенням режиму лікування. Значення відповідно до словника COMPOSITION_TREATMENT_VIOLATION
+      type: object
+      required:
+        - valueCode
+        - valueString
+      properties:
+        valueCode:
+          type: string
+          enum: ["TREATMENT_VIOLATION"]
+        valueString:
+          type: string
+          enum:
+            - reject_recommendation
+            - late_arrival
+            - alcohol_intoxication
+            - narcotic_intoxication
+            - toxic_intoxication
+            - hospital_leave
+            - hospital_change_unauthorized
+            - reject_examination
+
+    disabilityTreatmentViolationDateExtension:
+      description: дата порушення режиму лікування. Обовʼязкова, якщо надано disabilityTreatmentViolationExtension
+      type: object
+      required:
+        - valueCode
+        - valueDate
+      properties:
+        valueCode:
+          type: string
+          enum: ["TREATMENT_VIOLATION_DATE"]
+        valueDate:
+          type: string
+          format: date
+          example: "2022-10-24"
+
+    disabillityTicketExtension:
+      description: >-
+        Квитанція щодо статусу е-Лікарняного в ЕРЛН. Завжди генерується сервером
+      type: object
+      required:
+        - valueCode
+        - valueString
+      properties:
+        valueCode:
+          type: string
+          enum: ["ERLN_DISABILITY_TICKET"]
+        valueString:
+          type: string
+
+    disabilityForceNewExtension:
+      description: розширення, для вказання лікарем випадків, які однозначно вказують на початок нового випадку лікування, і не дозволяють проовжувати будь-які існуючі
+      type: object
+      required:
+        - valueCode
+        - valueBoolean
+      properties:
+        valueCode:
+          type: string
+          enum: ["IS_FORCE_RENEW"]
+        valueBoolean:
+          description: Чи лікар підтверджуює, що даний МВ є початком нового лікування
+          type: boolean
+
+    newbornBirthDateExtension:
+      type: object
+      description: Розширення, яке заповнюється сервером для вказання дати народження пацієнта
+      required:
+        - valueCode
+        - valueDate
+      properties:
+        valueCode:
+          type: string
+          enum: [ "NEWBORN_BIRTH_DATE" ]
+        valueDate:
+          format: date
+
+    newbornSexExtension:
+      type: object
+      description: Розширення, яке заповнюється сервером для вказання статі пацієнта
+      required:
+        - valueCode
+        - valueString
+      properties:
+        valueCode:
+          type: string
+          enum: [ "NEWBORN_SEX" ]
+        valueString:
+          $ref: '#/components/schemas/newbornGenderEnum'
+
+    authorizeWithExtension:
+      type: object
+      description: Розширення, яке використовується лікарем для вказання методу авторизація для надсилання СМС.
+      required:
+        - valueCode
+        - valueUuid
+      properties:
+        valueCode:
+          type: string
+          enum: ["AUTHORIZE_WITH"]
+        valueUuid:
+          type: string
+          format: uuid
+          enum: ["e7ff2eef-712f-4676-960d-6aa16dce2103"]
+          
+    compositionAsyncJobStateResponse:
+      description: Стан планування/виконання асинхронної задачі
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/compositionAsyncJobStateData'
+
+    compositionAsyncJobStateData:
+      type: object
+      required:
+        - eta
+        - id
+        - links
+        - status
+      properties:
+        eta:
+          type: string
+          format: datetime
+          example: "2022-10-24T12:35:49.956Z"
+        id:
+          type: string
+          format: uuid
+          example: "89678f60-4cdc-4fe3-ae83-e8b3ebd35c59"
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/compositionAsyncJobListItem'
+        status:
+          type: string
+          enum:
+            - PENDING
+            - FAILED
+            - DONE
+
+    compositionAsyncJobListItem:
+      type: object
+      required:
+        - entity
+      properties:
+        entity:
+          type: string
+          example: "eHealth/resources"

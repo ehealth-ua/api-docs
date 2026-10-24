@@ -2,10 +2,11 @@
 # Stamp the per-service "last deployed" badge into the published index.html.
 #
 # The badge is shown in the top-right corner and follows the service that is
-# open on the page (the URL hash: #medical-events, #general-mis, ...). A deploy
+# open on the page (the URL path: /medical-events/..., /general-mis/...; old
+# #medical-events links still work). A deploy
 # of one service moves only that service's time; the other services keep theirs.
 #
-# A service's time is the time of the last merge into this environment branch
+# A service's time is the time of the last merge into main
 # that changed its files (base/<service>/<env>.yaml or overlay/<service>/).
 # Nothing is stored between deploys: it is read from git history, so the
 # checkout must be full (actions/checkout with fetch-depth: 0).
@@ -79,13 +80,15 @@ runtime = """<!-- deploy-badge-runtime -->
         var first = Object.keys(stamps)[0];
         var last = null;
         function show() {
-          var h = location.hash;
+          var h = location.pathname + location.hash;
           if (h === last) return;
           last = h;
-          var slug = h.replace(/^#\\/?/, '').split(/[\\/?]/)[0] || first;
+          var seg = location.pathname.replace(/^\\//, '').split('/')[0];
+          var slug = stamps[seg] ? seg : (location.hash.replace(/^#\\/?/, '').split(/[\\/?]/)[0] || first);
           el.textContent = stamps[slug] ? 'deployed ' + stamps[slug] : '';
         }
         window.addEventListener('hashchange', show);
+        window.addEventListener('popstate', show);
         setInterval(show, 400);
         show();
       })();
