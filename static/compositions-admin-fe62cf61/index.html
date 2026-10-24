@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <title>Compositions Admin Panel | eHealth API</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <style>body { margin: 0; padding: 0; }</style>
+  </head>
+  <body>
+    <!--
+      A STATIC spec, UNLISTED: the Compositions admin-panel interfaces (formerly SwaggerHub ehealthua/compositions_Admin_panel
+      2.33.0). Public but not advertised: the random suffix in the path keeps it from being guessed from /compositions/, and
+      nothing on the site links here (keep it that way; noindex above). This is obscurity, not access control. Published once,
+      on PROD only (build/assemble_site.sh copies static/* into the prod site). openapi.yaml is the SwaggerHub document verbatim.
+    -->
+    <div id="app"></div>
+    <script src="../assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>
+    <script>
+      Scalar.createApiReference('#app', {
+        url: 'openapi.yaml',
+        hideTestRequestButton: true,
+        orderSchemaPropertiesBy: 'preserve',
+        orderRequiredPropertiesFirst: false,
+      });
+    </script>
+  </body>
+</html>

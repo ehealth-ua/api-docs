@@ -52,6 +52,15 @@ for dir in base/*/; do
 done
 [[ "$count" -gt 0 ]] || { echo "no services found in base/" >&2; exit 1; }
 
+# Static, environment-less docs (static/<name>/{index.html,openapi.yaml}): published once, on PROD only, each under its own
+# path /<name>/ (e.g. /man-templates-rendering/). They are not services of the main page, so they need no base/<env> files.
+if [[ "$ENV_NAME" == "prod" && -d static ]]; then
+  for d in static/*/; do
+    cp -R "$d" "$OUT/$(basename "$d")"
+    echo "  static: /$(basename "$d")/"
+  done
+fi
+
 [[ -f "dist/$ENV_NAME/manifest.json" ]] || { echo "missing dist/$ENV_NAME/manifest.json" >&2; exit 1; }
 cp "dist/$ENV_NAME/manifest.json" "$OUT/scalar-docs/manifest.json"
 
@@ -71,7 +80,7 @@ import re, sys
 path = sys.argv[1]
 with open(path, encoding="utf-8") as fh:
     html = fh.read()
-links = '<link rel="icon" href="favicon.ico" sizes="32x32" />\n    <link rel="icon" href="favicon.svg" type="image/svg+xml" />'
+links = '<link rel="icon" href="/favicon.ico" sizes="32x32" />\n    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />'
 new, n = re.subn(r'<link rel="icon"[^>]*>', links, html, count=1)
 if n != 1:
     sys.exit(f"no <link rel=\"icon\"> found in {path}")

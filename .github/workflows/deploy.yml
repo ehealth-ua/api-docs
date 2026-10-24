@@ -1,55 +1,54 @@
-# Деплой середовища на merge (push) у гілку env/<env>.
-# Збірка працює вже зараз і лишає сайт як artifact; крок публікації на сервер
-# позначено TODO і чекає на сервер.
+# Деплой на merge (push) у main. Середовища визначаються за змінами шляхами:
+#   base/<service>/<env>.yaml, dist/<env>/**  -> лише це середовище
+#   portal/, build/, overlay/, static/, .github/ -> усі середовища
+# (build/changed_envs.sh). Для кожного середовища: збірка, штамп часу деплою,
+# публікація. Збірка працює вже зараз і лишає сайт як artifact; крок публікації
+# на сервер позначено TODO і чекає на сервер.
 #
-# Деплой іде через GitHub Environment (prod, preprod, stage, demo), тому для
-# кожного середовища в налаштуваннях репозиторію можна ввімкнути обов'язкове
-# схвалення і обмеження гілок.
+# Деплой іде через GitHub Environment (prod, preprod, stage, demo).
 name: deploy
 
 on:
   push:
-    branches: ["env/prod", "env/preprod", "env/stage", "env/demo"]
+    branches: [main]
 
 permissions:
   contents: read
 
-concurrency:
-  group: deploy-${{ github.ref_name }}
-  cancel-in-progress: false
-
 jobs:
   target:
-    name: Resolve environment
+    name: Resolve environments
     runs-on: ubuntu-latest
     outputs:
-      env: ${{ steps.resolve.outputs.env }}
-      host: ${{ steps.resolve.outputs.host }}
+      envs: ${{ steps.resolve.outputs.envs }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - id: resolve
         env:
-          REF_NAME: ${{ github.ref_name }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
         run: |
-          env_name="${REF_NAME#env/}"
-          case "$env_name" in
-            prod)    host="docs.ehealth.gov.ua" ;;
-            preprod) host="docs-preprod.ehealth.gov.ua" ;;
-            stage)   host="docs-stage.ehealth.gov.ua" ;;
-            demo)    host="docs-demo.ehealth.gov.ua" ;;
-            *) echo "unexpected branch: $REF_NAME" >&2; exit 1 ;;
-          esac
-          {
-            echo "env=$env_name"
-            echo "host=$host"
-          } >> "$GITHUB_OUTPUT"
+          envs=$(build/changed_envs.sh --json "$BEFORE" "$AFTER")
+          echo "envs=$envs" >> "$GITHUB_OUTPUT"
+          echo "Deploying: $envs"
 
   deploy:
-    name: Deploy (${{ needs.target.outputs.env }})
+    name: Deploy (${{ matrix.env }})
     needs: target
+    if: needs.target.outputs.envs != '[]'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: ${{ fromJSON(needs.target.outputs.envs) }}
+    concurrency:
+      group: deploy-${{ matrix.env }}
+      cancel-in-progress: false
     environment:
-      name: ${{ needs.target.outputs.env }}
-      url: https://${{ needs.target.outputs.host }}
+      name: ${{ matrix.env }}
+      url: https://${{ matrix.env == 'prod' && 'docs' || format('docs-{0}', matrix.env) }}.ehealth.gov.ua
     steps:
       - uses: actions/checkout@v4
         with:
@@ -60,23 +59,23 @@ jobs:
           node-version: 20
 
       - name: Assemble site
-        run: build/assemble_site.sh "${{ needs.target.outputs.env }}" _site
+        run: build/assemble_site.sh "${{ matrix.env }}" _site
 
       - name: Stamp deploy badge
-        run: build/stamp_deploy_badge.sh _site/index.html "${{ needs.target.outputs.env }}"
+        run: build/stamp_deploy_badge.sh _site/index.html "${{ matrix.env }}"
 
       - name: Upload site
         uses: actions/upload-artifact@v4
         with:
-          name: site-${{ needs.target.outputs.env }}-${{ github.sha }}
+          name: site-${{ matrix.env }}-${{ github.sha }}
           path: _site
           retention-days: 30
 
-      # TODO(DevOps): опублікувати ./_site на хост (Cloudflare / S3 / nginx).
-      # Віддача: gzip/brotli, кеш і CORS описані в portal/nginx.conf.
-      # Сервер ще не готовий.
+      # TODO(DevOps): опублікувати ./_site на хост цього середовища
+      # (docs[-<env>].ehealth.gov.ua; сьогодні це build/deploy_host.sh на хості).
+      # Облікові дані/секрети тут не задані навмисно.
       - name: Publish (pending server)
         run: |
-          echo "Site is built and uploaded as artifact site-${{ needs.target.outputs.env }}-${{ github.sha }}."
-          echo "TODO(DevOps): publish to ${{ needs.target.outputs.host }}"
+          echo "Site is built and uploaded as artifact site-${{ matrix.env }}-${{ github.sha }}."
+          echo "TODO(DevOps): publish ${{ matrix.env }}"
           echo "::notice title=Not published::Hosting is not configured yet. Download the site artifact."

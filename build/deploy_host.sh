@@ -3,8 +3,8 @@
 # environment to the folder nginx serves for it. The host pulls; nothing needs
 # to be pushed to it, so CI can stay on GitHub-hosted runners.
 #
-# Each environment is built from its own branch (env/<env>):
-#   $SRC_ROOT/<env>   a clone of env/<env>, reset to origin on every run
+# Every environment is built from main (which holds one file per environment):
+#   $SRC_ROOT/<env>   a clone of main, reset to origin on every run
 #   $PUBLISH_BASE/<dir>   the nginx root of that environment (rsync target)
 #
 # Usage: build/deploy_host.sh [--dry-run] [env ...]     (default: all four)
@@ -46,9 +46,9 @@ for env in "${ENVS[@]}"; do
 
   # pull fresh: clone once, then force the checkout to match origin
   if [[ ! -d "$src/.git" ]]; then
-    git clone -q --branch "env/$env" --single-branch "$REPO_URL" "$src"
+    git clone -q --branch main --single-branch "$REPO_URL" "$src"
   fi
-  git -C "$src" fetch -q origin "env/$env"
+  git -C "$src" fetch -q origin main
   git -C "$src" reset -q --hard FETCH_HEAD
   echo "commit: $(git -C "$src" log -1 --format='%h %s')"
 
