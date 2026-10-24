@@ -19,7 +19,7 @@ info:
 
     * Patient data management
 
-    > In order to get specification for PIS-related consumers part of API documentation please proceed [here](/?r=1#ehealth-pis)
+    > In order to get specification for PIS-related consumers part of API documentation please proceed [here](/ehealth-pis)
 
     ## API Conventions
     
@@ -2155,7 +2155,7 @@ paths:
         This endpoint must be used only by trusted PIS clients.
 
 
-        After person request is created, [Complete Update Person details](/?r=1#ehealth-pis/tag/public-patient-information-system/PATCH/api/pis/person_requests/{id}/actions/complete) method must be called.'
+        After person request is created, [Complete Update Person details](/ehealth-pis/tag/public-patient-information-system/PATCH/api/pis/person_requests/{id}/actions/complete) method must be called.'
       tags:
         - Public. Patient Information System
       parameters:
