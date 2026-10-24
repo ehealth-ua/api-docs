@@ -25136,6 +25136,202 @@ paths:
                 - phones
                 - email
                 - type
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                        type: string
+                      name:
+                        example: Бориспільське відділення Клініки Ноунейм
+                        type: string
+                        description: the full name of division
+                      addresses:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Address'
+                      phones:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Phone'
+                      email:
+                        example: email@example.com
+                        type: string
+                        description: division's email
+                      working_hours:
+                        type: object
+                        properties:
+                          mon:
+                            type: array
+                            items: {}
+                          tue:
+                            type: array
+                            items: {}
+                          wed:
+                            type: array
+                            items: {}
+                          thu:
+                            type: array
+                            items: {}
+                          fri:
+                            type: array
+                            items: {}
+                          sat:
+                            type: array
+                            items: {}
+                          sun:
+                            type: array
+                            items: {}
+                        description: optional field, business hours by each day weekly, doesn't make any influence on business process and will be shown on portal and map.
+                      type:
+                        example: CLINIC
+                        type: string
+                        enum:
+                          - CLINIC
+                        description: '`Dictionary DIVISION_TYPE`'
+                      legal_entity_id:
+                        example: c8aadb87-ecb9-41ca-9ad4-ffdfe1dd89c9
+                        type: string
+                      external_id:
+                        example: '3213213'
+                        type: string
+                      location:
+                        type: object
+                        properties:
+                          latitude:
+                            example: 30.1233
+                            type: number
+                          longitude:
+                            example: 50.32423
+                            type: number
+                        required:
+                          - latitude
+                          - longitude
+                        description: optional field. geographical location, if it's empty, division won't be shown on a map.
+                      status:
+                        example: ACTIVE
+                        type: string
+                        enum:
+                          - ACTIVE
+                          - INACTIVE
+                      mountain_group:
+                        example: false
+                        type: boolean
+                      dls_id:
+                        example: '2872985'
+                        type: string
+                      dls_verified:
+                        example: true
+                        type: boolean
+                    required:
+                      - id
+                      - name
+                      - addresses
+                      - phones
+                      - email
+                      - working_hours
+                      - type
+                      - status
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  name: Бориспільське відділення Клініки Ноунейм
+                  addresses:
+                    - type: RESIDENCE
+                      country: UA
+                      area: Житомирська
+                      region: Бердичівський
+                      settlement: Київ
+                      settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      street_type: STREET
+                      street: вул. Ніжинська
+                      building: '15'
+                      apartment: '23'
+                      zip: 2090
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                  email: email@example.com
+                  working_hours:
+                    mon:
+                      -   - '08.00'
+                          - '12.00'
+                      -   - '14.00'
+                          - '18.00'
+                    tue:
+                      -   - '08.00'
+                          - '12.00'
+                    wed:
+                      -   - '08.00'
+                          - '12.00'
+                    thu:
+                      -   - '08.00'
+                          - '12.00'
+                    fri:
+                      -   - '08.00'
+                          - '12.00'
+                  type: CLINIC
+                  legal_entity_id: c8aadb87-ecb9-41ca-9ad4-ffdfe1dd89c9
+                  external_id: '3213213'
+                  location:
+                    latitude: 30.1233
+                    longitude: 50.32423
+                  status: ACTIVE
+                  mountain_group: false
+                  dls_id: '2872985'
+                  dls_verified: true
+      summary: Get Division Details
+      operationId: Get Division Details
+      description: "Key                | Value\n-------------------|-----------\nESOZ API ID        | API-005-022-0007\nScope              | division:details\nAuth               | yes\nLink to Confluence | <a href=\"https://e-health-ua.atlassian.net/wiki/spaces/ESOZ/pages/17570824251/DRAFT+REST+API+Get+division+details\">Get Division Details</a>"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: API-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
   /api/institutional/divisions/{id}:
     patch:
       responses:
