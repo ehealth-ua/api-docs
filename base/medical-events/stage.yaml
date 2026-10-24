@@ -3,12 +3,12 @@ info:
   title: MEDICAL EVENTS MIS API — STAGE
   version: "9.15.7"
   description: "**Version: 9.15.7**\n\n**Environment: STAGE**\n\n> Read more about\
-    \ eHealth API Manifest [here](/?r=1#general-mis/description/api-design-principles)\n\
+    \ eHealth API Manifest [here](/general-mis/description/api-design-principles)\n\
     \nAll the medical data, stored in eHealth, belongs to the patient and must be\
     \ properly protected. eHealth provides several mechanisms to secure patient's\
     \ data and limitate access.\n\n1. Only authenticated user with appropriate scope\
     \ can access medical dataverifi\nList of scopes available for the specific user\
-    \ role can be recieved using [/roles endpoint](/?r=1#general-mis/tag/public-medical-service-provider-integration-layer/GET/admin/roles)\
+    \ role can be recieved using [/roles endpoint](/general-mis/tag/public-medical-service-provider-integration-layer/GET/admin/roles)\
     \ [wiki: Scopes data model](https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/583404101/Scopes+model)\n\
     \n2. Access to Patient Medical Data is driven by Attribute-based access control(ABAC).\
     \ Rules [https://e-health-ua.atlassian.net/wiki/spaces/EH/pages/17049388207/ABAC+rules+EN]\n\
@@ -74,12 +74,12 @@ tags:
 
     ### Manage Service Requests in patient context
 
-    Use [GET Service Catalog](/?r=1#general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
+    Use [GET Service Catalog](/general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
 - name: Service Requests
   description: |-
     ### Manage Service Requests in patient context
 
-    Use [GET Service Catalog](/?r=1#general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
+    Use [GET Service Catalog](/general-mis/tag/public-medical-programs/GET/api/services) to receive current catalog of services.
 - name: Device requests
 - name: Device dispenses
 - name: Approvals

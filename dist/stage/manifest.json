@@ -13,7 +13,7 @@
       "page": "index.html",
       "slug": "ehealth-trusted-pis",
       "source": "specs/ehealth-trusted-pis.yaml",
-      "source_sha256": "93b6bd23a6b27119504387ba8760afff549faae7e219c313f71dbbc3ed6b93a1",
+      "source_sha256": "2d247e72b68cc79c47a81c0a84d7ecee9f6eb590919a7192f69a8d83ed42f5d5",
       "page_sha256": "903112a202e96e1ae4bfdec3aba212740a5fe7bf3955643bc3bccae48f1c520a"
     },
     "scalar-docs/general-mis.json": {
@@ -27,7 +27,7 @@
       "page": "index.html",
       "slug": "medical-events",
       "source": "specs/medical-events.yaml",
-      "source_sha256": "1ed44841bf84fbbebd8499f2388393a2c575f25427d4ab4485dd9e97943de6c2",
+      "source_sha256": "d2f89205a6f977eb786573cfe2e56530babfeb16a4733c41d347ccb95ea626d9",
       "page_sha256": "903112a202e96e1ae4bfdec3aba212740a5fe7bf3955643bc3bccae48f1c520a"
     }
   }
