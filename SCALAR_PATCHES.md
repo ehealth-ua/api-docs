@@ -20,7 +20,7 @@ rebase-oriented ledger**. If they disagree, fix both.
 
 | | |
 |---|---|
-| Cache-bust tag (`<script src="…/scalar.standalone.js?v=…">`) | `1.62.9-ehealth-custom.9e7daf33` — see [Bundle cache-bust tag](#bundle-cache-bust-tag) |
+| Cache-bust tag (`<script src="…/scalar.standalone.js?v=…">`) | `1.63.0-ehealth-custom.9e7daf33` — see [Bundle cache-bust tag](#bundle-cache-bust-tag) |
 | Upstream base | `scalar/scalar` `main` @ `46802789` (2026-07-29), i.e. between `@scalar/api-reference` 1.63.0 (2026-07-20) and 1.64.0 |
 | Upstream latest at last review | `1.76.0` (2026-10-23) — reviewed 2026-10-25, **not adopted** (see [Upstream review log](#upstream-review-log)) |
 | Bundle format | UMD `dist/browser/standalone.js`, self-contained (`grep -c 'chunks/'` must be `0`) |
@@ -32,9 +32,9 @@ rebase-oriented ledger**. If they disagree, fix both.
 
 ## Bundle cache-bust tag
 
-Every page loads the bundle as `scalar.standalone.js?v=1.62.9-ehealth-custom.<hash>`:
+Every page loads the bundle as `scalar.standalone.js?v=1.63.0-ehealth-custom.<hash>`:
 
-- `1.62.9` — **fixed**, never edited by a patch; it names the original Scalar state we checked out.
+- `1.63.0` — **fixed**, never edited by a patch; it is the `@scalar/api-reference` version at our upstream base commit `46802789` (`packages/api-reference/package.json` reads 1.63.0 there; the commit is 1.63.0 plus unreleased upstream work). Change it only when we rebase onto a newer upstream.
 - `ehealth-custom` — fixed company marker.
 - `<hash>` — **the only part that changes**: the first 8 hex chars of the SHA-256 of `assets/scalar.standalone.js` (`shasum -a 256 portal/assets/scalar.standalone.js | cut -c1-8`). It exists for cache invalidation and change tracking and equals the start of `bundle_sha256` in `manifest.json`.
 
