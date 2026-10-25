@@ -24,7 +24,7 @@ rebase-oriented ledger**. If they disagree, fix both.
 | Upstream base | `scalar/scalar` `main` @ `46802789` (2026-07-29), i.e. between `@scalar/api-reference` 1.63.0 (2026-07-20) and 1.64.0 |
 | Upstream latest at last review | `1.76.0` (2026-10-23) — reviewed 2026-10-25, **not adopted** (see [Upstream review log](#upstream-review-log)) |
 | Bundle format | UMD `dist/browser/standalone.js`, self-contained (`grep -c 'chunks/'` must be `0`) |
-| Built how | Source build for the base; patches P3–P9 are **hand edits of the minified output** (not source-level). |
+| Built how | Source build for the base; patches P3–P10 are **hand edits of the minified output** (not source-level). |
 
 > **Minified names (`Ib`, `TRe`, `Rb`, `y9`…) change on every rebuild.** The
 > "Where" column gives the *source* location to re-find the code; the
@@ -57,6 +57,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 | P7 | Load performance: skip console-only validation, no eager preload | local | bundle + prebuild | perf |
 | P8 | Large request examples keep highlighting + copy button | local | bundle | UX (**unshipped**) |
 | P9 | Request bodies always render all top-level attributes (no "Show additional properties") | local (= upstream config, 1.76) | bundle | config constant |
+| P10 | "Expand all / Collapse all" attributes button in the request-body header | local | bundle | UX feature |
 
 ### P1 + P2 — multi-group `oneOf` (backport)
 - **Upstream:** scalar/scalar#9727 → PR #9732, merged 2026-07-27. Contained in our base `46802789`.
@@ -138,6 +139,22 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 - **Verified (2026-10-25):** see the PR for numbers. Specs and every `scalar-docs/**/*.json` byte-identical to before; headless-Chrome DOM comparison old vs new bundle over every request-body operation (prod, all 4 services): bodies with ≤ 12 attributes identical; bodies with > 12 render exactly what the old bundle showed after clicking the button; no button anywhere; composed example + pickers still react.
 - **Review plan:** per-patch manual review list is in the PR body (section "MANUAL REVIEW PLAN"): open a > 12-attribute operation (no button, attributes in the same order, nothing duplicated), a ≤ 12-attribute control (unchanged) and the picker routes (`device_requests` POST `parameter[]`, `encounter_package`).
 
+### P10 — "Expand all / Collapse all" attributes button (request body)
+- **Symptom/need:** a deep body (e.g. `POST …/encounter_package/decoded-payload`, ~1350 nested attributes) has to be opened level by level, one "Show child attributes" click each.
+- **Where (source):** `RequestBody.vue` (header row: title · schema name · required · content-type) and `Schema.vue` (the `Disclosure` that owns the Show/Hide child attributes toggle; `defaultOpen` = `noncollapsible || expandAllSchemaProperties(cycle-safe) || on-target-path`).
+- **Mechanism:** the existing option `expandAllSchemaProperties` already makes every nested `Schema` open — but only at mount (`Disclosure` is uncontrolled). So the button owns a per-body ref `EXP` and passes `expandAllSchemaProperties:EXP.value` in the `options` of the body's `Schema`; `Schema`'s Disclosure gets `key: collapsible && expandAll ? 1 : 0`, so flipping the flag re-mounts that node with the new `defaultOpen` (all open / all closed). Cycle guard unchanged (`o`), so recursive schemas stay finite. Flag off = renders exactly as before.
+- **Speed (large trees):** opening all ~1350 attributes of `encounter_package/decoded-payload` in one go was one 1.6 s main-thread task (6.3 s at 4× CPU). Now the open is **staged one nesting level per animation frame**: `RequestBody` provides a depth ref under `Symbol.for('ehealth.expandDepth')`; `Schema`'s `c` computed also requires `level <= depth` when that ref is injected. First levels paint after ~0.4 s, longest task 1.6 s → 0.4 s (1×), total time about the same. Stepping stops when two frames add no `.schema-card`, or at 64 levels; clicking again cancels it. The top (non-collapsible) node keeps `key` 0, so it is not re-mounted on click.
+- **Related finding (why a first stepping attempt was 10× slower):** every `SchemaComposition` (oneOf/anyOf picker) writes its index into the shared `compositionSelection` ref in an *immediate* watcher on mount, and each write regenerates the whole request example (`ORe`/`Rb`, ~2 s for this body). Staged mounting therefore regenerated it once per level. Fix (4th edit below): skip that write when it would only record the default — `index 0`, no entry yet, first branch not `type:null` — which the generator treats identically (`Ib(...)??0`; the response path's `find(first non-null)` returns the same branch). Any non-default pick, or a null-first branch, is written as before.
+- **Change (bundle, all inside `RequestBody`, `Schema`, `SchemaComposition`):**
+  1. `RequestBody` setup: `EXP` (flag), `EXPD` (depth ref, provided), `runExp(on)` (stepper, rAF).
+  2. the 3 `Schema` usages in its template: `expandAllSchemaProperties:e.options.expandAllSchemaProperties` → `…:EXP.value`.
+  3. header right-hand group (after the content-type selector): `<button class="request-body-expand-all …">` with an inline-SVG unfold-more / unfold-less icon, `title` + `aria-label` "Expand all attributes" / "Collapse all attributes", `aria-pressed`, `onClick: runExp(!EXP.value)`. **Vue trap:** hand-written vnodes in a compiled (block) tree need `patchFlag 16` on the button and a `key` on the `svg`, otherwise props/children never re-patch (the first attempt expanded the tree but left the button stuck).
+  4. `SchemaComposition`: a deep (level > 2) picker hides its content behind a **"Show schema details"** button whose state `m` is read once from the option — a second hidden-content mechanism besides the child-attribute toggles. A watcher now keeps `m` in sync with `expandAllSchemaProperties`, otherwise Expand all misses those (found by comparing counts: 245 vs 275 attributes on `diagnostic_report_package/decoded-payload`).
+  5. `Schema`: `{key:0,defaultOpen:d.value}` → `{key:l.value&&c.value?1:0,defaultOpen:d.value}` and `c` gains the depth gate; `SchemaComposition` immediate selection watcher: skip default-only writes (above). When the stepper ends (or is capped) the depth ref is set to ∞, so anything mounted later also follows Expand all.
+- **Rebase notes:** upstream 1.76 has a schema-expansion store (`packages/blocks/src/schema/helpers/schema-expansion.ts`, `expandAll()` / `collapseAll()`); re-implement the button on top of it instead of re-mounting. `maxVisibleRequestBodyProperties` (P9) lives in the same component — re-apply both together.
+- **Out of scope (not done):** response bodies and parameter sections have no such button; the same `EXP` pattern can be added to `ExampleResponse`'s schema if wanted.
+- **Verification & review plan:** in the PR (MANUAL REVIEW PLAN).
+
 ## Spec-side & tooling dependencies (what a bundle swap can break)
 
 | Dependency | Why it matters on upgrade |
@@ -153,7 +170,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 1. `npm view @scalar/api-reference time --json` → pick target; read `packages/{api-reference,blocks,workspace-store}/CHANGELOG.md` between versions.
 2. For each patch above: open the **Where (source)** files at the target tag; decide *obsolete / still needed / needs re-port*. Prefer re-porting at **source level** (new patch files under a `patches/` dir in a Scalar checkout) over hand-editing minified output; record the commit SHA built from.
 3. Build: `pnpm turbo build --filter=@scalar/api-reference...`; vendor only `dist/browser/standalone.js`; confirm `grep -c 'chunks/'` = 0.
-4. Re-apply/verify P3–P9 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
+4. Re-apply/verify P3–P10 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
 5. **Zero-regression gate:** for every service × env, compare rendered output old-bundle vs new-bundle (the generated `scalar-docs/*.json` for the same YAML, and DOM/example text for sampled routes: all pickers listed in P4–P6, `encounter_package`, `/decoded-payload` ops, observation demo). Specs themselves must be byte-identical (`git diff --stat portal/specs` empty).
 6. Sandbox (`:8095`) first, then both repos in the same PR set; update the cache-bust hash everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`) per the rule below.
 7. Update this file: build table, per-patch status, review log.
