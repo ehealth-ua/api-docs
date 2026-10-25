@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * Screenshots for the P10 review: every example style x light/dark (+ a 390px phone width),
+ * Screenshots for the P11 review: every example style x light/dark (+ a 390px phone width),
  * of the request-body attribute list of one route, scrolled to its dense field block.
  *
- *   node scripts/p10_example_styles_shots.mjs --layout platform|apidocs --site <served dir> --out <dir> \
+ *   node scripts/p11_example_styles_shots.mjs --layout platform|apidocs --site <served dir> --out <dir> \
  *        [--route "medical-events POST /api/patients/{id}/encounter_package"] [--env prod]
  */
 import { createRequire } from 'node:module'
@@ -16,7 +16,7 @@ const here = dirname(fileURLToPath(import.meta.url))
 const puppeteer = createRequire(join(here, 'scalar_prebuild', 'package.json'))('puppeteer-core')
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d }
 const layout = arg('layout', 'platform'), env = arg('env', 'prod')
-const site = resolve(arg('site')), out = resolve(arg('out', 'p10-shots'))
+const site = resolve(arg('site')), out = resolve(arg('out', 'p11-shots'))
 const [svc, method, path] = arg('route', 'medical-events POST /api/patients/{id}/encounter_package').split(' ')
 mkdirSync(out, { recursive: true })
 

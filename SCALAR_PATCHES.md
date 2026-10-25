@@ -20,15 +20,25 @@ rebase-oriented ledger**. If they disagree, fix both.
 
 | | |
 |---|---|
-| Vendored bundle version tag | `1.63.0-ehealth-maxdepth25-oneofidx-allofitem-respreactive-perf` (shipped); `…-perf-copyvirt` = + patch P8, **not yet shipped** |
+| Cache-bust tag (`<script src="…/scalar.standalone.js?v=…">`) | `1.63.0-ehealth-custom.9e7daf33` — see [Bundle cache-bust tag](#bundle-cache-bust-tag) |
 | Upstream base | `scalar/scalar` `main` @ `46802789` (2026-07-29), i.e. between `@scalar/api-reference` 1.63.0 (2026-07-20) and 1.64.0 |
 | Upstream latest at last review | `1.76.0` (2026-10-23) — reviewed 2026-10-25, **not adopted** (see [Upstream review log](#upstream-review-log)) |
 | Bundle format | UMD `dist/browser/standalone.js`, self-contained (`grep -c 'chunks/'` must be `0`) |
-| Built how | Source build for the base; patches P3–P8 are **hand edits of the minified output** (not source-level). |
+| Built how | Source build for the base; patches P3–P10 are **hand edits of the minified output** (not source-level). |
 
 > **Minified names (`Ib`, `TRe`, `Rb`, `y9`…) change on every rebuild.** The
 > "Where" column gives the *source* location to re-find the code; the
 > before→after snippets are what the old bundle looked like, for orientation only.
+
+## Bundle cache-bust tag
+
+Every page loads the bundle as `scalar.standalone.js?v=1.63.0-ehealth-custom.<hash>`:
+
+- `1.63.0` — **fixed**, never edited by a patch; it is the `@scalar/api-reference` version at our upstream base commit `46802789` (`packages/api-reference/package.json` reads 1.63.0 there; the commit is 1.63.0 plus unreleased upstream work). Change it only when we rebase onto a newer upstream.
+- `ehealth-custom` — fixed company marker.
+- `<hash>` — **the only part that changes**: the first 8 hex chars of the SHA-256 of `assets/scalar.standalone.js` (`shasum -a 256 portal/assets/scalar.standalone.js | cut -c1-8`). It exists for cache invalidation and change tracking and equals the start of `bundle_sha256` in `manifest.json`.
+
+After any bundle edit: recompute the hash, replace it in all pages (`reference.html`, `observation-oneof-demo.html` in api-docs-platform; `index.html` in api-docs), then regenerate the prebuild (the page hash is in the manifest). Never append patch names or build the tag out of patch ids — the ledger above is where patches are tracked. When two patch PRs touch the bundle, whichever merges last recomputes the hash and manifests.
 
 ## Patch ledger
 
@@ -46,7 +56,9 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 | P6 | `oneOf` pickers under **response** bodies drive the example | local | bundle + spec | feature |
 | P7 | Load performance: skip console-only validation, no eager preload | local | bundle + prebuild | perf |
 | P8 | Large request examples keep highlighting + copy button | local | bundle | UX (**unshipped**) |
-| P10 | Persistent attribute "Example" display, 4 trial styles via `?exstyle=` | local | page asset (CSS/JS, **no bundle edit**) | UX (**trial**) |
+| P9 | Request bodies always render all top-level attributes (no "Show additional properties") | local (= upstream config, 1.76) | bundle | config constant |
+| P10 | "Expand all / Collapse all" attributes button in the request-body header | local | bundle | UX feature |
+| P11 | Persistent attribute "Example" display, 4 trial styles via `?exstyle=` | local | page asset (CSS/JS, **no bundle edit**) | UX (**trial**) |
 
 ### P1 + P2 — multi-group `oneOf` (backport)
 - **Upstream:** scalar/scalar#9727 → PR #9732, merged 2026-07-27. Contained in our base `46802789`.
@@ -95,7 +107,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
   - `packages/api-reference/src/features/Operation/components/ParameterListItem.vue`
   - `packages/api-reference/src/features/example-responses/ExampleResponse.vue` and `ExampleResponses.vue` (**1.76 still passes no `compositionSelection`**)
 - **Changes (bundle, 4 edits):**
-  1. `SchemaComposition` initial-index computed: drop `t.schemaContext!==\`requestBody\`||` (depend only on selection ref + non-empty `compositionPath`).
+  1. `SchemaComposition` initial-index computed: drop `t.schemaContext!==`requestBody`||` (depend only on selection ref + non-empty `compositionPath`).
   2. `SchemaComposition` sync watcher: same relaxation.
   3. `ParameterListItem` → `SchemaProperty` gets `compositionPath:[e.name]` (response status code / param name as path root).
   4. `ExampleResponse` gains `responseKey` prop (threaded from `ExampleResponses`'s selected status code), injects the shared selection ref and calls the builder with `compositionSelection` + `schemaPath:[e.responseKey]`.
@@ -118,14 +130,40 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 - **Rebase notes:** in 1.76 `ExampleResponse.vue` and `ExampleSchema.vue` also carry `VIRTUALIZATION_THRESHOLD = 20_000` — the same limitation likely applies to large **responses** (we never patched those).
 - **Upstream candidate:** make limit configurable / give virtual block a copy button.
 
-### P10 — persistent attribute "Example" display (trial styles; NOT in the bundle)
+### P9 — request bodies: all top-level attributes visible, no "Show additional properties"
+- **Symptom:** a request body with more than 12 top-level attributes showed the first 12 and hid the rest behind a **Show additional properties** button (the button sits under a faded card; the hidden attributes only appear after a click, and are absent from Ctrl-F until then).
+- **Where (source):** `RequestBody.vue` (`packages/api-reference/src/features/Operation/components/`) — module constant `const MAX_VISIBLE_PROPERTIES = 12` and the computed that splits the schema: `if (properties.length <= MAX_VISIBLE_PROPERTIES) return null` → `{ visibleProperties, collapsedProperties }`. The button is the second `<Schema additionalProperties>` card (i18n key `schema.showAdditionalProperties`).
+- **Change (bundle, one literal, in the `RequestBody` component's constants, just before `__name:"RequestBody"`):** `L9=12` → `L9=1e9`. With the cap at 1e9 the `t.length<=L9` guard always returns `null`, so the split never happens and the stock single-card path renders every attribute.
+- **Scope check:** that is the only place the bundle collapses a schema behind "Show additional properties". Responses, callbacks, nested schemas, parameters and the models section have no equivalent (the `ShowMoreButton` / `.show-more` component is a different thing: the collapsed Models list and "show all endpoints" in a collapsed tag). So the patch covers every collapsed body; nothing else needed unwrapping.
+- **Rebase notes:** upstream added this as config in `@scalar/api-reference` **1.76.0** — `maxVisibleRequestBodyProperties` (default `12`, `0` = unlimited), upstream PR [#10420](https://github.com/scalar/scalar/pull/10420) (2026-10-02, after our base). On upgrade **drop the bundle edit and add `maxVisibleRequestBodyProperties: 0` to the `Scalar.createApiReference(...)` config in `reference.html` / `index.html`** (next to `orderSchemaPropertiesBy`). Verify with a body of > 12 attributes that no button renders.
+- **Prebuild:** no effect on the generated `scalar-docs/*.json` (verified byte-identical); only `manifest.json` (`bundle_sha256`, `page_sha256`) changes, so regenerate it on merge.
+- **Verified (2026-10-25):** see the PR for numbers. Specs and every `scalar-docs/**/*.json` byte-identical to before; headless-Chrome DOM comparison old vs new bundle over every request-body operation (prod, all 4 services): bodies with ≤ 12 attributes identical; bodies with > 12 render exactly what the old bundle showed after clicking the button; no button anywhere; composed example + pickers still react.
+- **Review plan:** per-patch manual review list is in the PR body (section "MANUAL REVIEW PLAN"): open a > 12-attribute operation (no button, attributes in the same order, nothing duplicated), a ≤ 12-attribute control (unchanged) and the picker routes (`device_requests` POST `parameter[]`, `encounter_package`).
+
+### P10 — "Expand all / Collapse all" attributes button (request body)
+- **Symptom/need:** a deep body (e.g. `POST …/encounter_package/decoded-payload`, ~1350 nested attributes) has to be opened level by level, one "Show child attributes" click each.
+- **Where (source):** `RequestBody.vue` (header row: title · schema name · required · content-type) and `Schema.vue` (the `Disclosure` that owns the Show/Hide child attributes toggle; `defaultOpen` = `noncollapsible || expandAllSchemaProperties(cycle-safe) || on-target-path`).
+- **Mechanism:** the existing option `expandAllSchemaProperties` already makes every nested `Schema` open — but only at mount (`Disclosure` is uncontrolled). So the button owns a per-body ref `EXP` and passes `expandAllSchemaProperties:EXP.value` in the `options` of the body's `Schema`; `Schema`'s Disclosure gets `key: collapsible && expandAll ? 1 : 0`, so flipping the flag re-mounts that node with the new `defaultOpen` (all open / all closed). Cycle guard unchanged (`o`), so recursive schemas stay finite. Flag off = renders exactly as before.
+- **Speed (large trees):** opening all ~1350 attributes of `encounter_package/decoded-payload` in one go was one 1.6 s main-thread task (6.3 s at 4× CPU). Now the open is **staged one nesting level per animation frame**: `RequestBody` provides a depth ref under `Symbol.for('ehealth.expandDepth')`; `Schema`'s `c` computed also requires `level <= depth` when that ref is injected. First levels paint after ~0.4 s, longest task 1.6 s → 0.4 s (1×), total time about the same. Stepping stops when two frames add no `.schema-card`, or at 64 levels; clicking again cancels it. The top (non-collapsible) node keeps `key` 0, so it is not re-mounted on click.
+- **Related finding (why a first stepping attempt was 10× slower):** every `SchemaComposition` (oneOf/anyOf picker) writes its index into the shared `compositionSelection` ref in an *immediate* watcher on mount, and each write regenerates the whole request example (`ORe`/`Rb`, ~2 s for this body). Staged mounting therefore regenerated it once per level. Fix (4th edit below): skip that write when it would only record the default — `index 0`, no entry yet, first branch not `type:null` — which the generator treats identically (`Ib(...)??0`; the response path's `find(first non-null)` returns the same branch). Any non-default pick, or a null-first branch, is written as before.
+- **Change (bundle, all inside `RequestBody`, `Schema`, `SchemaComposition`):**
+  1. `RequestBody` setup: `EXP` (flag), `EXPD` (depth ref, provided), `runExp(on)` (stepper, rAF).
+  2. the 3 `Schema` usages in its template: `expandAllSchemaProperties:e.options.expandAllSchemaProperties` → `…:EXP.value`.
+  3. header right-hand group (after the content-type selector): `<button class="request-body-expand-all …">` with an inline-SVG unfold-more / unfold-less icon, `title` + `aria-label` "Expand all attributes" / "Collapse all attributes", `aria-pressed`, `onClick: runExp(!EXP.value)`. **Vue trap:** hand-written vnodes in a compiled (block) tree need `patchFlag 16` on the button and a `key` on the `svg`, otherwise props/children never re-patch (the first attempt expanded the tree but left the button stuck).
+  4. `SchemaComposition`: a deep (level > 2) picker hides its content behind a **"Show schema details"** button whose state `m` is read once from the option — a second hidden-content mechanism besides the child-attribute toggles. A watcher now keeps `m` in sync with `expandAllSchemaProperties`, otherwise Expand all misses those (found by comparing counts: 245 vs 275 attributes on `diagnostic_report_package/decoded-payload`).
+  5. `Schema`: `{key:0,defaultOpen:d.value}` → `{key:l.value&&c.value?1:0,defaultOpen:d.value}` and `c` gains the depth gate; `SchemaComposition` immediate selection watcher: skip default-only writes (above). When the stepper ends (or is capped) the depth ref is set to ∞, so anything mounted later also follows Expand all.
+- **Rebase notes:** upstream 1.76 has a schema-expansion store (`packages/blocks/src/schema/helpers/schema-expansion.ts`, `expandAll()` / `collapseAll()`); re-implement the button on top of it instead of re-mounting. `maxVisibleRequestBodyProperties` (P9) lives in the same component — re-apply both together.
+- **Out of scope (not done):** response bodies and parameter sections have no such button; the same `EXP` pattern can be added to `ExampleResponse`'s schema if wanted.
+- **Verification & review plan:** in the PR (MANUAL REVIEW PLAN).
+
+### P11 — persistent attribute "Example" display (trial styles; NOT in the bundle)
 - **Symptom / request:** in a schema attribute tree the property's example(s) appear only in a hover/focus popup (`Example` label → popup). With a leaf `example` on most scalar fields the reader cannot scan sample values without hovering every row. Wanted: example visible in the row, copy-on-click kept.
 - **Upstream:** 1.76.0 has no option for this (`SchemaPropertyExamples.vue` — popup pinned on click, hover/focus CSS, no config) → local patch.
-- **Mechanism: no bundle edit.** `portal/assets/example-styles.js` (same file in both repos, loaded by a plain `<script src="…/example-styles.js?v=p10">` right before the Scalar bundle in `portal/reference.html` / `portal/index.html`) re-skins the **existing** DOM with CSS. It is opt-in: with no `?exstyle=` (and nothing in `sessionStorage['ehealth-exstyle']`) it returns immediately — no `<style>`, no listeners, no DOM/attribute change, so the default render is byte-identical to before. `?exstyle=inline|nextline|pill|block` injects `<style id="ehealth-example-styles">`, sets `<html data-exstyle=…>`, shows a small bottom-right switcher (live switching, `default` = back to stock) and remembers the choice per tab in `sessionStorage` (Scalar rewrites the URL while navigating); `?exstyle=default` clears it. A lazy `mouseover`/`focusin` delegate sets `title=<full value>` on the value button so truncated values have a native tooltip.
+- **Mechanism: no bundle edit.** `portal/assets/example-styles.js` (same file in both repos, loaded by a plain `<script src="…/example-styles.js?v=p11">` right before the Scalar bundle in `portal/reference.html` / `portal/index.html`) re-skins the **existing** DOM with CSS. It is opt-in: with no `?exstyle=` (and nothing in `sessionStorage['ehealth-exstyle']`) it returns immediately — no `<style>`, no listeners, no DOM/attribute change, so the default render is byte-identical to before. `?exstyle=inline|nextline|pill|block` injects `<style id="ehealth-example-styles">`, sets `<html data-exstyle=…>`, shows a small bottom-right switcher (live switching, `default` = back to stock) and remembers the choice per tab in `sessionStorage` (Scalar rewrites the URL while navigating); `?exstyle=default` clears it. A lazy `mouseover`/`focusin` delegate sets `title=<full value>` on the value button so truncated values have a native tooltip.
 - **Styles:** `inline` muted `e.g. value` after the type (1 line, ellipsis at 42ch); `nextline` mono chip on its own line under the name (2-line clamp); `pill` compact bordered pill after the type (28ch); `block` full value on its own line with an accent rail, wrapping, 7.5em scroll cap. All keep the original `button.property-example-value` (click = copy, focusable, copy icon revealed on hover/`:focus-visible`), handle `example` and `examples` (several values wrap / stack), use only `--scalar-*` variables (light + dark) and never exceed the column width.
-- **Scalar DOM/classes the CSS depends on (re-check on every Scalar upgrade):** `.property-heading` › `.property-example` (label `button:first-child` + `.property-example-value-list` popup of `button.property-example-value` › `span` + `svg`). Upstream component: `packages/blocks/src/schema/SchemaPropertyExamples.vue` (compiled scoped CSS `[data-v-370db0bd]` in our 1.63 base: `.property-example-value-list` is `display:none; position:absolute`, shown on `:hover`/`:focus-within`). Our selectors are `html[data-exstyle…] .property-heading > .property-example …` so they outrank the scoped rules; if upstream renames these classes the styles silently do nothing (default view is still fine — verify with `scripts/p10_example_styles_check.mjs`).
-- **Rebase notes:** after a Scalar upgrade run the check script; if the classes changed, fix the selectors at the top of `example-styles.js` (variables `H0/V0/B0/L0`). Once a style is chosen: delete the other three style blocks and the switcher/`sessionStorage` code, make the remaining rules unconditional (drop the `[data-exstyle]` qualifier and the `?exstyle` gate, inject the `<style>` always — or move the rules into Scalar's `customCss` option), bump the `?v=p10` cache tag on every edit of the file, regenerate the prebuild (the page hash changes), update this entry.
-- **Evidence tooling:** `scripts/p10_example_styles_check.mjs` (platform) / `build/p10_example_styles_check.mjs` (api-docs): default view baseline-vs-candidate (`#app` outerHTML + screenshot), per style: console errors, horizontal overflow at 1280/390 px, every value visible, clipboard == example text, oneOf picker still reacts. `p10_example_styles_shots.mjs`: screenshots per style × light/dark × phone. Both repos' PRs carry the numbers.
+- **Scalar DOM/classes the CSS depends on (re-check on every Scalar upgrade):** `.property-heading` › `.property-example` (label `button:first-child` + `.property-example-value-list` popup of `button.property-example-value` › `span` + `svg`). Upstream component: `packages/blocks/src/schema/SchemaPropertyExamples.vue` (compiled scoped CSS `[data-v-370db0bd]` in our 1.63 base: `.property-example-value-list` is `display:none; position:absolute`, shown on `:hover`/`:focus-within`). Our selectors are `html[data-exstyle…] .property-heading > .property-example …` so they outrank the scoped rules; if upstream renames these classes the styles silently do nothing (default view is still fine — verify with `scripts/p11_example_styles_check.mjs`).
+- **Rebase notes:** after a Scalar upgrade run the check script; if the classes changed, fix the selectors at the top of `example-styles.js` (variables `H0/V0/B0/L0`). Once a style is chosen: delete the other three style blocks and the switcher/`sessionStorage` code, make the remaining rules unconditional (drop the `[data-exstyle]` qualifier and the `?exstyle` gate, inject the `<style>` always — or move the rules into Scalar's `customCss` option), bump the `?v=p11` cache tag on every edit of the file, regenerate the prebuild (the page hash changes), update this entry.
+- **Evidence tooling:** `scripts/p11_example_styles_check.mjs` (platform) / `build/p11_example_styles_check.mjs` (api-docs): default view baseline-vs-candidate (`#app` outerHTML + screenshot), per style: console errors, horizontal overflow at 1280/390 px, every value visible, clipboard == example text, oneOf picker still reacts. `p11_example_styles_shots.mjs`: screenshots per style × light/dark × phone. Both repos' PRs carry the numbers.
 - **Upstream candidate:** a `showSchemaExamples: 'inline' | 'popup'` style option would be a small upstream PR.
 
 ## Spec-side & tooling dependencies (what a bundle swap can break)
@@ -143,9 +181,9 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 1. `npm view @scalar/api-reference time --json` → pick target; read `packages/{api-reference,blocks,workspace-store}/CHANGELOG.md` between versions.
 2. For each patch above: open the **Where (source)** files at the target tag; decide *obsolete / still needed / needs re-port*. Prefer re-porting at **source level** (new patch files under a `patches/` dir in a Scalar checkout) over hand-editing minified output; record the commit SHA built from.
 3. Build: `pnpm turbo build --filter=@scalar/api-reference...`; vendor only `dist/browser/standalone.js`; confirm `grep -c 'chunks/'` = 0.
-4. Re-apply/verify P3–P8, then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
+4. Re-apply/verify P3–P10 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
 5. **Zero-regression gate:** for every service × env, compare rendered output old-bundle vs new-bundle (the generated `scalar-docs/*.json` for the same YAML, and DOM/example text for sampled routes: all pickers listed in P4–P6, `encounter_package`, `/decoded-payload` ops, observation demo). Specs themselves must be byte-identical (`git diff --stat portal/specs` empty).
-6. Sandbox (`:8095`) first, then both repos in the same PR set; bump version tag everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`).
+6. Sandbox (`:8095`) first, then both repos in the same PR set; update the cache-bust hash everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`) per the rule below.
 7. Update this file: build table, per-patch status, review log.
 
 ## Upstream review log

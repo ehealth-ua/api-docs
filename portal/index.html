@@ -63,8 +63,8 @@
         history.replaceState(null, '', '/' + m[1] + (m[2] || '') + (qs ? '?' + qs : ''));
       })();
     </script>
-    <script src="/assets/example-styles.js?v=p10"></script>
-    <script src="/assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>
+    <script src="/assets/example-styles.js?v=p11"></script>
+    <script src="/assets/scalar.standalone.js?v=1.63.0-ehealth-custom.c81f42d2"></script>
     <script>
       // Document switcher entries, in display order. title -> left-panel label.
       const SOURCES = [
@@ -95,7 +95,7 @@
       // site root. `sources` keeps the relative urls (prebuild.mjs reads them).
       const apiSources = sources.map((s) => ({ ...s, url: '/' + s.url }));
 
-      // Stock Scalar — no theme overrides (the only visual add-on is assets/example-styles.js, patch P10:
+      // Stock Scalar — no theme overrides (the only visual add-on is assets/example-styles.js, patch P11:
       // inert unless the URL has ?exstyle=…, see SCALAR_PATCHES.md). Keep schema fields in the spec's own
       // (apiary) order rather than Scalar's alphabetical-with-required-first sort.
       Scalar.createApiReference('#app', {
