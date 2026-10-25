@@ -20,7 +20,7 @@ rebase-oriented ledger**. If they disagree, fix both.
 
 | | |
 |---|---|
-| Vendored bundle version tag | `1.63.0-ehealth-maxdepth25-oneofidx-allofitem-respreactive-perf-reqbodyall` (= shipped tag + P9); `…-perf-copyvirt` = P8 on top of the previous tag, **not yet shipped** — merge order decides the final tag, re-tag when P8 lands |
+| Cache-bust tag (`<script src="…/scalar.standalone.js?v=…">`) | `1.62.9-ehealth-custom.9e7daf33` — see [Bundle cache-bust tag](#bundle-cache-bust-tag) |
 | Upstream base | `scalar/scalar` `main` @ `46802789` (2026-07-29), i.e. between `@scalar/api-reference` 1.63.0 (2026-07-20) and 1.64.0 |
 | Upstream latest at last review | `1.76.0` (2026-10-23) — reviewed 2026-10-25, **not adopted** (see [Upstream review log](#upstream-review-log)) |
 | Bundle format | UMD `dist/browser/standalone.js`, self-contained (`grep -c 'chunks/'` must be `0`) |
@@ -29,6 +29,16 @@ rebase-oriented ledger**. If they disagree, fix both.
 > **Minified names (`Ib`, `TRe`, `Rb`, `y9`…) change on every rebuild.** The
 > "Where" column gives the *source* location to re-find the code; the
 > before→after snippets are what the old bundle looked like, for orientation only.
+
+## Bundle cache-bust tag
+
+Every page loads the bundle as `scalar.standalone.js?v=1.62.9-ehealth-custom.<hash>`:
+
+- `1.62.9` — **fixed**, never edited by a patch; it names the original Scalar state we checked out.
+- `ehealth-custom` — fixed company marker.
+- `<hash>` — **the only part that changes**: the first 8 hex chars of the SHA-256 of `assets/scalar.standalone.js` (`shasum -a 256 portal/assets/scalar.standalone.js | cut -c1-8`). It exists for cache invalidation and change tracking and equals the start of `bundle_sha256` in `manifest.json`.
+
+After any bundle edit: recompute the hash, replace it in all pages (`reference.html`, `observation-oneof-demo.html` in api-docs-platform; `index.html` in api-docs), then regenerate the prebuild (the page hash is in the manifest). Never append patch names or build the tag out of patch ids — the ledger above is where patches are tracked. When two patch PRs touch the bundle, whichever merges last recomputes the hash and manifests.
 
 ## Patch ledger
 
@@ -145,7 +155,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 3. Build: `pnpm turbo build --filter=@scalar/api-reference...`; vendor only `dist/browser/standalone.js`; confirm `grep -c 'chunks/'` = 0.
 4. Re-apply/verify P3–P9 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
 5. **Zero-regression gate:** for every service × env, compare rendered output old-bundle vs new-bundle (the generated `scalar-docs/*.json` for the same YAML, and DOM/example text for sampled routes: all pickers listed in P4–P6, `encounter_package`, `/decoded-payload` ops, observation demo). Specs themselves must be byte-identical (`git diff --stat portal/specs` empty).
-6. Sandbox (`:8095`) first, then both repos in the same PR set; bump version tag everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`).
+6. Sandbox (`:8095`) first, then both repos in the same PR set; update the cache-bust hash everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`) per the rule below.
 7. Update this file: build table, per-patch status, review log.
 
 ## Upstream review log
