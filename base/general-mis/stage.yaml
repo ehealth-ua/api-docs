@@ -101392,6 +101392,1352 @@ paths:
           schema:
             type: string
           example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/connections:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                        type: string
+                        description: Unique connection id
+                      client_id:
+                        example: c4a6d45f-2cf2-4e6d-909a-5962604ad63b
+                        type: string
+                        description: Unique connection id
+                      consumer_id:
+                        example: 25c03af6-69bd-439e-b0dd-f1669b3dbbfd
+                        type: string
+                        description: Unique connection id
+                      redirect_uri:
+                        example: https://example2.com
+                        type: string
+                    required:
+                      - id
+                      - client_id
+                      - consumer_id
+                      - redirect_uri
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                  client_id: c4a6d45f-2cf2-4e6d-909a-5962604ad63b
+                  consumer_id: 25c03af6-69bd-439e-b0dd-f1669b3dbbfd
+                  redirect_uri: https://example2.com
+      summary: Create client connection
+      operationId: Create client connection
+      description: "Using this method, owner of LE can create additional connection for another MIS\n\n**Scopes required:** `connection:write`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: API-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: '...'
+              signed_content_encoding: base64
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  example: '...'
+                  type: string
+                signed_content_encoding:
+                  example: base64
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+  /api/persons/{person_id}/medication_requests/{medication_requests_id}/price_catalog_link:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                        type: string
+                        description: medication request identifier
+                      price_catalog_link:
+                        example: https://npctest.e-life.com.ua/search-prescription
+                        type: string
+                        description: Link to State Price Catalog
+                    required:
+                      - id
+                      - price_catalog_link
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  price_catalog_link: https://npctest.e-life.com.ua/search-prescription
+      summary: Get Medication Request Price Catalog link
+      operationId: Get Medication Request Price Catalog link
+      description: "***Scope  medication_request:details***\n\nThis method is designed to return link to State Price Catalog for prescribed medication. This link is needed to inform the patient about the available brands and their prices in the context of the prescribed medication"
+      tags:
+        - Public. Reimbursement
+      parameters:
+        - name: person_id
+          in: path
+          description: Person identifier
+          required: true
+          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+          schema:
+            type: string
+        - name: medication_requests_id
+          in: path
+          description: Medication request identifier
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/pharmacy/medication_requests:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                          type: string
+                          description: Medication Request identifier
+                        status:
+                          example: ACTIVE
+                          type: string
+                          enum:
+                            - ACTIVE
+                            - COMPLETED
+                            - REJECTED
+                            - EXPIRED
+                          description: Medication Request status. Find available **statuses** on State Charts wiki page
+                        request_number:
+                          example: 0000-243P-1X53-EH38
+                          type: string
+                          description: Public medication request human readable number
+                        created_at:
+                          example: '2017-08-17'
+                          type: string
+                          description: Medication request creation date. Format *DATE '2017-09-07'*
+                        started_at:
+                          example: '2017-08-17'
+                          type: string
+                          description: Start date of a treatment period. Format *DATE '2017-09-07'*
+                        ended_at:
+                          example: '2017-09-16'
+                          type: string
+                          description: End date of a treatment period. Format *DATE '2017-10-07'*
+                        dispense_valid_from:
+                          example: '2017-08-17'
+                          type: string
+                          description: Start date of dispense period, which is determined by the external system. Format *DATE '2017-09-07'*
+                        dispense_valid_to:
+                          example: '2017-09-16'
+                          type: string
+                          description: End date of dispense period, which is determined by the external system. Greater or equal to **dispense_valid_from**. Format *DATE '2017-10-07'*
+                        person:
+                          type: object
+                          properties:
+                            short_name:
+                              example: Петро І. І.
+                              type: string
+                            age:
+                              example: 35
+                              type: number
+                              description: full years between medication request date and birth date
+                          required:
+                            - short_name
+                            - age
+                        medical_program:
+                          type: object
+                          properties:
+                            id:
+                              example: c7d52544-0bd4-4129-97b0-2d72633e0490
+                              type: string
+                              description: Internal medical program ID, a UUID string.
+                            name:
+                              example: Доступні ліки
+                              type: string
+                              description: medical program name that is used on govermental level
+                            funding_source:
+                              example: NHS
+                              type: string
+                              description: '`Dictionary FUNDING_SOURCE`'
+                            mr_blank_type:
+                              example: F-1
+                              type: string
+                              description: '`Dictionary MR_BLANK_TYPES`'
+                          required:
+                            - id
+                            - name
+                            - funding_source
+                            - mr_blank_type
+                        intent:
+                          example: plan
+                          type: string
+                          enum:
+                            - plan
+                            - order
+                          description: Represents the medication request purpose. Dictionary MEDICATION_REQUEST_INTENT
+                        category:
+                          example: community
+                          type: string
+                          enum:
+                            - community
+                          description: Type of medication usage. Dictionary MEDICATION_REQUEST_CATEGORY
+                        based_on:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              identifier:
+                                type: object
+                                properties:
+                                  type:
+                                    type: object
+                                    required:
+                                      - coding
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              example: eHealth/resources
+                                              type: string
+                                            code:
+                                              example: care_plan
+                                              type: string
+                                              description: Symbol in syntax defined by the system
+                                          required:
+                                            - system
+                                            - code
+                                      text:
+                                        type: string
+                                    description: Description of identifier
+                                  value:
+                                    example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                    type: string
+                                    description: The value that is unique
+                                required:
+                                  - type
+                                  - value
+                        context:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  required:
+                                    - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: encounter
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                          - system
+                                          - code
+                                    text:
+                                      type: string
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                                - type
+                                - value
+                          required:
+                            - identifier
+                          additionalProperties: false
+                        dosage_instruction:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - sequence
+                              - text
+                              - max_dose_per_period
+                              - max_dose_per_administration
+                            properties:
+                              sequence:
+                                example: 1
+                                type: number
+                                description: The order of the dosage instructions
+                              text:
+                                example: 0.25mg PO every 6-12 hours as needed for menses from Jan 15-20, 2015.  Do not exceed more than 4mg per day
+                                type: string
+                                description: Free text dosage instructions e.g. SIG
+                              additional_instruction:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                    - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/SNOMED/additional_dosage_instructions
+                                            type: string
+                                          code:
+                                            example: '311504000'
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                          - system
+                                          - code
+                                    text:
+                                      type: string
+                              patient_instruction:
+                                example: 0.25mg PO every 6-12 hours as needed for menses from Jan 15-20, 2015.  Do not exceed more than 4mg per day
+                                type: string
+                                description: Patient or consumer oriented instructions
+                              timing:
+                                type: object
+                                properties:
+                                  event:
+                                    type: array
+                                    description: When the event occurs. ISO 8601 date and time in UTC timezone.
+                                    items: {}
+                                  repeat:
+                                    type: object
+                                    properties:
+                                      count:
+                                        example: 2
+                                        type: number
+                                        description: Number of times to repeat
+                                      count_max:
+                                        example: 4
+                                        type: number
+                                        description: Maximum number of times to repeat
+                                      duration:
+                                        example: 4
+                                        type: number
+                                        description: How long when it happens
+                                      duration_max:
+                                        example: 6
+                                        type: number
+                                        description: How long when it happens Max
+                                      duration_unit:
+                                        example: d
+                                        type: string
+                                        description: unit of time UCUM
+                                      frequency:
+                                        example: 1
+                                        type: number
+                                        description: Event occurs frequency times per period
+                                      frequency_max:
+                                        example: 2
+                                        type: number
+                                        description: Event occurs up to frequencyMax times per period
+                                      period:
+                                        example: 4
+                                        type: number
+                                        description: Event occurs frequency times per period
+                                      period_max:
+                                        example: 6
+                                        type: number
+                                        description: Upper limit of period
+                                      period_unit:
+                                        example: d
+                                        type: string
+                                        description: unit of time UCUM
+                                      day_of_week:
+                                        type: array
+                                        description: day of week
+                                        items: {}
+                                      time_of_day:
+                                        type: array
+                                        description: Time of day for action
+                                        items: {}
+                                      when:
+                                        type: array
+                                        description: Regular life events the event is tied to
+                                        items: {}
+                                      offset:
+                                        example: 4
+                                        type: number
+                                        description: Minutes from event before or after
+                                    oneOf:
+                                      - properties:
+                                          bounds_duration:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 10
+                                                type: number
+                                                description: The value of the measured amount. The value includes an implicit precision in the presentation of the value
+                                              unit:
+                                                example: days
+                                                type: string
+                                                description: A human-readable form of the unit
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                                description: The identification of the system that provides the coded form of the unit
+                                              code:
+                                                example: d
+                                                type: string
+                                                description: A computer processable form of the unit in some unit representation system
+                                        title: Bounds Duration
+                                      - properties:
+                                          bounds_range:
+                                            type: object
+                                            properties:
+                                              low:
+                                                type: object
+                                                properties:
+                                                  value:
+                                                    example: 13.5
+                                                    type: number
+                                                  unit:
+                                                    example: mg
+                                                    type: string
+                                                  system:
+                                                    example: eHealth/ucum/units
+                                                    type: string
+                                                  code:
+                                                    example: mg
+                                                    type: string
+                                                required:
+                                                  - value
+                                                  - unit
+                                              high:
+                                                type: object
+                                                properties:
+                                                  value:
+                                                    example: 13.5
+                                                    type: number
+                                                  unit:
+                                                    example: mg
+                                                    type: string
+                                                  system:
+                                                    example: eHealth/ucum/units
+                                                    type: string
+                                                  code:
+                                                    example: mg
+                                                    type: string
+                                                required:
+                                                  - value
+                                                  - unit
+                                            required:
+                                              - low
+                                              - high
+                                        title: Bounds Range
+                                      - properties:
+                                          bounds_period:
+                                            type: object
+                                            properties:
+                                              start:
+                                                example: '2018-08-02T10:45:16.000Z'
+                                                type: string
+                                                description: C? Starting time with inclusive boundary
+                                              end:
+                                                example: '2018-08-02T11:00:00.000Z'
+                                                type: string
+                                                description: C? End time with inclusive boundary, if not ongoing
+                                            required:
+                                              - start
+                                              - end
+                                        title: Bounds Period
+                                  code:
+                                    type: object
+                                    required:
+                                      - coding
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              example: TIMING_ABBREVIATIONS
+                                              type: string
+                                            code:
+                                              example: patient
+                                              type: string
+                                              description: Symbol in syntax defined by the system
+                                          required:
+                                            - system
+                                            - code
+                                      text:
+                                        type: string
+                              site:
+                                type: object
+                                required:
+                                  - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          example: eHealth/SNOMED/anatomical_structure_administration_site_codes
+                                          type: string
+                                        code:
+                                          example: '344001'
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                        - system
+                                        - code
+                                  text:
+                                    type: string
+                                description: Body site to administer to
+                              route:
+                                type: object
+                                required:
+                                  - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          example: eHealth/SNOMED/route_codes
+                                          type: string
+                                        code:
+                                          example: '46713006'
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                        - system
+                                        - code
+                                  text:
+                                    type: string
+                                description: How drug should enter body
+                              method:
+                                type: object
+                                required:
+                                  - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          example: eHealth/SNOMED/administration_methods
+                                          type: string
+                                        code:
+                                          example: '419747000'
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                        - system
+                                        - code
+                                  text:
+                                    type: string
+                                description: Technique for administering medication
+                              dose_and_rate:
+                                type: object
+                                properties:
+                                  type:
+                                    type: object
+                                    required:
+                                      - coding
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              example: eHealth/dose_and_rate
+                                              type: string
+                                            code:
+                                              example: ordered
+                                              type: string
+                                              description: Symbol in syntax defined by the system
+                                          required:
+                                            - system
+                                            - code
+                                      text:
+                                        type: string
+                                oneOf:
+                                  - properties:
+                                      dose_range:
+                                        type: object
+                                        properties:
+                                          low:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                          high:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                        required:
+                                          - low
+                                          - high
+                                    title: Dose Range
+                                  - properties:
+                                      dose_quantity (Simple_Quantity):
+                                        type: string
+                                    title: Dose Quantity (Simple Quantity)
+                                  - properties:
+                                      rate_ratio:
+                                        type: object
+                                        properties:
+                                          numerator:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                          denominator:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                        required:
+                                          - numerator
+                                          - denominator
+                                    title: Rate Ratio
+                                  - properties:
+                                      rate_range:
+                                        type: object
+                                        properties:
+                                          low:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13.5
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                          high:
+                                            type: object
+                                            properties:
+                                              value:
+                                                example: 13.5
+                                                type: number
+                                              unit:
+                                                example: mg
+                                                type: string
+                                              system:
+                                                example: eHealth/ucum/units
+                                                type: string
+                                              code:
+                                                example: mg
+                                                type: string
+                                            required:
+                                              - value
+                                              - unit
+                                        required:
+                                          - low
+                                          - high
+                                    title: Rate Range
+                                  - properties:
+                                      rate_quantity (Simple_Quantity):
+                                        type: string
+                                    title: Rate Quantity (Simple Quantity)
+                              max_dose_per_period:
+                                type: object
+                                properties:
+                                  numerator:
+                                    type: object
+                                    properties:
+                                      value:
+                                        example: 13
+                                        type: number
+                                      unit:
+                                        example: mg
+                                        type: string
+                                      system:
+                                        example: eHealth/ucum/units
+                                        type: string
+                                      code:
+                                        example: mg
+                                        type: string
+                                    required:
+                                      - value
+                                      - unit
+                                  denominator:
+                                    type: object
+                                    properties:
+                                      value:
+                                        example: 13
+                                        type: number
+                                      unit:
+                                        example: mg
+                                        type: string
+                                      system:
+                                        example: eHealth/ucum/units
+                                        type: string
+                                      code:
+                                        example: mg
+                                        type: string
+                                    required:
+                                      - value
+                                      - unit
+                                required:
+                                  - numerator
+                                  - denominator
+                              max_dose_per_administration:
+                                type: object
+                                properties:
+                                  value:
+                                    example: 13
+                                    type: number
+                                  unit:
+                                    example: mg
+                                    type: string
+                                  system:
+                                    example: eHealth/ucum/units
+                                    type: string
+                                  code:
+                                    example: mg
+                                    type: string
+                                required:
+                                  - value
+                                  - unit
+                              max_dose_per_lifetime:
+                                type: object
+                                properties:
+                                  value:
+                                    example: 13
+                                    type: number
+                                  unit:
+                                    example: mg
+                                    type: string
+                                  system:
+                                    example: eHealth/ucum/units
+                                    type: string
+                                  code:
+                                    example: mg
+                                    type: string
+                                required:
+                                  - value
+                                  - unit
+                              as_needed_boolean:
+                                example: true
+                                type: boolean
+                              as_needed_codeable_concept (Codeable_Concept):
+                                type: object
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          type: string
+                                        code:
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                        - system
+                                        - code
+                        reject_reason:
+                          example: Incompatible drugs
+                          type:
+                            - string
+                            - 'null'
+                          description: Medication request reject reason
+                        reject_reason_code:
+                          example: PATIENT_REJECT
+                          type:
+                            - string
+                            - 'null'
+                          description: '`Dictionary MEDICATION_REQUEST_REJECT_REASON`'
+                        block_reason:
+                          example: Підозра на фрод
+                          type: string
+                          description: Block or unblock reason description
+                        block_reason_code:
+                          example: BLOCK_WRONG_QTY_DRUG
+                          type: string
+                          description: Block or unblock reason code `Dictionary MEDICATION_REQUEST_BLOCK_REASON`
+                        priority:
+                          example: routine
+                          type: string
+                          enum:
+                            - routine
+                            - urgent
+                            - asap
+                            - stat
+                          description: '`Dictionary MEDICATION_REQUEST_PRIORITY`'
+                        prior_prescription:
+                          type: object
+                          properties:
+                            identifier:
+                              type: object
+                              properties:
+                                type:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            example: eHealth/resources
+                                            type: string
+                                          code:
+                                            example: medication_request
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                          - system
+                                          - code
+                                    text:
+                                      type: string
+                                  required:
+                                    - coding
+                                  description: Description of identifier
+                                value:
+                                  example: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                                  type: string
+                                  description: The value that is unique
+                              required:
+                                - type
+                                - value
+                          required:
+                            - identifier
+                          additionalProperties: false
+                          description: An order/prescription that is being replaced
+                        container_dosage:
+                          type: object
+                          properties:
+                            system:
+                              example: MEDICATION_UNIT
+                              type: string
+                            code:
+                              example: ML
+                              type: string
+                            value:
+                              example: 4
+                              type: number
+                          required:
+                            - system
+                            - code
+                            - value
+                          description: It presents a dosage of primary package required by Doctor in Medication Request.
+                        note:
+                          example: some additional info
+                          type: string
+                          description: Additional information
+                        blocked_to:
+                          example: '2021-12-18T14:40:16Z'
+                          type:
+                            - string
+                            - 'null'
+                          description: Blocked to date - ISO 8601 date and time in UTC timezone.
+                        blocked_by_legal_entity:
+                          type: object
+                          properties:
+                            id:
+                              example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                              type: string
+                            name:
+                              example: Клініка Ноунейм
+                              type: string
+                            short_name:
+                              example: Ноунейм
+                              type: string
+                            public_name:
+                              example: Клініка Ноунейм
+                              type: string
+                            type:
+                              example: MSP
+                              type: string
+                            edrpou:
+                              example: '5432345432'
+                              type: string
+                            status:
+                              example: ACTIVE
+                              type: string
+                              enum:
+                                - ACTIVE
+                                - CLOSED
+                          required:
+                            - name
+                            - short_name
+                            - public_name
+                            - type
+                            - edrpou
+                            - status
+                            - id
+                          description: Legal entity identifier who blocked MR
+                        inform_with:
+                          example: ce74e177-9c3b-4426-aeec-294674f2d65a
+                          type: string
+                          description: Identifier of person's auth method.
+                        medication_info:
+                          type: object
+                          properties:
+                            medication_id:
+                              example: 4a63b858-c138-4921-9341-ae9e384bcbd6
+                              type: string
+                              description: '`Identifier medication with type **INNM_DOSAGE**`'
+                            medication_name:
+                              example: Аміодарон 200мг таблетки
+                              type: string
+                              description: '`Name of medication with type **INNM_DOSAGE**`'
+                            form:
+                              example: PILL
+                              type: string
+                              description: '`Dictionary MEDICATION_FORM`'
+                            dosage:
+                              type: object
+                              properties:
+                                numerator_unit:
+                                  example: MG
+                                  type: string
+                                  description: '`Dictionary MEDICATION_UNIT`'
+                                numerator_value:
+                                  example: 200
+                                  type: number
+                                denumerator_unit:
+                                  example: PILL
+                                  type: string
+                                  description: '`Dictionary MEDICATION_UNIT`'
+                                denumerator_value:
+                                  example: 1
+                                  type: number
+                              required:
+                                - numerator_unit
+                                - numerator_value
+                                - denumerator_unit
+                                - denumerator_value
+                              description: Dosage of innm_dosage object (to be excluded)
+                            ingredients:
+                              type: array
+                              description: Details of dosage of INNM ingredients, added 2022-04-23, part 1
+                              items:
+                                $ref: '#/components/schemas/Ingredient'
+                            medication_qty:
+                              example: 10.34
+                              type: number
+                              description: Medication quantity issued by the doctor
+                            medication_remaining_qty:
+                              example: 10.23
+                              type: number
+                              description: medication quantity allowed to dispense
+                          required:
+                            - medication_id
+                            - medication_name
+                            - form
+                            - dosage
+                            - ingredients
+                            - medication_qty
+                      required:
+                        - id
+                        - status
+                        - created_at
+                        - started_at
+                        - ended_at
+                        - dispense_valid_from
+                        - dispense_valid_to
+                        - person
+                        - medication_info
+                        - medical_program
+                        - intent
+                        - category
+                        - context
+                        - dosage_instruction
+                        - reject_reason_code
+                  paging:
+                    type: object
+                    properties:
+                      page_number:
+                        example: 2
+                        type: number
+                        description: Page number.
+                      page_size:
+                        example: 50
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 300. Default: 50'
+                      total_entries:
+                        example: 1000
+                        type: number
+                        description: Total number of objects in collection.
+                      total_pages:
+                        example: 23
+                        type: number
+                        description: Total number of pages.
+                    required:
+                      - page_number
+                      - page_size
+                      - total_entries
+                      - total_pages
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  - id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    status: ACTIVE
+                    request_number: 0000-243P-1X53-EH38
+                    created_at: '2017-08-17'
+                    started_at: '2017-08-17'
+                    ended_at: '2017-09-16'
+                    dispense_valid_from: '2017-08-17'
+                    dispense_valid_to: '2017-09-16'
+                    person:
+                      short_name: Петро І. І.
+                      age: 35
+                    medical_program:
+                      id: c7d52544-0bd4-4129-97b0-2d72633e0490
+                      name: Доступні ліки
+                      funding_source: NHS
+                      mr_blank_type: F-1
+                    intent: plan
+                    category: community
+                    based_on:
+                      - identifier:
+                          type:
+                            coding:
+                              - system: eHealth/resources
+                                code: care_plan
+                          value: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                      - identifier:
+                          type:
+                            coding:
+                              - system: eHealth/resources
+                                code: activity
+                          value: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                    context:
+                      identifier:
+                        type:
+                          coding:
+                            - system: eHealth/resources
+                              code: encounter
+                        value: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                    dosage_instruction:
+                      - sequence: 1
+                        text: 0.25mg PO every 6-12 hours as needed for menses from Jan 15-20, 2015.  Do not exceed more than 4mg per day
+                        additional_instruction:
+                          - coding:
+                              - system: eHealth/SNOMED/additional_dosage_instructions
+                                code: '311504000'
+                        patient_instruction: 0.25mg PO every 6-12 hours as needed for menses from Jan 15-20, 2015.  Do not exceed more than 4mg per day
+                        timing:
+                          event:
+                            - '2017-04-20T19:14:13Z'
+                          repeat:
+                            bounds_duration:
+                              value: 10
+                              unit: days
+                              system: eHealth/ucum/units
+                              code: d
+                            count: 2
+                            count_max: 4
+                            duration: 4
+                            duration_max: 6
+                            duration_unit: d
+                            frequency: 1
+                            frequency_max: 2
+                            period: 4
+                            period_max: 6
+                            period_unit: d
+                            day_of_week:
+                              - mon
+                            time_of_day:
+                              - '2017-04-20T19:14:13Z'
+                            when:
+                              - WAKE
+                            offset: 4
+                          code:
+                            coding:
+                              - system: TIMING_ABBREVIATIONS
+                                code: patient
+                        as_needed_boolean: true
+                        site:
+                          coding:
+                            - system: eHealth/SNOMED/anatomical_structure_administration_site_codes
+                              code: '344001'
+                        route:
+                          coding:
+                            - system: eHealth/SNOMED/route_codes
+                              code: '46713006'
+                        method:
+                          coding:
+                            - system: eHealth/SNOMED/administration_methods
+                              code: '419747000'
+                        dose_and_rate:
+                          type:
+                            coding:
+                              - system: eHealth/dose_and_rate
+                                code: ordered
+                          dose_range:
+                            low:
+                              value: 13
+                              unit: mg
+                              system: eHealth/ucum/units
+                              code: mg
+                            high:
+                              value: 13
+                              unit: mg
+                              system: eHealth/ucum/units
+                              code: mg
+                          rate_ratio:
+                            numerator:
+                              value: 13
+                              unit: mg
+                              system: eHealth/ucum/units
+                              code: mg
+                            denominator:
+                              value: 13
+                              unit: mg
+                              system: eHealth/ucum/units
+                              code: mg
+                        max_dose_per_period:
+                          numerator:
+                            value: 13
+                            unit: mg
+                            system: eHealth/ucum/units
+                            code: mg
+                          denominator:
+                            value: 13
+                            unit: mg
+                            system: eHealth/ucum/units
+                            code: mg
+                        max_dose_per_administration:
+                          value: 13
+                          unit: mg
+                          system: eHealth/ucum/units
+                          code: mg
+                        max_dose_per_lifetime:
+                          value: 13
+                          unit: mg
+                          system: eHealth/ucum/units
+                          code: mg
+                    reject_reason: Incompatible drugs
+                    reject_reason_code: PATIENT_REJECT
+                    block_reason: Підозра на фрод
+                    block_reason_code: BLOCK_WRONG_QTY_DRUG
+                    priority: routine
+                    prior_prescription:
+                      identifier:
+                        type:
+                          coding:
+                            - system: eHealth/resources
+                              code: medication_request
+                        value: 9183a36b-4d45-4244-9339-63d81cd08d9c
+                    container_dosage:
+                      system: MEDICATION_UNIT
+                      code: ML
+                      value: 4
+                    note: some additional info
+                    blocked_to: '2021-12-18T14:40:16Z'
+                    blocked_by_legal_entity:
+                      id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      name: Клініка Ноунейм
+                      short_name: Ноунейм
+                      public_name: Клініка Ноунейм
+                      type: MSP
+                      edrpou: '5432345432'
+                      status: ACTIVE
+                    inform_with: ce74e177-9c3b-4426-aeec-294674f2d65a
+                    medication_info:
+                      medication_id: 4a63b858-c138-4921-9341-ae9e384bcbd6
+                      medication_name: Аміодарон 200мг таблетки
+                      form: PILL
+                      dosage:
+                        numerator_unit: MG
+                        numerator_value: 200
+                        denumerator_unit: PILL
+                        denumerator_value: 1
+                      ingredients:
+                        - id: 1349a693-4db1-4a3f-9ac6-8c2f9e541982
+                          name: Інсулін деглюдек
+                          name_original: Insulin degludec
+                          sctid: '52574003'
+                          dosage:
+                            numerator_unit: MG
+                            numerator_value: 200
+                            denumerator_unit: PILL
+                            denumerator_value: 1
+                          is_primary: true
+                      medication_qty: 10.34
+                      medication_remaining_qty: 10.23
+                paging:
+                  page_number: 2
+                  page_size: 50
+                  total_entries: 1000
+                  total_pages: 23
+      summary: Search for a Medication requests by Pharmacy User
+      operationId: Search for a Medication requests by Pharmacy User
+      description: "Scope required: `medication_request:read_pharm`\n\nUse this method by pharmacy user to search for short Medication Requests by request_number."
+      tags:
+        - Public. Reimbursement
+      parameters:
+        - name: request_number
+          in: query
+          description: '`Medication Request request_number`'
+          required: true
+          example: 0000-P692-3549-T722
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
 components:
   schemas:
     Responses:

@@ -102846,6 +102846,162 @@ paths:
           schema:
             type: string
           example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/connections:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                        type: string
+                        description: Unique connection id
+                      client_id:
+                        example: c4a6d45f-2cf2-4e6d-909a-5962604ad63b
+                        type: string
+                        description: Unique connection id
+                      consumer_id:
+                        example: 25c03af6-69bd-439e-b0dd-f1669b3dbbfd
+                        type: string
+                        description: Unique connection id
+                      redirect_uri:
+                        example: https://example2.com
+                        type: string
+                    required:
+                      - id
+                      - client_id
+                      - consumer_id
+                      - redirect_uri
+                    additionalProperties: false
+              example:
+                meta:
+                  code: '3114'
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: df9f70ee-4b12-4740-b0f5-bb5aea116863
+                  client_id: c4a6d45f-2cf2-4e6d-909a-5962604ad63b
+                  consumer_id: 25c03af6-69bd-439e-b0dd-f1669b3dbbfd
+                  redirect_uri: https://example2.com
+      summary: Create client connection
+      operationId: Create client connection
+      description: "Using this method, owner of LE can create additional connection for another MIS\n\n**Scopes required:** `connection:write`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: API-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: '...'
+              signed_content_encoding: base64
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  example: '...'
+                  type: string
+                signed_content_encoding:
+                  example: base64
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+  /api/persons/{person_id}/medication_requests/{medication_requests_id}/price_catalog_link:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                        type: string
+                        description: medication request identifier
+                      price_catalog_link:
+                        example: https://npctest.e-life.com.ua/search-prescription
+                        type: string
+                        description: Link to State Price Catalog
+                    required:
+                      - id
+                      - price_catalog_link
+              example:
+                meta:
+                  code: '3114'
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  price_catalog_link: https://npctest.e-life.com.ua/search-prescription
+      summary: Get Medication Request Price Catalog link
+      operationId: Get Medication Request Price Catalog link
+      description: "***Scope  medication_request:details***\n\nThis method is designed to return link to State Price Catalog for prescribed medication. This link is needed to inform the patient about the available brands and their prices in the context of the prescribed medication"
+      tags:
+        - Public. Reimbursement
+      parameters:
+        - name: person_id
+          in: path
+          description: Person identifier
+          required: true
+          example: 5e661b15-a39a-4713-b18e-ba03a4a48ecc
+          schema:
+            type: string
+        - name: medication_requests_id
+          in: path
+          description: Medication request identifier
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
 components:
   schemas:
     Responses:
