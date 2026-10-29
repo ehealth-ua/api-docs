@@ -20,7 +20,7 @@
       "page": "index.html",
       "slug": "general-mis",
       "source": "specs/general-mis.yaml",
-      "source_sha256": "d5a80127baddc6024bfab3b67b140888dd2e33dd0fe53906c45f1d03b259b5c6",
+      "source_sha256": "d2f16bb24de4204e4c14b58d3506c2a06d68b02bdcc7e510129d9232705bc0be",
       "page_sha256": "68c9828c11ca464d2e70ac59e5824aadfa82f108fd05ded80030503644e51f80"
     },
     "scalar-docs/medical-events.json": {

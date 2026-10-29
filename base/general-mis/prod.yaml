@@ -102879,6 +102879,282 @@ paths:
           schema:
             type: string
           example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/employees/{employee_id}/short:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+                        type: string
+                      position:
+                        example: P8
+                        type: string
+                        description: '`Dictionary POSITION`'
+                      party:
+                        type: object
+                        properties:
+                          id:
+                            example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                            type: string
+                          first_name:
+                            example: Петро
+                            type: string
+                          last_name:
+                            example: Іванов
+                            type: string
+                          second_name:
+                            example: Миколайович
+                            type: string
+                        required:
+                          - id
+                          - first_name
+                          - last_name
+                    required:
+                      - id
+                      - position
+                      - party
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  position: P8
+                  party:
+                    id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+      summary: Get Employee short details
+      operationId: Get Employee short details
+      description: "Use this end-point to obtain short information about employee.\n\n**Scopes required:** `employee:read`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: employee_id
+          in: path
+          description: ''
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/persons/{id}/confidant_person_relationship_requests/update:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        type: string
+                      status:
+                        example: NEW
+                        type: string
+                        enum:
+                          - NEW
+                        description: current status on relationship request.
+                      action:
+                        example: UPDATE
+                        type: string
+                        enum:
+                          - UPDATE
+                        description: action that initiates by request creation.
+                      channel:
+                        example: MIS
+                        type: string
+                        enum:
+                          - MIS
+                        description: channel that invokes the adding or updating of relationship request.
+                    required:
+                      - id
+                      - channel
+                  urgent:
+                    type: object
+                    properties:
+                      authentication_method_current:
+                        type: object
+                        properties:
+                          type:
+                            example: OTP
+                            type: string
+                            enum:
+                              - OTP
+                              - OFFLINE
+                          phone_number:
+                            example: +38093*****81
+                            type: string
+                        required:
+                          - type
+                        description: if the person doesn't have active auth methods, then this block will be nill
+                      documents:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Document'
+                    required:
+                      - authentication_method_current
+                      - documents
+                required:
+                  - urgent
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  status: NEW
+                  action: UPDATE
+                  channel: MIS
+                urgent:
+                  authentication_method_current:
+                    type: OTP
+                    phone_number: +38093*****81
+                  documents:
+                    - type: PASSPORT
+                      url: https://storage.ehealth.world
+        '422':
+          description: Unprocessable Entity
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        example: request_malformed
+                        type: string
+                        description: Atom that represents error type.
+                      message:
+                        example: This patient has X confidants and can not have more
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
+                    required:
+                      - type
+                      - message
+                    additionalProperties: false
+              example:
+                meta:
+                  code: '422'
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                error:
+                  type: request_malformed
+                  message: This patient has X confidants and can not have more
+      summary: Update Confidant Person relationship request
+      operationId: Update Confidant Person relationship request
+      description: "This method allows to update Confidant Person relationship.\n\n**Scopes required:** `confidant_person_relationship_request:write`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: Person identifier
+          required: true
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: api-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      requestBody:
+        content:
+          application/json:
+            example:
+              confidant_person_relationship:
+                id: 7b100a9c-daaa-490e-b88d-2a911059b055
+                documents_relationship:
+                  - type: COURT_DECISION
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    active_to: '2025-08-19'
+              authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6
+            schema:
+              type: object
+              properties:
+                confidant_person_relationship:
+                  type: object
+                  properties:
+                    id:
+                      example: 7b100a9c-daaa-490e-b88d-2a911059b055
+                      type: string
+                      description: identifier of person relationship that will be deactivated
+                    documents_relationship:
+                      type: array
+                      items: {}
+                  required:
+                    - id
+                    - documents_relationship
+                authorize_with:
+                  example: cc949559-5dfe-420f-ac05-065e443b2cc6
+                  type: string
+                  description: identifier of person's auth method
+              required:
+                - confidant_person_relationship
 components:
   schemas:
     Responses:
@@ -136906,3 +137182,66 @@ components:
             type: array
             items:
               type: string
+    Employee_details_short_Response:
+      type: object
+      required:
+        - id
+        - position
+      properties:
+        id:
+          type: string
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        position:
+          type: string
+          description: '`Dictionary POSITION`'
+          example: P8
+        party:
+          $ref: '#/components/schemas/Party_Response_short'
+      example:
+        id: d290f1ee-6c54-4b01-90e6-d701748f0851
+        position: P8
+        party:
+          id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          first_name: Петро
+          last_name: Іванов
+          second_name: Миколайович
+    Party_Response_short:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+    Update_Confidant_Person_request:
+      type: object
+      required:
+        - confidant_person_relationship
+      properties:
+        confidant_person_relationship:
+          type: object
+          required:
+            - id
+            - documents_relationship
+          properties:
+            id:
+              type: string
+              description: identifier of person relationship that will be deactivated
+              example: 7b100a9c-daaa-490e-b88d-2a911059b055
+            documents_relationship:
+              type: array
+              items: {}
+        authorize_with:
+          type: string
+          description: identifier of person's auth method
+          example: cc949559-5dfe-420f-ac05-065e443b2cc6
+      example:
+        confidant_person_relationship:
+          id: 7b100a9c-daaa-490e-b88d-2a911059b055
+          documents_relationship:
+            - type: COURT_DECISION
+              number: АА120518
+              issued_by: Рокитнянським РВ ГУ МВС Київської області
+              issued_at: '2017-02-28'
+              active_to: '2025-08-19'
+        authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6

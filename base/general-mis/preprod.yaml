@@ -1676,8 +1676,7 @@ paths:
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
                     code: '3114'
-                    settings: '{"DEVICE_REQUIRED_PARAMETERS": [{"check": [{"code": "presence_of_brakes",
-                      "system": "device_request_code_parameter"}]}]}'
+                    settings: '{"DEVICE_REQUIRED_PARAMETERS": [{"check": [{"code": "presence_of_brakes", "system": "device_request_code_parameter"}]}]}'
                     system: device_code_system
                     is_active: true
                     inserted_at: '2017-04-20T19:14:13Z'
@@ -1877,8 +1876,7 @@ paths:
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
                     code: presence_of_a_hygienic_hole
-                    settings: '{"DEVICE_PARAMETER_DATA_TYPE": {"check": "codeable_concept"}, "DEVICE_PARAMETER_DICTIONARY":
-                      {"check": "device_properties"}}'
+                    settings: '{"DEVICE_PARAMETER_DATA_TYPE": {"check": "codeable_concept"}, "DEVICE_PARAMETER_DICTIONARY": {"check": "device_properties"}}'
                     system: device_request_code_parameter
                     is_active: true
                     inserted_at: '2017-04-20T19:14:13Z'
@@ -2073,21 +2071,7 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 data:
                   - id: e477a845-972b-47a1-8ca3-1c71e4fd00c2
-                    settings: '[{"codes": ["18_03_06", "12_22_06", "06_03_15", "18_12_10", "09_33_07",
-                      "06_06_15", "22_27_12", "09_12_15", "09_12_12", "06_24_09", "12_06_06", "12_22_18",
-                      "12_36_12", "09_12_03", "06_18_18", "04_48_15", "12_03_12", "12_06_12", "09_33_05",
-                      "09_06_24", "06_18_03", "06_18_06", "04_33_03", "09_06_15", "18_18_06", "06_06_13",
-                      "06_18_15", "18_09_03", "18_18_03", "12_22_09", "18_03_15", "06_12_19", "09_12_09",
-                      "06_12_17", "06_12_16", "06_06_21", "06_03_12", "06_03_18", "12_03_16", "06_24_03",
-                      "12_18_06", "18_12_07", "06_24_06", "06_12_13", "12_06_03", "12_23_06", "06_24_18",
-                      "09_03_24", "06_24_40", "12_06_09", "12_07_05", "12_23_03", "09_12_25", "12_03_09",
-                      "06_03_06", "06_06_24", "06_24_15", "06_12_09", "15_03_03", "06_24_12", "06_06_06",
-                      "06_12_18", "06_06_20", "09_06_18", "04_33_06", "04_48_07", "18_09_39", "18_09_21",
-                      "12_27_15", "06_18_21", "06_06_30", "05_36_03", "06_18_12", "18_12_18", "06_18_45",
-                      "12_39_03", "09_06_12", "06_30_18", "05_36_06", "06_06_12", "06_06_19", "06_03_03",
-                      "06_12_12", "04_06_06", "06_06_03", "06_18_09", "06_12_03", "12_03_06", "22_24_06",
-                      "12_22_03", "18_30_21", "22_27_04", "06_03_09", "12_24_24", "12_36_03", "22_18_03",
-                      "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
+                    settings: '[{"codes": ["18_03_06", "12_22_06", "06_03_15", "18_12_10", "09_33_07", "06_06_15", "22_27_12", "09_12_15", "09_12_12", "06_24_09", "12_06_06", "12_22_18", "12_36_12", "09_12_03", "06_18_18", "04_48_15", "12_03_12", "12_06_12", "09_33_05", "09_06_24", "06_18_03", "06_18_06", "04_33_03", "09_06_15", "18_18_06", "06_06_13", "06_18_15", "18_09_03", "18_18_03", "12_22_09", "18_03_15", "06_12_19", "09_12_09", "06_12_17", "06_12_16", "06_06_21", "06_03_12", "06_03_18", "12_03_16", "06_24_03", "12_18_06", "18_12_07", "06_24_06", "06_12_13", "12_06_03", "12_23_06", "06_24_18", "09_03_24", "06_24_40", "12_06_09", "12_07_05", "12_23_03", "09_12_25", "12_03_09", "06_03_06", "06_06_24", "06_24_15", "06_12_09", "15_03_03", "06_24_12", "06_06_06", "06_12_18", "06_06_20", "09_06_18", "04_33_06", "04_48_07", "18_09_39", "18_09_21", "12_27_15", "06_18_21", "06_06_30", "05_36_03", "06_18_12", "18_12_18", "06_18_45", "12_39_03", "09_06_12", "06_30_18", "05_36_06", "06_06_12", "06_06_19", "06_03_03", "06_12_12", "04_06_06", "06_06_03", "06_18_09", "06_12_03", "12_03_06", "22_24_06", "12_22_03", "18_30_21", "22_27_04", "06_03_09", "12_24_24", "12_36_03", "22_18_03", "12_18_09", "12_03_03", "12_31_18", "06_12_15", "06_12_06"], "system": "eHealth/assistive_devices"}]'
                     name: assistive_devices
                     is_active: true
                     inserted_at: '2017-04-20T19:14:13Z'
@@ -103002,6 +102986,194 @@ paths:
           schema:
             type: string
           example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/persons/{id}/confidant_person_relationship_requests/update:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        type: string
+                      status:
+                        example: NEW
+                        type: string
+                        enum:
+                          - NEW
+                        description: current status on relationship request.
+                      action:
+                        example: UPDATE
+                        type: string
+                        enum:
+                          - UPDATE
+                        description: action that initiates by request creation.
+                      channel:
+                        example: MIS
+                        type: string
+                        enum:
+                          - MIS
+                        description: channel that invokes the adding or updating of relationship request.
+                    required:
+                      - id
+                      - channel
+                  urgent:
+                    type: object
+                    properties:
+                      authentication_method_current:
+                        type: object
+                        properties:
+                          type:
+                            example: OTP
+                            type: string
+                            enum:
+                              - OTP
+                              - OFFLINE
+                          phone_number:
+                            example: +38093*****81
+                            type: string
+                        required:
+                          - type
+                        description: if the person doesn't have active auth methods, then this block will be nill
+                      documents:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Document'
+                    required:
+                      - authentication_method_current
+                      - documents
+                required:
+                  - urgent
+              example:
+                meta:
+                  code: '3114'
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  status: NEW
+                  action: UPDATE
+                  channel: MIS
+                urgent:
+                  authentication_method_current:
+                    type: OTP
+                    phone_number: +38093*****81
+                  documents:
+                    - type: PASSPORT
+                      url: https://storage.ehealth.world
+        '422':
+          description: Unprocessable Entity
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        example: request_malformed
+                        type: string
+                        description: Atom that represents error type.
+                      message:
+                        example: This patient has X confidants and can not have more
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
+                    required:
+                      - type
+                      - message
+                    additionalProperties: false
+              example:
+                meta:
+                  code: '422'
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                error:
+                  type: request_malformed
+                  message: This patient has X confidants and can not have more
+      summary: Update Confidant Person relationship request
+      operationId: Update Confidant Person relationship request
+      description: "This method allows to update Confidant Person relationship.\n\n**Scopes required:** `confidant_person_relationship_request:write`"
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: Person identifier
+          required: true
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: api-key
+          in: header
+          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
+          required: false
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      requestBody:
+        content:
+          application/json:
+            example:
+              confidant_person_relationship:
+                id: 7b100a9c-daaa-490e-b88d-2a911059b055
+                documents_relationship:
+                  - type: COURT_DECISION
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    active_to: '2025-08-19'
+              authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6
+            schema:
+              type: object
+              properties:
+                confidant_person_relationship:
+                  type: object
+                  properties:
+                    id:
+                      example: 7b100a9c-daaa-490e-b88d-2a911059b055
+                      type: string
+                      description: identifier of person relationship that will be deactivated
+                    documents_relationship:
+                      type: array
+                      items: {}
+                  required:
+                    - id
+                    - documents_relationship
+                authorize_with:
+                  example: cc949559-5dfe-420f-ac05-065e443b2cc6
+                  type: string
+                  description: identifier of person's auth method
+              required:
+                - confidant_person_relationship
 components:
   schemas:
     Responses:
@@ -137280,3 +137452,35 @@ components:
             type: array
             items:
               type: string
+    Update_Confidant_Person_request:
+      type: object
+      required:
+        - confidant_person_relationship
+      properties:
+        confidant_person_relationship:
+          type: object
+          required:
+            - id
+            - documents_relationship
+          properties:
+            id:
+              type: string
+              description: identifier of person relationship that will be deactivated
+              example: 7b100a9c-daaa-490e-b88d-2a911059b055
+            documents_relationship:
+              type: array
+              items: {}
+        authorize_with:
+          type: string
+          description: identifier of person's auth method
+          example: cc949559-5dfe-420f-ac05-065e443b2cc6
+      example:
+        confidant_person_relationship:
+          id: 7b100a9c-daaa-490e-b88d-2a911059b055
+          documents_relationship:
+            - type: COURT_DECISION
+              number: АА120518
+              issued_by: Рокитнянським РВ ГУ МВС Київської області
+              issued_at: '2017-02-28'
+              active_to: '2025-08-19'
+        authorize_with: cc949559-5dfe-420f-ac05-065e443b2cc6
