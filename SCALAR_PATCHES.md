@@ -24,7 +24,7 @@ rebase-oriented ledger**. If they disagree, fix both.
 | Upstream base | `scalar/scalar` `main` @ `46802789` (2026-07-29), i.e. between `@scalar/api-reference` 1.63.0 (2026-07-20) and 1.64.0 |
 | Upstream latest at last review | `1.76.0` (2026-10-23) — reviewed 2026-10-25, **not adopted** (see [Upstream review log](#upstream-review-log)) |
 | Bundle format | UMD `dist/browser/standalone.js`, self-contained (`grep -c 'chunks/'` must be `0`) |
-| Built how | Source build for the base; patches P3–P10 are **hand edits of the minified output** (not source-level). |
+| Built how | Source build for the base; patches P3–P11 are **hand edits of the minified output** (not source-level). |
 
 > **Minified names (`Ib`, `TRe`, `Rb`, `y9`…) change on every rebuild.** The
 > "Where" column gives the *source* location to re-find the code; the
@@ -58,6 +58,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 | P8 | Large request examples keep highlighting + copy button | local | bundle | UX (**unshipped**) |
 | P9 | Request bodies always render all top-level attributes (no "Show additional properties") | local (= upstream config, 1.76) | bundle | config constant |
 | P10 | "Expand all / Collapse all" attributes button in the request-body header | local | bundle | UX feature |
+| P11 | "Expand all / Collapse all" button in the Responses section | local | bundle | UX feature |
 
 ### P1 + P2 — multi-group `oneOf` (backport)
 - **Upstream:** scalar/scalar#9727 → PR #9732, merged 2026-07-27. Contained in our base `46802789`.
@@ -155,6 +156,17 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 - **Out of scope (not done):** response bodies and parameter sections have no such button; the same `EXP` pattern can be added to `ExampleResponse`'s schema if wanted.
 - **Verification & review plan:** in the PR (MANUAL REVIEW PLAN).
 
+### P11 — "Expand all / Collapse all" in the Responses section
+- **Need:** same as P10, for the left-column **Responses** list (each status code is a collapsed item holding an attribute tree).
+- **Where (source):** `OperationResponses.vue` (heading + list) and `ParameterListItem.vue` (the per-status `Disclosure`; `collapsableItems`).
+- **Mechanism:** identical to P10 (state `EXP`, depth ref `EXPD` provided under `Symbol.for('ehealth.expandDepth')`, staged one level per frame by `runExp`), plus: the status item itself must open. `OperationResponses` passes `options:{...e.options, expandAllSchemaProperties: EXP}` to every item; `ParameterListItem`'s Disclosure gets `key` / `defaultOpen` from `collapsableItems && options.expandAllSchemaProperties`, so each status code opens and re-mounts with its tree. Path/query/header lists (`collapsableItems` false) are untouched.
+- **Change (bundle, 3 edits):**
+  1. `OperationResponses` setup: `EXP`, `EXPD`, `runExp`, `OPTR` (options with the flag), `hasTree` (any response with content/headers).
+  2. its template: heading `<div>` → flex row `[<span>Responses</span>, <button class="response-expand-all …">]` (same icon/aria/`patchFlag 16` + svg `key` rules as P10), items get `options: OPTR.value`.
+  3. `ParameterListItem`: `{defaultOpen:d.value}` → `{key:…,defaultOpen:d.value||!!(collapsableItems&&options?.expandAllSchemaProperties)}`.
+- **Rebase notes:** same as P10 (use upstream's schema-expansion store if present); keep P10 + P11 consistent — the stepper code is duplicated in `RequestBody` and `OperationResponses` (separate module scopes in the minified bundle).
+- **Verification & review plan:** in the PR.
+
 ## Spec-side & tooling dependencies (what a bundle swap can break)
 
 | Dependency | Why it matters on upgrade |
@@ -170,7 +182,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 1. `npm view @scalar/api-reference time --json` → pick target; read `packages/{api-reference,blocks,workspace-store}/CHANGELOG.md` between versions.
 2. For each patch above: open the **Where (source)** files at the target tag; decide *obsolete / still needed / needs re-port*. Prefer re-porting at **source level** (new patch files under a `patches/` dir in a Scalar checkout) over hand-editing minified output; record the commit SHA built from.
 3. Build: `pnpm turbo build --filter=@scalar/api-reference...`; vendor only `dist/browser/standalone.js`; confirm `grep -c 'chunks/'` = 0.
-4. Re-apply/verify P3–P10 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
+4. Re-apply/verify P3–P11 (P9 → config `maxVisibleRequestBodyProperties: 0` on ≥ 1.76), then `prebuild.mjs` (re-anchor), regenerate `scalar-docs/`.
 5. **Zero-regression gate:** for every service × env, compare rendered output old-bundle vs new-bundle (the generated `scalar-docs/*.json` for the same YAML, and DOM/example text for sampled routes: all pickers listed in P4–P6, `encounter_package`, `/decoded-payload` ops, observation demo). Specs themselves must be byte-identical (`git diff --stat portal/specs` empty).
 6. Sandbox (`:8095`) first, then both repos in the same PR set; update the cache-bust hash everywhere (`reference.html`, `index.html`, `observation-oneof-demo.html`) per the rule below.
 7. Update this file: build table, per-patch status, review log.
