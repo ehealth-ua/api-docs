@@ -677,7 +677,6 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
@@ -927,14 +926,12 @@ paths:
             type: number
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1045,14 +1042,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1087,14 +1082,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1156,14 +1149,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1222,14 +1213,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1683,14 +1672,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1912,14 +1899,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2204,14 +2189,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2297,14 +2280,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2433,14 +2414,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2545,14 +2524,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2707,14 +2684,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2863,14 +2838,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -3191,14 +3164,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -3576,14 +3547,12 @@ paths:
             type: number
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -3666,14 +3635,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -4018,14 +3985,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -4331,7 +4296,6 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
@@ -4529,14 +4493,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -4756,14 +4718,12 @@ paths:
             type: number
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -5505,14 +5465,12 @@ paths:
           example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -6398,14 +6356,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -6699,14 +6655,12 @@ paths:
             type: number
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -8173,14 +8127,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -9669,14 +9621,12 @@ paths:
           example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -10544,14 +10494,12 @@ paths:
             type: string
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
           required: true
           schema:
             type: string
           example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -10823,7 +10771,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -11164,7 +11111,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -11455,7 +11401,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -11789,7 +11734,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -11916,7 +11860,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -12141,7 +12084,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -12198,7 +12140,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -12249,7 +12190,6 @@ paths:
       parameters:
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -12363,7 +12303,6 @@ paths:
             type: string
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -12602,7 +12541,6 @@ paths:
             type: number
         - name: api-key
           in: header
-          description: e.g. L0RWeXV6a2tQWEp3OTJaM0RkYzBmQT09
           required: true
           schema:
             type: string
@@ -13696,21 +13634,18 @@ paths:
             type: number
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: false
           schema:
             type: string
           example: uXhEczJ56adsfh3Ri9SUkc4en
         - name: X-Custom-PSK
           in: header
-          description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
           required: true
           schema:
             type: string
