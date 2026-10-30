@@ -1,0 +1,3984 @@
+openapi: 3.1.0
+info:
+  title: eHealth PIS Private API
+  version: 1.0.0
+  description: |-
+    Private methods of the eHealth Patient Information System (PIS) used only by the eHealth Auth service and the Auth front-end client.
+    These endpoints are not available to outside API consumers.
+tags:
+  - name: Private. Patient Information System
+    description: |-
+      This set of endpoints are private and used only by eHealth Auth service.
+
+      This endpoints shouldn't be obtained by outside API consumers.
+paths:
+  /auth/login:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        description: oAuth access token.
+                      user_id:
+                        type: string
+                        description: User identifier
+                      user:
+                        type: object
+                        properties:
+                          person_id:
+                            type: string
+                            description: Person identifier that is linked to user
+                        description: Additional user params
+                      name:
+                        type: string
+                        description: oAuth token name
+                      id:
+                        type: string
+                        description: oAuth token identifier
+                      expires_at:
+                        type: number
+                        description: expiration date-time timestamp
+                      details:
+                        type: object
+                        properties:
+                          app_id:
+                            type: string
+                            description: Identifier of approval between user, applicant user and client that was used to issue access token
+                          applicant_user_id:
+                            type: string
+                            description: Identifier of user that initiated access token generation
+                          applicant_person_id:
+                            type: string
+                            description: Identifier of person that is accosiated with user who initiated access token generation
+                          scope:
+                            type: string
+                            description: List of scopes that is required in application business logic, separated by space
+                          refresh_token:
+                            type: string
+                            description: oAuth refresh token
+                          redirect_uri:
+                            type: string
+                            description: Redirect URI
+                          grant_type:
+                            type: string
+                          client_id:
+                            type: string
+                            description: Client ID of authorized user.
+                        required:
+                          - scope
+                          - refresh_token
+                          - redirect_uri
+                          - client_id
+                    required:
+                      - value
+                      - user_id
+                      - user
+                      - name
+                      - id
+                      - expires_at
+                      - details
+                    additionalProperties: false
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                  urgent:
+                    type: object
+                    properties:
+                      next_step:
+                        type: string
+                        enum:
+                          - REQUEST_FACTOR
+                          - REQUEST_OTP
+                          - REQUEST_APPS
+                          - RESEND_OTP
+                        description: Next step of authorization process.
+                    required:
+                      - next_step
+                required:
+                  - urgent
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  value: SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09
+                  user_id: 3ff33ced-69dc-415a-b231-c6446898335a
+                  user:
+                    person_id: 2b5e9656-8750-49b3-8c5c-b9c344f8fe52
+                  name: access_token
+                  id: 3ff33ced-69dc-415a-b231-c6446898335a
+                  expires_at: 1498749591
+                  details:
+                    app_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    applicant_user_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    applicant_person_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                    scope: capitation_contracts:view capitation_contracts:create patients:view patients:create
+                    refresh_token: my-oauth-refresh-token
+                    redirect_uri: https://example.com/
+                    grant_type: authorization_code
+                    client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+                urgent:
+                  next_step: REQUEST_FACTOR
+      summary: Patient login
+      operationId: Patient login
+      description: This endpoint should be reachable only by the eHealth authorization front-end application.
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              token:
+                client_id: 6498d88e-97fb-47e2-85a5-99e884f888aa
+                grant_type: pis_auth
+                signed_content: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJFSGVhbHRoIiwibm9uY2UiOiIxMjM0NSIsImV4cCI6MTUyMjM0MTExOSwiaWF0IjoxNTIyMDgxOTE5LCJpc3MiOiJFSGVhbHRoIiwianRpIjoiNWZlNzhiNzUtODQ5Zi00M2UzLTlmMzYtZWRhZWY1MmVkNzNjIiwibmJmIjoxNTIyMDgxOTE4LCJzdWIiOiIxMjM0NSIsInR5cCI6ImFjY2VzcyJ9.N_RALR_8QMzY637pzQfSAM57pW4IFCU3eGJeqfry34_me0gJbJRVhYx8NltSoBFkmCM3ROMpdp-ARUUWYNyfkA
+                signed_content_encoding: base64
+                scope: app:authorize profile:read
+            schema:
+              type: object
+              properties:
+                token:
+                  type: object
+                  properties:
+                    client_id:
+                      type: string
+                      description: auth application client_id in mithril
+                    grant_type:
+                      type: string
+                      enum:
+                        - pis_auth
+                      description: oAuth Grant Type.
+                    signed_content:
+                      type: string
+                      description: encoded sign-in content.
+                    signed_content_encoding:
+                      type: string
+                      description: signed content encoding type.
+                    scope:
+                      type: string
+                      description: list of scopes that is required in application business logic, separated by space.
+                  required:
+                    - client_id
+                    - grant_type
+                    - signed_content
+                    - signed_content_encoding
+                    - scope
+              required:
+                - token
+  /oauth/apps/authorize:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers:
+            Location:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Internal app ID, a UUID string.
+                      created_at:
+                        type: string
+                        description: ISO 8601 date and time in UTC timezone.
+                      updated_at:
+                        type: string
+                        description: ISO 8601 date and time in UTC timezone.
+                      user_id:
+                        type: string
+                        description: Internal user ID, a UUID string.
+                      applicant_user_id:
+                        type: string
+                        description: Internal user ID, a UUID string.
+                      client_name:
+                        type: string
+                        description: Internal client name, string.
+                      client_id:
+                        type: string
+                        description: Internal client ID, a UUID string.
+                      scope:
+                        type: string
+                        description: Scope, in a space-delimited format.
+                    required:
+                      - id
+                      - created_at
+                      - updated_at
+                      - user_id
+                      - applicant_user_id
+                      - client_name
+                      - client_id
+                      - scope
+                    additionalProperties: false
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  id: 1380df72-275a-11e7-93ae-92361f002671
+                  created_at: '2017-04-20T19:14:13Z'
+                  updated_at: '2017-04-20T19:14:13Z'
+                  user_id: 1380df72-275a-11e7-93ae-92361f002671
+                  applicant_user_id: 1380df72-275a-11e7-93ae-92361f002671
+                  client_name: Clinic N1
+                  client_id: 1380df72-275a-11e7-93ae-92361f002671
+                  scope: notebooks:read notebooks:create patients:read
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        description: oAuth grant code
+                      user_id:
+                        type: string
+                        description: user identifier
+                      name:
+                        type: string
+                        description: oAuth token name
+                      id:
+                        type: string
+                        description: oAuth token identifier
+                      expires_at:
+                        type: number
+                        description: expiration date-time timestamp
+                      details:
+                        type: object
+                        properties:
+                          scope_request:
+                            type: string
+                            description: list of scopes that are granted with the token
+                          redirect_uri:
+                            type: string
+                            description: client Redirect URL pattern to protect from malicious redirects
+                          grant_type:
+                            type: string
+                          client_id:
+                            type: string
+                            description: client ID of authorized user
+                        required:
+                          - scope_request
+                          - redirect_uri
+                          - grant_type
+                          - client_id
+                    required:
+                      - value
+                      - user_id
+                      - name
+                      - id
+                      - expires_at
+                      - details
+                    additionalProperties: false
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                  urgent:
+                    type: object
+                    properties:
+                      redirect_uri:
+                        type: string
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  value: authorization_code-cTdHUE9jN29yWHo0VTAwL3lwSVRoUT09
+                  user_id: 3ff33ced-69dc-415a-b231-c6446898335a
+                  name: authorization_code
+                  id: 3ff33ced-69dc-415a-b231-c6446898335a
+                  expires_at: 1498749591
+                  details:
+                    scope_request: capitation_contracts:view capitation_contracts:create patients:view patients:create
+                    redirect_uri: http://example.com/my_success_login_page
+                    grant_type: password
+                    client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+                urgent:
+                  redirect_uri: http://example.com/my_success_login_page?code=authorization_code-cTdHUE9jN29yWHo0VTAwL3lwSVRoUT09
+      summary: Authorize an Approval
+      operationId: Authorize an Approval
+      description: |-
+        This endpoint should be reachable only by the eHealth authorization front-end application.
+        It will update or create Approval. It's idempotent.
+
+        After creating Approval user should be redirected to `redirect_url` with `code` query parameter.
+      tags:
+        - Private. Patient Information System
+      parameters:
+        - name: Authorization
+          in: header
+          description: e.g. Bearer 432fsdfg543252345tfgdsgdft2345 - access_token with the `app:authorize` scope
+          required: false
+          schema:
+            type: string
+          example: Bearer 432fsdfg543252345tfgdsgdft2345 - access_token with the `app:authorize` scope
+      requestBody:
+        content:
+          application/json:
+            example:
+              app:
+                client_id: client-1380df72-275a-11e7-93ae-92361f002671
+                scope: notebooks:read notebooks:create patients:read
+                redirect_uri: http://example.com/my_success_login_page
+            schema:
+              type: object
+              properties:
+                app:
+                  type: object
+                  properties:
+                    client_id:
+                      type: string
+                      description: ID of client that is granted with access to user's resources.
+                    scope:
+                      type: string
+                      description: List of scopes that are granted to the client on the user's behalf.
+                    redirect_uri:
+                      type: string
+                      description: URL of client where user will be redirected on Approval creation.
+                  required:
+                    - client_id
+                    - scope
+                    - redirect_uri
+              required:
+                - app
+  /api/pis/confidant/login:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                      token:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: oAuth access token.
+                          user_id:
+                            type: string
+                            description: User identifier
+                          user:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                                description: Person identifier that is linked to user
+                            description: Additional user params
+                          name:
+                            type: string
+                            description: oAuth token name
+                          id:
+                            type: string
+                            description: oAuth token identifier
+                          expires_at:
+                            type: number
+                            description: expiration date-time timestamp
+                          details:
+                            type: object
+                            properties:
+                              app_id:
+                                type: string
+                                description: Identifier of approval between user, applicant user and client that was used to issue access token
+                              applicant_user_id:
+                                type: string
+                                description: Identifier of user that initiated access token generation
+                              applicant_person_id:
+                                type: string
+                                description: Identifier of person that is accosiated with user who initiated access token generation
+                              scope:
+                                type: string
+                                description: List of scopes that is required in application business logic, separated by space
+                              refresh_token:
+                                type: string
+                                description: oAuth refresh token
+                              redirect_uri:
+                                type: string
+                                description: Redirect URI
+                              grant_type:
+                                type: string
+                              client_id:
+                                type: string
+                                description: Client ID of authorized user.
+                            required:
+                              - scope
+                              - refresh_token
+                              - redirect_uri
+                              - client_id
+                        required:
+                          - value
+                          - user_id
+                          - user
+                          - name
+                          - expires_at
+                    required:
+                      - user
+                      - access_token
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                  token:
+                    value: SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09
+                    user_id: 3ff33ced-69dc-415a-b231-c6446898335a
+                    user:
+                      person_id: 2b5e9656-8750-49b3-8c5c-b9c344f8fe52
+                    name: access_token
+                    id: 3ff33ced-69dc-415a-b231-c6446898335a
+                    expires_at: 1498749591
+                    details:
+                      app_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      applicant_user_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      applicant_person_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      scope: capitation_contracts:view capitation_contracts:create patients:view patients:create
+                      refresh_token: my-oauth-refresh-token
+                      redirect_uri: https://example.com/
+                      grant_type: authorization_code
+                      client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: Confidant patient login
+      operationId: Confidant patient login
+      description: |-
+        This endpoint is used to create authorization token for confidant person to approve or reject scopes request for related person
+
+        > **Note:** It could be done ONLY if there is a registered relation between actor (authenticated person) and related person
+
+        This endpoint must be used only by Auth UI client.
+
+        Look at [**Payload: Confidant patient login**](#tag/private-patient-information-system/POST/api/pis/confidant/login/decoded-payload) for more details.
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: ewogICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAiYmlydGhfZGF0ZSI6ICIxOTkxLTA4LTE5IiwKICAgICJiaXJ0aF9jb3VudHJ5IjogItCj0LrRgNCw0ZfQvdCwIiwKICAgICJiaXJ0aF9zZXR0bGVtZW50IjogItCS0ZbQvdC90LjRhtGPIiwKICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAiZW1haWwiOiAiZW1haWxAZXhhbXBsZS5jb20iLAogICAgInRheF9pZCI6ICIzMTI2NTA5ODE2IiwKICAgICJzZWNyZXQiOiAic2VjcmV0IiwKICAgICJkb2N1bWVudHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgIm51bWJlciI6ICIxMjA1MTgiLAogICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgfQogICAgXSwKICAgICJhZGRyZXNzZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJSRVNJREVOQ0UiLAogICAgICAgICJjb3VudHJ5IjogIlVBIiwKICAgICAgICAiYXJlYSI6ICLQltC40YLQvtC80LjRgNGB0YzQutCwIiwKICAgICAgICAicmVnaW9uIjogItCR0LXRgNC00LjRh9GW0LLRgdGM0LrQuNC5IiwKICAgICAgICAic2V0dGxlbWVudCI6ICLQmtC40ZfQsiIsCiAgICAgICAgInNldHRsZW1lbnRfdHlwZSI6ICJDSVRZIiwKICAgICAgICAic2V0dGxlbWVudF9pZCI6ICI0MzQzMjQzMiIsCiAgICAgICAgInN0cmVldF90eXBlIjogIlNUUkVFVCIsCiAgICAgICAgInN0cmVldCI6ICLQstGD0LsuINCd0ZbQttC40L3RgdGM0LrQsCIsCiAgICAgICAgImJ1aWxkaW5nIjogIjE1IiwKICAgICAgICAiYXBhcnRtZW50IjogIjIzIiwKICAgICAgICAiemlwIjogIjAyMDkwIgogICAgICB9CiAgICBdLAogICAgInBob25lcyI6IFsKICAgICAgewogICAgICAgICJ0eXBlIjogIk1PQklMRSIsCiAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICB9CiAgICBdLAogICAgImF1dGhlbnRpY2F0aW9uX21ldGhvZHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJPVFAiLAogICAgICAgICJwaG9uZV9udW1iZXIiOiAiKzM4MDUwODg4NzcwMCIKICAgICAgfQogICAgXSwKICAgICJwcmVmZXJyZWRfd2F5X2NvbW11bmljYXRpb24iOiAiZW1haWwiLAogICAgImVtZXJnZW5jeV9jb250YWN0IjogewogICAgICAiZmlyc3RfbmFtZSI6ICLQn9C10YLRgNC+IiwKICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAgICJwaG9uZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInR5cGUiOiAiTU9CSUxFIiwKICAgICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgICB9CiAgICAgIF0KICAgIH0sCiAgICAicHJvY2Vzc19kaXNjbG9zdXJlX2RhdGFfY29uc2VudCI6IHRydWUKICB9Cn0=
+              signed_content_encoding: base64
+              client_id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2941
+              grant_type: pis-auth
+              scope: app:authorize
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                signed_content_encoding:
+                  type: string
+                client_id:
+                  type: string
+                grant_type:
+                  type: string
+                scope:
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+                - client_id
+                - grant_type
+                - scope
+  /oauth/user/apps:
+    get:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      scope:
+                        type: string
+                        description: list of scopes that are available to authorize by user
+                    required:
+                      - scope
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  scope: app:read_pis person_verification:details_pis person:details_pis authentication_method:read_pis declaration_request:read_pis declaration_request:details_pis declaration:read_pis declaration:details_pis employee:read_pis legal_entity:read_pis division:read_pis party:read_pis employee_role:read_pis healthcare_service:read_pis person_request:read_pis person_request:details_pis
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: Determine available user approvals
+      operationId: Determine available user approvals
+      description: |-
+        This endpoint is used to determine approvals that are available to authorize for user in client.
+
+        Available approvals list is determined based on persons legal capacity and confidant person relationship status.
+
+        This endpoint must be used only by Auth UI client.
+      tags:
+        - Private. Patient Information System
+      parameters:
+        - name: client_id
+          in: query
+          description: ''
+          required: true
+          example: 7673eb5a-0cae-4fa8-9f81-e6da46aa2941
+          schema:
+            type: string
+        - name: scope
+          in: query
+          description: list of scopes to be authorized by user
+          required: true
+          example: app:read_pis app:delete_pis confidant_person:login confidant_person:sign_up person_documents:write_pis person_verification:details_pis person:details_pis authentication_method:read_pis declaration_request:read_pis declaration_request:details_pis declaration_request:details_pis declaration_request:write_pis declaration_request:sign_pis declaration_request:reject_pis declaration:read_pis declaration:details_pis declaration:terminate_pis authentication_method_request:write_pis employee:read_pis legal_entity:read_pis division:read_pis party:read_pis employee_role:read_pis healthcare_service:read_pis person_request:reject_pis person_request:write_pis person_request:read_pis person_request:details_pis
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: e.g. Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+          required: false
+          schema:
+            type: string
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+  /api/pis/sign-up_validation:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                        required:
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - secret
+                          - documents
+                          - addresses
+                          - authentication_methods
+                          - emergency_contact
+                      token:
+                        type: string
+                    required:
+                      - person
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '1991-08-19'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    tax_id: '3126509816'
+                    secret: secret
+                    documents:
+                      - type: PASSPORT
+                        number: АА120518
+                        expiration_date: '2021-02-28'
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: OTP
+                        phone_number: +38093*****85
+                    preferred_way_communication: email
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+        '409':
+          description: Conflict
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: Atom that represents error type.
+                      message:
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
+                    required:
+                      - type
+                      - message
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 409
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                error:
+                  type: conflict
+                  message: User with such tax_id already exists
+      summary: Patient sign-up validation
+      operationId: Patient sign-up validation
+      description: |-
+        This endpoint is used to validate signed content as a part of patient registration process, extract patient data if it is valid and create session token to do further steps.
+
+        This endpoint must be used only by Auth UI client.
+
+        Signed content must contain patient data and nonce that was generated for PIS.
+
+        Look at [**Payload: Patient sign-up validation**](#tag/private-patient-information-system/POST/api/pis/sign-up_validation/decoded-payload) for more details.
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: ewogICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAiYmlydGhfZGF0ZSI6ICIxOTkxLTA4LTE5IiwKICAgICJiaXJ0aF9jb3VudHJ5IjogItCj0LrRgNCw0ZfQvdCwIiwKICAgICJiaXJ0aF9zZXR0bGVtZW50IjogItCS0ZbQvdC90LjRhtGPIiwKICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAiZW1haWwiOiAiZW1haWxAZXhhbXBsZS5jb20iLAogICAgInRheF9pZCI6ICIzMTI2NTA5ODE2IiwKICAgICJzZWNyZXQiOiAic2VjcmV0IiwKICAgICJkb2N1bWVudHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgIm51bWJlciI6ICIxMjA1MTgiLAogICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgfQogICAgXSwKICAgICJhZGRyZXNzZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJSRVNJREVOQ0UiLAogICAgICAgICJjb3VudHJ5IjogIlVBIiwKICAgICAgICAiYXJlYSI6ICLQltC40YLQvtC80LjRgNGB0YzQutCwIiwKICAgICAgICAicmVnaW9uIjogItCR0LXRgNC00LjRh9GW0LLRgdGM0LrQuNC5IiwKICAgICAgICAic2V0dGxlbWVudCI6ICLQmtC40ZfQsiIsCiAgICAgICAgInNldHRsZW1lbnRfdHlwZSI6ICJDSVRZIiwKICAgICAgICAic2V0dGxlbWVudF9pZCI6ICI0MzQzMjQzMiIsCiAgICAgICAgInN0cmVldF90eXBlIjogIlNUUkVFVCIsCiAgICAgICAgInN0cmVldCI6ICLQstGD0LsuINCd0ZbQttC40L3RgdGM0LrQsCIsCiAgICAgICAgImJ1aWxkaW5nIjogIjE1IiwKICAgICAgICAiYXBhcnRtZW50IjogIjIzIiwKICAgICAgICAiemlwIjogIjAyMDkwIgogICAgICB9CiAgICBdLAogICAgInBob25lcyI6IFsKICAgICAgewogICAgICAgICJ0eXBlIjogIk1PQklMRSIsCiAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICB9CiAgICBdLAogICAgImF1dGhlbnRpY2F0aW9uX21ldGhvZHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJPVFAiLAogICAgICAgICJwaG9uZV9udW1iZXIiOiAiKzM4MDUwODg4NzcwMCIKICAgICAgfQogICAgXSwKICAgICJwcmVmZXJyZWRfd2F5X2NvbW11bmljYXRpb24iOiAiZW1haWwiLAogICAgImVtZXJnZW5jeV9jb250YWN0IjogewogICAgICAiZmlyc3RfbmFtZSI6ICLQn9C10YLRgNC+IiwKICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAgICJwaG9uZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInR5cGUiOiAiTU9CSUxFIiwKICAgICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgICB9CiAgICAgIF0KICAgIH0sCiAgICAicHJvY2Vzc19kaXNjbG9zdXJlX2RhdGFfY29uc2VudCI6IHRydWUKICB9Cn0=
+              signed_content_encoding: base64
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                signed_content_encoding:
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+  /api/sms_verifications:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      result:
+                        type: string
+                        enum:
+                          - OTP sent
+                          - Verified
+                        description: phone verification result.
+                    required:
+                      - result
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                  urgent:
+                    type: object
+                    properties:
+                      next_step:
+                        type: string
+                        description: next step that needs to be taken in phone verification process.
+                required:
+                  - data
+                  - urgent
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  result: OTP sent
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+                urgent:
+                  next_step: REQUEST_OTP
+      summary: Verify phone number
+      operationId: Verify phone number
+      description: |-
+        This endpoint is used to verify submitted phone number as a part of person registration process.
+
+        In case number needs verification - generate and send OTP, in case phone does not need verification - return OK.
+      tags:
+        - Private. Patient Information System
+      parameters:
+        - name: Authorization
+          in: header
+          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjYWJpbmV0LXJlZ2lzdHJhdGlvbiIsImVtYWlsIjoiYXByb2tvcHBoYXJtZGlyNEB1a3IubmV0IiwiZXhwIjoxNjgyNjkzNTc3LCJpYXQiOjE2ODI2NjQ3NzcsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiIxOTAyYTkyYS00MDcyLTQ3MWEtYmU4NS1iZWU0MzQzNmNlYjEiLCJuYmYiOjE2ODI2NjQ3NzYsInN1YiI6ImFwcm9rb3BwaGFybWRpcjRAdWtyLm5ldCIsInR5cCI6ImFjY2VzcyJ9.EXTuYRQenjqzsjNAJ5agmEbSHcg_XRKwc3VOGAtSjfMOy4uIJ_BBMUeUWSVzy4_OezPjEIiVcnaLTN4pZbtgow
+          required: false
+          schema:
+            type: string
+          example: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjYWJpbmV0LXJlZ2lzdHJhdGlvbiIsImVtYWlsIjoiYXByb2tvcHBoYXJtZGlyNEB1a3IubmV0IiwiZXhwIjoxNjgyNjkzNTc3LCJpYXQiOjE2ODI2NjQ3NzcsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiIxOTAyYTkyYS00MDcyLTQ3MWEtYmU4NS1iZWU0MzQzNmNlYjEiLCJuYmYiOjE2ODI2NjQ3NzYsInN1YiI6ImFwcm9rb3BwaGFybWRpcjRAdWtyLm5ldCIsInR5cCI6ImFjY2VzcyJ9.EXTuYRQenjqzsjNAJ5agmEbSHcg_XRKwc3VOGAtSjfMOy4uIJ_BBMUeUWSVzy4_OezPjEIiVcnaLTN4pZbtgow
+      requestBody:
+        content:
+          application/json:
+            example:
+              factor: '+380501112233'
+              type: SMS
+              content_hash: 76dea970d89477ed03dc5289f297443c
+            schema:
+              type: object
+              properties:
+                factor:
+                  type: string
+                  description: phone number that needs to be verified.
+                type:
+                  type: string
+                  enum:
+                    - SMS
+                  description: verification type.
+                content_hash:
+                  type: string
+                  description: MD5 hash of content with phone number that needs to be verified.
+              required:
+                - factor
+                - type
+  /api/pis/register:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                        required:
+                          - id
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - secret
+                          - documents
+                          - addresses
+                          - authentication_methods
+                          - emergency_contact
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                      token:
+                        type: object
+                        properties:
+                          value:
+                            type: string
+                            description: oAuth access token.
+                          user_id:
+                            type: string
+                            description: User identifier
+                          user:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                                description: Person identifier that is linked to user
+                            description: Additional user params
+                          name:
+                            type: string
+                            description: oAuth token name
+                          id:
+                            type: string
+                            description: oAuth token identifier
+                          expires_at:
+                            type: number
+                            description: expiration date-time timestamp
+                          details:
+                            type: object
+                            properties:
+                              app_id:
+                                type: string
+                                description: Identifier of approval between user, applicant user and client that was used to issue access token
+                              applicant_user_id:
+                                type: string
+                                description: Identifier of user that initiated access token generation
+                              applicant_person_id:
+                                type: string
+                                description: Identifier of person that is accosiated with user who initiated access token generation
+                              scope:
+                                type: string
+                                description: List of scopes that is required in application business logic, separated by space
+                              refresh_token:
+                                type: string
+                                description: oAuth refresh token
+                              redirect_uri:
+                                type: string
+                                description: Redirect URI
+                              grant_type:
+                                type: string
+                              client_id:
+                                type: string
+                                description: Client ID of authorized user.
+                            required:
+                              - scope
+                              - refresh_token
+                              - redirect_uri
+                              - client_id
+                        required:
+                          - value
+                          - user_id
+                          - user
+                          - name
+                          - expires_at
+                    required:
+                      - person
+                      - user
+                      - access_token
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    id: 1380df72-275a-11e7-93ae-92361f002671
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '1991-08-19'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    tax_id: '3126509816'
+                    secret: secret
+                    documents:
+                      - type: PASSPORT
+                        number: АА120518
+                        expiration_date: '2021-02-28'
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: OTP
+                        phone_number: +38093*****85
+                    preferred_way_communication: email
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                  token:
+                    value: SnNRdCtvU0tTOENBV2dLRUZwNmIzZz09
+                    user_id: 3ff33ced-69dc-415a-b231-c6446898335a
+                    user:
+                      person_id: 2b5e9656-8750-49b3-8c5c-b9c344f8fe52
+                    name: access_token
+                    id: 3ff33ced-69dc-415a-b231-c6446898335a
+                    expires_at: 1498749591
+                    details:
+                      app_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      applicant_user_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      applicant_person_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                      scope: capitation_contracts:view capitation_contracts:create patients:view patients:create
+                      refresh_token: my-oauth-refresh-token
+                      redirect_uri: https://example.com/
+                      grant_type: authorization_code
+                      client_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: Patient sign-up registration
+      operationId: Patient sign-up registration
+      description: |-
+        This endpoint is used to register patient in the system based on data received from Patient Information System.
+
+        This endpoint must be used only by Auth UI client.
+
+        Signed content must contain patient data. Request authorization header must contain JWT that was generated as a result of [Sign-up validation](#reference/private.-patient-information-system/sign-up/patient-sign-up-validation) endpoint.
+
+        Look at [**Payload: Patient sign-up registration**](#tag/private-patient-information-system/POST/api/pis/register/decoded-payload) for more details.
+      tags:
+        - Private. Patient Information System
+      parameters:
+        - name: Authorization
+          in: header
+          description: e.g. Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+          required: false
+          schema:
+            type: string
+          example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: ewogICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAiYmlydGhfZGF0ZSI6ICIxOTkxLTA4LTE5IiwKICAgICJiaXJ0aF9jb3VudHJ5IjogItCj0LrRgNCw0ZfQvdCwIiwKICAgICJiaXJ0aF9zZXR0bGVtZW50IjogItCS0ZbQvdC90LjRhtGPIiwKICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAiZW1haWwiOiAiZW1haWxAZXhhbXBsZS5jb20iLAogICAgInRheF9pZCI6ICIzMTI2NTA5ODE2IiwKICAgICJzZWNyZXQiOiAic2VjcmV0IiwKICAgICJkb2N1bWVudHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgIm51bWJlciI6ICIxMjA1MTgiLAogICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgfQogICAgXSwKICAgICJhZGRyZXNzZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJSRVNJREVOQ0UiLAogICAgICAgICJjb3VudHJ5IjogIlVBIiwKICAgICAgICAiYXJlYSI6ICLQltC40YLQvtC80LjRgNGB0YzQutCwIiwKICAgICAgICAicmVnaW9uIjogItCR0LXRgNC00LjRh9GW0LLRgdGM0LrQuNC5IiwKICAgICAgICAic2V0dGxlbWVudCI6ICLQmtC40ZfQsiIsCiAgICAgICAgInNldHRsZW1lbnRfdHlwZSI6ICJDSVRZIiwKICAgICAgICAic2V0dGxlbWVudF9pZCI6ICI0MzQzMjQzMiIsCiAgICAgICAgInN0cmVldF90eXBlIjogIlNUUkVFVCIsCiAgICAgICAgInN0cmVldCI6ICLQstGD0LsuINCd0ZbQttC40L3RgdGM0LrQsCIsCiAgICAgICAgImJ1aWxkaW5nIjogIjE1IiwKICAgICAgICAiYXBhcnRtZW50IjogIjIzIiwKICAgICAgICAiemlwIjogIjAyMDkwIgogICAgICB9CiAgICBdLAogICAgInBob25lcyI6IFsKICAgICAgewogICAgICAgICJ0eXBlIjogIk1PQklMRSIsCiAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICB9CiAgICBdLAogICAgImF1dGhlbnRpY2F0aW9uX21ldGhvZHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJPVFAiLAogICAgICAgICJwaG9uZV9udW1iZXIiOiAiKzM4MDUwODg4NzcwMCIKICAgICAgfQogICAgXSwKICAgICJwcmVmZXJyZWRfd2F5X2NvbW11bmljYXRpb24iOiAiZW1haWwiLAogICAgImVtZXJnZW5jeV9jb250YWN0IjogewogICAgICAiZmlyc3RfbmFtZSI6ICLQn9C10YLRgNC+IiwKICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAgICJwaG9uZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInR5cGUiOiAiTU9CSUxFIiwKICAgICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgICB9CiAgICAgIF0KICAgIH0sCiAgICAicHJvY2Vzc19kaXNjbG9zdXJlX2RhdGFfY29uc2VudCI6IHRydWUKICB9Cn0=
+              signed_content_encoding: base64
+              otp: 1234
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                signed_content_encoding:
+                  type: string
+                otp:
+                  type: number
+              required:
+                - signed_content
+                - signed_content_encoding
+  /api/pis/confidant/sign-up_validation:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          no_tax_id:
+                            type: boolean
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          unzr:
+                            type: string
+                            description: the record number in the demographic register
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                          confidant_person:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              relation_type:
+                                type: string
+                                enum:
+                                  - PRIMARY
+                                  - SECONDARY
+                              documents_relationship:
+                                type: array
+                                items: {}
+                            required:
+                              - person_id
+                              - first_name
+                              - last_name
+                              - relation_type
+                              - documents_relationship
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                        required:
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - no_tax_id
+                          - secret
+                          - documents
+                          - addresses
+                          - emergency_contact
+                          - confidant_person
+                      token:
+                        type: string
+                    required:
+                      - person
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '2009-07-05'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    no_tax_id: false
+                    tax_id: '3999869394'
+                    secret: secret
+                    documents:
+                      - type: BIRTH_CERTIFICATE
+                        number: АА120518
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                        expiration_date: '2027-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: THIRD_PERSON
+                        value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                        alias: husband
+                    unzr: 20090705-00011
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                    confidant_person:
+                      person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      relation_type: PRIMARY
+                      documents_relationship:
+                        - type: BIRTH_CERTIFICATE
+                          number: АА120518
+                          issued_by: Рокитнянським РВ ГУ МВС Київської області
+                          issued_at: '2017-02-28'
+                    preferred_way_communication: email
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+        '409':
+          description: Conflict
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  error:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: Atom that represents error type.
+                      message:
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
+                    required:
+                      - type
+                      - message
+                    additionalProperties: false
+              example:
+                meta:
+                  code: 409
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                error:
+                  type: conflict
+                  message: User with such tax_id already exists
+      summary: Confidant patient sign-up validation
+      operationId: Confidant patient sign-up validation
+      description: |-
+        This endpoint is used to validate signed content as a part of patient registration via confidant person process, extract patient data if it is valid and create session token to do further steps.
+
+        This endpoint must be used only by Auth UI client.
+
+        Look at [**Payload: Confidant patient sign-up validation**](#tag/private-patient-information-system/POST/api/pis/confidant/sign-up_validation/decoded-payload) for more details.
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: ewogICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAiYmlydGhfZGF0ZSI6ICIxOTkxLTA4LTE5IiwKICAgICJiaXJ0aF9jb3VudHJ5IjogItCj0LrRgNCw0ZfQvdCwIiwKICAgICJiaXJ0aF9zZXR0bGVtZW50IjogItCS0ZbQvdC90LjRhtGPIiwKICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAiZW1haWwiOiAiZW1haWxAZXhhbXBsZS5jb20iLAogICAgInRheF9pZCI6ICIzMTI2NTA5ODE2IiwKICAgICJzZWNyZXQiOiAic2VjcmV0IiwKICAgICJkb2N1bWVudHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgIm51bWJlciI6ICIxMjA1MTgiLAogICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgfQogICAgXSwKICAgICJhZGRyZXNzZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJSRVNJREVOQ0UiLAogICAgICAgICJjb3VudHJ5IjogIlVBIiwKICAgICAgICAiYXJlYSI6ICLQltC40YLQvtC80LjRgNGB0YzQutCwIiwKICAgICAgICAicmVnaW9uIjogItCR0LXRgNC00LjRh9GW0LLRgdGM0LrQuNC5IiwKICAgICAgICAic2V0dGxlbWVudCI6ICLQmtC40ZfQsiIsCiAgICAgICAgInNldHRsZW1lbnRfdHlwZSI6ICJDSVRZIiwKICAgICAgICAic2V0dGxlbWVudF9pZCI6ICI0MzQzMjQzMiIsCiAgICAgICAgInN0cmVldF90eXBlIjogIlNUUkVFVCIsCiAgICAgICAgInN0cmVldCI6ICLQstGD0LsuINCd0ZbQttC40L3RgdGM0LrQsCIsCiAgICAgICAgImJ1aWxkaW5nIjogIjE1IiwKICAgICAgICAiYXBhcnRtZW50IjogIjIzIiwKICAgICAgICAiemlwIjogIjAyMDkwIgogICAgICB9CiAgICBdLAogICAgInBob25lcyI6IFsKICAgICAgewogICAgICAgICJ0eXBlIjogIk1PQklMRSIsCiAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICB9CiAgICBdLAogICAgImF1dGhlbnRpY2F0aW9uX21ldGhvZHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJPVFAiLAogICAgICAgICJwaG9uZV9udW1iZXIiOiAiKzM4MDUwODg4NzcwMCIKICAgICAgfQogICAgXSwKICAgICJwcmVmZXJyZWRfd2F5X2NvbW11bmljYXRpb24iOiAiZW1haWwiLAogICAgImVtZXJnZW5jeV9jb250YWN0IjogewogICAgICAiZmlyc3RfbmFtZSI6ICLQn9C10YLRgNC+IiwKICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAgICJwaG9uZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInR5cGUiOiAiTU9CSUxFIiwKICAgICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgICB9CiAgICAgIF0KICAgIH0sCiAgICAicHJvY2Vzc19kaXNjbG9zdXJlX2RhdGFfY29uc2VudCI6IHRydWUKICB9Cn0=
+              signed_content_encoding: base64
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                signed_content_encoding:
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+  /api/pis/confidant/register:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          no_tax_id:
+                            type: boolean
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          unzr:
+                            type: string
+                            description: the record number in the demographic register
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                          confidant_person:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              relation_type:
+                                type: string
+                                enum:
+                                  - PRIMARY
+                                  - SECONDARY
+                              documents_relationship:
+                                type: array
+                                items: {}
+                            required:
+                              - person_id
+                              - first_name
+                              - last_name
+                              - relation_type
+                              - documents_relationship
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                        required:
+                          - id
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - no_tax_id
+                          - secret
+                          - documents
+                          - addresses
+                          - emergency_contact
+                          - confidant_person
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                    required:
+                      - person
+                      - user
+                      - access_token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    id: 1380df72-275a-11e7-93ae-92361f002671
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '2009-07-05'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    no_tax_id: false
+                    tax_id: '3999869394'
+                    secret: secret
+                    documents:
+                      - type: BIRTH_CERTIFICATE
+                        number: АА120518
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                        expiration_date: '2027-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: THIRD_PERSON
+                        value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                        alias: husband
+                    unzr: 20090705-00011
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                    confidant_person:
+                      person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      relation_type: PRIMARY
+                      documents_relationship:
+                        - type: BIRTH_CERTIFICATE
+                          number: АА120518
+                          issued_by: Рокитнянським РВ ГУ МВС Київської області
+                          issued_at: '2017-02-28'
+                    preferred_way_communication: email
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: Confidant patient sign-up registration
+      operationId: Confidant patient sign-up registration
+      description: |-
+        This endpoint is used to register patient in the system via confidant person based on data received from Patient Information System.
+
+        This endpoint must be used only by Auth UI client.
+
+        Signed content must contain patient data as well as authenticated patient details.
+
+        Look at [**Payload: Confidant patient sign-up registration**](#tag/private-patient-information-system/POST/api/pis/confidant/register/decoded-payload) for more details.
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              signed_content: ewogICAgImZpcnN0X25hbWUiOiAi0J/QtdGC0YDQviIsCiAgICAibGFzdF9uYW1lIjogItCG0LLQsNC90L7QsiIsCiAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAiYmlydGhfZGF0ZSI6ICIxOTkxLTA4LTE5IiwKICAgICJiaXJ0aF9jb3VudHJ5IjogItCj0LrRgNCw0ZfQvdCwIiwKICAgICJiaXJ0aF9zZXR0bGVtZW50IjogItCS0ZbQvdC90LjRhtGPIiwKICAgICJnZW5kZXIiOiAiTUFMRSIsCiAgICAiZW1haWwiOiAiZW1haWxAZXhhbXBsZS5jb20iLAogICAgInRheF9pZCI6ICIzMTI2NTA5ODE2IiwKICAgICJzZWNyZXQiOiAic2VjcmV0IiwKICAgICJkb2N1bWVudHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJQQVNTUE9SVCIsCiAgICAgICAgIm51bWJlciI6ICIxMjA1MTgiLAogICAgICAgICJpc3N1ZWRfYnkiOiAi0KDQvtC60LjRgtC90Y/QvdGB0YzQutC40Lwg0KDQkiDQk9CjINCc0JLQoSDQmtC40ZfQstGB0YzQutC+0Zcg0L7QsdC70LDRgdGC0ZYiLAogICAgICAgICJpc3N1ZWRfYXQiOiAiMjAxNy0wMi0yOCIKICAgICAgfQogICAgXSwKICAgICJhZGRyZXNzZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJSRVNJREVOQ0UiLAogICAgICAgICJjb3VudHJ5IjogIlVBIiwKICAgICAgICAiYXJlYSI6ICLQltC40YLQvtC80LjRgNGB0YzQutCwIiwKICAgICAgICAicmVnaW9uIjogItCR0LXRgNC00LjRh9GW0LLRgdGM0LrQuNC5IiwKICAgICAgICAic2V0dGxlbWVudCI6ICLQmtC40ZfQsiIsCiAgICAgICAgInNldHRsZW1lbnRfdHlwZSI6ICJDSVRZIiwKICAgICAgICAic2V0dGxlbWVudF9pZCI6ICI0MzQzMjQzMiIsCiAgICAgICAgInN0cmVldF90eXBlIjogIlNUUkVFVCIsCiAgICAgICAgInN0cmVldCI6ICLQstGD0LsuINCd0ZbQttC40L3RgdGM0LrQsCIsCiAgICAgICAgImJ1aWxkaW5nIjogIjE1IiwKICAgICAgICAiYXBhcnRtZW50IjogIjIzIiwKICAgICAgICAiemlwIjogIjAyMDkwIgogICAgICB9CiAgICBdLAogICAgInBob25lcyI6IFsKICAgICAgewogICAgICAgICJ0eXBlIjogIk1PQklMRSIsCiAgICAgICAgIm51bWJlciI6ICIrMzgwNTAzNDEwODcwIgogICAgICB9CiAgICBdLAogICAgImF1dGhlbnRpY2F0aW9uX21ldGhvZHMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJPVFAiLAogICAgICAgICJwaG9uZV9udW1iZXIiOiAiKzM4MDUwODg4NzcwMCIKICAgICAgfQogICAgXSwKICAgICJwcmVmZXJyZWRfd2F5X2NvbW11bmljYXRpb24iOiAiZW1haWwiLAogICAgImVtZXJnZW5jeV9jb250YWN0IjogewogICAgICAiZmlyc3RfbmFtZSI6ICLQn9C10YLRgNC+IiwKICAgICAgImxhc3RfbmFtZSI6ICLQhtCy0LDQvdC+0LIiLAogICAgICAic2Vjb25kX25hbWUiOiAi0JzQuNC60L7Qu9Cw0LnQvtCy0LjRhyIsCiAgICAgICJwaG9uZXMiOiBbCiAgICAgICAgewogICAgICAgICAgInR5cGUiOiAiTU9CSUxFIiwKICAgICAgICAgICJudW1iZXIiOiAiKzM4MDUwMzQxMDg3MCIKICAgICAgICB9CiAgICAgIF0KICAgIH0sCiAgICAicHJvY2Vzc19kaXNjbG9zdXJlX2RhdGFfY29uc2VudCI6IHRydWUKICB9Cn0=
+              signed_content_encoding: base64
+              jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                signed_content_encoding:
+                  type: string
+                jwt:
+                  type: string
+              required:
+                - signed_content
+                - signed_content_encoding
+                - jwt
+  /api/pis/confidant/login/decoded-payload:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                    required:
+                      - user
+                      - access_token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: 'Payload: Confidant patient login'
+      operationId: 'Payload: Confidant patient login'
+      description: ''
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              last_name: Петров
+              given_name: Петро Петрович
+              tax_id: '2323232323'
+              document:
+                type: PASSPORT
+                number: АА120518
+            schema:
+              type: object
+              properties:
+                last_name:
+                  type: string
+                given_name:
+                  type: string
+                tax_id:
+                  type: string
+                document:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: '`Dictionary DOCUMENT_TYPE`'
+                    number:
+                      type: string
+                      description: document issue number
+                  required:
+                    - type
+                    - number
+              required:
+                - last_name
+                - given_name
+  /api/pis/sign-up_validation/decoded-payload:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                        required:
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - secret
+                          - documents
+                          - addresses
+                          - authentication_methods
+                          - emergency_contact
+                      token:
+                        type: string
+                    required:
+                      - person
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '1991-08-19'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    tax_id: '3126509816'
+                    secret: secret
+                    documents:
+                      - type: PASSPORT
+                        number: АА120518
+                        expiration_date: '2021-02-28'
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: OTP
+                        phone_number: +38093*****85
+                    preferred_way_communication: email
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: 'Payload: Patient sign-up validation'
+      operationId: 'Payload: Patient sign-up validation'
+      description: ''
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: PASSPORT
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: 2090
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: OTP
+                    phone_number: '+380508887700'
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+              jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+            schema:
+              type: object
+              properties:
+                person:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    second_name:
+                      type: string
+                    birth_date:
+                      type: string
+                    birth_country:
+                      type: string
+                    birth_settlement:
+                      type: string
+                    gender:
+                      type: string
+                      enum:
+                        - MALE
+                        - FEMALE
+                    email:
+                      type: string
+                    no_tax_id:
+                      type: boolean
+                    tax_id:
+                      type: string
+                    secret:
+                      type: string
+                    documents:
+                      type: array
+                    addresses:
+                      type: array
+                    phones:
+                      type: array
+                    authentication_methods:
+                      type: array
+                    unzr:
+                      type: string
+                      description: the record number in the demographic register
+                    emergency_contact:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        second_name:
+                          type: string
+                        phones:
+                          type: array
+                      required:
+                        - first_name
+                        - last_name
+                        - phones
+                    preferred_way_communication:
+                      type: string
+                      enum:
+                        - email
+                        - phone
+                      description: the way how a patient wants to be reached
+                  required:
+                    - first_name
+                    - last_name
+                    - birth_date
+                    - birth_country
+                    - birth_settlement
+                    - gender
+                    - no_tax_id
+                    - secret
+                    - documents
+                    - addresses
+                    - emergency_contact
+                patient_signed:
+                  type: boolean
+                  description: Person's evidence of sign the declaration request
+                process_disclosure_data_consent:
+                  type: boolean
+                  description: Person's evidence of information about consent to data disclosure
+                jwt:
+                  type: string
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+                - jwt
+  /api/pis/register/decoded-payload:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                        required:
+                          - id
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - secret
+                          - documents
+                          - addresses
+                          - authentication_methods
+                          - emergency_contact
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                    required:
+                      - person
+                      - user
+                      - access_token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    id: 1380df72-275a-11e7-93ae-92361f002671
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '1991-08-19'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    tax_id: '3126509816'
+                    secret: secret
+                    documents:
+                      - type: PASSPORT
+                        number: АА120518
+                        expiration_date: '2021-02-28'
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: OTP
+                        phone_number: +38093*****85
+                    preferred_way_communication: email
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: 'Payload: Patient sign-up registration'
+      operationId: 'Payload: Patient sign-up registration'
+      description: ''
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: PASSPORT
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: 2090
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: OTP
+                    phone_number: '+380508887700'
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+            schema:
+              type: object
+              properties:
+                person:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    second_name:
+                      type: string
+                    birth_date:
+                      type: string
+                    birth_country:
+                      type: string
+                    birth_settlement:
+                      type: string
+                    gender:
+                      type: string
+                      enum:
+                        - MALE
+                        - FEMALE
+                    email:
+                      type: string
+                    no_tax_id:
+                      type: boolean
+                    tax_id:
+                      type: string
+                    secret:
+                      type: string
+                    documents:
+                      type: array
+                    addresses:
+                      type: array
+                    phones:
+                      type: array
+                    authentication_methods:
+                      type: array
+                    unzr:
+                      type: string
+                      description: the record number in the demographic register
+                    emergency_contact:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        second_name:
+                          type: string
+                        phones:
+                          type: array
+                      required:
+                        - first_name
+                        - last_name
+                        - phones
+                    preferred_way_communication:
+                      type: string
+                      enum:
+                        - email
+                        - phone
+                      description: the way how a patient wants to be reached
+                  required:
+                    - first_name
+                    - last_name
+                    - birth_date
+                    - birth_country
+                    - birth_settlement
+                    - gender
+                    - no_tax_id
+                    - secret
+                    - documents
+                    - addresses
+                    - emergency_contact
+                patient_signed:
+                  type: boolean
+                  description: Person's evidence of sign the declaration request
+                process_disclosure_data_consent:
+                  type: boolean
+                  description: Person's evidence of information about consent to data disclosure
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+  /api/pis/confidant/sign-up_validation/decoded-payload:
+    post:
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          no_tax_id:
+                            type: boolean
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          unzr:
+                            type: string
+                            description: the record number in the demographic register
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                          confidant_person:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              relation_type:
+                                type: string
+                                enum:
+                                  - PRIMARY
+                                  - SECONDARY
+                              documents_relationship:
+                                type: array
+                                items: {}
+                            required:
+                              - person_id
+                              - first_name
+                              - last_name
+                              - relation_type
+                              - documents_relationship
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                        required:
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - no_tax_id
+                          - secret
+                          - documents
+                          - addresses
+                          - emergency_contact
+                          - confidant_person
+                      token:
+                        type: string
+                    required:
+                      - person
+                      - token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 200
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '2009-07-05'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    no_tax_id: false
+                    tax_id: '3999869394'
+                    secret: secret
+                    documents:
+                      - type: BIRTH_CERTIFICATE
+                        number: АА120518
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                        expiration_date: '2027-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: THIRD_PERSON
+                        value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                        alias: husband
+                    unzr: 20090705-00011
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                    confidant_person:
+                      person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      relation_type: PRIMARY
+                      documents_relationship:
+                        - type: BIRTH_CERTIFICATE
+                          number: АА120518
+                          issued_by: Рокитнянським РВ ГУ МВС Київської області
+                          issued_at: '2017-02-28'
+                    preferred_way_communication: email
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNwLnZpcm55QGdtYWlsLmNvbSIsInRpbWVzdGFtcCI6IjIwMTgtMDItMjggMTA6Mzg6MDAifQ.LJRLTqK-zf9gxDNMONcI8cMCSYosDtmAIZqhzZUdhz4
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: 'Payload: Confidant patient sign-up validation'
+      operationId: 'Payload: Confidant patient sign-up validation'
+      description: ''
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: BIRTH_CERTIFICATE
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: 2090
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: THIRD_PERSON
+                    value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                    alias: husband
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                confidant_person:
+                  person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  relation_type: PRIMARY
+                  documents_relationship:
+                    - type: BIRTH_CERTIFICATE
+                      number: АА120518
+                      issued_by: Рокитнянським РВ ГУ МВС Київської області
+                      issued_at: '2017-02-28'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+            schema:
+              type: object
+              properties:
+                person:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    second_name:
+                      type: string
+                    birth_date:
+                      type: string
+                    birth_country:
+                      type: string
+                    birth_settlement:
+                      type: string
+                    gender:
+                      type: string
+                      enum:
+                        - MALE
+                        - FEMALE
+                    email:
+                      type: string
+                    no_tax_id:
+                      type: boolean
+                    tax_id:
+                      type: string
+                    secret:
+                      type: string
+                    documents:
+                      type: array
+                    addresses:
+                      type: array
+                    phones:
+                      type: array
+                    authentication_methods:
+                      type: array
+                    unzr:
+                      type: string
+                      description: the record number in the demographic register
+                    emergency_contact:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        second_name:
+                          type: string
+                        phones:
+                          type: array
+                      required:
+                        - first_name
+                        - last_name
+                        - phones
+                    confidant_person:
+                      type: object
+                      properties:
+                        person_id:
+                          type: string
+                        relation_type:
+                          type: string
+                          enum:
+                            - PRIMARY
+                            - SECONDARY
+                        documents_relationship:
+                          type: array
+                      required:
+                        - person_id
+                        - relation_type
+                        - documents_relationship
+                    preferred_way_communication:
+                      type: string
+                      enum:
+                        - email
+                        - phone
+                      description: the way how a patient wants to be reached
+                  required:
+                    - first_name
+                    - last_name
+                    - birth_date
+                    - birth_country
+                    - birth_settlement
+                    - gender
+                    - no_tax_id
+                    - secret
+                    - documents
+                    - addresses
+                    - emergency_contact
+                    - confidant_person
+                patient_signed:
+                  type: boolean
+                  description: Person's evidence of sign the declaration request
+                process_disclosure_data_consent:
+                  type: boolean
+                  description: Person's evidence of information about consent to data disclosure
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+  /api/pis/confidant/register/decoded-payload:
+    post:
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      code:
+                        type: number
+                        description: HTTP response code.
+                      url:
+                        type: string
+                        description: URL to requested resource.
+                      type:
+                        type: string
+                        enum:
+                          - object
+                          - list
+                        description: Type of data that is located in `data` attribute.
+                      request_id:
+                        type: string
+                        description: '[Request ID](https://docs.apimanifest.apiary.io/#introduction/interacting-with-api/request-id). Send it with `X-Request-ID` header.'
+                    required:
+                      - code
+                      - url
+                      - type
+                      - request_id
+                    additionalProperties: false
+                  data:
+                    type: object
+                    properties:
+                      person:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          first_name:
+                            type: string
+                          last_name:
+                            type: string
+                          second_name:
+                            type: string
+                          birth_date:
+                            type: string
+                          birth_country:
+                            type: string
+                          birth_settlement:
+                            type: string
+                          gender:
+                            type: string
+                            enum:
+                              - MALE
+                              - FEMALE
+                          email:
+                            type: string
+                          no_tax_id:
+                            type: boolean
+                          tax_id:
+                            type: string
+                          secret:
+                            type: string
+                          documents:
+                            type: array
+                            items: {}
+                          addresses:
+                            type: array
+                            items: {}
+                          phones:
+                            type: array
+                            items: {}
+                          authentication_methods:
+                            type: array
+                            items: {}
+                          unzr:
+                            type: string
+                            description: the record number in the demographic register
+                          emergency_contact:
+                            type: object
+                            properties:
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              phones:
+                                type: array
+                                items: {}
+                            required:
+                              - first_name
+                              - last_name
+                              - phones
+                          confidant_person:
+                            type: object
+                            properties:
+                              person_id:
+                                type: string
+                              first_name:
+                                type: string
+                              last_name:
+                                type: string
+                              second_name:
+                                type: string
+                              relation_type:
+                                type: string
+                                enum:
+                                  - PRIMARY
+                                  - SECONDARY
+                              documents_relationship:
+                                type: array
+                                items: {}
+                            required:
+                              - person_id
+                              - first_name
+                              - last_name
+                              - relation_type
+                              - documents_relationship
+                          preferred_way_communication:
+                            type: string
+                            enum:
+                              - email
+                              - phone
+                            description: the way how a patient wants to be reached
+                        required:
+                          - id
+                          - first_name
+                          - last_name
+                          - birth_date
+                          - birth_country
+                          - birth_settlement
+                          - gender
+                          - no_tax_id
+                          - secret
+                          - documents
+                          - addresses
+                          - emergency_contact
+                          - confidant_person
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          tax_id:
+                            type: string
+                        required:
+                          - tax_id
+                      access_token:
+                        type: string
+                        description: access token
+                    required:
+                      - person
+                      - user
+                      - access_token
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                        description: 'A limit on the number of objects to be returned, between 1 and 100. Default: 50.'
+                      cursors:
+                        type: object
+                        properties:
+                          starting_after:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+                          ending_before:
+                            type: string
+                            description: A cursor for use in pagination. An object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+                      size:
+                        type: number
+                        description: Total number of objects in collection.
+                      has_more:
+                        type: boolean
+                        description: Is this collection have more data to load in the same style as last request loaded it.
+                    required:
+                      - limit
+                      - cursors
+                      - size
+                      - has_more
+                    additionalProperties: false
+                required:
+                  - data
+              example:
+                meta:
+                  code: 201
+                  url: https://example.com/resource
+                  type: object
+                  request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
+                data:
+                  person:
+                    id: 1380df72-275a-11e7-93ae-92361f002671
+                    first_name: Петро
+                    last_name: Іванов
+                    second_name: Миколайович
+                    birth_date: '2009-07-05'
+                    birth_country: Україна
+                    birth_settlement: Вінниця
+                    gender: MALE
+                    email: email@example.com
+                    no_tax_id: false
+                    tax_id: '3999869394'
+                    secret: secret
+                    documents:
+                      - type: BIRTH_CERTIFICATE
+                        number: АА120518
+                        issued_by: Рокитнянським РВ ГУ МВС Київської області
+                        issued_at: '2017-02-28'
+                        expiration_date: '2027-02-28'
+                    addresses:
+                      - type: RESIDENCE
+                        country: UA
+                        area: Житомирська
+                        region: Бердичівський
+                        settlement: Київ
+                        settlement_type: CITY
+                        settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                        street_type: STREET
+                        street: вул. Ніжинська
+                        building: '15'
+                        apartment: '23'
+                        zip: 2090
+                    phones:
+                      - type: MOBILE
+                        number: '+380503410870'
+                    authentication_methods:
+                      - type: THIRD_PERSON
+                        value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                        alias: husband
+                    unzr: 20090705-00011
+                    emergency_contact:
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      phones:
+                        - type: MOBILE
+                          number: '+380503410870'
+                    confidant_person:
+                      person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                      first_name: Петро
+                      last_name: Іванов
+                      second_name: Миколайович
+                      relation_type: PRIMARY
+                      documents_relationship:
+                        - type: BIRTH_CERTIFICATE
+                          number: АА120518
+                          issued_by: Рокитнянським РВ ГУ МВС Київської області
+                          issued_at: '2017-02-28'
+                    preferred_way_communication: email
+                  user:
+                    id: 7673eb5a-0cae-4fa8-9f81-e6da46aa2940
+                    tax_id: '3000080053'
+                  access_token: my-oauth-token
+                paging:
+                  limit: 20
+                  cursors:
+                    starting_after: 56c31536a60ad644060041af
+                    ending_before: 56c31536a60ad644060041aa
+                  size: 1000
+                  has_more: false
+      summary: 'Payload: Confidant patient sign-up registration'
+      operationId: 'Payload: Confidant patient sign-up registration'
+      description: ''
+      tags:
+        - Private. Patient Information System
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            example:
+              person:
+                first_name: Петро
+                last_name: Іванов
+                second_name: Миколайович
+                birth_date: '2009-07-05'
+                birth_country: Україна
+                birth_settlement: Вінниця
+                gender: MALE
+                email: email@example.com
+                no_tax_id: false
+                tax_id: '3999869394'
+                secret: secret
+                documents:
+                  - type: BIRTH_CERTIFICATE
+                    number: АА120518
+                    issued_by: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at: '2017-02-28'
+                    expiration_date: '2027-02-28'
+                addresses:
+                  - type: RESIDENCE
+                    country: UA
+                    area: Житомирська
+                    region: Бердичівський
+                    settlement: Київ
+                    settlement_type: CITY
+                    settlement_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                    street_type: STREET
+                    street: вул. Ніжинська
+                    building: '15'
+                    apartment: '23'
+                    zip: 2090
+                phones:
+                  - type: MOBILE
+                    number: '+380503410870'
+                authentication_methods:
+                  - type: THIRD_PERSON
+                    value: c282f8a9-e709-40aa-94b4-dde1402bf4b6
+                    alias: husband
+                unzr: 20090705-00011
+                emergency_contact:
+                  first_name: Петро
+                  last_name: Іванов
+                  second_name: Миколайович
+                  phones:
+                    - type: MOBILE
+                      number: '+380503410870'
+                confidant_person:
+                  person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  relation_type: PRIMARY
+                  documents_relationship:
+                    - type: BIRTH_CERTIFICATE
+                      number: АА120518
+                      issued_by: Рокитнянським РВ ГУ МВС Київської області
+                      issued_at: '2017-02-28'
+                preferred_way_communication: email
+              patient_signed: true
+              process_disclosure_data_consent: true
+            schema:
+              type: object
+              properties:
+                person:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    second_name:
+                      type: string
+                    birth_date:
+                      type: string
+                    birth_country:
+                      type: string
+                    birth_settlement:
+                      type: string
+                    gender:
+                      type: string
+                      enum:
+                        - MALE
+                        - FEMALE
+                    email:
+                      type: string
+                    no_tax_id:
+                      type: boolean
+                    tax_id:
+                      type: string
+                    secret:
+                      type: string
+                    documents:
+                      type: array
+                    addresses:
+                      type: array
+                    phones:
+                      type: array
+                    authentication_methods:
+                      type: array
+                    unzr:
+                      type: string
+                      description: the record number in the demographic register
+                    emergency_contact:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        second_name:
+                          type: string
+                        phones:
+                          type: array
+                      required:
+                        - first_name
+                        - last_name
+                        - phones
+                    confidant_person:
+                      type: object
+                      properties:
+                        person_id:
+                          type: string
+                        relation_type:
+                          type: string
+                          enum:
+                            - PRIMARY
+                            - SECONDARY
+                        documents_relationship:
+                          type: array
+                      required:
+                        - person_id
+                        - relation_type
+                        - documents_relationship
+                    preferred_way_communication:
+                      type: string
+                      enum:
+                        - email
+                        - phone
+                      description: the way how a patient wants to be reached
+                  required:
+                    - first_name
+                    - last_name
+                    - birth_date
+                    - birth_country
+                    - birth_settlement
+                    - gender
+                    - no_tax_id
+                    - secret
+                    - documents
+                    - addresses
+                    - emergency_contact
+                    - confidant_person
+                patient_signed:
+                  type: boolean
+                  description: Person's evidence of sign the declaration request
+                process_disclosure_data_consent:
+                  type: boolean
+                  description: Person's evidence of information about consent to data disclosure
+              required:
+                - person
+                - patient_signed
+                - process_disclosure_data_consent
+components:
+  schemas: {}
