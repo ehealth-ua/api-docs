@@ -48793,7 +48793,7 @@ paths:
                     - total_entries
                     - total_pages
                     additionalProperties: false
-      summary: Get Observations
+      summary: Get Observations (Summary)
       operationId: Get Observations (Summary)
       description: '**Scopes required:** `patient_summary:read`'
       tags:
@@ -50232,7 +50232,7 @@ paths:
                     - total_entries
                     - total_pages
                     additionalProperties: false
-      summary: Get Conditions
+      summary: Get Conditions (Summary)
       operationId: Get Conditions (Summary)
       description: '**Scopes required:** `patient_summary:read`'
       tags:

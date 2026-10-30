@@ -17743,11 +17743,20 @@ paths:
                           type: array
                           items:
                             type: object
+                            required:
+                              - type
+                              - number
+                              - record_type
                             properties:
                               type:
                                 type: string
+                                example: BIRTH_CERTIFICATE
                               number:
                                 type: string
+                                example: '******18'
+                              record_type:
+                                type: string
+                                example: relationship_confirmation
                         relationship_verification_details:
                           type: object
                           properties:
@@ -17866,6 +17875,7 @@ paths:
                     documents_relationship:
                       - type: BIRTH_CERTIFICATE
                         number: '******18'
+                        record_type: relationship_confirmation
                     relationship_verification_details:
                       verification_status: VERIFICATION_NEEDED
                       verification_reason: MANUAL_CREATED_BY_DOCTOR

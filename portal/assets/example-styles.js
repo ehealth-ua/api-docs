@@ -1,5 +1,5 @@
 /*
- * P11 — persistent attribute "Example" display (trial styles).
+ * P12 — persistent attribute "Example" display (trial styles).
  *
  * Stock Scalar shows a schema property's example(s) only in a hover/focus popup
  * (`.property-example` > label button + `.property-example-value-list` popup of
@@ -13,7 +13,7 @@
  * ?exstyle=default clears it. A small switcher is shown while a style is active.
  *
  * Depends on Scalar class names: property-heading, property-example,
- * property-example-value-list, property-example-value. See SCALAR_PATCHES.md P11.
+ * property-example-value-list, property-example-value. See SCALAR_PATCHES.md P12.
  */
 (function () {
   var STYLES = ['inline', 'nextline', 'pill', 'block'];

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * Regression harness for SCALAR_PATCHES.md P11 (persistent "Example" styles).
+ * Regression harness for SCALAR_PATCHES.md P12 (persistent "Example" styles).
  *
- *   node scripts/p11_example_styles_check.mjs \
+ *   node scripts/p12_example_styles_check.mjs \
  *       --layout platform|apidocs --env prod \
  *       --baseline <dir served as the OLD site> --candidate <dir served as the NEW site> \
  *       --out <dir for screenshots + report.json>
@@ -12,7 +12,7 @@
  *
  * 1. DEFAULT: for every sample route, baseline vs candidate with NO ?exstyle:
  *    `#app` outerHTML + viewport screenshot bytes must be identical, and none of the
- *    P11 artefacts (style tag, switcher, data-exstyle) may exist.
+ *    P12 artefacts (style tag, switcher, data-exstyle) may exist.
  * 2. PER STYLE: on the candidate, ?exstyle=<s>: no console/page errors, no horizontal
  *    overflow at 1280 and 390 px, every example value visible, clipboard content equals
  *    the example text for first / longest / multi-example values, a oneOf picker (if the
@@ -33,7 +33,7 @@ const layout = arg('layout', 'platform')
 const env = arg('env', 'prod')
 const baseDir = resolve(arg('baseline'))
 const candDir = resolve(arg('candidate'))
-const outDir = resolve(arg('out', 'p11-out'))
+const outDir = resolve(arg('out', 'p12-out'))
 const only = arg('only') // optional comma-separated substring filters on route
 mkdirSync(outDir, { recursive: true })
 
@@ -211,7 +211,7 @@ for (const r of ROUTES) {
       bad(`${row.route}: viewport screenshot differs (PNGs diff-${n}-*.png in out dir)`)
     }
     row.artefacts = b.artefacts
-    if (b.artefacts.style || b.artefacts.sw || b.artefacts.attr) bad(`${row.route}: P11 artefacts present without ?exstyle`)
+    if (b.artefacts.style || b.artefacts.sw || b.artefacts.attr) bad(`${row.route}: P12 artefacts present without ?exstyle`)
     row.errors = { baseline: a.errors, candidate: b.errors }
     if (b.errors > a.errors) bad(`${row.route}: more console errors in candidate: ${b.errorText}`)
     // picker control (separate loads, after the DOM comparison, since expanding changes the DOM): same behaviour baseline vs candidate
@@ -265,11 +265,11 @@ for (const style of STYLES) {
       const longest = vals.reduce((a, v) => (!a || v.textContent.length > a.textContent.length ? v : a), null)
       const multi = vals.find((v) => v.parentElement.children.length > 1)
       const set = [vals[0], longest, multi].filter(Boolean)
-      set.forEach((v, i) => v.setAttribute('data-p11-pick', i))
+      set.forEach((v, i) => v.setAttribute('data-p12-pick', i))
       return set.map((v, i) => ({ i, text: v.firstElementChild.textContent }))
     })
     for (const pk of picks) {
-      const h = await page.$(`[data-p11-pick="${pk.i}"]`)
+      const h = await page.$(`[data-p12-pick="${pk.i}"]`)
       await h.evaluate((e) => e.scrollIntoView({ block: 'center' }))
       await wait(200)
       await page.evaluate(() => navigator.clipboard.writeText('__sentinel__'))

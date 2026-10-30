@@ -1,34 +1,34 @@
 {
   "generator": 1,
-  "bundle_sha256": "c81f42d2357148e5ecff177a9240809e29950f792944343c93fa70086b8658e6",
+  "bundle_sha256": "d781b70e9c4d5f9c097c20344d2be5b503c557967d7aca4b98434dcdbdaaacf4",
   "documents": {
     "scalar-docs/ehealth-pis.json": {
       "page": "index.html",
       "slug": "ehealth-pis",
       "source": "specs/ehealth-pis.yaml",
       "source_sha256": "b7f54f0088eb3fb745390af2fe2496a5ab13820cd8b4ed0834b4ca4cbb9f827f",
-      "page_sha256": "a490216172296304a58a0e869c5229b6e419fea0bd6220adbfdf2d5df9267d63"
+      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
     },
     "scalar-docs/ehealth-trusted-pis.json": {
       "page": "index.html",
       "slug": "ehealth-trusted-pis",
       "source": "specs/ehealth-trusted-pis.yaml",
       "source_sha256": "56741d95096b2035a9517db7b1ba9c737465747e4d0c99a49b918581352c2135",
-      "page_sha256": "a490216172296304a58a0e869c5229b6e419fea0bd6220adbfdf2d5df9267d63"
+      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
     },
     "scalar-docs/general-mis.json": {
       "page": "index.html",
       "slug": "general-mis",
       "source": "specs/general-mis.yaml",
-      "source_sha256": "bada87f18b0e3e5db02c4be7a40a1dd01391f9baf35f621e388a6f6f41f39d0f",
-      "page_sha256": "a490216172296304a58a0e869c5229b6e419fea0bd6220adbfdf2d5df9267d63"
+      "source_sha256": "f5623af64c932dd5fe7c01b7f6910de35732558bdd515ec7985d0a767fc59d37",
+      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
     },
     "scalar-docs/medical-events.json": {
       "page": "index.html",
       "slug": "medical-events",
       "source": "specs/medical-events.yaml",
-      "source_sha256": "91385a447a71b3a2a3e0ba678bce4e860f12cc398cf092413678d290fe066727",
-      "page_sha256": "a490216172296304a58a0e869c5229b6e419fea0bd6220adbfdf2d5df9267d63"
+      "source_sha256": "4c747348b11f1110597d90ffe71ac9c6e4efdd974cdafc9967fb39c18a39a038",
+      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
     }
   }
 }

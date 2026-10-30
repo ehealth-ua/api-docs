@@ -1,4 +1,4 @@
-# P11 — persistent "Example" display: MANUAL REVIEW PLAN
+# P12 — persistent "Example" display: MANUAL REVIEW PLAN
 
 Trial host (sandbox, container `scalar-trial-b`, **do not use for anything else**):
 `http://94.131.243.236:8102` — serves the **api-docs** PROD build at `/` (path routing, what
@@ -83,7 +83,7 @@ all four services; per-style console/overflow/clipboard/picker checks; generated
 2. In `assets/example-styles.js` keep only that style's rules, drop the `?exstyle` gate, the
    switcher and the `sessionStorage` code, remove the `[data-exstyle]` qualifier, inject the
    `<style>` unconditionally (or move the CSS into Scalar's `customCss` config).
-3. Bump `?v=p11` → `?v=p11-final` in `reference.html` / `index.html`, regenerate the prebuilt
-   Scalar docs (`prebuild.mjs`, see CLAUDE.md), update `SCALAR_PATCHES.md` P11 (status
-   "shipped", single style), keep `scripts/p11_example_styles_check.mjs` as the regression
+3. Bump `?v=p12` → `?v=p12-final` in `reference.html` / `index.html`, regenerate the prebuilt
+   Scalar docs (`prebuild.mjs`, see CLAUDE.md), update `SCALAR_PATCHES.md` P12 (status
+   "shipped", single style), keep `scripts/p12_example_styles_check.mjs` as the regression
    gate (adapt the per-style loop), ship to all four `docs*` hosts in the same change.
