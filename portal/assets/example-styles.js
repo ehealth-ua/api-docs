@@ -92,9 +92,8 @@
     G(ROW, B0) + '{font-size:var(--scalar-mini);gap:3px;max-width:100%}',
     G(ROW, B0 + ' > span') + '{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
     G(ROW, V0 + ' > .property-example-value:not(:only-child)') + '{flex:0 1 auto;max-width:24ch}',
-    // B: "field" boxes that FILL the rest of the row (visibly different from A's content-hugging chip)
-    G(['row', 'rowright'], V0) + '{flex-grow:1}',
-    G(['row', 'rowright'], V0 + ' > .property-example-value:only-child') + '{flex:1 1 auto;width:100%;border-radius:var(--scalar-radius);padding:1px 8px}',
+    // B: plain row variants (value hugs its text; rowright pushes it to the right edge)
+    G(['row', 'rowright'], B0) + '{border-radius:var(--scalar-radius);padding:1px 8px}',
     S('row') + B0 + '{background:var(--scalar-background-2)}',
     S('rowright') + H0 + '{justify-content:flex-end;margin-left:auto}',
     S('rowright') + V0 + '{justify-content:flex-end}',
@@ -148,11 +147,6 @@
     lab.textContent = 'Example style';
     bar.appendChild(lab);
     ['default'].concat(STYLES).forEach(function (s, i) {
-      if (s === 'inline' || s === 'row' || s === 'chip') {
-        var g = document.createElement('span');
-        g.textContent = s === 'inline' ? '| A:' : s === 'row' ? '| B:' : '| C:';
-        bar.appendChild(g);
-      }
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = s;
