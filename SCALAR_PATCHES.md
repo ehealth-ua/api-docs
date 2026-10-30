@@ -55,7 +55,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 | P5 | Array-item `allOf` with first-position bare `oneOf` merges instead of splitting | local | bundle | fix |
 | P6 | `oneOf` pickers under **response** bodies drive the example | local | bundle + spec | feature |
 | P7 | Load performance: skip console-only validation, no eager preload | local | bundle + prebuild | perf |
-| P8 | Large request examples keep highlighting + copy button | local | bundle | UX (**unshipped**) |
+| P8 | Large request examples keep highlighting + copy button | local | bundle | UX (**held — on branch `scalar-patch-p8-large-examples`, tested on :8095 only, not merged/deployed**) |
 | P9 | Request bodies always render all top-level attributes (no "Show additional properties") | local (= upstream config, 1.76) | bundle | config constant |
 | P10 | "Expand all / Collapse all" attributes button in the request-body header | local | bundle | UX feature |
 | P11 | "Expand all / Collapse all" button in the Responses section | local | bundle | UX feature |
@@ -123,11 +123,12 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 - **Measured:** care-plan deep link 6.2 s → ~2.5 s (1× CPU), ~38 s → ~8 s (4×).
 - **Rebase notes:** both behaviors still present in 1.76. Upstream added perf work after our base (#10261 cheaper schema walks, #10263 non-reactive store mode, #10264 compact sparse document, `urlRouting:false` #10697) — evaluate whether they reduce the need for P7 / the prebuild step.
 
-### P8 — large request examples (UNSHIPPED — only in a working tree)
-- **Symptom:** request example > 20 000 chars (every `/decoded-payload` op) became unhighlighted plaintext with no copy button.
-- **Where (source):** request-example card in `packages/components` / `api-reference` (`ScalarVirtualText` swap threshold).
-- **Changes (bundle):** threshold `>2e4` → `>1e5`; the remaining virtual branch is wrapped in `div.group/code-block` and renders the stock `ScalarCodeCopy` (`LY` + backdrop `NY`) fed the FULL text.
-- **Rebase notes:** in 1.76 `ExampleResponse.vue` and `ExampleSchema.vue` also carry `VIRTUALIZATION_THRESHOLD = 20_000` — the same limitation likely applies to large **responses** (we never patched those).
+### P8 — large request examples keep highlighting + copy button (HELD: branch `scalar-patch-p8-large-examples`, :8095 only)
+- **Symptom:** request example > 20 000 chars became unhighlighted plaintext with no copy button. On prod only **2 of 188** request-body operations hit it (`encounter_package/decoded-payload` POST ~58 k chars, PATCH ~61 k).
+- **Where (source):** request-example card in `packages/api-reference` (`RequestExample`/`ExampleRequest`: `ScalarVirtualText` swap threshold).
+- **Changes (bundle, 2 edits, rebuilt 2026-10-30 on top of P9–P11 from the original working-tree version):** threshold `>2e4` → `>1e5`; the remaining virtual branch is wrapped in `div.group/code-block` and renders the stock `ScalarCodeCopy` (`LY` + backdrop `NY`) fed the FULL text.
+- **Cost measured:** those two operations render ~0.2 s slower at 1× CPU (visible 1.3 → 1.5 s, longest task 0.85 → 1.0 s), ~+1 s at 4×; control operation unchanged (905 vs 907 ms). Highlight cost grows with size, hence the 1e5 cap.
+- **Rebase notes:** in 1.76 `ExampleResponse.vue` and `ExampleSchema.vue` also carry `VIRTUALIZATION_THRESHOLD = 20_000` — the same limitation likely applies to large **responses** (never patched).
 - **Upstream candidate:** make limit configurable / give virtual block a copy button.
 
 ### P9 — request bodies: all top-level attributes visible, no "Show additional properties"
