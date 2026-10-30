@@ -58,7 +58,8 @@
     // ---- A: inline — muted "e.g. value" after the type --------------------
     S('inline') + H0 + '{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px;overflow:hidden}',
     S('inline') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
-    S('inline') + B0 + '{max-width:42ch;font-size:var(--scalar-mini);gap:3px}',
+    S('inline') + B0 + '{max-width:42ch;font-size:var(--scalar-mini);gap:3px;background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:var(--scalar-radius);padding:0 6px}',
+    S('inline') + B0 + ' > svg{background:var(--scalar-background-2)}',
     S('inline') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
     S('inline') + V0 + ' > .property-example-value:not(:only-child){max-width:22ch}',
 
