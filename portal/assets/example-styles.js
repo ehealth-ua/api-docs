@@ -47,7 +47,10 @@
     V + '{display:flex;position:static;transform:none;box-shadow:none;border:0;background:transparent;padding:0;min-width:0;max-width:100%;overflow:visible;z-index:auto;gap:4px}',
     B + '{flex:0 0 auto;width:auto;min-width:0;max-width:100%;padding:0;background:transparent;border:0;border-radius:0;text-align:left;cursor:copy;color:var(--scalar-color-2)}',
     B + ' > span{min-width:0}',
-    B + ' > svg{flex:none;width:11px;height:11px;opacity:0;transition:opacity .12s}',
+    B + '{position:relative}',
+    // copy icon overlays the end of the value on hover/focus instead of reserving blank space after it
+    B + ' > svg{position:absolute;right:2px;top:50%;margin-top:-7px;box-sizing:content-box;padding:2px;width:11px;height:11px;border-radius:3px;background:var(--scalar-background-1);opacity:0;pointer-events:none;transition:opacity .12s}',
+    S('chip') + B0 + ' > svg{background:var(--scalar-background-2)}',
     B + ':hover > svg,' + B + ':focus-visible > svg{opacity:1}',
     B + ':focus-visible{outline:2px solid var(--scalar-color-accent,currentColor);outline-offset:1px}',
     L + '{display:none}', // the "Example" label is dropped in every style; the value list is always shown
@@ -79,7 +82,7 @@
     S('block') + V0 + '{flex-direction:column;gap:2px}',
     S('block') + B0 + '{font-size:var(--scalar-mini);align-items:flex-start;gap:6px;white-space:normal}',
     S('block') + B0 + ' > span{display:block;white-space:pre-wrap;overflow-wrap:anywhere;text-overflow:clip;overflow:auto;max-height:7.5em}',
-    S('block') + B0 + ' > svg{margin-top:3px}',
+    
 
     // ---- B: value stays on the field's OWN row (takes the room left, ellipsis, never wraps below) ----
     S('row') + H0 + ',' + S('chip') + H0 + ',' + S('rowright') + H0 + '{flex:1 1 8ch;display:flex;flex-direction:row;min-width:0;overflow:hidden;align-items:baseline}',
