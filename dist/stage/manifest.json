@@ -7,28 +7,28 @@
       "slug": "ehealth-pis",
       "source": "specs/ehealth-pis.yaml",
       "source_sha256": "a4fcad8d72d7552284d9bf17eccd66baef309c8eaa957ced80ea3fbfb0dda50a",
-      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
+      "page_sha256": "53b803aa27decc9c4bdbd4e925b291e4483492b8533313bdb51029b22f7b540a"
     },
     "scalar-docs/ehealth-trusted-pis.json": {
       "page": "index.html",
       "slug": "ehealth-trusted-pis",
       "source": "specs/ehealth-trusted-pis.yaml",
       "source_sha256": "2d247e72b68cc79c47a81c0a84d7ecee9f6eb590919a7192f69a8d83ed42f5d5",
-      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
+      "page_sha256": "53b803aa27decc9c4bdbd4e925b291e4483492b8533313bdb51029b22f7b540a"
     },
     "scalar-docs/general-mis.json": {
       "page": "index.html",
       "slug": "general-mis",
       "source": "specs/general-mis.yaml",
       "source_sha256": "562054e355f9c452159e42bf25d36f440795f8e4e26d32b313d3b7c738944a38",
-      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
+      "page_sha256": "53b803aa27decc9c4bdbd4e925b291e4483492b8533313bdb51029b22f7b540a"
     },
     "scalar-docs/medical-events.json": {
       "page": "index.html",
       "slug": "medical-events",
       "source": "specs/medical-events.yaml",
       "source_sha256": "92d4a39f0de611f10609f284a0e4d1f70e23773221cb84fdeeb86a04093f0bc3",
-      "page_sha256": "53396d37c96b272d9ee1500526343a782891c1ea056dc0fc11f53ca137c48033"
+      "page_sha256": "53b803aa27decc9c4bdbd4e925b291e4483492b8533313bdb51029b22f7b540a"
     }
   }
 }

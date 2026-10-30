@@ -7,16 +7,19 @@ Trial host (sandbox, container `scalar-trial-b`):
 docs.ehealth.gov.ua will ship) and the **api-docs-platform** portal at `/platform/`
 (hash routing). Both load the same `assets/example-styles.js`.
 
-Four styles, chosen with `?exstyle=`; `default`/no parameter = today's stock behaviour
+Seven styles in three groups (**A** `inline` `nextline` `pill` `block` — example after the type / on its own line; **B** `row` `rowright` — always on the field's own row; **C** `chip` — own row, exactly the stock popup chip look). The word "Example" is not shown in any of them. Chosen with `?exstyle=`; `default`/no parameter = today's stock behaviour
 (hover popup). A switcher (bottom-right) flips styles live without reloading; the choice
 is remembered per browser tab (`exstyle=default` clears it).
 
 | `exstyle` | Look | Long values |
 |---|---|---|
 | `inline` | muted `e.g. value` right after `type · required`, one line | ellipsis at 42ch, full text in native tooltip |
-| `nextline` | monospace chip on its own line under the name, `EXAMPLE` micro-label | 2-line clamp, tooltip |
+| `nextline` | monospace chip on its own line under the name, | 2-line clamp, tooltip |
 | `pill` | compact bordered pill after the type, `e.g.` prefix | ellipsis at 28ch, tooltip |
-| `block` | full value on its own line, accent rail, `EXAMPLE` micro-label | wraps (anywhere), max 7.5em then scrolls |
+| `block` | full value on its own line, accent rail |
+| `row` | **B:** muted value on the field's own row, ellipsis at the row end |
+| `rowright` | **B:** same, right-aligned |
+| `chip` | **C:** own row, stock popup chip background/border/radius, no rail | wraps (anywhere), max 7.5em then scrolls |
 
 In every style the value is the **original copy button**: click = copy, Tab-focusable, a
 copy icon appears on hover / keyboard focus.

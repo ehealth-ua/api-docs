@@ -16,7 +16,8 @@
  * property-example-value-list, property-example-value. See SCALAR_PATCHES.md P12.
  */
 (function () {
-  var STYLES = ['inline', 'nextline', 'pill', 'block'];
+  // A = value after the type, wraps to its own line when the row is full; B = value always on the field's own row.
+  var STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip'];
   var KEY = 'ehealth-exstyle';
   var style = null;
   try {
@@ -49,12 +50,10 @@
     B + ' > svg{flex:none;width:11px;height:11px;opacity:0;transition:opacity .12s}',
     B + ':hover > svg,' + B + ':focus-visible > svg{opacity:1}',
     B + ':focus-visible{outline:2px solid var(--scalar-color-accent,currentColor);outline-offset:1px}',
-    L + '{text-decoration:none;cursor:default;color:var(--scalar-color-3)}',
+    L + '{display:none}', // the "Example" label is dropped in every style; the value list is always shown
 
     // ---- A: inline — muted "e.g. value" after the type --------------------
     S('inline') + H0 + '{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px;overflow:hidden}',
-    S('inline') + L0 + '{font-size:0}',
-    S('inline') + L0 + '::before{content:"e.g.";font-size:var(--scalar-mini)}',
     S('inline') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
     S('inline') + B0 + '{max-width:42ch;font-size:var(--scalar-mini);gap:3px}',
     S('inline') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
@@ -62,7 +61,6 @@
 
     // ---- B: nextline — chip on its own line, 2-line clamp -----------------
     S('nextline') + H0 + '{flex:0 0 100%;display:flex;flex-direction:row;align-items:flex-start;gap:6px;margin-top:2px}',
-    S('nextline') + L0 + '{flex:none;font-size:var(--scalar-micro);text-transform:uppercase;letter-spacing:.04em;padding-top:4px}',
     S('nextline') + V0 + '{flex-direction:row;flex-wrap:wrap;align-items:flex-start}',
     S('nextline') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:var(--scalar-radius);padding:2px 6px;font-size:var(--scalar-mini);white-space:normal}',
     S('nextline') + B0 + ':hover{background:var(--scalar-background-3,var(--scalar-background-2))}',
@@ -70,8 +68,6 @@
 
     // ---- C: pill — compact bordered pill after the type -------------------
     S('pill') + H0 + '{display:inline-flex;flex-direction:row;align-items:center;gap:4px;overflow:hidden}',
-    S('pill') + L0 + '{font-size:0}',
-    S('pill') + L0 + '::before{content:"e.g.";font-size:var(--scalar-micro)}',
     S('pill') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
     S('pill') + B0 + '{max-width:28ch;font-size:var(--scalar-micro);gap:4px;padding:0 8px;border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:999px;line-height:1.7}',
     S('pill') + B0 + ':hover{background:var(--scalar-background-2)}',
@@ -80,11 +76,22 @@
 
     // ---- D: block — full value on its own line, accent rail ---------------
     S('block') + H0 + '{flex:0 0 100%;display:flex;flex-direction:column;gap:2px;margin-top:3px;padding-left:8px;border-left:2px solid var(--scalar-color-accent,var(--scalar-border-color))}',
-    S('block') + L0 + '{align-self:flex-start;font-size:var(--scalar-micro);text-transform:uppercase;letter-spacing:.06em;padding:0}',
     S('block') + V0 + '{flex-direction:column;gap:2px}',
     S('block') + B0 + '{font-size:var(--scalar-mini);align-items:flex-start;gap:6px;white-space:normal}',
     S('block') + B0 + ' > span{display:block;white-space:pre-wrap;overflow-wrap:anywhere;text-overflow:clip;overflow:auto;max-height:7.5em}',
     S('block') + B0 + ' > svg{margin-top:3px}',
+
+    // ---- B: value stays on the field's OWN row (takes the room left, ellipsis, never wraps below) ----
+    S('row') + H0 + ',' + S('chip') + H0 + ',' + S('rowright') + H0 + '{flex:1 1 8ch;display:flex;flex-direction:row;min-width:0;overflow:hidden;align-items:baseline}',
+    S('row') + V0 + ',' + S('chip') + V0 + ',' + S('rowright') + V0 + '{flex:1 1 auto;flex-direction:row;flex-wrap:nowrap;min-width:0}',
+    S('row') + B0 + ',' + S('chip') + B0 + ',' + S('rowright') + B0 + '{font-size:var(--scalar-mini);gap:3px;max-width:100%}',
+    S('row') + B0 + ' > span,' + S('chip') + B0 + ' > span,' + S('rowright') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    S('row') + V0 + ' > .property-example-value:not(:only-child),' + S('chip') + V0 + ' > .property-example-value:not(:only-child),' + S('rowright') + V0 + ' > .property-example-value:not(:only-child){flex:0 1 auto;max-width:24ch}',
+    // C: exactly the stock popup value chip (same background / border / radius / mono font), on the field's own row, no rail
+    S('chip') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:var(--scalar-radius);padding:2px 6px}',
+    S('rowright') + H0 + '{justify-content:flex-end;margin-left:auto}',
+    S('rowright') + V0 + '{justify-content:flex-end}',
+    S('rowright') + B0 + '{justify-content:flex-end;text-align:right}',
 
     // ---- switcher ---------------------------------------------------------
     '#ehealth-exstyle-switch{position:fixed;right:12px;bottom:12px;z-index:100000;display:flex;gap:2px;padding:3px;font:12px var(--scalar-font,system-ui);background:var(--scalar-background-1,#fff);color:var(--scalar-color-1,#222);border:1px solid var(--scalar-border-color,#ccc);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2)}',
@@ -126,7 +133,12 @@
     var lab = document.createElement('span');
     lab.textContent = 'Example style';
     bar.appendChild(lab);
-    ['default'].concat(STYLES).forEach(function (s) {
+    ['default'].concat(STYLES).forEach(function (s, i) {
+      if (s === 'inline' || s === 'row' || s === 'chip') {
+        var g = document.createElement('span');
+        g.textContent = s === 'inline' ? '| A:' : s === 'row' ? '| B:' : '| C:';
+        bar.appendChild(g);
+      }
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = s;

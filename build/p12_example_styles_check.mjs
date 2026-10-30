@@ -37,7 +37,7 @@ const outDir = resolve(arg('out', 'p12-out'))
 const only = arg('only') // optional comma-separated substring filters on route
 mkdirSync(outDir, { recursive: true })
 
-const STYLES = ['inline', 'nextline', 'pill', 'block']
+const STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip']
 const ROUTES = [
   ['medical-events', 'POST', '/api/patients/{id}/encounter_package'],
   ['medical-events', 'PATCH', '/api/patients/{id}/encounter_package'],

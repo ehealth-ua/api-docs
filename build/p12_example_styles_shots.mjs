@@ -41,7 +41,7 @@ const browser = await puppeteer.launch({ executablePath: CHROME, headless: true,
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 for (const scheme of ['light', 'dark']) {
   for (const [w, tagw] of [[1280, ''], [390, '-phone']]) {
-    for (const style of [null, 'inline', 'nextline', 'pill', 'block']) {
+    for (const style of [null, 'inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip']) {
       const page = await browser.newPage()
       await page.setViewport({ width: w, height: w === 390 ? 844 : 760 })
       await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: scheme }])
