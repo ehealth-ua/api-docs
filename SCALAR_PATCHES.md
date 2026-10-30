@@ -59,6 +59,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 | P9 | Request bodies always render all top-level attributes (no "Show additional properties") | local (= upstream config, 1.76) | bundle | config constant |
 | P10 | "Expand all / Collapse all" attributes button in the request-body header | local | bundle | UX feature |
 | P11 | "Expand all / Collapse all" button in the Responses section | local | bundle | UX feature |
+| P12 | Persistent attribute "Example" display: plain fields as pills, object/array examples keep the popup | local | page asset (CSS/JS, **no bundle edit**) | UX |
 
 ### P1 + P2 — multi-group `oneOf` (backport)
 - **Upstream:** scalar/scalar#9727 → PR #9732, merged 2026-07-27. Contained in our base `46802789`.
@@ -167,6 +168,17 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
   3. `ParameterListItem`: `{defaultOpen:d.value}` → `{key:…,defaultOpen:d.value||!!(collapsableItems&&options?.expandAllSchemaProperties)}`.
 - **Rebase notes:** same as P10 (use upstream's schema-expansion store if present); keep P10 + P11 consistent — the stepper code is duplicated in `RequestBody` and `OperationResponses` (separate module scopes in the minified bundle).
 - **Verification & review plan:** in the PR.
+
+### P12 — persistent attribute "Example" display (pills; NOT in the bundle)
+- **Symptom / request:** in a schema attribute tree the property's example appeared only in a hover/focus popup (`Example` label → popup). With a leaf `example` on most scalar fields the reader could not scan sample values without hovering every row; Apiary shows them inline.
+- **Upstream:** 1.76.0 has no option for this (`SchemaPropertyExamples.vue` — popup pinned on click, hover/focus CSS, no config) → local patch.
+- **Mechanism: no bundle edit.** `portal/assets/example-styles.js` (same file in both repos, `<script src="…/example-styles.js?v=<sha8 of the file>">` right before the Scalar bundle in `portal/reference.html` / `portal/index.html`) injects one `<style>` and re-skins the **existing** example DOM: for a plain field the value stays visible in the row as a pill (stock popup chip colours `--scalar-background-2` / border / `--scalar-color-1`, light + dark), the whole value when the row has room, ellipsis at the row end with the full text as native tooltip (lazy `title`), copy icon overlaying the pill end on hover/`:focus-visible`; the "Example" label is hidden; several examples → each shortened to 16ch. The original `button.property-example-value` is kept: click = copy, keyboard focusable.
+- **Object/array examples keep the stock popup.** A `MutationObserver` (microtask, no paint of the wrong style) sets `data-p12-big` on every `.property-example` whose value starts with `{` or `[` (e.g. `encounter`, big JSON), and every rule is scoped `:not([data-p12-big])`.
+- **Scalar DOM/classes the CSS depends on (re-check on every Scalar upgrade):** `.property-heading` › `.property-example` (label `button:first-child` + `.property-example-value-list` popup of `button.property-example-value` › `span` + `svg`). Upstream component: `packages/blocks/src/schema/SchemaPropertyExamples.vue` (compiled scoped CSS `[data-v-370db0bd]` in our 1.63 base: the list is `display:none; position:absolute`, shown on `:hover`/`:focus-within`). Our selectors have 5 classes so they outrank the scoped rules; if upstream renames the classes the styles silently do nothing and the stock popup returns (nothing breaks).
+- **Rebase notes:** after a Scalar upgrade open a dense route (`…/encounter_package/decoded-payload`) and confirm pills for plain fields, stock popup for `encounter`; fix the selectors at the top of `example-styles.js` if classes changed. Bump the `?v=` hash on every edit of the file (assets are cached for a year) and regenerate the prebuild (page hash changes).
+- **Prebuild:** no effect on `scalar-docs/*.json`; only `manifest.json` (`page_sha256`) changes.
+- **History:** trialled as 9 selectable `?exstyle=` styles (PRs api-docs-platform#91 / api-docs#56, :8095 review); the "pillfields" variant was chosen and everything else removed.
+- **Upstream candidate:** a `showSchemaExamples: 'inline' | 'popup'` style option would be a small upstream PR.
 
 ## Spec-side & tooling dependencies (what a bundle swap can break)
 
