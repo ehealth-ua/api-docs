@@ -1,6 +1,8 @@
 # P12 — persistent "Example" display: MANUAL REVIEW PLAN
 
-Trial host (sandbox, container `scalar-trial-b`, **do not use for anything else**):
+**Also deployed to the main test surface `http://94.131.243.236:8095`** (api-docs PROD build incl. this patch; same paths as below, replace `:8102` by `:8095`; previous content backed up as `~/projects/api-docs-pr74.bak-20261030-pre-p12`).
+
+Trial host (sandbox, container `scalar-trial-b`):
 `http://94.131.243.236:8102` — serves the **api-docs** PROD build at `/` (path routing, what
 docs.ehealth.gov.ua will ship) and the **api-docs-platform** portal at `/platform/`
 (hash routing). Both load the same `assets/example-styles.js`.
