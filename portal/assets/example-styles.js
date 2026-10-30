@@ -17,7 +17,7 @@
  */
 (function () {
   // A = value after the type, wraps to its own line when the row is full; B = value always on the field's own row.
-  var STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip', 'chipsoft', 'chiptint'];
+  var STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip', 'chipsoft', 'chiptint', 'pillfields'];
   var KEY = 'ehealth-exstyle';
   var style = null;
   try {
@@ -33,8 +33,9 @@
   if (!style) return;
 
   // Selector pieces; S(name) scopes a rule to one style (same specificity as the shared rules, later wins).
-  var P = 'html[data-exstyle]';
-  var S = function (n) { return 'html[data-exstyle=' + n + ']'; };
+  var NOPF = ':not([data-exstyle=pillfields])'; // pillfields has its own cloned rules (below)
+  var P = 'html[data-exstyle]' + NOPF;
+  var S = function (n) { return 'html[data-exstyle=' + n + ']' + NOPF; };
   var H0 = ' .property-heading > .property-example';
   var V0 = H0 + ' .property-example-value-list';
   var B0 = V0 + ' > .property-example-value';
@@ -114,6 +115,35 @@
     '#ehealth-exstyle-switch button[aria-pressed=true]{background:var(--scalar-color-accent,#06c);color:#fff}'
   ].join('\n');
 
+  // pillfields = pill for every plain field, while object/array-valued examples (big JSON such as `encounter`)
+  // keep the stock hover popup: the pill rules are cloned for [data-exstyle=pillfields] and exclude [data-p12-big].
+  var pf = css.split('\n').filter(function (l) { return l.indexOf(P) === 0 || l.indexOf(S('pill')) === 0; })
+    .map(function (l) {
+      return l.split(S('pill')).join('html[data-exstyle=pillfields]').split(P).join('html[data-exstyle=pillfields]')
+        .split('.property-heading > .property-example').join('.property-heading > .property-example:not([data-p12-big])');
+    }).join('\n');
+  css += '\n' + pf;
+  // marks examples whose value starts with { or [ (lazy, only while pillfields is active)
+  var obs = null;
+  function mark(root) {
+    var list = (root.querySelectorAll ? root.querySelectorAll('.property-example:not([data-p12-chk])') : []);
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i], v = e.querySelector('.property-example-value > span');
+      e.setAttribute('data-p12-chk', '');
+      if (v && /^\s*[\[{]/.test(v.textContent)) e.setAttribute('data-p12-big', '');
+    }
+  }
+  function watch() {
+    if (obs || !window.MutationObserver) return;
+    var pending = false;
+    mark(document);
+    obs = new MutationObserver(function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () { pending = false; mark(document); });
+    });
+    obs.observe(document.body || document.documentElement, { childList: true, subtree: true });
+  }
   var el = document.createElement('style');
   el.id = 'ehealth-example-styles';
   el.textContent = css;
@@ -131,12 +161,14 @@
     if (s) u.searchParams.set('exstyle', s);
     else u.searchParams.set('exstyle', 'default');
     history.replaceState(history.state, '', u.toString());
+    if (s === 'pillfields' && document.body) watch();
     var bs = document.querySelectorAll('#ehealth-exstyle-switch button');
     for (var i = 0; i < bs.length; i++)
       bs[i].setAttribute('aria-pressed', String((bs[i].dataset.s || '') === (s || '')));
   }
 
   apply(style);
+  if (style === 'pillfields') document.addEventListener('DOMContentLoaded', watch);
 
   document.addEventListener('DOMContentLoaded', function () {
     var bar = document.createElement('div');
