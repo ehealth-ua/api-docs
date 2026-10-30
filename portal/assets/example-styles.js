@@ -52,7 +52,7 @@
     L + '{text-decoration:none;cursor:default;color:var(--scalar-color-3)}',
 
     // ---- A: inline — muted "e.g. value" after the type --------------------
-    S('inline') + H0 + '{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px}',
+    S('inline') + H0 + '{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px;overflow:hidden}',
     S('inline') + L0 + '{font-size:0}',
     S('inline') + L0 + '::before{content:"e.g.";font-size:var(--scalar-mini)}',
     S('inline') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
@@ -69,7 +69,7 @@
     S('nextline') + B0 + ' > span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;white-space:normal;overflow-wrap:anywhere;text-overflow:clip}',
 
     // ---- C: pill — compact bordered pill after the type -------------------
-    S('pill') + H0 + '{display:inline-flex;flex-direction:row;align-items:center;gap:4px}',
+    S('pill') + H0 + '{display:inline-flex;flex-direction:row;align-items:center;gap:4px;overflow:hidden}',
     S('pill') + L0 + '{font-size:0}',
     S('pill') + L0 + '::before{content:"e.g.";font-size:var(--scalar-micro)}',
     S('pill') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',

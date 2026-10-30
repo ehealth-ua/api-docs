@@ -122,10 +122,12 @@ async function open(origin, id, style, width = 1280, scheme) {
 }
 
 async function expandAll(page) {
-  for (let k = 0; k < 3; k++) {
-    await page.evaluate(() => [...document.querySelectorAll('button')].filter((b) => /Show .*Child/i.test(b.textContent)).slice(0, 25).forEach((b) => b.click()))
-    await wait(500)
-  }
+  // The bundle's own "Expand all" button (patch P10, staged level by level) opens a whole request body cheaply;
+  // fall back to a bounded manual expansion for pages without one (responses, parameters).
+  const clicked = await page.evaluate(() => { const b = document.querySelector('button.request-body-expand-all'); if (b) b.click(); return !!b })
+  if (clicked) { await wait(4000); return }
+  await page.evaluate(() => [...document.querySelectorAll('button')].filter((b) => /Show .*Child/i.test(b.textContent)).slice(0, 12).forEach((b) => b.click()))
+  await wait(600)
 }
 
 
