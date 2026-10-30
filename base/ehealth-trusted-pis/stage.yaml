@@ -265,7 +265,6 @@ paths:
       parameters:
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -448,7 +447,6 @@ paths:
       parameters:
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -750,7 +748,6 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
@@ -830,7 +827,6 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjYWJpbmV0LXJlZ2lzdHJhdGlvbiIsImVtYWlsIjoiYXByb2tvcHBoYXJtZGlyNEB1a3IubmV0IiwiZXhwIjoxNjgyNjkzNTc3LCJpYXQiOjE2ODI2NjQ3NzcsImlzcyI6IkVIZWFsdGgiLCJqdGkiOiIxOTAyYTkyYS00MDcyLTQ3MWEtYmU4NS1iZWU0MzQzNmNlYjEiLCJuYmYiOjE2ODI2NjQ3NzYsInN1YiI6ImFwcm9rb3BwaGFybWRpcjRAdWtyLm5ldCIsInR5cCI6ImFjY2VzcyJ9.EXTuYRQenjqzsjNAJ5agmEbSHcg_XRKwc3VOGAtSjfMOy4uIJ_BBMUeUWSVzy4_OezPjEIiVcnaLTN4pZbtgow
           required: true
           schema:
             type: string
@@ -1208,7 +1204,6 @@ paths:
       parameters:
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -1706,7 +1701,6 @@ paths:
       parameters:
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string
@@ -2168,14 +2162,12 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
           required: true
           schema:
             type: string
           example: Bearer c2778f3064753ea70de870a53795f5c9
         - name: api-key
           in: header
-          description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
           required: true
           schema:
             type: string

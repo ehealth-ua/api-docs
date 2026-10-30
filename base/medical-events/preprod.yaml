@@ -237,14 +237,12 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -419,14 +417,12 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -994,14 +990,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer 342432fdsfdsgfdt24535422fgds
         required: true
         schema:
           type: string
         example: Bearer 342432fdsfdsgfdt24535422fgds
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -1694,14 +1688,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -1840,14 +1832,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -2689,21 +2679,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -2848,14 +2835,12 @@ paths:
         example: 70a9e15b-b71b-4caf-8f2e-ff247e8a5677
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -3792,21 +3777,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -4163,21 +4145,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -4319,14 +4298,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -4514,14 +4491,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -4724,7 +4699,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -5624,21 +5598,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -5790,7 +5761,6 @@ paths:
                           note:
                             example: "Some notes"
                             type: string
-                            description: Some notes
                         required:
                         - requester_legal_entity_edrpou
                         - requester_employee_name
@@ -6633,21 +6603,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -7064,21 +7031,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -7447,21 +7411,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -8532,21 +8493,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -9568,21 +9526,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -9875,21 +9830,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -10133,21 +10085,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -10637,21 +10586,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -11093,21 +11039,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -11259,7 +11202,6 @@ paths:
                           note:
                             example: "Some notes"
                             type: string
-                            description: Some notes
                         required:
                         - requester_legal_entity_edrpou
                         - requester_employee_name
@@ -12095,14 +12037,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -12269,7 +12209,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -13174,14 +13113,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -13301,14 +13238,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -13670,14 +13605,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -14105,14 +14038,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -14244,14 +14175,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -15266,14 +15195,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -16373,14 +16300,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -16551,14 +16476,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -16795,14 +16718,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -17102,14 +17023,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -17229,14 +17148,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -17671,14 +17588,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -18175,14 +18090,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -18302,14 +18215,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -18845,14 +18756,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -19451,14 +19360,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -19578,14 +19485,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -20079,14 +19984,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -20700,14 +20603,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -20827,14 +20728,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -21178,14 +21077,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -21647,14 +21544,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -21774,14 +21669,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -22283,14 +22176,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -22893,14 +22784,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -23020,14 +22909,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -23275,14 +23162,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -23593,14 +23478,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -23720,14 +23603,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -24322,14 +24203,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -25007,14 +24886,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -25134,14 +25011,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -25515,14 +25390,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -25965,14 +25838,12 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -26092,14 +25963,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -26242,14 +26111,12 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -26395,14 +26262,12 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -26569,7 +26434,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -27191,14 +27055,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -27307,7 +27169,6 @@ paths:
                               note:
                                 example: "Some notes"
                                 type: string
-                                description: Some notes
                             required:
                             - requester_legal_entity_edrpou
                             - requester_employee_name
@@ -27986,14 +27847,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -28312,14 +28171,12 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -28428,7 +28285,6 @@ paths:
                               note:
                                 example: "Some notes"
                                 type: string
-                                description: Some notes
                             required:
                             - requester_legal_entity_edrpou
                             - requester_employee_name
@@ -29059,14 +28915,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -29237,14 +29091,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -29334,21 +29186,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -29469,7 +29318,6 @@ paths:
                               note:
                                 example: "Some notes"
                                 type: string
-                                description: Some notes
                             required:
                             - requester_legal_entity_edrpou
                             - requester_employee_name
@@ -30188,21 +30036,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -30320,7 +30165,6 @@ paths:
                         note:
                           example: "Some notes"
                           type: string
-                          description: Some notes
                       required:
                       - requester_legal_entity_edrpou
                       - requester_employee_name
@@ -31012,21 +30856,18 @@ paths:
         required: true
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -31197,14 +31038,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -31545,21 +31384,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -31663,21 +31499,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -31894,21 +31727,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -32690,21 +32520,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -33409,21 +33236,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34116,21 +33940,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34239,21 +34060,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34370,21 +34188,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34522,21 +34337,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34676,21 +34488,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34837,21 +34646,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer WUZKa1BnUTRkOWhYcTAxOHNmUTdUUT09
         required: true
         schema:
           type: string
         example: Bearer WUZKa1BnUTRkOWhYcTAxOHNmUTdUUT09
       - name: api-key
         in: header
-        description: e.g. b1lPV3d3blRHRHdOYVYrYmNPU0tJdz09
         required: true
         schema:
           type: string
         example: b1lPV3d3blRHRHdOYVYrYmNPU0tJdz09
       - name: X-Custom-PSK
         in: header
-        description: e.g. a1aa07c96f3f4d91870f923a53cc9aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -34942,21 +34748,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer WUZKa1BnUTRkOWhYcTAxOHNmUTdUUT09
         required: true
         schema:
           type: string
         example: Bearer WUZKa1BnUTRkOWhYcTAxOHNmUTdUUT09
       - name: api-key
         in: header
-        description: e.g. b1lPV3d3blRHRHdOYVYrYmNPU0tJdz09
         required: true
         schema:
           type: string
         example: b1lPV3d3blRHRHdOYVYrYmNPU0tJdz09
       - name: X-Custom-PSK
         in: header
-        description: e.g. a1aa07c96f3f4d91870f923a53cc9aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -35100,14 +34903,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -35794,21 +35595,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -35928,14 +35726,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -36635,14 +36431,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -36736,7 +36530,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -37353,14 +37146,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -37512,7 +37303,6 @@ paths:
                           note:
                             example: "Some notes"
                             type: string
-                            description: Some notes
                         required:
                         - requester_legal_entity_edrpou
                         - requester_employee_name
@@ -38355,14 +38145,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -39013,14 +38801,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -39116,7 +38902,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -39785,14 +39570,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -40161,14 +39944,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -41190,14 +40971,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -41578,14 +41357,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -42027,14 +41804,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -43177,14 +42952,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -43848,14 +43621,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -44575,14 +44346,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -45399,14 +45168,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -45517,21 +45284,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -45781,21 +45545,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -46098,21 +45859,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -46325,14 +46083,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -46815,14 +46571,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -47257,14 +47011,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -47550,14 +47302,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -47794,14 +47544,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -48865,14 +48613,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -49887,14 +49633,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -50304,14 +50048,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -50673,14 +50415,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -50922,14 +50662,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -51465,14 +51203,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -52057,14 +51793,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -52558,14 +52292,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -53113,14 +52845,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -53368,14 +53098,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -53672,14 +53400,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -53773,7 +53499,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -54383,14 +54108,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -54499,7 +54222,6 @@ paths:
                               note:
                                 example: "Some notes"
                                 type: string
-                                description: Some notes
                             required:
                             - requester_legal_entity_edrpou
                             - requester_employee_name
@@ -55142,14 +54864,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -55245,7 +54965,6 @@ paths:
                             note:
                               example: "Some notes"
                               type: string
-                              description: Some notes
                           required:
                           - requester_legal_entity_edrpou
                           - requester_employee_name
@@ -55907,14 +55626,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -56025,7 +55742,6 @@ paths:
                               note:
                                 example: "Some notes"
                                 type: string
-                                description: Some notes
                             required:
                             - requester_legal_entity_edrpou
                             - requester_employee_name
@@ -56714,21 +56430,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -57102,14 +56815,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -57538,14 +57249,12 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -57991,21 +57700,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -58165,14 +57871,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -58869,21 +58573,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -60130,21 +59831,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -61383,21 +61081,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -62585,21 +62280,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -63780,21 +63472,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -65008,14 +64697,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -66223,21 +65910,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -67430,21 +67114,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -67533,21 +67214,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -67683,21 +67361,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -67963,21 +67638,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -68069,21 +67741,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -69284,21 +68953,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -69548,21 +69214,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -70080,21 +69743,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -70911,21 +70571,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -71296,21 +70953,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -72132,21 +71786,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -72837,21 +72488,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73024,14 +72672,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73139,14 +72785,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73257,21 +72901,18 @@ paths:
         example: 70a9e15b-b71b-4caf-8f2e-ff247e8a5677
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73438,21 +73079,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73563,21 +73201,18 @@ paths:
         example: 70a9e15b-b71b-4caf-8f2e-ff247e8a5677
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -73747,21 +73382,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -74926,21 +74558,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -75054,21 +74683,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -75947,21 +75573,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -76719,21 +76342,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -76904,14 +76524,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -77020,7 +76638,6 @@ paths:
           type: string
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -77125,21 +76742,18 @@ paths:
         example: 70a9e15b-b71b-4caf-8f2e-ff247e8a5677
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -77596,14 +77210,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -78424,21 +78036,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -78803,14 +78412,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -79156,21 +78763,18 @@ paths:
         required: true
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -79209,14 +78813,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
         required: true
         schema:
           type: string
         example: Bearer d368a4b0-4a0e-457a-b267-32359fa6288f
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -79642,21 +79244,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -80366,21 +79965,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -80836,21 +80432,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -81116,14 +80709,12 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -82424,21 +82015,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer F3GF124Df565FDS234SDF34
         required: true
         schema:
           type: string
         example: Bearer F3GF124Df565FDS234SDF34
       - name: api-key
         in: header
-        description: e.g. aDGFDFGT46S5gFGD
         required: true
         schema:
           type: string
         example: aDGFDFGT46S5gFGD
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -83325,21 +82913,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -84044,21 +83629,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -84570,21 +84152,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -85039,21 +84618,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -85891,21 +85467,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer c2778f3064753ea70de870a53795f5c9
         required: true
         schema:
           type: string
         example: Bearer c2778f3064753ea70de870a53795f5c9
       - name: api-key
         in: header
-        description: e.g. uXhEczJ56adsfh3Ri9SUkc4en
         required: true
         schema:
           type: string
         example: uXhEczJ56adsfh3Ri9SUkc4en
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -86625,21 +86198,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -87535,21 +87105,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -88472,21 +88039,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -89427,21 +88991,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -89624,7 +89185,6 @@ paths:
           type: number
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -89767,7 +89327,6 @@ paths:
           type: string
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -90261,21 +89820,18 @@ paths:
           type: number
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -90334,21 +89890,18 @@ paths:
           type: string
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -91552,21 +91105,18 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -91738,21 +91288,18 @@ paths:
         example: NBXk9EyErUZv1RhXgyvgg
       - name: Authorization
         in: header
-        description: e.g. Bearer mF_9.B5f-4.1JqM
         required: true
         schema:
           type: string
         example: Bearer mF_9.B5f-4.1JqM
       - name: api-key
         in: header
-        description: e.g. aFBLVTZ6Z2dON1V
         required: true
         schema:
           type: string
         example: aFBLVTZ6Z2dON1V
       - name: X-Custom-PSK
         in: header
-        description: e.g. a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
         required: true
         schema:
           type: string
@@ -128308,7 +127855,6 @@ components:
           example: '2018-10-08'
         note:
           type: string
-          description: Some notes
           example: Some notes
       example:
         requisition: 1111-2222-3333-4444
