@@ -74,7 +74,7 @@
     // ---- C: pill — compact bordered pill after the type -------------------
     S('pill') + H0 + '{display:inline-flex;flex-direction:row;align-items:center;gap:4px;overflow:hidden}',
     S('pill') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
-    S('pill') + B0 + '{background:var(--scalar-background-2);max-width:28ch;font-size:var(--scalar-micro);gap:4px;padding:0 8px;border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:999px;line-height:1.7}',
+    S('pill') + B0 + '{background:var(--scalar-background-2);max-width:100%;font-size:var(--scalar-micro);gap:4px;padding:0 8px;border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:999px;line-height:1.7}',
     S('pill') + B0 + ':hover{background:var(--scalar-background-2)}',
     S('pill') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
     S('pill') + V0 + ' > .property-example-value:not(:only-child){max-width:16ch}',
