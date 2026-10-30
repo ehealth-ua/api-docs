@@ -17,7 +17,7 @@
  */
 (function () {
   // A = value after the type, wraps to its own line when the row is full; B = value always on the field's own row.
-  var STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip'];
+  var STYLES = ['inline', 'nextline', 'pill', 'block', 'row', 'rowright', 'chip', 'chipsoft', 'chiptint'];
   var KEY = 'ehealth-exstyle';
   var style = null;
   try {
@@ -39,6 +39,8 @@
   var V0 = H0 + ' .property-example-value-list';
   var B0 = V0 + ' > .property-example-value';
   var L0 = H0 + ' > button:first-child';
+  var ROW = ['row', 'rowright', 'chip', 'chipsoft', 'chiptint'];
+  var G = function (names, tail) { return names.map(function (n) { return S(n) + tail; }).join(','); };
   var H = P + H0, V = P + V0, B = P + B0, L = P + L0;
   var css = [
     // ---- shared: neutralise the popup, keep the buttons -------------------
@@ -50,8 +52,7 @@
     B + '{position:relative}',
     // copy icon overlays the end of the value on hover/focus instead of reserving blank space after it
     B + ' > svg{position:absolute;right:2px;top:50%;margin-top:-7px;box-sizing:content-box;padding:2px;width:11px;height:11px;border-radius:3px;background:var(--scalar-background-1);opacity:0;pointer-events:none;transition:opacity .12s}',
-    S('chip') + B0 + ' > svg{background:var(--scalar-background-2)}',
-    B + ':hover > svg,' + B + ':focus-visible > svg{opacity:1}',
+        B + ':hover > svg,' + B + ':focus-visible > svg{opacity:1}',
     B + ':focus-visible{outline:2px solid var(--scalar-color-accent,currentColor);outline-offset:1px}',
     L + '{display:none}', // the "Example" label is dropped in every style; the value list is always shown
 
@@ -85,17 +86,26 @@
     S('block') + B0 + ' > span{display:block;white-space:pre-wrap;overflow-wrap:anywhere;text-overflow:clip;overflow:auto;max-height:7.5em}',
     
 
-    // ---- B: value stays on the field's OWN row (takes the room left, ellipsis, never wraps below) ----
-    S('row') + H0 + ',' + S('chip') + H0 + ',' + S('rowright') + H0 + '{flex:1 1 8ch;display:flex;flex-direction:row;min-width:0;overflow:hidden;align-items:baseline}',
-    S('row') + V0 + ',' + S('chip') + V0 + ',' + S('rowright') + V0 + '{flex:1 1 auto;flex-direction:row;flex-wrap:nowrap;min-width:0}',
-    S('row') + B0 + ',' + S('chip') + B0 + ',' + S('rowright') + B0 + '{font-size:var(--scalar-mini);gap:3px;max-width:100%}',
-    S('row') + B0 + ' > span,' + S('chip') + B0 + ' > span,' + S('rowright') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-    S('row') + V0 + ' > .property-example-value:not(:only-child),' + S('chip') + V0 + ' > .property-example-value:not(:only-child),' + S('rowright') + V0 + ' > .property-example-value:not(:only-child){flex:0 1 auto;max-width:24ch}',
-    // C: exactly the stock popup value chip (same background / border / radius / mono font), on the field's own row, no rail
-    S('chip') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:var(--scalar-radius);padding:2px 6px}',
+    // ---- B + C: value stays on the field's OWN row (room left on the row, ellipsis, never wraps below) ----
+    G(ROW, H0) + '{flex:1 1 8ch;display:flex;flex-direction:row;min-width:0;overflow:hidden;align-items:baseline}',
+    G(ROW, V0) + '{flex:1 1 auto;flex-direction:row;flex-wrap:nowrap;min-width:0}',
+    G(ROW, B0) + '{font-size:var(--scalar-mini);gap:3px;max-width:100%}',
+    G(ROW, B0 + ' > span') + '{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+    G(ROW, V0 + ' > .property-example-value:not(:only-child)') + '{flex:0 1 auto;max-width:24ch}',
+    // B: "field" boxes that FILL the rest of the row (visibly different from A's content-hugging chip)
+    G(['row', 'rowright'], V0) + '{flex-grow:1}',
+    G(['row', 'rowright'], V0 + ' > .property-example-value:only-child') + '{flex:1 1 auto;width:100%;border-radius:var(--scalar-radius);padding:1px 8px}',
+    S('row') + B0 + '{background:var(--scalar-background-2)}',
     S('rowright') + H0 + '{justify-content:flex-end;margin-left:auto}',
     S('rowright') + V0 + '{justify-content:flex-end}',
-    S('rowright') + B0 + '{justify-content:flex-end;text-align:right}',
+    S('rowright') + B0 + '{justify-content:flex-end;text-align:right;background:color-mix(in srgb,var(--scalar-color-accent,#0a84ff) 9%,var(--scalar-background-1))}',
+    // C: content-hugging chips with three background options
+    G(['chip', 'chipsoft', 'chiptint'], B0) + '{border-radius:var(--scalar-radius);padding:2px 6px}',
+    S('chip') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color)}',  // exactly the stock popup chip
+    S('chipsoft') + B0 + '{background:var(--scalar-background-3,var(--scalar-background-2))}',
+    S('chiptint') + B0 + '{background:color-mix(in srgb,var(--scalar-color-accent,#0a84ff) 9%,var(--scalar-background-1))}',
+    // the copy icon takes the button's own background wherever the button has one
+    G(['row', 'rowright', 'chip', 'chipsoft', 'chiptint'], B0 + ' > svg') + '{background:inherit}',
 
     // ---- switcher ---------------------------------------------------------
     '#ehealth-exstyle-switch{position:fixed;right:12px;bottom:12px;z-index:100000;display:flex;gap:2px;padding:3px;font:12px var(--scalar-font,system-ui);background:var(--scalar-background-1,#fff);color:var(--scalar-color-1,#222);border:1px solid var(--scalar-border-color,#ccc);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.2)}',
