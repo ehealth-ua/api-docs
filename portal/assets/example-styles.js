@@ -47,7 +47,7 @@
     H + '{position:static;min-width:0;max-width:100%;margin-right:0}',
     H + ':hover::before{display:none}',
     V + '{display:flex;position:static;transform:none;box-shadow:none;border:0;background:transparent;padding:0;min-width:0;max-width:100%;overflow:visible;z-index:auto;gap:4px}',
-    B + '{flex:0 0 auto;width:auto;min-width:0;max-width:100%;padding:0;background:transparent;border:0;border-radius:0;text-align:left;cursor:copy;color:var(--scalar-color-2)}',
+    B + '{flex:0 0 auto;width:auto;min-width:0;max-width:100%;padding:0;background:transparent;border:0;border-radius:0;text-align:left;cursor:copy;color:var(--scalar-color-1)}',
     B + ' > span{min-width:0}',
     B + '{position:relative}',
     // copy icon overlays the end of the value on hover/focus instead of reserving blank space after it
@@ -74,7 +74,7 @@
     // ---- C: pill — compact bordered pill after the type -------------------
     S('pill') + H0 + '{display:inline-flex;flex-direction:row;align-items:center;gap:4px;overflow:hidden}',
     S('pill') + V0 + '{flex-direction:row;flex-wrap:wrap;row-gap:2px}',
-    S('pill') + B0 + '{max-width:28ch;font-size:var(--scalar-micro);gap:4px;padding:0 8px;border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:999px;line-height:1.7}',
+    S('pill') + B0 + '{background:var(--scalar-background-2);max-width:28ch;font-size:var(--scalar-micro);gap:4px;padding:0 8px;border:var(--scalar-border-width) solid var(--scalar-border-color);border-radius:999px;line-height:1.7}',
     S('pill') + B0 + ':hover{background:var(--scalar-background-2)}',
     S('pill') + B0 + ' > span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
     S('pill') + V0 + ' > .property-example-value:not(:only-child){max-width:16ch}',
@@ -94,10 +94,10 @@
     G(ROW, V0 + ' > .property-example-value:not(:only-child)') + '{flex:0 1 auto;max-width:24ch}',
     // B: plain row variants (value hugs its text; rowright pushes it to the right edge)
     G(['row', 'rowright'], B0) + '{border-radius:var(--scalar-radius);padding:1px 8px}',
-    S('row') + B0 + '{background:var(--scalar-background-2)}',
+    S('row') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color)}',
     S('rowright') + H0 + '{justify-content:flex-end;margin-left:auto}',
     S('rowright') + V0 + '{justify-content:flex-end}',
-    S('rowright') + B0 + '{justify-content:flex-end;text-align:right;background:color-mix(in srgb,var(--scalar-color-accent,#0a84ff) 9%,var(--scalar-background-1))}',
+    S('rowright') + B0 + '{justify-content:flex-end;text-align:right;background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color)}',
     // C: content-hugging chips with three background options
     G(['chip', 'chipsoft', 'chiptint'], B0) + '{border-radius:var(--scalar-radius);padding:2px 6px}',
     S('chip') + B0 + '{background:var(--scalar-background-2);border:var(--scalar-border-width) solid var(--scalar-border-color)}',  // exactly the stock popup chip
