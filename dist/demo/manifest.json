@@ -6,7 +6,7 @@
       "page": "index.html",
       "slug": "ehealth-pis",
       "source": "specs/ehealth-pis.yaml",
-      "source_sha256": "4aede7ba8dadf1540a93df316a463afea0f14028230a261061eb51fcc9c5e4a0",
+      "source_sha256": "ef1e6c49b20e80fb955d1a6085bf2d4603f1dd5c3a0030ae69c6008f5d69fea9",
       "page_sha256": "a900fca0af86ac9be3f1e79341d9480fe930a08153dd7862729f7fa6600e4cf3"
     },
     "scalar-docs/ehealth-trusted-pis.json": {

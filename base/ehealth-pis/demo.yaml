@@ -1,8 +1,8 @@
 openapi: 3.1.0
 info:
   title: eHealth PIS API — DEMO
-  version: "9.15.0 v.1"
-  description: '**Version: 9.15.0 v.1**
+  version: "9.15.20"
+  description: '**Version: 9.15.20**
 
 
     Environment: **DEMO**
@@ -13650,6 +13650,88 @@ paths:
           schema:
             type: string
           example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+  /api/pis/person/markers:
+    get:
+      summary: Get Person Markers
+      operationId: Get Person Markers
+      description: Get the current user's person markers.
+      tags:
+        - Public. Patient Information System
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer access-token
+        - name: api-key
+          in: header
+          required: true
+          schema:
+            type: string
+            example: api-key
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person_Markers'
+  /api/pis/person/markers/history:
+    get:
+      summary: Get Person Markers History
+      operationId: Get Person Markers History
+      description: Get the current user's person marker history with details about the users who created records.
+      tags:
+        - Public. Patient Information System
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Bearer access-token
+        - name: api-key
+          in: header
+          required: true
+          schema:
+            type: string
+            example: api-key
+        - name: page
+          in: query
+          schema:
+            type: integer
+            example: 2
+          description: Page number.
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            example: 50
+          description: Page size from 1 to 500; default 50.
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person_Markers_History'
 components:
   schemas:
     Response_OK:
@@ -18673,3 +18755,89 @@ components:
             updated_by: eeebb86d-5cba-43c9-885b-6482ecaf826b
             inserted_at: '2025-11-11T11:11:11Z'
             discrepancy_result: '101'
+    Person_Markers:
+      type: object
+      required:
+        - code
+        - value
+        - updated_at
+        - updated_by
+      properties:
+        code:
+          type: string
+          example: availability
+          description: Marker code from PERSON_MARKER_CODES.
+        value:
+          type: string
+          example: UNAVAILABLE
+          description: Value from person marker dictionaries.
+        reason:
+          type: string
+          example: NO_ANSWER
+          description: Reason from person marker dictionaries.
+        updated_at:
+          type: string
+          example: '2025-11-11T11:11:11Z'
+        updated_by:
+          type: string
+          example: eeebb86d-5cba-43c9-885b-6482ecaf82
+    Person_Markers_History:
+      type: object
+      required:
+        - action
+        - code
+        - value
+        - inserted_at
+        - inserted_by
+        - inserted_by_details
+      properties:
+        action:
+          type: string
+          example: SET
+        code:
+          type: string
+          example: availability
+        value:
+          type: string
+          example: UNAVAILABLE
+        reason:
+          type: string
+          example: NO_ANSWER
+        inserted_at:
+          type: string
+          example: '2025-11-11T11:11:11Z'
+        inserted_by:
+          type: string
+          example: eeebb86d-5cba-43c9-885b-6482ecaf82
+        inserted_by_details:
+          type: object
+          properties:
+            person_names:
+              type: array
+              items:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                    example: Іван
+                  last_name:
+                    type: string
+                    example: Іванов
+                  second_name:
+                    type: string
+                    example: Іванович
+                  language:
+                    type: string
+                    example: uk
+            party_name:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: Іван
+                last_name:
+                  type: string
+                  example: Іванов
+                second_name:
+                  type: string
+                  example: Іванович
