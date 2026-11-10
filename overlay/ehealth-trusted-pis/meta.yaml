@@ -1,0 +1,7 @@
+# Per-environment values stamped into base/ehealth-trusted-pis/<env>.yaml by build/apply_overlay.py at build time.
+# base/ carries no version: it is what the vendor delivers; the version is configuration.
+version:
+  prod: "9.11.0 v.1"
+  preprod: "9.14.0 v.1"
+  stage: "9.11.0 v.1"
+  demo: "9.13.0 v.1"

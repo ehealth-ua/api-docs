@@ -1,0 +1,7 @@
+# Per-environment values stamped into base/medical-events/<env>.yaml by build/apply_overlay.py at build time.
+# base/ carries no version: it is what the vendor delivers; the version is configuration.
+version:
+  prod: "9.15.4"
+  preprod: "9.15.6"
+  stage: "9.15.7"
+  demo: "9.15.9 v.1"

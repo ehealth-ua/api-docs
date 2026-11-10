@@ -1,10 +1,7 @@
 openapi: 3.1.0
 info:
   title: eHealth Trusted PIS API — DEMO
-  version: "9.13.0 v.1"
   description: |-
-    **Version: 9.13.0 v.1**
-
     Environment: **DEMO**
 
     This is a **Trusted PIS-related sign-in and sign-up part** of API documentation for Ukrainian Health Services government institution back-end, that should provide:

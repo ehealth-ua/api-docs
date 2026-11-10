@@ -1,0 +1,7 @@
+# Per-environment values stamped into base/general-mis/<env>.yaml by build/apply_overlay.py at build time.
+# base/ carries no version: it is what the vendor delivers; the version is configuration.
+version:
+  prod: "9.15.6"
+  preprod: "9.15.9"
+  stage: "9.15.8"
+  demo: "9.15.12"

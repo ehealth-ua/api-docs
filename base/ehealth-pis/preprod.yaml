@@ -1,8 +1,7 @@
 openapi: 3.1.0
 info:
   title: eHealth PIS API — PREPROD
-  version: "9.14.0 v.1"
-  description: '**Version: 9.14.0 v.1**
+  description: '
 
 
     Environment: **PREPROD**

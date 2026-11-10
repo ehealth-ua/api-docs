@@ -7,7 +7,7 @@
 #
 #   <out>/index.html
 #   <out>/assets/...
-#   <out>/specs/<service>.yaml          <- base/<service>/<env>.yaml
+#   <out>/specs/<service>.yaml          <- base/<service>/<env>.yaml + overlay/<service>/meta.yaml (version)
 #   <out>/scalar-docs/<service>.json    <- dist/<env>/<service>.json
 #   <out>/scalar-docs/manifest.json     <- dist/<env>/manifest.json
 #   <out>/favicon.svg, favicon.ico      <- portal/favicon.svg, portal/favicon.ico
@@ -46,7 +46,8 @@ for dir in base/*/; do
   doc="dist/$ENV_NAME/$svc.json"
   [[ -f "$spec" ]] || { echo "missing $spec" >&2; exit 1; }
   [[ -f "$doc" ]]  || { echo "missing $doc"  >&2; exit 1; }
-  cp "$spec" "$OUT/specs/$svc.yaml"
+  # base + overlay: the version lives in overlay/<svc>/meta.yaml, not in base/
+  python3 build/apply_overlay.py apply "$ENV_NAME" "$svc" "$spec" > "$OUT/specs/$svc.yaml"
   cp "$doc"  "$OUT/scalar-docs/$svc.json"
   count=$((count + 1))
 done
