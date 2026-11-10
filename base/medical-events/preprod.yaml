@@ -19551,50 +19551,147 @@ paths:
                       property:
                         type: array
                         items:
-                          type: object
-                          required:
-                          - code
-                          properties:
-                            code:
-                              type: object
+                          allOf:
+                          - type: object
+                            required:
+                            - code
+                            properties:
+                              code:
+                                type: object
+                                required:
+                                - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          type: string
+                                          example: device_properties
+                                        code:
+                                          type: string
+                                          example: default
+                                  text:
+                                    type: string
+                          - oneOf:
+                            - properties:
+                                value_quantity:
+                                  type: object
+                                  required:
+                                  - value
+                                  - system
+                                  - code
+                                  properties:
+                                    value:
+                                      type: number
+                                      example: 13.5
+                                    comparator:
+                                      type: string
+                                      example: '>'
+                                    unit:
+                                      type: string
+                                      example: kg
+                                    system:
+                                      type: string
+                                      example: eHealth/ucum/units
+                                    code:
+                                      type: string
+                                      example: kg
                               required:
-                              - coding
-                              properties:
-                                coding:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      system:
-                                        type: string
-                                        example: device_properties
-                                      code:
-                                        type: string
-                                        example: default
-                                text:
-                                  type: string
-                            value_quantity:
-                              type: object
+                              - value_quantity
+                              title: Value Quantity
+                            - properties:
+                                value_codeable_concept:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        $ref: '#/components/schemas/Coding'
+                                    text:
+                                      type: string
                               required:
-                              - value
-                              - system
-                              - code
-                              properties:
-                                value:
-                                  type: number
-                                  example: 13.5
-                                comparator:
+                              - value_codeable_concept
+                              title: Value Codeable Concept
+                            - properties:
+                                value_string:
                                   type: string
-                                  example: '>'
-                                unit:
-                                  type: string
-                                  example: kg
-                                system:
-                                  type: string
-                                  example: eHealth/ucum/units
-                                code:
-                                  type: string
-                                  example: kg
+                                  example: some description
+                              required:
+                              - value_string
+                              title: Value String
+                            - properties:
+                                value_boolean:
+                                  type: boolean
+                                  example: true
+                              required:
+                              - value_boolean
+                              title: Value Boolean
+                            - properties:
+                                value_range:
+                                  type: object
+                                  required:
+                                  - low
+                                  - high
+                                  additionalProperties: false
+                                  properties:
+                                    low:
+                                        type: object
+                                        required:
+                                        - value
+                                        - system
+                                        - code
+                                        properties:
+                                          value:
+                                            type: number
+                                            example: 13.5
+                                          comparator:
+                                            type: string
+                                            example: '>'
+                                          unit:
+                                            type: string
+                                            example: kg
+                                          system:
+                                            type: string
+                                            example: eHealth/ucum/units
+                                          code:
+                                            type: string
+                                            example: kg
+                                    high:
+                                        type: object
+                                        required:
+                                        - value
+                                        - system
+                                        - code
+                                        properties:
+                                          value:
+                                            type: number
+                                            example: 13.5
+                                          comparator:
+                                            type: string
+                                            example: '<'
+                                          unit:
+                                            type: string
+                                            example: kg
+                                          system:
+                                            type: string
+                                            example: eHealth/ucum/units
+                                          code:
+                                            type: string
+                                            example: kg
+                              required:
+                              - value_range
+                              title: Value Range
+                            - properties:
+                                value_integer:
+                                  type: integer
+                                  example: 10
+                              required:
+                              - value_integer
+                              title: Value Integer
                       type:
                         type: object
                         properties:
@@ -20065,50 +20162,147 @@ paths:
                         property:
                           type: array
                           items:
-                            type: object
-                            required:
-                            - code
-                            properties:
-                              code:
-                                type: object
+                            allOf:
+                            - type: object
+                              required:
+                              - code
+                              properties:
+                                code:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            type: string
+                                            example: device_properties
+                                          code:
+                                            type: string
+                                            example: default
+                                    text:
+                                      type: string
+                            - oneOf:
+                              - properties:
+                                  value_quantity:
+                                    type: object
+                                    required:
+                                    - value
+                                    - system
+                                    - code
+                                    properties:
+                                      value:
+                                        type: number
+                                        example: 13.5
+                                      comparator:
+                                        type: string
+                                        example: '>'
+                                      unit:
+                                        type: string
+                                        example: kg
+                                      system:
+                                        type: string
+                                        example: eHealth/ucum/units
+                                      code:
+                                        type: string
+                                        example: kg
                                 required:
-                                - coding
-                                properties:
-                                  coding:
-                                    type: array
-                                    items:
-                                      type: object
-                                      properties:
-                                        system:
-                                          type: string
-                                          example: device_properties
-                                        code:
-                                          type: string
-                                          example: default
-                                  text:
-                                    type: string
-                              value_quantity:
-                                type: object
+                                - value_quantity
+                                title: Value Quantity
+                              - properties:
+                                  value_codeable_concept:
+                                    type: object
+                                    required:
+                                    - coding
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          $ref: '#/components/schemas/Coding'
+                                      text:
+                                        type: string
                                 required:
-                                - value
-                                - system
-                                - code
-                                properties:
-                                  value:
-                                    type: number
-                                    example: 13.5
-                                  comparator:
+                                - value_codeable_concept
+                                title: Value Codeable Concept
+                              - properties:
+                                  value_string:
                                     type: string
-                                    example: '>'
-                                  unit:
-                                    type: string
-                                    example: kg
-                                  system:
-                                    type: string
-                                    example: eHealth/ucum/units
-                                  code:
-                                    type: string
-                                    example: kg
+                                    example: some description
+                                required:
+                                - value_string
+                                title: Value String
+                              - properties:
+                                  value_boolean:
+                                    type: boolean
+                                    example: true
+                                required:
+                                - value_boolean
+                                title: Value Boolean
+                              - properties:
+                                  value_range:
+                                    type: object
+                                    required:
+                                    - low
+                                    - high
+                                    additionalProperties: false
+                                    properties:
+                                      low:
+                                          type: object
+                                          required:
+                                          - value
+                                          - system
+                                          - code
+                                          properties:
+                                            value:
+                                              type: number
+                                              example: 13.5
+                                            comparator:
+                                              type: string
+                                              example: '>'
+                                            unit:
+                                              type: string
+                                              example: kg
+                                            system:
+                                              type: string
+                                              example: eHealth/ucum/units
+                                            code:
+                                              type: string
+                                              example: kg
+                                      high:
+                                          type: object
+                                          required:
+                                          - value
+                                          - system
+                                          - code
+                                          properties:
+                                            value:
+                                              type: number
+                                              example: 13.5
+                                            comparator:
+                                              type: string
+                                              example: '<'
+                                            unit:
+                                              type: string
+                                              example: kg
+                                            system:
+                                              type: string
+                                              example: eHealth/ucum/units
+                                            code:
+                                              type: string
+                                              example: kg
+                                required:
+                                - value_range
+                                title: Value Range
+                              - properties:
+                                  value_integer:
+                                    type: integer
+                                    example: 10
+                                required:
+                                - value_integer
+                                title: Value Integer
                         type:
                           type: object
                           properties:
@@ -51859,50 +52053,147 @@ paths:
                       property:
                         type: array
                         items:
-                          type: object
-                          required:
-                          - code
-                          properties:
-                            code:
-                              type: object
+                          allOf:
+                          - type: object
+                            required:
+                            - code
+                            properties:
+                              code:
+                                type: object
+                                required:
+                                - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          type: string
+                                          example: device_properties
+                                        code:
+                                          type: string
+                                          example: default
+                                  text:
+                                    type: string
+                          - oneOf:
+                            - properties:
+                                value_quantity:
+                                  type: object
+                                  required:
+                                  - value
+                                  - system
+                                  - code
+                                  properties:
+                                    value:
+                                      type: number
+                                      example: 13.5
+                                    comparator:
+                                      type: string
+                                      example: '>'
+                                    unit:
+                                      type: string
+                                      example: kg
+                                    system:
+                                      type: string
+                                      example: eHealth/ucum/units
+                                    code:
+                                      type: string
+                                      example: kg
                               required:
-                              - coding
-                              properties:
-                                coding:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      system:
-                                        type: string
-                                        example: device_properties
-                                      code:
-                                        type: string
-                                        example: default
-                                text:
-                                  type: string
-                            value_quantity:
-                              type: object
+                              - value_quantity
+                              title: Value Quantity
+                            - properties:
+                                value_codeable_concept:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        $ref: '#/components/schemas/Coding'
+                                    text:
+                                      type: string
                               required:
-                              - value
-                              - system
-                              - code
-                              properties:
-                                value:
-                                  type: number
-                                  example: 13.5
-                                comparator:
+                              - value_codeable_concept
+                              title: Value Codeable Concept
+                            - properties:
+                                value_string:
                                   type: string
-                                  example: '>'
-                                unit:
-                                  type: string
-                                  example: kg
-                                system:
-                                  type: string
-                                  example: eHealth/ucum/units
-                                code:
-                                  type: string
-                                  example: kg
+                                  example: some description
+                              required:
+                              - value_string
+                              title: Value String
+                            - properties:
+                                value_boolean:
+                                  type: boolean
+                                  example: true
+                              required:
+                              - value_boolean
+                              title: Value Boolean
+                            - properties:
+                                value_range:
+                                  type: object
+                                  required:
+                                  - low
+                                  - high
+                                  additionalProperties: false
+                                  properties:
+                                    low:
+                                        type: object
+                                        required:
+                                        - value
+                                        - system
+                                        - code
+                                        properties:
+                                          value:
+                                            type: number
+                                            example: 13.5
+                                          comparator:
+                                            type: string
+                                            example: '>'
+                                          unit:
+                                            type: string
+                                            example: kg
+                                          system:
+                                            type: string
+                                            example: eHealth/ucum/units
+                                          code:
+                                            type: string
+                                            example: kg
+                                    high:
+                                        type: object
+                                        required:
+                                        - value
+                                        - system
+                                        - code
+                                        properties:
+                                          value:
+                                            type: number
+                                            example: 13.5
+                                          comparator:
+                                            type: string
+                                            example: '<'
+                                          unit:
+                                            type: string
+                                            example: kg
+                                          system:
+                                            type: string
+                                            example: eHealth/ucum/units
+                                          code:
+                                            type: string
+                                            example: kg
+                              required:
+                              - value_range
+                              title: Value Range
+                            - properties:
+                                value_integer:
+                                  type: integer
+                                  example: 10
+                              required:
+                              - value_integer
+                              title: Value Integer
                       type:
                         type: object
                         properties:
@@ -52373,50 +52664,147 @@ paths:
                         property:
                           type: array
                           items:
-                            type: object
-                            required:
-                            - code
-                            properties:
-                              code:
-                                type: object
+                            allOf:
+                            - type: object
+                              required:
+                              - code
+                              properties:
+                                code:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            type: string
+                                            example: device_properties
+                                          code:
+                                            type: string
+                                            example: default
+                                    text:
+                                      type: string
+                            - oneOf:
+                              - properties:
+                                  value_quantity:
+                                    type: object
+                                    required:
+                                    - value
+                                    - system
+                                    - code
+                                    properties:
+                                      value:
+                                        type: number
+                                        example: 13.5
+                                      comparator:
+                                        type: string
+                                        example: '>'
+                                      unit:
+                                        type: string
+                                        example: kg
+                                      system:
+                                        type: string
+                                        example: eHealth/ucum/units
+                                      code:
+                                        type: string
+                                        example: kg
                                 required:
-                                - coding
-                                properties:
-                                  coding:
-                                    type: array
-                                    items:
-                                      type: object
-                                      properties:
-                                        system:
-                                          type: string
-                                          example: device_properties
-                                        code:
-                                          type: string
-                                          example: default
-                                  text:
-                                    type: string
-                              value_quantity:
-                                type: object
+                                - value_quantity
+                                title: Value Quantity
+                              - properties:
+                                  value_codeable_concept:
+                                    type: object
+                                    required:
+                                    - coding
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          $ref: '#/components/schemas/Coding'
+                                      text:
+                                        type: string
                                 required:
-                                - value
-                                - system
-                                - code
-                                properties:
-                                  value:
-                                    type: number
-                                    example: 13.5
-                                  comparator:
+                                - value_codeable_concept
+                                title: Value Codeable Concept
+                              - properties:
+                                  value_string:
                                     type: string
-                                    example: '>'
-                                  unit:
-                                    type: string
-                                    example: kg
-                                  system:
-                                    type: string
-                                    example: eHealth/ucum/units
-                                  code:
-                                    type: string
-                                    example: kg
+                                    example: some description
+                                required:
+                                - value_string
+                                title: Value String
+                              - properties:
+                                  value_boolean:
+                                    type: boolean
+                                    example: true
+                                required:
+                                - value_boolean
+                                title: Value Boolean
+                              - properties:
+                                  value_range:
+                                    type: object
+                                    required:
+                                    - low
+                                    - high
+                                    additionalProperties: false
+                                    properties:
+                                      low:
+                                          type: object
+                                          required:
+                                          - value
+                                          - system
+                                          - code
+                                          properties:
+                                            value:
+                                              type: number
+                                              example: 13.5
+                                            comparator:
+                                              type: string
+                                              example: '>'
+                                            unit:
+                                              type: string
+                                              example: kg
+                                            system:
+                                              type: string
+                                              example: eHealth/ucum/units
+                                            code:
+                                              type: string
+                                              example: kg
+                                      high:
+                                          type: object
+                                          required:
+                                          - value
+                                          - system
+                                          - code
+                                          properties:
+                                            value:
+                                              type: number
+                                              example: 13.5
+                                            comparator:
+                                              type: string
+                                              example: '<'
+                                            unit:
+                                              type: string
+                                              example: kg
+                                            system:
+                                              type: string
+                                              example: eHealth/ucum/units
+                                            code:
+                                              type: string
+                                              example: kg
+                                required:
+                                - value_range
+                                title: Value Range
+                              - properties:
+                                  value_integer:
+                                    type: integer
+                                    example: 10
+                                required:
+                                - value_integer
+                                title: Value Integer
                         type:
                           type: object
                           properties:
@@ -99044,50 +99432,147 @@ components:
         property:
           type: array
           items:
-            type: object
-            required:
-            - code
-            properties:
-              code:
-                type: object
+            allOf:
+            - type: object
+              required:
+              - code
+              properties:
+                code:
+                  type: object
+                  required:
+                  - coding
+                  properties:
+                    coding:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          system:
+                            type: string
+                            example: device_properties
+                          code:
+                            type: string
+                            example: default
+                    text:
+                      type: string
+            - oneOf:
+              - properties:
+                  value_quantity:
+                    type: object
+                    required:
+                    - value
+                    - system
+                    - code
+                    properties:
+                      value:
+                        type: number
+                        example: 13.5
+                      comparator:
+                        type: string
+                        example: '>'
+                      unit:
+                        type: string
+                        example: kg
+                      system:
+                        type: string
+                        example: eHealth/ucum/units
+                      code:
+                        type: string
+                        example: kg
                 required:
-                - coding
-                properties:
-                  coding:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        system:
-                          type: string
-                          example: device_properties
-                        code:
-                          type: string
-                          example: default
-                  text:
-                    type: string
-              value_quantity:
-                type: object
+                - value_quantity
+                title: Value Quantity
+              - properties:
+                  value_codeable_concept:
+                    type: object
+                    required:
+                    - coding
+                    properties:
+                      coding:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Coding'
+                      text:
+                        type: string
                 required:
-                - value
-                - system
-                - code
-                properties:
-                  value:
-                    type: number
-                    example: 13.5
-                  comparator:
+                - value_codeable_concept
+                title: Value Codeable Concept
+              - properties:
+                  value_string:
                     type: string
-                    example: '>'
-                  unit:
-                    type: string
-                    example: kg
-                  system:
-                    type: string
-                    example: eHealth/ucum/units
-                  code:
-                    type: string
-                    example: kg
+                    example: some description
+                required:
+                - value_string
+                title: Value String
+              - properties:
+                  value_boolean:
+                    type: boolean
+                    example: true
+                required:
+                - value_boolean
+                title: Value Boolean
+              - properties:
+                  value_range:
+                    type: object
+                    required:
+                    - low
+                    - high
+                    additionalProperties: false
+                    properties:
+                      low:
+                          type: object
+                          required:
+                          - value
+                          - system
+                          - code
+                          properties:
+                            value:
+                              type: number
+                              example: 13.5
+                            comparator:
+                              type: string
+                              example: '>'
+                            unit:
+                              type: string
+                              example: kg
+                            system:
+                              type: string
+                              example: eHealth/ucum/units
+                            code:
+                              type: string
+                              example: kg
+                      high:
+                          type: object
+                          required:
+                          - value
+                          - system
+                          - code
+                          properties:
+                            value:
+                              type: number
+                              example: 13.5
+                            comparator:
+                              type: string
+                              example: '<'
+                            unit:
+                              type: string
+                              example: kg
+                            system:
+                              type: string
+                              example: eHealth/ucum/units
+                            code:
+                              type: string
+                              example: kg
+                required:
+                - value_range
+                title: Value Range
+              - properties:
+                  value_integer:
+                    type: integer
+                    example: 10
+                required:
+                - value_integer
+                title: Value Integer
         type:
           allOf:
           - $ref: '#/components/schemas/Codeable_Concept'
