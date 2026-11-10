@@ -16741,8 +16741,13 @@ paths:
                         example: "forbidden"
                         type: string
                         description: Atom that represents error type.
+                      message:
+                        example: "Active declaration belongs to another msp"
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
                     required:
                       - type
+                      - message
                     additionalProperties: false
               example:
                 meta:
@@ -16752,6 +16757,7 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 error:
                   type: forbidden
+                  message: Active declaration belongs to another msp
       summary: Get Person Declaration
       operationId: Get Person Declaration
       description: 'This method allows to receive active person declarations issued by current legal entity (based on access_token). It can be used to check if Patient has active declarations in other Legal Entities.
@@ -35492,6 +35498,9 @@ paths:
                     name: Доступні ліки
                     medical_program_settings:
                       care_plan_required: true
+                      employee_types_to_create_request:
+                        - SPECIALIST
+                        - DOCTOR
                       dispense_period_day: 90
                       request_max_period_day: 90
                       skip_request_employee_declaration_verify: true
@@ -35817,6 +35826,9 @@ paths:
                   name: Доступні ліки
                   medical_program_settings:
                     care_plan_required: true
+                    employee_types_to_create_request:
+                      - SPECIALIST
+                      - DOCTOR
                     dispense_period_day: 90
                     request_max_period_day: 90
                     skip_request_employee_declaration_verify: true
@@ -78701,6 +78713,9 @@ paths:
                       name: Доступні ліки
                       medical_program_settings:
                         care_plan_required: true
+                        employee_types_to_create_request:
+                          - SPECIALIST
+                          - DOCTOR
                         dispense_period_day: 90
                         request_max_period_day: 90
                         skip_request_employee_declaration_verify: true
@@ -100797,8 +100812,13 @@ paths:
                         example: forbidden
                         type: string
                         description: Atom that represents error type.
+                      message:
+                        example: "Active declaration belongs to another msp"
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
                     required:
                       - type
+                      - message
                     additionalProperties: false
               example:
                 meta:
@@ -100808,6 +100828,7 @@ paths:
                   request_id: 6617aeec-15e2-4d6f-b9bd-53559c358f97#17810
                 error:
                   type: forbidden
+                  message: Active declaration belongs to another msp
       summary: Get Person Declaration V2
       operationId: Get Person Declaration V2
       description: "This method allows to receive active person declarations issued by current legal entity (based on access_token). It can be used to check if Patient has active declarations in other Legal Entities.\n\nIt returns:\n1. Short declaration info if **active declaration found** AND issued by legal entity that is available for `access_token` scope.\n2. 404 error if **active declaration not found**.\n3. 403 if **active declaration found** issued by **other** (not available by access scopes) legal entity.\n\n**Scopes required:** `declaration:read`"

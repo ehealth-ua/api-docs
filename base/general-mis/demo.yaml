@@ -16707,8 +16707,13 @@ paths:
                         example: "forbidden"
                         type: string
                         description: Atom that represents error type.
+                      message:
+                        example: "Active declaration belongs to another msp"
+                        type: string
+                        description: Human-readable error message. This is for developers, not end-users.
                     required:
                       - type
+                      - message
                     additionalProperties: false
               example:
                 meta:
@@ -35497,7 +35502,7 @@ paths:
                     name: Доступні ліки
                     medical_program_settings:
                       care_plan_required: true
-                      employee_types_to_create_medication_request:
+                      employee_types_to_create_request:
                         - SPECIALIST
                         - DOCTOR
                       skip_mnn_in_treatment_period: true
@@ -35828,7 +35833,7 @@ paths:
                   name: Доступні ліки
                   medical_program_settings:
                     care_plan_required: true
-                    employee_types_to_create_medication_request:
+                    employee_types_to_create_request:
                       - SPECIALIST
                       - DOCTOR
                     skip_mnn_in_treatment_period: true
@@ -78718,7 +78723,7 @@ paths:
                       name: Доступні ліки
                       medical_program_settings:
                         care_plan_required: true
-                        employee_types_to_create_medication_request:
+                        employee_types_to_create_request:
                           - SPECIALIST
                           - DOCTOR
                         skip_mnn_in_treatment_period: true
