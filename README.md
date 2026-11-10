@@ -32,6 +32,23 @@
 | **`overlay/`** | Конфіг шар поверх `base/`: gov IDs, badges, description, version. Дані з ключем `(service, METHOD, path)`. |
 | **`dist/<env>/`** | Згенеровані артефакти, які публікує сайт. |
 
+### Версія документа живе в `overlay/`
+
+Версія це конфігурація, а не контент. `base/<service>/<env>.yaml` версії не містить: це те, що приходить від вендора.
+Версії всіх середовищ сервісу лежать в `overlay/<service>/meta.yaml`:
+
+```yaml
+version:
+  prod: "9.15.6"
+  demo: "9.15.20"
+```
+
+`build/assemble_site.sh` викликає `build/apply_overlay.py`, який вписує версію в `info.version` та в рядок `**Version: …**`
+на початку опису, тож опублікований `specs/<service>.yaml` це `base` + `overlay`. Теги релізів (`build/tag_releases.sh`) беруться з того самого файлу.
+Файл від вендора без версії підходить як є. Версію зі спеки, що її містить (наприклад, з `api-docs-platform`), знімає
+`build/apply_overlay.py strip <spec>`, знайдену версію він друкує в stderr: її треба записати в `meta.yaml`.
+Якщо в `base/` версія все ж є, перемагає overlay. Якщо для середовища версії в overlay немає, збірка падає.
+
 ## Гілка і середовища
 
 Одна гілка — `main`. Специфікації: `base/<service>/<env>.yaml`, згенероване: `dist/<env>/`.

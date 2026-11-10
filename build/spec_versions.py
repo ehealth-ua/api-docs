@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Print "<service><TAB><info.version>" for every base/<service>/<env>.yaml.
+"""Print "<service><TAB><version>" for every base/<service>/<env>.yaml.
+
+The version is configuration and lives in overlay/<service>/meta.yaml (see
+build/apply_overlay.py), not in base/.
 
 Usage: build/spec_versions.py <env>   (run from the repository root)
 """
 import glob
 import os
-import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from apply_overlay import overlay_version  # noqa: E402
+
 env = sys.argv[1]
-pattern = re.compile(r'^info:\n(?:(?:  .*|)\n)*?  version:\s*["\']?([^"\'\n]+)', re.M)
 for path in sorted(glob.glob(f"base/*/{env}.yaml")):
     service = os.path.basename(os.path.dirname(path))
-    with open(path, encoding="utf-8") as fh:
-        match = pattern.search(fh.read())
-    if not match:
-        sys.exit(f"no info.version in {path}")
-    print(f"{service}\t{match.group(1).strip()}")
+    print(f"{service}\t{overlay_version(env, service)}")

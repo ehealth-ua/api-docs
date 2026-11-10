@@ -1,8 +1,7 @@
 openapi: 3.1.0
 info:
   title: GENERAL MIS API — PROD
-  version: "9.15.6"
-  description: '**Version: 9.15.6**
+  description: '
 
 
     Environment: **PROD**

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Create a git tag for every service of one environment, from the version in its
-# spec (info.version in base/<service>/<env>.yaml):
+# overlay (version in overlay/<service>/meta.yaml, stamped into the spec by build/apply_overlay.py):
 #
 #   <service>/<env>/<version>      e.g. medical-events/stage/9.15.7
 #                                       ehealth-pis/prod/9.11.0.3-v2   ("9.11.0.3 v.2")

@@ -1,8 +1,7 @@
 openapi: 3.1.0
 info:
   title: GENERAL MIS API — DEMO
-  version: "9.15.12"
-  description: '**Version: 9.15.12**
+  description: '
 
 
     Environment: **DEMO**
