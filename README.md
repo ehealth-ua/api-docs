@@ -143,10 +143,19 @@ flowchart LR
 Тобто зміну в `overlay/` можна замерджити й задеплоїти окремо: вона оновить час
 деплою сервісу в індикаторі, але не створить новий реліз і не змінить git‑тег.
 
-Перед PR перегенеруйте `dist/` (потрібен локальний Chrome):
+Перед PR перегенеруйте `dist/` (потрібні Node і локальний Chrome; `npm ci` скрипт робить сам):
 
 ```bash
-(cd build/scalar_prebuild && npm ci) && node build/scalar_prebuild/prebuild.mjs . portal/index.html
+build/regen_dist.sh            # усі середовища
+build/regen_dist.sh preprod    # лише одне (prod | preprod | stage | demo)
+```
+
+Скрипт для кожного середовища збирає site-root (`build/assemble_site.sh`), запускає
+`prebuild.mjs` і копіює `scalar-docs/*.json` та `manifest.json` у `dist/<env>/`.
+Перевірити, що `dist/` не застарів (те саме, що робить CI):
+
+```bash
+for e in prod preprod stage demo; do build/assemble_site.sh $e /tmp/site-$e; done
 ```
 
 CI на кожен PR перевіряє, що `dist/` відповідає `base/` і `overlay/`; прев'ю
