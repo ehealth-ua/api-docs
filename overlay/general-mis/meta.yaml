@@ -4,4 +4,4 @@ version:
   prod: "9.15.6"
   preprod: "9.15.9"
   stage: "9.15.8"
-  demo: "9.15.12"
+  demo: "9.15.20"
