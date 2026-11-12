@@ -28649,6 +28649,8 @@ paths:
       summary: Create procedure
       operationId: Create procedure
       description: |-
+        **Will be deprecated!**
+        
         This WS allows to register procedure by its own. Also prosedure can be registered as a part of [encounter package](/#medical-events/tag/medical-events/POST/api/patients/{id}/encounter_package).
         **Scopes required:** `procedure:write`
       tags:
