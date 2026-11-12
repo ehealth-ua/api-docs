@@ -15,8 +15,7 @@
       project ehealthpisapi (groups "Private. Patient Information System" and "Private. Dummy methods", the latter as Payload: siblings).
       Public but not advertised: the random suffix in the path keeps it from being guessed, and nothing on the site links here
       (keep it that way; noindex above). This is obscurity, not access control. Published once, on PROD only
-      (build/assemble_site.sh copies static/* into the prod site). openapi.yaml is generated in ehealth-ua/api-docs-platform
-      (legacy-docs/pis-private/apiary.apib -> scripts/apib-to-openapi.sh pis-private -> scripts/finalize_pis_private.py).
+      (build/assemble_site.sh copies static/* into the prod site). openapi.yaml is a generated file (from the Apiary source above); it is not edited by hand.
     -->
     <div id="app"></div>
     <script src="../assets/scalar.standalone.js?v=1.62.9-ehealth-custom.451f9950"></script>

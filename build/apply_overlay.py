@@ -3,7 +3,7 @@
 
 The version of a document is configuration, not content: it lives in
 overlay/<service>/meta.yaml and base/<service>/<env>.yaml carries none (a vendor
-file arrives without one, and a platform-derived spec has it removed with `strip`).
+file arrives without one, and a spec that carries one has it removed with `strip`).
 The build combines the two, so the published specs/<service>.yaml is
 base + overlay.
 
