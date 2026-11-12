@@ -6,15 +6,9 @@ Purpose: when Scalar ships a new version we can diff upstream against this
 list, see which patches are obsolete, which collide with upstream refactors,
 and re-apply the rest.
 
-This file is **kept identical in both repos** and must be updated in the same
-PR as any bundle change:
-
-- [`ehealth-ua/api-docs-platform`](https://github.com/ehealth-ua/api-docs-platform) — `SCALAR_PATCHES.md` (tooling repo, sandbox portal)
-- [`ehealth-ua/api-docs`](https://github.com/ehealth-ua/api-docs) — `SCALAR_PATCHES.md` (production `docs*.ehealth.gov.ua`)
-
-Narrative/history lives in `api-docs-platform/SCALAR_FORK_TRACKING.md` and
-unpatched bugs in `SCALAR_KNOWN_ISSUES.md`; **this file is the compact,
-rebase-oriented ledger**. If they disagree, fix both.
+This file must be updated in the same PR as any bundle change; **it is the compact,
+rebase-oriented ledger** of the patches carried by `assets/scalar.standalone.js`
+(production `docs*.ehealth.gov.ua`).
 
 ## Current build
 
@@ -38,7 +32,7 @@ Every page loads the bundle as `scalar.standalone.js?v=1.63.0-ehealth-custom.<ha
 - `ehealth-custom` — fixed company marker.
 - `<hash>` — **the only part that changes**: the first 8 hex chars of the SHA-256 of `assets/scalar.standalone.js` (`shasum -a 256 portal/assets/scalar.standalone.js | cut -c1-8`). It exists for cache invalidation and change tracking and equals the start of `bundle_sha256` in `manifest.json`.
 
-After any bundle edit: recompute the hash, replace it in all pages (`reference.html`, `observation-oneof-demo.html` in api-docs-platform; `index.html` in api-docs), then regenerate the prebuild (the page hash is in the manifest). Never append patch names or build the tag out of patch ids — the ledger above is where patches are tracked. When two patch PRs touch the bundle, whichever merges last recomputes the hash and manifests.
+After any bundle edit: recompute the hash, replace it in all pages (`index.html`), then regenerate the prebuild (the page hash is in the manifest). Never append patch names or build the tag out of patch ids — the ledger above is where patches are tracked. When two patch PRs touch the bundle, whichever merges last recomputes the hash and manifests.
 
 ## Patch ledger
 
@@ -177,7 +171,7 @@ rebase past it); `local` = ours alone, must be re-applied/ported.
 - **Scalar DOM/classes the CSS depends on (re-check on every Scalar upgrade):** `.property-heading` › `.property-example` (label `button:first-child` + `.property-example-value-list` popup of `button.property-example-value` › `span` + `svg`). Upstream component: `packages/blocks/src/schema/SchemaPropertyExamples.vue` (compiled scoped CSS `[data-v-370db0bd]` in our 1.63 base: the list is `display:none; position:absolute`, shown on `:hover`/`:focus-within`). Our selectors have 5 classes so they outrank the scoped rules; if upstream renames the classes the styles silently do nothing and the stock popup returns (nothing breaks).
 - **Rebase notes:** after a Scalar upgrade open a dense route (`…/encounter_package/decoded-payload`) and confirm pills for plain fields, stock popup for `encounter`; fix the selectors at the top of `example-styles.js` if classes changed. Bump the `?v=` hash on every edit of the file (assets are cached for a year) and regenerate the prebuild (page hash changes).
 - **Prebuild:** no effect on `scalar-docs/*.json`; only `manifest.json` (`page_sha256`) changes.
-- **History:** trialled as 9 selectable `?exstyle=` styles (PRs api-docs-platform#91 / api-docs#56, :8095 review); the "pillfields" variant was chosen and everything else removed.
+- **History:** trialled as 9 selectable `?exstyle=` styles (api-docs#56, :8095 review); the "pillfields" variant was chosen and everything else removed.
 - **Upstream candidate:** a `showSchemaExamples: 'inline' | 'popup'` style option would be a small upstream PR.
 
 ## Spec-side & tooling dependencies (what a bundle swap can break)

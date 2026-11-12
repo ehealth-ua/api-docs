@@ -12,8 +12,7 @@
          itself (docs./docs-demo./docs-preprod./docs-stage.) already tells
          the visitor which environment they're on, so a redundant in-page
          PROD/DEMO/... badge was dropped. z-index is the max signed 32-bit
-         int, matching api-docs-platform's sandbox portal badge
-         (scripts/stamp_deploy_badge.py) -- 9999 was invisible in practice,
+         int (build/stamp_deploy_badge.sh) -- 9999 was invisible in practice,
          covered by this Scalar fork's own fixed-position UI, which uses
          higher values of its own. */
       #deploy-badge{position:fixed;top:6px;right:10px;z-index:2147483647;
