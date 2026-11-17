@@ -29501,7 +29501,54 @@ paths:
                           focal_device:
                             type: array
                             description: Manipulated, implanted, or removed device
-                            items: {}
+                            items:
+                              type: object
+                              required:
+                                - manipulated
+                              properties:
+                                action:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            type: string
+                                            example: procedure_focal_device_actions
+                                          code:
+                                            type: string
+                                            example: some_action
+                                    text:
+                                      type: string
+                                manipulated:
+                                  type: object
+                                  properties:
+                                    identifier:
+                                      type: object
+                                      required:
+                                        - value
+                                      properties:
+                                        type:
+                                          type: object
+                                          properties:
+                                            coding:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  system:
+                                                    type: string
+                                                    example: eHealth/resources
+                                                  code:
+                                                    type: string
+                                                    example: device
+                                            text:
+                                              type: string
+                                        value:
+                                          type: string
+                                          example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                         required:
                         - managing_organization
                         - category
@@ -30288,7 +30335,54 @@ paths:
                     focal_device:
                       type: array
                       description: Manipulated, implanted, or removed device
-                      items: {}
+                      items:
+                        type: object
+                        required:
+                          - manipulated
+                        properties:
+                          action:
+                            type: object
+                            properties:
+                              coding:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    system:
+                                      type: string
+                                      example: procedure_focal_device_actions
+                                    code:
+                                      type: string
+                                      example: some_action
+                              text:
+                                type: string
+                          manipulated:
+                            type: object
+                            properties:
+                              identifier:
+                                type: object
+                                required:
+                                  - value
+                                properties:
+                                  type:
+                                    type: object
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              type: string
+                                              example: eHealth/resources
+                                            code:
+                                              type: string
+                                              example: device
+                                      text:
+                                        type: string
+                                  value:
+                                    type: string
+                                    example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                   required:
                   - managing_organization
                   - category
@@ -38998,7 +39092,54 @@ paths:
                         focal_device:
                           type: array
                           description: Manipulated, implanted, or removed device
-                          items: {}
+                          items:
+                            type: object
+                            required:
+                              - manipulated
+                            properties:
+                              action:
+                                type: object
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          type: string
+                                          example: procedure_focal_device_actions
+                                        code:
+                                          type: string
+                                          example: some_action
+                                  text:
+                                    type: string
+                              manipulated:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    required:
+                                      - value
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  type: string
+                                                  example: eHealth/resources
+                                                code:
+                                                  type: string
+                                                  example: device
+                                          text:
+                                            type: string
+                                      value:
+                                        type: string
+                                        example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                       required:
                       - managing_organization
                       - category
@@ -55404,7 +55545,54 @@ paths:
                         focal_device:
                           type: array
                           description: Manipulated, implanted, or removed device
-                          items: {}
+                          items:
+                            type: object
+                            required:
+                              - manipulated
+                            properties:
+                              action:
+                                type: object
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        system:
+                                          type: string
+                                          example: procedure_focal_device_actions
+                                        code:
+                                          type: string
+                                          example: some_action
+                                  text:
+                                    type: string
+                              manipulated:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    required:
+                                      - value
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  type: string
+                                                  example: eHealth/resources
+                                                code:
+                                                  type: string
+                                                  example: device
+                                          text:
+                                            type: string
+                                      value:
+                                        type: string
+                                        example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                       required:
                       - managing_organization
                       - category
@@ -56120,7 +56308,54 @@ paths:
                           focal_device:
                             type: array
                             description: Manipulated, implanted, or removed device
-                            items: {}
+                            items:
+                              type: object
+                              required:
+                                - manipulated
+                              properties:
+                                action:
+                                  type: object
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          system:
+                                            type: string
+                                            example: procedure_focal_device_actions
+                                          code:
+                                            type: string
+                                            example: some_action
+                                    text:
+                                      type: string
+                                manipulated:
+                                  type: object
+                                  properties:
+                                    identifier:
+                                      type: object
+                                      required:
+                                        - value
+                                      properties:
+                                        type:
+                                          type: object
+                                          properties:
+                                            coding:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  system:
+                                                    type: string
+                                                    example: eHealth/resources
+                                                  code:
+                                                    type: string
+                                                    example: device
+                                            text:
+                                              type: string
+                                        value:
+                                          type: string
+                                          example: 9183a36b-4d45-4244-9339-63d81cd08d9c
                         required:
                         - managing_organization
                         - category
