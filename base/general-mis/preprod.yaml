@@ -76730,10 +76730,50 @@ paths:
                           description: Forbidden group deactivation reason
                         forbidden_group_codes:
                           type: array
-                          items: {}
+                          items:
+                            type: object
+                            required:
+                              - id
+                              - code
+                              - system
+                              - creation_reason
+                            properties:
+                              id:
+                                example: f016a994-4826-48ae-be65-8d459a75f021
+                                type: string
+                                description: Forbidden group code identifier
+                              code:
+                                example: G30.9
+                                type: string
+                              system:
+                                example: eHealth/ICD10_AM/condition_codes
+                                type: string
+                              creation_reason:
+                                example: Some text
+                                type: string
+                                description: Forbidden group code creation reason
                         forbidden_group_services:
                           type: array
-                          items: {}
+                          items:
+                            type: object
+                            required:
+                              - id
+                              - creation_reason
+                            properties:
+                              id:
+                                example: b8bc70e1-783c-4b25-a90e-0da9217d84d9
+                                type: string
+                                description: Forbidden group service identifier
+                              service_id:
+                                example: b2e4464e-609e-480c-a32c-6db4fbb04cf1
+                                type: string
+                              service_group_id:
+                                example: d838dbea-0ca0-4295-bf46-819dc069b8d4
+                                type: string
+                              creation_reason:
+                                example: Some text
+                                type: string
+                                description: Forbidden group service creation reason
                       required:
                         - id
                         - name
@@ -76963,7 +77003,23 @@ paths:
                           description: Group of Diagnoses description
                         diagnoses_group_codes:
                           type: array
-                          items: {}
+                          items:
+                            type: object
+                            required:
+                              - id
+                              - code
+                              - system
+                            properties:
+                              id:
+                                example: f016a994-4826-48ae-be65-8d459a75f021
+                                type: string
+                                description: Diagnoses Group Code identifier
+                              code:
+                                example: G30.9
+                                type: string
+                              system:
+                                example: eHealth/ICD10_AM/condition_codes
+                                type: string
                       required:
                         - id
                         - name
@@ -99587,7 +99643,8 @@ paths:
                       status_history:
                         type: array
                         description: Care team status changes history records in ascending order
-                        items: {}
+                        items:
+                          $ref: '#/components/schemas/care_team_status_history_record'
                     required:
                       - id
                       - status
@@ -102610,7 +102667,8 @@ paths:
                       description: identifier of person relationship that will be deactivated
                     documents_relationship:
                       type: array
-                      items: {}
+                      items:
+                        $ref: '#/components/schemas/RelationshipDocument'
                   required:
                     - id
                     - documents_relationship
@@ -136912,7 +136970,8 @@ components:
               example: 7b100a9c-daaa-490e-b88d-2a911059b055
             documents_relationship:
               type: array
-              items: {}
+              items:
+                $ref: '#/components/schemas/RelationshipDocument'
         authorize_with:
           type: string
           description: identifier of person's auth method

@@ -18583,7 +18583,8 @@ components:
           description: status of the dictionary value
         child_values:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/Dictionary_value'
           description: subordinate values of the dictionary
         id:
           type: string
