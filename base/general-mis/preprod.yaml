@@ -36701,7 +36701,8 @@ paths:
                                     example: true
                         packages:
                           type: array
-                          items: {}
+                          items:
+                            $ref: '#/components/schemas/Medication_package_DrugsV2'
                       required:
                         - id
                         - name
@@ -36976,7 +36977,8 @@ paths:
                             $ref: '#/components/schemas/Drugs_program_medication'
                         packages:
                           type: array
-                          items: {}
+                          items:
+                            $ref: '#/components/schemas/Medication_package_DrugsV2'
                       required:
                         - id
                         - name
@@ -37274,7 +37276,8 @@ paths:
                             - denumerator_value
                         packages:
                           type: array
-                          items: {}
+                          items:
+                            $ref: '#/components/schemas/Medication_package'
                       required:
                         - id
                         - name
@@ -117134,7 +117137,8 @@ components:
           $ref: '#/components/schemas/Dosage_drug'
         packages:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/Medication_package'
     Drug_v2_Response:
       type: object
       required:
@@ -117173,7 +117177,8 @@ components:
             $ref: '#/components/schemas/Ingredient'
         packages:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/Medication_package_DrugsV2'
     Drug_v3_Response:
       type: object
       required:
@@ -117211,7 +117216,8 @@ components:
             $ref: '#/components/schemas/Drugs_program_medication'
         packages:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/Medication_package_DrugsV2'
     Ingredient_v2:
       type: object
       required:
