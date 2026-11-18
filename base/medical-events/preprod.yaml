@@ -29354,69 +29354,71 @@ paths:
                                 text:
                                   type: string
                           focal_device:
-                            type: object
-                            properties:
-                              action:
-                                type: object
-                                required:
-                                - coding
-                                properties:
-                                  coding:
-                                    type: array
-                                    items:
-                                      type: object
-                                      properties:
-                                        system:
-                                          example: "procedure_focal_device_actions"
-                                          type: string
-                                        code:
-                                          example: "some_action"
-                                          type: string
-                                          description: Symbol in syntax defined by the system
-                                      required:
-                                      - system
-                                      - code
-                                  text:
-                                    type: string
-                                description: Kind of change to Device
-                              manipulated:
-                                type: object
-                                properties:
-                                  identifier:
-                                    type: object
-                                    properties:
-                                      type:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                action:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
                                         type: object
                                         properties:
-                                          coding:
-                                            type: array
-                                            items:
-                                              type: object
-                                              properties:
-                                                system:
-                                                  example: "eHealth/resources"
-                                                  type: string
-                                                code:
-                                                  example: "device"
-                                                  type: string
-                                                  description: Symbol in syntax defined by the system
-                                              required:
-                                              - system
-                                              - code
-                                          text:
+                                          system:
+                                            example: "procedure_focal_device_actions"
                                             type: string
-                                        description: Description of identifier
-                                      value:
-                                        example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                                        type: string
-                                        description: The value that is unique
-                                    required:
-                                    - type
-                                    - value
-                                description: Implanted Device used for this procedure
-                            required:
-                            - manipulated
-                            description: Manipulated, implanted, or removed device
+                                          code:
+                                            example: "some_action"
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Kind of change to Device
+                                manipulated:
+                                  type: object
+                                  properties:
+                                    identifier:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: object
+                                          properties:
+                                            coding:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  system:
+                                                    example: "eHealth/resources"
+                                                    type: string
+                                                  code:
+                                                    example: "device"
+                                                    type: string
+                                                    description: Symbol in syntax defined by the system
+                                                required:
+                                                - system
+                                                - code
+                                            text:
+                                              type: string
+                                          description: Description of identifier
+                                        value:
+                                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                          type: string
+                                          description: The value that is unique
+                                      required:
+                                      - type
+                                      - value
+                                  description: Implanted Device used for this procedure
+                              required:
+                              - manipulated
+                              description: Manipulated, implanted, or removed device
                         required:
                         - managing_organization
                         - category
@@ -30201,69 +30203,71 @@ paths:
                           text:
                             type: string
                     focal_device:
-                      type: object
-                      properties:
-                        action:
-                          type: object
-                          required:
-                          - coding
-                          properties:
-                            coding:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  system:
-                                    example: "procedure_focal_device_actions"
-                                    type: string
-                                  code:
-                                    example: "some_action"
-                                    type: string
-                                    description: Symbol in syntax defined by the system
-                                required:
-                                - system
-                                - code
-                            text:
-                              type: string
-                          description: Kind of change to Device
-                        manipulated:
-                          type: object
-                          properties:
-                            identifier:
-                              type: object
-                              properties:
-                                type:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          action:
+                            type: object
+                            required:
+                            - coding
+                            properties:
+                              coding:
+                                type: array
+                                items:
                                   type: object
                                   properties:
-                                    coding:
-                                      type: array
-                                      items:
-                                        type: object
-                                        properties:
-                                          system:
-                                            example: "eHealth/resources"
-                                            type: string
-                                          code:
-                                            example: "device"
-                                            type: string
-                                            description: Symbol in syntax defined by the system
-                                        required:
-                                        - system
-                                        - code
-                                    text:
+                                    system:
+                                      example: "procedure_focal_device_actions"
                                       type: string
-                                  description: Description of identifier
-                                value:
-                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                                  type: string
-                                  description: The value that is unique
-                              required:
-                              - type
-                              - value
-                          description: Implanted Device used for this procedure
-                      required:
-                      - manipulated
-                      description: Manipulated, implanted, or removed device
+                                    code:
+                                      example: "some_action"
+                                      type: string
+                                      description: Symbol in syntax defined by the system
+                                  required:
+                                  - system
+                                  - code
+                              text:
+                                type: string
+                            description: Kind of change to Device
+                          manipulated:
+                            type: object
+                            properties:
+                              identifier:
+                                type: object
+                                properties:
+                                  type:
+                                    type: object
+                                    properties:
+                                      coding:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            system:
+                                              example: "eHealth/resources"
+                                              type: string
+                                            code:
+                                              example: "device"
+                                              type: string
+                                              description: Symbol in syntax defined by the system
+                                          required:
+                                          - system
+                                          - code
+                                      text:
+                                        type: string
+                                    description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                    type: string
+                                    description: The value that is unique
+                                required:
+                                - type
+                                - value
+                            description: Implanted Device used for this procedure
+                        required:
+                        - manipulated
+                        description: Manipulated, implanted, or removed device
                   required:
                   - managing_organization
                   - category
@@ -31071,58 +31075,60 @@ paths:
                       type: string
                       example: "Процедура була відмінена у зв'язку з помилкою при виборі пацієнта "
                     focal_device:
-                      type: object
+                      type: array
                       description: Manipulated, implanted, or removed device
-                      required:
-                        - manipulated
-                      properties:
-                        action:
-                          allOf:
-                            - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
-                            - type: object
-                              properties:
-                                coding:
-                                  type: array
-                                  items:
+                      items:
+                        type: object
+                        required:
+                          - manipulated
+                        properties:
+                          action:
+                            allOf:
+                              - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
+                              - type: object
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
+                                      allOf:
+                                        - $ref: '#/components/schemas/Coding_DecodedPayload'
+                                        - type: object
+                                          properties:
+                                            system:
+                                              type: string
+                                              example: procedure_focal_device_actions
+                                            code:
+                                              type: string
+                                              example: some_action
+                            description: Kind of change to Device
+                          manipulated:
+                            allOf:
+                              - $ref: '#/components/schemas/Reference_request_DecodedPayload'
+                              - type: object
+                                properties:
+                                  identifier:
                                     allOf:
-                                      - $ref: '#/components/schemas/Coding_DecodedPayload'
+                                      - $ref: '#/components/schemas/Identifier_DecodedPayload'
                                       - type: object
                                         properties:
-                                          system:
-                                            type: string
-                                            example: procedure_focal_device_actions
-                                          code:
-                                            type: string
-                                            example: some_action
-                          description: Kind of change to Device
-                        manipulated:
-                          allOf:
-                            - $ref: '#/components/schemas/Reference_request_DecodedPayload'
-                            - type: object
-                              properties:
-                                identifier:
-                                  allOf:
-                                    - $ref: '#/components/schemas/Identifier_DecodedPayload'
-                                    - type: object
-                                      properties:
-                                        type:
-                                          allOf:
-                                            - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
-                                            - type: object
-                                              properties:
-                                                coding:
-                                                  type: array
-                                                  items:
-                                                    allOf:
-                                                      - $ref: '#/components/schemas/Coding_DecodedPayload'
-                                                      - type: object
-                                                        properties:
-                                                          code:
-                                                            type: string
-                                                            example: device
-                                        value:
-                                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                          description: Implanted Device used for this procedure
+                                          type:
+                                            allOf:
+                                              - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
+                                              - type: object
+                                                properties:
+                                                  coding:
+                                                    type: array
+                                                    items:
+                                                      allOf:
+                                                        - $ref: '#/components/schemas/Coding_DecodedPayload'
+                                                        - type: object
+                                                          properties:
+                                                            code:
+                                                              type: string
+                                                              example: device
+                                          value:
+                                            example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                            description: Implanted Device used for this procedure
       responses:
         '200':
           description: Success
@@ -38939,69 +38945,71 @@ paths:
                               text:
                                 type: string
                         focal_device:
-                          type: object
-                          properties:
-                            action:
-                              type: object
-                              required:
-                              - coding
-                              properties:
-                                coding:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      system:
-                                        example: "procedure_focal_device_actions"
-                                        type: string
-                                      code:
-                                        example: "some_action"
-                                        type: string
-                                        description: Symbol in syntax defined by the system
-                                    required:
-                                    - system
-                                    - code
-                                text:
-                                  type: string
-                              description: Kind of change to Device
-                            manipulated:
-                              type: object
-                              properties:
-                                identifier:
-                                  type: object
-                                  properties:
-                                    type:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              action:
+                                type: object
+                                required:
+                                - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
                                       type: object
                                       properties:
-                                        coding:
-                                          type: array
-                                          items:
-                                            type: object
-                                            properties:
-                                              system:
-                                                example: "eHealth/resources"
-                                                type: string
-                                              code:
-                                                example: "device"
-                                                type: string
-                                                description: Symbol in syntax defined by the system
-                                            required:
-                                            - system
-                                            - code
-                                        text:
+                                        system:
+                                          example: "procedure_focal_device_actions"
                                           type: string
-                                      description: Description of identifier
-                                    value:
-                                      example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                                      type: string
-                                      description: The value that is unique
-                                  required:
-                                  - type
-                                  - value
-                              description: Implanted Device used for this procedure
-                          required:
-                          - manipulated
-                          description: Manipulated, implanted, or removed device
+                                        code:
+                                          example: "some_action"
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                      - system
+                                      - code
+                                  text:
+                                    type: string
+                                description: Kind of change to Device
+                              manipulated:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: "eHealth/resources"
+                                                  type: string
+                                                code:
+                                                  example: "device"
+                                                  type: string
+                                                  description: Symbol in syntax defined by the system
+                                              required:
+                                              - system
+                                              - code
+                                          text:
+                                            type: string
+                                        description: Description of identifier
+                                      value:
+                                        example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                        type: string
+                                        description: The value that is unique
+                                    required:
+                                    - type
+                                    - value
+                                description: Implanted Device used for this procedure
+                            required:
+                            - manipulated
+                            description: Manipulated, implanted, or removed device
                       required:
                       - managing_organization
                       - category
@@ -54659,69 +54667,71 @@ paths:
                               text:
                                 type: string
                         focal_device:
-                          type: object
-                          properties:
-                            action:
-                              type: object
-                              required:
-                              - coding
-                              properties:
-                                coding:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      system:
-                                        example: "procedure_focal_device_actions"
-                                        type: string
-                                      code:
-                                        example: "some_action"
-                                        type: string
-                                        description: Symbol in syntax defined by the system
-                                    required:
-                                    - system
-                                    - code
-                                text:
-                                  type: string
-                              description: Kind of change to Device
-                            manipulated:
-                              type: object
-                              properties:
-                                identifier:
-                                  type: object
-                                  properties:
-                                    type:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              action:
+                                type: object
+                                required:
+                                - coding
+                                properties:
+                                  coding:
+                                    type: array
+                                    items:
                                       type: object
                                       properties:
-                                        coding:
-                                          type: array
-                                          items:
-                                            type: object
-                                            properties:
-                                              system:
-                                                example: "eHealth/resources"
-                                                type: string
-                                              code:
-                                                example: "device"
-                                                type: string
-                                                description: Symbol in syntax defined by the system
-                                            required:
-                                            - system
-                                            - code
-                                        text:
+                                        system:
+                                          example: "procedure_focal_device_actions"
                                           type: string
-                                      description: Description of identifier
-                                    value:
-                                      example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                                      type: string
-                                      description: The value that is unique
-                                  required:
-                                  - type
-                                  - value
-                              description: Implanted Device used for this procedure
-                          required:
-                          - manipulated
-                          description: Manipulated, implanted, or removed device
+                                        code:
+                                          example: "some_action"
+                                          type: string
+                                          description: Symbol in syntax defined by the system
+                                      required:
+                                      - system
+                                      - code
+                                  text:
+                                    type: string
+                                description: Kind of change to Device
+                              manipulated:
+                                type: object
+                                properties:
+                                  identifier:
+                                    type: object
+                                    properties:
+                                      type:
+                                        type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                system:
+                                                  example: "eHealth/resources"
+                                                  type: string
+                                                code:
+                                                  example: "device"
+                                                  type: string
+                                                  description: Symbol in syntax defined by the system
+                                              required:
+                                              - system
+                                              - code
+                                          text:
+                                            type: string
+                                        description: Description of identifier
+                                      value:
+                                        example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                        type: string
+                                        description: The value that is unique
+                                    required:
+                                    - type
+                                    - value
+                                description: Implanted Device used for this procedure
+                            required:
+                            - manipulated
+                            description: Manipulated, implanted, or removed device
                       required:
                       - managing_organization
                       - category
@@ -55435,69 +55445,71 @@ paths:
                                 text:
                                   type: string
                           focal_device:
-                            type: object
-                            properties:
-                              action:
-                                type: object
-                                required:
-                                - coding
-                                properties:
-                                  coding:
-                                    type: array
-                                    items:
-                                      type: object
-                                      properties:
-                                        system:
-                                          example: "procedure_focal_device_actions"
-                                          type: string
-                                        code:
-                                          example: "some_action"
-                                          type: string
-                                          description: Symbol in syntax defined by the system
-                                      required:
-                                      - system
-                                      - code
-                                  text:
-                                    type: string
-                                description: Kind of change to Device
-                              manipulated:
-                                type: object
-                                properties:
-                                  identifier:
-                                    type: object
-                                    properties:
-                                      type:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                action:
+                                  type: object
+                                  required:
+                                  - coding
+                                  properties:
+                                    coding:
+                                      type: array
+                                      items:
                                         type: object
                                         properties:
-                                          coding:
-                                            type: array
-                                            items:
-                                              type: object
-                                              properties:
-                                                system:
-                                                  example: "eHealth/resources"
-                                                  type: string
-                                                code:
-                                                  example: "device"
-                                                  type: string
-                                                  description: Symbol in syntax defined by the system
-                                              required:
-                                              - system
-                                              - code
-                                          text:
+                                          system:
+                                            example: "procedure_focal_device_actions"
                                             type: string
-                                        description: Description of identifier
-                                      value:
-                                        example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                                        type: string
-                                        description: The value that is unique
-                                    required:
-                                    - type
-                                    - value
-                                description: Implanted Device used for this procedure
-                            required:
-                            - manipulated
-                            description: Manipulated, implanted, or removed device
+                                          code:
+                                            example: "some_action"
+                                            type: string
+                                            description: Symbol in syntax defined by the system
+                                        required:
+                                        - system
+                                        - code
+                                    text:
+                                      type: string
+                                  description: Kind of change to Device
+                                manipulated:
+                                  type: object
+                                  properties:
+                                    identifier:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: object
+                                          properties:
+                                            coding:
+                                              type: array
+                                              items:
+                                                type: object
+                                                properties:
+                                                  system:
+                                                    example: "eHealth/resources"
+                                                    type: string
+                                                  code:
+                                                    example: "device"
+                                                    type: string
+                                                    description: Symbol in syntax defined by the system
+                                                required:
+                                                - system
+                                                - code
+                                            text:
+                                              type: string
+                                          description: Description of identifier
+                                        value:
+                                          example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                          type: string
+                                          description: The value that is unique
+                                      required:
+                                      - type
+                                      - value
+                                  description: Implanted Device used for this procedure
+                              required:
+                              - manipulated
+                              description: Manipulated, implanted, or removed device
                         required:
                         - managing_organization
                         - category
@@ -101686,56 +101698,58 @@ components:
               text:
                 type: string
         focal_device:
-          type: object
-          required:
-          - manipulated
-          properties:
-            action:
-              allOf:
-              - $ref: '#/components/schemas/Codeable_Concept'
-              - type: object
-                properties:
-                  coding:
-                    type: array
-                    items:
+          type: array
+          items:
+            type: object
+            required:
+            - manipulated
+            properties:
+              action:
+                allOf:
+                - $ref: '#/components/schemas/Codeable_Concept'
+                - type: object
+                  properties:
+                    coding:
+                      type: array
+                      items:
+                        allOf:
+                        - $ref: '#/components/schemas/Coding'
+                        - type: object
+                          properties:
+                            system:
+                              type: string
+                              example: procedure_focal_device_actions
+                            code:
+                              type: string
+                              example: some_action
+                description: Kind of change to Device
+              manipulated:
+                allOf:
+                - $ref: '#/components/schemas/Reference_request'
+                - type: object
+                  properties:
+                    identifier:
                       allOf:
-                      - $ref: '#/components/schemas/Coding'
+                      - $ref: '#/components/schemas/Identifier'
                       - type: object
                         properties:
-                          system:
-                            type: string
-                            example: procedure_focal_device_actions
-                          code:
-                            type: string
-                            example: some_action
-              description: Kind of change to Device
-            manipulated:
-              allOf:
-              - $ref: '#/components/schemas/Reference_request'
-              - type: object
-                properties:
-                  identifier:
-                    allOf:
-                    - $ref: '#/components/schemas/Identifier'
-                    - type: object
-                      properties:
-                        type:
-                          allOf:
-                          - $ref: '#/components/schemas/Codeable_Concept'
-                          - type: object
-                            properties:
-                              coding:
-                                type: array
-                                items:
-                                  allOf:
-                                  - $ref: '#/components/schemas/Coding'
-                                  - type: object
-                                    properties:
-                                      code:
-                                        type: string
-                                        example: device
-              description: Implanted Device used for this procedure
-          description: Manipulated, implanted, or removed device
+                          type:
+                            allOf:
+                            - $ref: '#/components/schemas/Codeable_Concept'
+                            - type: object
+                              properties:
+                                coding:
+                                  type: array
+                                  items:
+                                    allOf:
+                                    - $ref: '#/components/schemas/Coding'
+                                    - type: object
+                                      properties:
+                                        code:
+                                          type: string
+                                          example: device
+                description: Implanted Device used for this procedure
+            description: Manipulated, implanted, or removed device
     Procedure_Short_Response:
       type: object
       required:
@@ -102199,53 +102213,55 @@ components:
                     example: 9183a36b-4d45-4244-9339-63d81cd08d9c
           description: Items used during procedure.
         focal_device:
-          type: object
-          required:
-          - manipulated
-          properties:
-            action:
-              allOf:
-              - $ref: '#/components/schemas/Codeable_Concept'
-              - type: object
-                properties:
-                  coding:
-                    type: array
-                    items:
+          type: array
+          items:
+            type: object
+            required:
+            - manipulated
+            properties:
+              action:
+                allOf:
+                - $ref: '#/components/schemas/Codeable_Concept'
+                - type: object
+                  properties:
+                    coding:
+                      type: array
+                      items:
+                        allOf:
+                        - $ref: '#/components/schemas/Coding'
+                        - type: object
+                          properties:
+                            system:
+                              type: string
+                            code:
+                              type: string
+                description: Kind of change to Device
+              manipulated:
+                allOf:
+                - $ref: '#/components/schemas/Reference_request'
+                - type: object
+                  properties:
+                    identifier:
                       allOf:
-                      - $ref: '#/components/schemas/Coding'
+                      - $ref: '#/components/schemas/Identifier'
                       - type: object
                         properties:
-                          system:
-                            type: string
-                          code:
-                            type: string
-              description: Kind of change to Device
-            manipulated:
-              allOf:
-              - $ref: '#/components/schemas/Reference_request'
-              - type: object
-                properties:
-                  identifier:
-                    allOf:
-                    - $ref: '#/components/schemas/Identifier'
-                    - type: object
-                      properties:
-                        type:
-                          allOf:
-                          - $ref: '#/components/schemas/Codeable_Concept'
-                          - type: object
-                            properties:
-                              coding:
-                                type: array
-                                items:
-                                  allOf:
-                                  - $ref: '#/components/schemas/Coding'
-                                  - type: object
-                                    properties:
-                                      code:
-                                        type: string
-              description: Implanted Device used for this procedure
-          description: Manipulated, implanted, or removed device
+                          type:
+                            allOf:
+                            - $ref: '#/components/schemas/Codeable_Concept'
+                            - type: object
+                              properties:
+                                coding:
+                                  type: array
+                                  items:
+                                    allOf:
+                                    - $ref: '#/components/schemas/Coding'
+                                    - type: object
+                                      properties:
+                                        code:
+                                          type: string
+                description: Implanted Device used for this procedure
+            description: Manipulated, implanted, or removed device
     Medication_Administration_EncounterPCG_Request:
       type: object
       required:
@@ -127721,76 +127737,78 @@ components:
                         description: The value that is unique
               description: Items used during procedure.
             focal_device:
-              type: object
-              required:
-                - manipulated
-              properties:
-                action:
-                  allOf:
-                    - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
-                    - type: object
-                      properties:
-                        coding:
-                          type: array
-                          items:
+              type: array
+              items:
+                type: object
+                required:
+                  - manipulated
+                properties:
+                  action:
+                    allOf:
+                      - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
+                      - type: object
+                        properties:
+                          coding:
+                            type: array
+                            items:
+                              allOf:
+                                - $ref: '#/components/schemas/Coding_DecodedPayload'
+                                - type: object
+                                  required:
+                                    - system
+                                    - code
+                                  properties:
+                                    system:
+                                      type: string
+                                      example: procedure_focal_device_actions
+                                    code:
+                                      type: string
+                                      example: some_action
+                                      description: Symbol in syntax defined by the system
+                        required:
+                          - coding
+                    description: Kind of change to Device
+                  manipulated:
+                    allOf:
+                      - $ref: '#/components/schemas/Reference_request_DecodedPayload'
+                      - type: object
+                        properties:
+                          identifier:
                             allOf:
-                              - $ref: '#/components/schemas/Coding_DecodedPayload'
+                              - $ref: '#/components/schemas/Identifier_DecodedPayload'
                               - type: object
-                                required:
-                                  - system
-                                  - code
                                 properties:
-                                  system:
-                                    type: string
-                                    example: procedure_focal_device_actions
-                                  code:
-                                    type: string
-                                    example: some_action
-                                    description: Symbol in syntax defined by the system
-                      required:
-                        - coding
-                  description: Kind of change to Device
-                manipulated:
-                  allOf:
-                    - $ref: '#/components/schemas/Reference_request_DecodedPayload'
-                    - type: object
-                      properties:
-                        identifier:
-                          allOf:
-                            - $ref: '#/components/schemas/Identifier_DecodedPayload'
-                            - type: object
-                              properties:
-                                type:
-                                  allOf:
-                                    - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
-                                    - type: object
-                                      properties:
-                                        coding:
-                                          type: array
-                                          items:
-                                            allOf:
-                                              - $ref: '#/components/schemas/Coding_DecodedPayload'
-                                              - type: object
-                                                required:
-                                                  - system
-                                                  - code
-                                                properties:
-                                                  system:
-                                                    type: string
-                                                    example: eHealth/resources
-                                                  code:
-                                                    type: string
-                                                    example: device
-                                                    description: Symbol in syntax defined by the system
-                                      required:
-                                        - coding
-                                  description: Description of identifier
-                                value:
-                                  example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
-                              required:
-                                - type
-                  description: Implanted Device used for this procedure
-              description: Manipulated, implanted, or removed device
+                                  type:
+                                    allOf:
+                                      - $ref: '#/components/schemas/Codeable_Concept_DecodedPayload'
+                                      - type: object
+                                        properties:
+                                          coding:
+                                            type: array
+                                            items:
+                                              allOf:
+                                                - $ref: '#/components/schemas/Coding_DecodedPayload'
+                                                - type: object
+                                                  required:
+                                                    - system
+                                                    - code
+                                                  properties:
+                                                    system:
+                                                      type: string
+                                                      example: eHealth/resources
+                                                    code:
+                                                      type: string
+                                                      example: device
+                                                      description: Symbol in syntax defined by the system
+                                        required:
+                                          - coding
+                                    description: Description of identifier
+                                  value:
+                                    example: "9183a36b-4d45-4244-9339-63d81cd08d9c"
+                                required:
+                                  - type
+                    description: Implanted Device used for this procedure
+                description: Manipulated, implanted, or removed device
           required:
             - managing_organization
             - category
