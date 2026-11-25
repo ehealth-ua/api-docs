@@ -71550,6 +71550,26 @@ paths:
                               example: "cc949559-5dfe-420f-ac05-065e443b2cc6"
                               type: string
                               description: identifier of patient's auth method
+                            remaining_quantity:
+                              type: object
+                              properties:
+                                value:
+                                  example: 10
+                                  type: number
+                                system:
+                                  example: device_unit
+                                  type: string
+                                code:
+                                  example: piece
+                                  type: string
+                                unit:
+                                  example: шт
+                                  type: string
+                              required:
+                                - value
+                                - system
+                                - code
+                                - unit
                             identity:
                               type: object
                               properties:
