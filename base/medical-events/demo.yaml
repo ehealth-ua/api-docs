@@ -5320,7 +5320,6 @@ paths:
                       - period
                       - inserted_at
                       - updated_at
-                      - visit
                       - episode
                       - class
                       - type
@@ -6382,7 +6381,6 @@ paths:
                     - period
                     - inserted_at
                     - updated_at
-                    - visit
                     - episode
                     - class
                     - type
@@ -11465,7 +11463,6 @@ paths:
                     - period
                     - inserted_at
                     - updated_at
-                    - visit
                     - episode
                     - class
                     - type
@@ -12472,7 +12469,6 @@ paths:
                       - period
                       - inserted_at
                       - updated_at
-                      - visit
                       - episode
                       - class
                       - type
@@ -37381,7 +37377,6 @@ paths:
                     - period
                     - inserted_at
                     - updated_at
-                    - visit
                     - episode
                     - class
                     - type
@@ -92017,7 +92012,6 @@ components:
       - id
       - status
       - period
-      - visit
       - episode
       - class
       - type
@@ -93848,7 +93842,6 @@ components:
       - period
       - inserted_at
       - updated_at
-      - visit
       - episode
       - class
       - type
@@ -122739,7 +122732,6 @@ components:
         - id
         - status
         - period
-        - visit
         - episode
         - class
         - type
