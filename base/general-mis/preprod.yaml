@@ -20126,6 +20126,188 @@ paths:
       responses:
         '200':
           description: Success
+  /api/persons/{id}/markers:
+    get:
+      summary: Get Person Markers
+      operationId: get-person-markers
+      description: Returns the current person's markers.
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: Person identifier
+          required: true
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: api-key
+          in: header
+          required: true
+          schema:
+            type: string
+          example: uXhEczJ56adsfh3Ri9SUkc4en
+        - name: X-Custom-PSK
+          in: header
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person_Markers'
+                required:
+                  - meta
+                  - data
+    patch:
+      summary: Update Person Markers
+      operationId: update-person-markers
+      description: "Updates the person's markers.\n\n**Scopes required:** `person_marker:write`\n\nSend the digitally signed marker payload in `signed_content`. See [the decoded payload schema](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH/api/persons/{id}/markers/decoded-payload)."
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: Person identifier
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+          example: Bearer c2778f3064753ea70de870a53795f5c9
+        - name: X-Custom-PSK
+          in: header
+          required: true
+          schema:
+            type: string
+          example: a2aa05c76f3f2d91870f923a53cc8aa8f23bbc01a8238d1c2c26d4299715a7e4
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signed_content:
+                  type: string
+                  description: Base64 encoded digitally signed marker payload. See the decoded payload schema.
+              required:
+                - signed_content
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Response__Meta'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Person_Markers'
+                required:
+                  - meta
+                  - data
+  /api/persons/{id}/markers/decoded-payload:
+    patch:
+      summary: 'Payload: Update Person Markers'
+      operationId: dummy-patch-api-persons-id-markers
+      description: Build, sign (КЕП / UA-EDS) and base64-encode this structure into `signed_content` for [Update Person Markers](/#general-mis/tag/public-medical-service-provider-integration-layer/PATCH/api/persons/{id}/markers).
+      tags:
+        - Public. Medical Service Provider Integration Layer
+      parameters:
+        - name: id
+          in: path
+          description: Person identifier
+          required: true
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                markers:
+                  type: array
+                  description: Marker operations to apply to the person.
+                  items:
+                    oneOf:
+                      - type: object
+                        title: Set marker
+                        properties:
+                          action:
+                            type: string
+                            enum:
+                              - SET
+                            description: Action that must be performed with the marker.
+                          code:
+                            type: string
+                            example: availability
+                            description: Marker code from the `PERSON_MARKER_CODES` dictionary.
+                          value:
+                            type: string
+                            example: UNAVAILABLE
+                            description: Value from the `PERSON_MARKER_AVAILABILITY_VALUES` or `PERSON_MARKER_DECEASED_STATUS_VALUES` dictionary.
+                          reason:
+                            type: string
+                            example: NO_ANSWER
+                            description: Reason from the `PERSON_MARKER_AVAILABILITY_REASONS` or `PERSON_MARKER_DECEASED_STATUS_REASONS` dictionary.
+                        required:
+                          - action
+                          - code
+                      - type: object
+                        title: Cancel marker
+                        properties:
+                          action:
+                            type: string
+                            enum:
+                              - CANCEL
+                            description: Action that must be performed with the marker.
+                          code:
+                            type: string
+                            example: deceased_status
+                            description: Marker code from the `PERSON_MARKER_CODES` dictionary.
+                        required:
+                          - action
+                          - code
+                  example:
+                    - action: SET
+                      code: availability
+                      value: UNAVAILABLE
+                      reason: NO_ANSWER
+                    - action: CANCEL
+                      code: deceased_status
+              required:
+                - markers
+      responses:
+        '200':
+          description: Success
   /api/patients/{patient_id}/{medical_event_type}/{medical_event_id}/emergency_contact:
     get:
       responses:
@@ -104975,6 +105157,35 @@ components:
               discrepancy_result:
                 type: string
                 example: '101'
+    Person_Markers:
+      type: object
+      properties:
+        code:
+          type: string
+          example: availability
+          description: Marker code from the `PERSON_MARKER_CODES` dictionary.
+        value:
+          type: string
+          example: UNAVAILABLE
+          description: Value from the `PERSON_MARKER_AVAILABILITY_VALUES` or `PERSON_MARKER_DECEASED_STATUS_VALUES` dictionary.
+        reason:
+          type: string
+          example: NO_ANSWER
+          description: Reason from the `PERSON_MARKER_AVAILABILITY_REASONS` or `PERSON_MARKER_DECEASED_STATUS_REASONS` dictionary.
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-11-11T11:11:11Z'
+          description: Date and time when the marker was updated.
+        updated_by:
+          type: string
+          example: eeebb86d-5cba-43c9-885b-6482ecaf82
+          description: Identifier of the user who updated the marker.
+      required:
+        - code
+        - value
+        - updated_at
+        - updated_by
     PersonVerification:
       type: object
       required:
@@ -114092,6 +114303,8 @@ components:
       required:
         - type
         - number
+        - issued_by
+        - issued_at
       properties:
         type:
           type: string
@@ -130900,6 +131113,120 @@ components:
             - phone
           description: the way how a patient wants to be reached
           example: email
+        confidant_person_relationship:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - documents_relationship
+              - relationship_verification_details
+              - confidant_person
+            properties:
+              id:
+                type: string
+                example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+              active_to:
+                type: string
+                example: '2025-08-19'
+              documents_relationship:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - type
+                    - number
+                    - issued_by
+                    - issued_at
+                    - record_type
+                  properties:
+                    type:
+                      type: string
+                      example: BIRTH_CERTIFICATE
+                    number:
+                      type: string
+                      example: АА120518
+                    issued_by:
+                      type: string
+                      example: Рокитнянським РВ ГУ МВС Київської області
+                    issued_at:
+                      type: string
+                      example: '2017-02-28'
+                    active_to:
+                      type: string
+                      example: '2025-08-19'
+                    record_type:
+                      type: string
+                      example: relationship_confirmation
+              relationship_verification_details:
+                type: object
+                required:
+                  - verification_status
+                  - verification_reason
+                properties:
+                  verification_status:
+                    type: string
+                    example: VERIFICATION_NEEDED
+                  verification_reason:
+                    type: string
+                    example: MANUAL_CREATED_BY_DOCTOR
+                  verification_comment:
+                    type: string
+                    example: Підтверджено на підставі свідоцтва про народження
+              confidant_person:
+                type: object
+                required:
+                  - person_id
+                  - name
+                  - no_tax_id
+                properties:
+                  person_id:
+                    type: string
+                    example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+                  name:
+                    type: string
+                    example: Петров А.А.
+                  gender:
+                    type: string
+                    example: MALE
+                  tax_id:
+                    type: string
+                    example: '******50'
+                  no_tax_id:
+                    type: boolean
+                    example: false
+                  unzr:
+                    type: string
+                    example: '**********99'
+                  documents_person:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - type
+                        - number
+                      properties:
+                        type:
+                          type: string
+                          example: PASSPORT
+                        number:
+                          type: string
+                          example: '******18'
+                  phones:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - type
+                        - number
+                      properties:
+                        type:
+                          type: string
+                          example: MOBILE
+                        number:
+                          type: string
+                          example: +38093*****85
+          description: Should be set if this Person has active confidant person relationships
       example:
         names:
           - first_name: Петро
@@ -131769,6 +132096,46 @@ components:
         declaration_request_id: 74a6fae6-4207-4e03-a136-f2e70c6b0c02
         inserted_at: '2017-04-20T19:14:13Z'
         updated_at: '2017-04-20T19:14:13Z'
+    RelationshipDocument_with_record_type:
+      type: object
+      required:
+        - type
+        - number
+        - issued_by
+        - issued_at
+        - record_type
+      properties:
+        type:
+          type: string
+          description: '`Dictionary DOCUMENT_RELATIONSHIP_TYPE`'
+          example: BIRTH_CERTIFICATE
+        number:
+          type: string
+          description: document issue number
+          example: АА120518
+        issued_by:
+          type: string
+          description: authority which issued the document
+          example: Рокитнянським РВ ГУ МВС Київської області
+        issued_at:
+          type: string
+          description: the date when document was issued
+          example: '2017-02-28'
+        active_to:
+          type: string
+          description: the date then period of document validity ends
+          example: '2025-08-19'
+        record_type:
+          type: string
+          description: '`Dictionary DOCUMENT_RELATIONSHIP_RECORD_TYPE`'
+          example: relationship_confirmation
+      example:
+        type: BIRTH_CERTIFICATE
+        number: АА120518
+        issued_by: Рокитнянським РВ ГУ МВС Київської області
+        issued_at: '2017-02-28'
+        active_to: '2025-08-19'
+        record_type: relationship_confirmation
     Address_DecodedPayload:
       type: object
       required:
@@ -136959,6 +137326,147 @@ components:
             type: array
             items:
               type: string
+    Confidant_Person_Relationship_Full_Masked:
+      type: object
+      required:
+        - id
+        - documents_relationship
+        - relationship_verification_details
+        - confidant_person
+      properties:
+        id:
+          type: string
+          description: confidant person relationship identifier
+          example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        active_to:
+          type: string
+          description: the date when confidant person relationship is active to
+          example: '2025-08-19'
+        documents_relationship:
+          type: array
+          items:
+            type: object
+            required:
+              - type
+              - number
+              - issued_by
+              - issued_at
+              - record_type
+            properties:
+              type:
+                type: string
+                example: BIRTH_CERTIFICATE
+              number:
+                type: string
+                example: АА120518
+              issued_by:
+                type: string
+                example: Рокитнянським РВ ГУ МВС Київської області
+              issued_at:
+                type: string
+                example: '2017-02-28'
+              active_to:
+                type: string
+                example: '2025-08-19'
+              record_type:
+                type: string
+                example: relationship_confirmation
+        relationship_verification_details:
+          type: object
+          required:
+            - verification_status
+            - verification_reason
+          properties:
+            verification_status:
+              type: string
+              description: status of relationship verification according to `PERSONS_RELATIONSHIP_VERIFICATION_STATUSES` dictionary
+              example: VERIFICATION_NEEDED
+            verification_reason:
+              type: string
+              description: how current relationship verification status has been set according to `PERSONS_RELATIONSHIP_VERIFICATION_STATUSES` dictionary
+              example: MANUAL_CREATED_BY_DOCTOR
+            verification_comment:
+              type: string
+              description: Relationship verification status description set by NHS or Doctor
+              example: Підтверджено на підставі свідоцтва про народження
+        confidant_person:
+          type: object
+          required:
+            - person_id
+            - name
+            - no_tax_id
+          properties:
+            person_id:
+              type: string
+              description: confidant person identifier
+              example: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+            name:
+              type: string
+              description: confidant person name, masked
+              example: Петров А.А.
+            gender:
+              type: string
+              enum:
+                - MALE
+                - FEMALE
+              example: MALE
+            tax_id:
+              type: string
+              description: confidant person tax id, masked
+              example: '******50'
+            no_tax_id:
+              type: boolean
+              description: fact of declining tax_id
+              example: false
+            unzr:
+              type: string
+              description: unzr (if exists), masked
+              example: '**********99'
+            documents_person:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - number
+                properties:
+                  type:
+                    type: string
+                    example: PASSPORT
+                  number:
+                    type: string
+                    example: '******18'
+            phones:
+              type: array
+              items:
+                $ref: '#/components/schemas/Phone'
+      example:
+        id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+        active_to: '2025-08-19'
+        documents_relationship:
+          - type: BIRTH_CERTIFICATE
+            number: АА120518
+            issued_by: Рокитнянським РВ ГУ МВС Київської області
+            issued_at: '2017-02-28'
+            active_to: '2025-08-19'
+            record_type: relationship_confirmation
+        relationship_verification_details:
+          verification_status: VERIFICATION_NEEDED
+          verification_reason: MANUAL_CREATED_BY_DOCTOR
+          verification_comment: Підтверджено на підставі свідоцтва про народження
+        confidant_person:
+          person_id: b075f148-7f93-4fc2-b2ec-2d81b19a9b7b
+          name: Петров А.А.
+          gender: MALE
+          tax_id: '******50'
+          no_tax_id: false
+          unzr: '**********99'
+          documents_person:
+            - type: PASSPORT
+              number: '******18'
+          phones:
+            - type: MOBILE
+              number: +38093*****85
     Update_Confidant_Person_request:
       type: object
       required:
